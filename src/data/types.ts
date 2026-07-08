@@ -7,6 +7,23 @@ export type QuestionOption = {
   text: string;
 };
 
+export type QuestionTranslation = {
+  prompt?: string;
+  options?: QuestionOption[];
+  selector?: string;
+  explanation?: string;
+};
+
+export type LocalizedText = {
+  es?: {
+    name?: string;
+    text?: string;
+    sectionTitle?: string;
+    syllabusPage?: number;
+    minutes?: number;
+  };
+};
+
 export type Question = {
   id: string;
   sourceModel: SourceModel;
@@ -23,6 +40,9 @@ export type Question = {
   explanation: string;
   notes: string[];
   points: number;
+  translations?: {
+    es?: QuestionTranslation;
+  };
 };
 
 export type Chapter = {
@@ -30,6 +50,7 @@ export type Chapter = {
   name: string;
   minutes: number;
   keywords: string[];
+  translations?: LocalizedText;
 };
 
 export type Objective = {
@@ -40,6 +61,7 @@ export type Objective = {
   section: string;
   sectionTitle: string;
   syllabusPage?: number;
+  translations?: LocalizedText;
 };
 
 export type ExamRules = {

@@ -196,6 +196,20 @@ def ensure_pypdf():
 PdfReader = ensure_pypdf()
 
 
+def load_existing_question_translations() -> dict[str, dict[str, Any]]:
+    if not OUT.exists():
+        return {}
+    try:
+        bank = json.loads(OUT.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    return {
+        question["id"]: question.get("translations", {})
+        for question in bank.get("questions", [])
+        if question.get("translations")
+    }
+
+
 def read_pdf(path: Path) -> str:
     reader = PdfReader(str(path))
     chunks = []
@@ -354,6 +368,7 @@ def parse_objectives() -> list[dict[str, Any]]:
         for item in guide.values():
             objective_k_levels.setdefault(item["reference"], item["kLevel"])
     syllabus = parse_syllabus_reference()
+    spanish_syllabus = parse_spanish_syllabus_reference()
     return [
         {
             "code": code,
@@ -363,6 +378,9 @@ def parse_objectives() -> list[dict[str, Any]]:
             "section": syllabus.get(code, {}).get("section", section_from_objective(code)),
             "sectionTitle": syllabus.get(code, {}).get("sectionTitle", ""),
             "syllabusPage": syllabus.get(code, {}).get("syllabusPage"),
+            "translations": {"es": spanish_syllabus.get("objectives", {}).get(code, {})}
+            if code in spanish_syllabus.get("objectives", {})
+            else {},
         }
         for code in sorted(objective_k_levels)
     ]
@@ -418,6 +436,58 @@ def parse_syllabus_reference() -> dict[str, dict[str, Any]]:
     return objectives
 
 
+def parse_spanish_syllabus_reference() -> dict[str, dict[str, Any]]:
+    path = DOCS / "ISTQB_CTFL_Syllabus_v4.0_español.pdf"
+    if not path.exists():
+        return {"chapters": {}, "objectives": {}}
+
+    reader = PdfReader(str(path))
+    chapters: dict[str, dict[str, Any]] = {
+        "FL-2": {
+            "name": "Pruebas a lo Largo del Ciclo de Vida del Desarrollo de Software",
+        }
+    }
+    section_pages: dict[str, dict[str, Any]] = {}
+    objectives: dict[str, dict[str, Any]] = {}
+
+    for page_index, page in enumerate(reader.pages, start=1):
+        text = page.extract_text() or ""
+        lines = [normalize_spaces(line) for line in text.splitlines()]
+        for line in lines:
+            chapter_match = re.match(r"^([1-6])\.\s+(.+?)\s+[–:-]\s+(\d+)\s+minutos?$", line, re.I)
+            if chapter_match:
+                chapter, title, minutes = chapter_match.groups()
+                chapters[f"FL-{chapter}"] = {"name": title, "minutes": int(minutes)}
+
+            section_match = re.match(r"^([1-6]\.\d)\.\s+(.+)$", line)
+            if section_match:
+                section, title = section_match.groups()
+                if "..." not in title:
+                    section_pages.setdefault(
+                        section,
+                        {
+                            "sectionTitle": title,
+                            "syllabusPage": page_index,
+                        },
+                    )
+
+            objective_match = re.match(r"^(FL-\d\.\d\.\d)\s+\(\s*(K[123])\)\s+(.+)$", line)
+            if objective_match:
+                code, _k_level, objective_text = objective_match.groups()
+                section = section_from_objective(code)
+                objectives[code] = {
+                    "text": objective_text,
+                    **section_pages.get(section, {}),
+                }
+
+    for code, objective in list(objectives.items()):
+        section = section_from_objective(code)
+        if section in section_pages:
+            objective.update(section_pages[section])
+
+    return {"chapters": chapters, "objectives": objectives}
+
+
 def load_sources() -> dict[str, Path]:
     files = {path.name: path for path in DOCS.iterdir() if path.is_file()}
     required: dict[str, Path] = {}
@@ -443,6 +513,8 @@ def load_sources() -> dict[str, Path]:
 
 def build_bank() -> dict[str, Any]:
     sources = load_sources()
+    spanish_syllabus = parse_spanish_syllabus_reference()
+    existing_translations = load_existing_question_translations()
     questions: list[dict[str, Any]] = []
     issues: list[str] = []
 
@@ -462,25 +534,26 @@ def build_bank() -> dict[str, Any]:
             g = guide[number]
             reference = g["reference"]
             correct = g["answers"]
-            questions.append(
-                {
-                    "id": question_id,
-                    "sourceModel": model,
-                    "sourceNumber": number,
-                    "chapter": chapter_from_reference(reference),
-                    "reference": reference,
-                    "kLevel": g["kLevel"],
-                    "rawKLevel": g["rawKLevel"],
-                    "prompt": q["prompt"],
-                    "options": q["options"],
-                    "correctAnswers": correct,
-                    "selectionMode": selection_mode(q["selector"], correct),
-                    "selector": q["selector"],
-                    "explanation": explanations.get(number, ""),
-                    "notes": q["notes"],
-                    "points": g["points"],
-                }
-            )
+            item = {
+                "id": question_id,
+                "sourceModel": model,
+                "sourceNumber": number,
+                "chapter": chapter_from_reference(reference),
+                "reference": reference,
+                "kLevel": g["kLevel"],
+                "rawKLevel": g["rawKLevel"],
+                "prompt": q["prompt"],
+                "options": q["options"],
+                "correctAnswers": correct,
+                "selectionMode": selection_mode(q["selector"], correct),
+                "selector": q["selector"],
+                "explanation": explanations.get(number, ""),
+                "notes": q["notes"],
+                "points": g["points"],
+            }
+            if question_id in existing_translations:
+                item["translations"] = existing_translations[question_id]
+            questions.append(item)
 
     return {
         "metadata": {
@@ -505,7 +578,15 @@ def build_bank() -> dict[str, Any]:
             "countsByKLevel": Counter(q["kLevel"] for q in questions),
             "extractionIssues": issues,
         },
-        "chapters": CHAPTERS,
+        "chapters": [
+            {
+                **chapter,
+                "translations": {"es": spanish_syllabus.get("chapters", {}).get(chapter["id"], {})}
+                if chapter["id"] in spanish_syllabus.get("chapters", {})
+                else {},
+            }
+            for chapter in CHAPTERS
+        ],
         "objectives": parse_objectives(),
         "questions": questions,
     }

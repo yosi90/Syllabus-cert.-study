@@ -50,6 +50,8 @@ type ExamState = {
 };
 
 type TimerMode = "off" | "standard" | "extended";
+type Language = "en" | "es";
+const SPANISH_TRANSLATION_NOTICE_KEY = "istqb-ctfl-v4-spanish-translation-notice-seen";
 
 type ReviewState = {
   title: string;
@@ -60,6 +62,180 @@ type ReviewState = {
 
 const models: SourceModel[] = ["A", "B", "C", "D"];
 const kLevels: KLevel[] = ["K1", "K2", "K3"];
+const uiCopy = {
+  en: {
+    trainer: "Trainer",
+    modesLabel: "Modes",
+    practice: "Practice",
+    exam: "Exam",
+    review: "Review",
+    localProgress: "Local progress",
+    viewed: "Viewed",
+    correct: "Correct",
+    wrong: "Wrong",
+    flagged: "Flagged",
+    filters: "Filters",
+    searchPlaceholder: "Search text, LO or topic",
+    clearFilters: "Clear filters",
+    model: "Model",
+    chapter: "Chapter",
+    reference: "Reference",
+    all: "All",
+    status: "Status",
+    unseen: "Unseen",
+    lastCorrect: "Last correct",
+    lastIncorrect: "Last incorrect",
+    export: "Export",
+    import: "Import",
+    tutorial: "Tutorial",
+    delete: "Delete",
+    noQuestions: "No questions match these filters",
+    changeFilters: "Change the filters to restore the bank.",
+    practiceTitle: "Single questions",
+    filtered: "Filtered",
+    current: "Current",
+    previous: "Previous",
+    check: "Check",
+    random: "Random",
+    next: "Next",
+    multiple: "Multiple selection",
+    single: "Single selection",
+    selectOne: "Select ONE option.",
+    selectTwo: "Select TWO options.",
+    removeFlag: "Remove from flagged",
+    addFlag: "Flag for review",
+    removeFlagAria: "Remove question from flagged",
+    addFlagAria: "Flag question for review",
+    theory: "View theory",
+    objective: "Objective",
+    section: "Section",
+    pdfPage: "PDF page",
+    unavailable: "Unavailable",
+    syllabusNote:
+      "Open that page in the matching syllabus PDF. The official rationale may also rely on concepts from other syllabus sections.",
+    examTitle: "40-question exam",
+    passedMetric: "Pass",
+    time: "Time",
+    noLimit: "No limit",
+    timer: "Timer",
+    noTime: "No time",
+    modelTitle: "Model",
+    modelSubtitle: "40 official questions in their original order.",
+    randomSubtitle: "40 unique questions using the CTFL chapter distribution.",
+    activeExam: "Active exam",
+    answered: "Answered",
+    question: "Question",
+    timeUp: "Time is up.",
+    timeUpText: "You can finish the exam to grade it or cancel without saving.",
+    noCorrection: "No correction until finished",
+    finish: "Finish",
+    cancel: "Cancel",
+    recentHistory: "Recent history",
+    noSessions: "No finished exams yet",
+    completeExam: "Complete an exam to see its review here.",
+    points: "Points",
+    result: "Result",
+    percent: "Percent",
+    passed: "Passed",
+    failed: "Failed",
+    notPassed: "Not passed",
+    blank: "Blank",
+    yourAnswer: "Your answer",
+    correctAnswer: "Correct",
+    unanswered: "Unanswered",
+    translationNoticeTitle: "Spanish translation notice",
+    translationNoticeText:
+      "This site was originally built in English. The Spanish translation may contain inconsistencies or errors, so use the official English wording when precision matters.",
+    translationNoticeAction: "I understand",
+  },
+  es: {
+    trainer: "Entrenador",
+    modesLabel: "Modos",
+    practice: "Práctica",
+    exam: "Simulacro",
+    review: "Revisión",
+    localProgress: "Progreso local",
+    viewed: "Vistas",
+    correct: "Correctas",
+    wrong: "Falladas",
+    flagged: "Marcadas",
+    filters: "Filtros",
+    searchPlaceholder: "Buscar texto, LO o tema",
+    clearFilters: "Limpiar filtros",
+    model: "Modelo",
+    chapter: "Capítulo",
+    reference: "Referencia",
+    all: "Todas",
+    status: "Estado",
+    unseen: "Sin responder",
+    lastCorrect: "Última correcta",
+    lastIncorrect: "Última incorrecta",
+    export: "Exportar",
+    import: "Importar",
+    tutorial: "Tutorial",
+    delete: "Borrar",
+    noQuestions: "No hay preguntas con esos filtros",
+    changeFilters: "Cambia los filtros para recuperar el banco.",
+    practiceTitle: "Preguntas sueltas",
+    filtered: "Filtradas",
+    current: "Actual",
+    previous: "Anterior",
+    check: "Comprobar",
+    random: "Aleatoria",
+    next: "Siguiente",
+    multiple: "Selección múltiple",
+    single: "Selección única",
+    selectOne: "Selecciona UNA opción.",
+    selectTwo: "Selecciona DOS opciones.",
+    removeFlag: "Quitar de marcadas",
+    addFlag: "Marcar para repasar",
+    removeFlagAria: "Quitar pregunta de marcadas",
+    addFlagAria: "Marcar pregunta para repasar",
+    theory: "Ver teoría",
+    objective: "Objetivo",
+    section: "Sección",
+    pdfPage: "Página del PDF",
+    unavailable: "No disponible",
+    syllabusNote:
+      "Consulta esa página en el PDF del syllabus correspondiente. El rationale oficial puede apoyarse también en conceptos de otras secciones del syllabus.",
+    examTitle: "Examen de 40 preguntas",
+    passedMetric: "Aprobado",
+    time: "Tiempo",
+    noLimit: "Sin límite",
+    timer: "Temporizador",
+    noTime: "Sin tiempo",
+    modelTitle: "Modelo",
+    modelSubtitle: "40 preguntas oficiales en orden original.",
+    randomSubtitle: "40 preguntas sin duplicados con distribución por capítulo.",
+    activeExam: "Simulacro activo",
+    answered: "Respondidas",
+    question: "Pregunta",
+    timeUp: "Tiempo agotado.",
+    timeUpText: "Puedes finalizar el simulacro para corregirlo o cancelarlo sin guardar.",
+    noCorrection: "Sin corrección hasta finalizar",
+    finish: "Finalizar",
+    cancel: "Cancelar",
+    recentHistory: "Historial reciente",
+    noSessions: "Aún no hay simulacros terminados",
+    completeExam: "Completa un simulacro para ver la revisión aquí.",
+    points: "Puntos",
+    result: "Resultado",
+    percent: "Porcentaje",
+    passed: "Aprobado",
+    failed: "No apto",
+    notPassed: "No aprobado",
+    blank: "Blanco",
+    yourAnswer: "Tu respuesta",
+    correctAnswer: "Correcta",
+    unanswered: "Sin responder",
+    translationNoticeTitle: "Aviso sobre la traducción",
+    translationNoticeText:
+      "Esta web se construyó originalmente en inglés. La traducción al español puede contener inconsistencias o errores, así que consulta el texto oficial en inglés cuando necesites máxima precisión.",
+    translationNoticeAction: "Entendido",
+  },
+} as const;
+
+type Copy = (typeof uiCopy)[Language];
 const tutorialSteps = [
   {
     title: "Bienvenida",
@@ -149,10 +325,10 @@ function questionLabel(question: Question) {
   return `${question.sourceModel}-${String(question.sourceNumber).padStart(2, "0")}`;
 }
 
-function progressLabel(progress: ProgressState, question: Question) {
+function progressLabel(progress: ProgressState, question: Question, copy: Copy) {
   const item = progress.questionProgress[question.id];
-  if (!item?.attempts) return "Sin responder";
-  return item.lastCorrect ? "Última correcta" : "Última incorrecta";
+  if (!item?.attempts) return copy.unseen;
+  return item.lastCorrect ? copy.lastCorrect : copy.lastIncorrect;
 }
 
 function parseExplanation(explanation: string) {
@@ -182,6 +358,31 @@ function getObjective(reference: string): Objective | undefined {
   return questionBank.objectives.find((objective) => objective.code === reference);
 }
 
+function localizedChapterName(chapterId: string, language: Language) {
+  const chapter = chapters.find((item) => item.id === chapterId);
+  if (!chapter) return chapterId;
+  return language === "es" ? chapter.translations?.es?.name ?? chapter.name : chapter.name;
+}
+
+function localizedObjective(objective: Objective, language: Language) {
+  const translation = language === "es" ? objective.translations?.es : undefined;
+  return {
+    text: translation?.text ?? objective.text,
+    sectionTitle: translation?.sectionTitle ?? objective.sectionTitle,
+    syllabusPage: translation?.syllabusPage ?? objective.syllabusPage,
+  };
+}
+
+function localizedQuestion(question: Question, language: Language) {
+  const translation = language === "es" ? question.translations?.es : undefined;
+  return {
+    prompt: translation?.prompt ?? question.prompt,
+    options: translation?.options?.length ? translation.options : question.options,
+    selector: translation?.selector ?? question.selector,
+    explanation: translation?.explanation ?? question.explanation,
+  };
+}
+
 function hasActiveFilters(filters: QuestionFilters) {
   return (
     filters.query.trim().length > 0 ||
@@ -202,8 +403,8 @@ function hashString(value: string): number {
   return hash >>> 0;
 }
 
-function shuffledOptions(question: Question) {
-  const options = [...question.options];
+function shuffledOptions(question: Question, language: Language) {
+  const options = [...localizedQuestion(question, language).options];
   const originalOrder = options.map((option) => option.key).join("");
   let state = hashString(question.id);
   for (let index = options.length - 1; index > 0; index -= 1) {
@@ -219,8 +420,8 @@ function shuffledOptions(question: Question) {
 
 const displayLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-function getDisplayOptions(question: Question) {
-  return shuffledOptions(question).map((option, index) => ({
+function getDisplayOptions(question: Question, language: Language) {
+  return shuffledOptions(question, language).map((option, index) => ({
     ...option,
     displayKey: displayLetters[index] ?? String(index + 1),
     text: cleanOptionText(option.text),
@@ -238,9 +439,14 @@ function cleanExplanationText(text: string) {
     .trim();
 }
 
-function displayAnswerLabels(question: Question, answerKeys: string[]) {
-  const displayKeyByOriginalKey = new Map(getDisplayOptions(question).map((option) => [option.key, option.displayKey]));
+function displayAnswerLabels(question: Question, answerKeys: string[], language: Language) {
+  const displayKeyByOriginalKey = new Map(getDisplayOptions(question, language).map((option) => [option.key, option.displayKey]));
   return answerKeys.map((key) => displayKeyByOriginalKey.get(key) ?? key.toUpperCase()).join(", ");
+}
+
+function selectorLabel(question: Question, copy: Copy) {
+  if (question.selectionMode === "multiple") return copy.selectTwo;
+  return copy.selectOne;
 }
 
 function formatRemainingTime(milliseconds: number) {
@@ -252,6 +458,9 @@ function formatRemainingTime(milliseconds: number) {
 
 function AppShell() {
   const navigate = useNavigate();
+  const [language, setLanguage] = useState<Language>("en");
+  const [showSpanishNotice, setShowSpanishNotice] = useState(false);
+  const copy = uiCopy[language];
   const [progress, setProgress] = useState<ProgressState>(() => loadProgress());
   const [filters, setFilters] = useState<QuestionFilters>(emptyFilters);
   const [studyIndex, setStudyIndex] = useState(0);
@@ -273,7 +482,7 @@ function AppShell() {
     return () => window.clearInterval(interval);
   }, [activeExam?.endsAt]);
 
-  const filteredQuestions = useMemo(() => filterQuestions(questions, filters, progress), [filters, progress]);
+  const filteredQuestions = useMemo(() => filterQuestions(questions, filters, progress, language), [filters, progress, language]);
   const progressSummary = useMemo(() => summarizeProgress(questions, progress), [progress]);
   const references = useMemo(() => Array.from(new Set(questions.map((question) => question.reference))).sort(), []);
   const tutorialTarget = progress.preferences.tutorialCompleted ? undefined : tutorialSteps[tutorialStep].target;
@@ -348,7 +557,7 @@ function AppShell() {
   }
 
   function cancelExam() {
-    if (confirm("¿Cancelar este simulacro? Las respuestas actuales no se guardarán.")) {
+    if (confirm(language === "es" ? "¿Cancelar este simulacro? Las respuestas actuales no se guardarán." : "Cancel this exam? Current answers will not be saved.")) {
       setActiveExam(null);
       navigate("/exam");
     }
@@ -414,7 +623,7 @@ function AppShell() {
       const imported = importProgress(raw);
       updateProgress(imported);
     } catch (error) {
-      alert(error instanceof Error ? error.message : "No se pudo importar el progreso.");
+      alert(error instanceof Error ? error.message : language === "es" ? "No se pudo importar el progreso." : "Progress could not be imported.");
     }
   }
 
@@ -423,13 +632,13 @@ function AppShell() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "istqb-ctfl-v4-progreso.json";
+    link.download = language === "es" ? "istqb-ctfl-v4-progreso.json" : "istqb-ctfl-v4-progress.json";
     link.click();
     URL.revokeObjectURL(url);
   }
 
   function handleReset() {
-    if (confirm("Esto borrará todo el progreso local de esta web.")) {
+    if (confirm(language === "es" ? "Esto borrará todo el progreso local de esta web." : "This will delete all local progress for this site.")) {
       updateProgress(clearProgress());
       setTutorialStep(0);
       setStudyAnswers({});
@@ -450,26 +659,38 @@ function AppShell() {
     setTutorialStep(0);
   }
 
+  function handleLanguageChange(nextLanguage: Language) {
+    setLanguage(nextLanguage);
+    if (nextLanguage === "es" && window.localStorage.getItem(SPANISH_TRANSLATION_NOTICE_KEY) !== "true") {
+      setShowSpanishNotice(true);
+    }
+  }
+
+  function closeSpanishNotice() {
+    window.localStorage.setItem(SPANISH_TRANSLATION_NOTICE_KEY, "true");
+    setShowSpanishNotice(false);
+  }
+
   return (
     <div className="app">
       <aside className={classNames("sidebar", tutorialTarget === "layout" && "tutorial-highlight")}>
         <div className="brand">
           <div>
             <span className="eyebrow">ISTQB CTFL v4.0</span>
-            <h1>Entrenador</h1>
+            <h1>{copy.trainer}</h1>
           </div>
           <ListChecks aria-hidden="true" />
         </div>
 
-        <nav className={classNames("mode-tabs", tutorialTarget === "modes" && "tutorial-highlight")} aria-label="Modos">
+        <nav className={classNames("mode-tabs", tutorialTarget === "modes" && "tutorial-highlight")} aria-label={copy.modesLabel}>
           <NavLink to="/" end>
-            Práctica
+            {copy.practice}
           </NavLink>
-          <NavLink to="/exam">Simulacro</NavLink>
-          <NavLink to="/review">Revisión</NavLink>
+          <NavLink to="/exam">{copy.exam}</NavLink>
+          <NavLink to="/review">{copy.review}</NavLink>
         </nav>
 
-        <StatsPanel progressSummary={progressSummary} highlighted={tutorialTarget === "progress-actions"} />
+        <StatsPanel progressSummary={progressSummary} highlighted={tutorialTarget === "progress-actions"} copy={copy} />
         <FiltersPanel
           filters={filters}
           setFilters={setFilters}
@@ -479,6 +700,8 @@ function AppShell() {
           onImport={handleImport}
           onReset={handleReset}
           onTutorialReset={handleTutorialReset}
+          language={language}
+          copy={copy}
         />
       </aside>
 
@@ -503,6 +726,9 @@ function AppShell() {
               }}
               onFlag={handleFlag}
               highlighted={tutorialTarget === "practice"}
+              language={language}
+              onLanguageChange={handleLanguageChange}
+              copy={copy}
             />
           }
         />
@@ -525,10 +751,12 @@ function AppShell() {
               }
               onCancel={cancelExam}
               onFinish={finishExam}
+              language={language}
+              copy={copy}
             />
           }
         />
-        <Route path="/review" element={<ReviewView review={review} sessions={progress.sessions} />} />
+        <Route path="/review" element={<ReviewView review={review} sessions={progress.sessions} language={language} copy={copy} />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
@@ -543,6 +771,28 @@ function AppShell() {
           onComplete={handleTutorialComplete}
         />
       )}
+      {showSpanishNotice && <TranslationNotice copy={copy} onClose={closeSpanishNotice} />}
+    </div>
+  );
+}
+
+function TranslationNotice({ copy, onClose }: { copy: Copy; onClose: () => void }) {
+  return (
+    <div className="notice-backdrop" role="presentation" onClick={onClose}>
+      <section
+        className="notice-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="translation-notice-title"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <h2 id="translation-notice-title">{copy.translationNoticeTitle}</h2>
+        <p>{copy.translationNoticeText}</p>
+        <button className="primary" type="button" onClick={onClose}>
+          <CheckCircle2 aria-hidden="true" />
+          {copy.translationNoticeAction}
+        </button>
+      </section>
     </div>
   );
 }
@@ -550,18 +800,20 @@ function AppShell() {
 function StatsPanel({
   progressSummary,
   highlighted,
+  copy,
 }: {
   progressSummary: ReturnType<typeof summarizeProgress>;
   highlighted: boolean;
+  copy: Copy;
 }) {
   return (
     <section className={classNames("panel compact", highlighted && "tutorial-highlight")}>
-      <h2>Progreso local</h2>
+      <h2>{copy.localProgress}</h2>
       <div className="stat-grid">
-        <Metric label="Vistas" value={progressSummary.attempted} />
-        <Metric label="Correctas" value={progressSummary.correct} />
-        <Metric label="Falladas" value={progressSummary.incorrect} />
-        <Metric label="Marcadas" value={progressSummary.flagged} />
+        <Metric label={copy.viewed} value={progressSummary.attempted} />
+        <Metric label={copy.correct} value={progressSummary.correct} />
+        <Metric label={copy.wrong} value={progressSummary.incorrect} />
+        <Metric label={copy.flagged} value={progressSummary.flagged} />
       </div>
     </section>
   );
@@ -585,6 +837,8 @@ function FiltersPanel({
   onImport,
   onReset,
   onTutorialReset,
+  language,
+  copy,
 }: {
   filters: QuestionFilters;
   setFilters: (filters: QuestionFilters) => void;
@@ -594,6 +848,8 @@ function FiltersPanel({
   onImport: (raw: string) => void;
   onReset: () => void;
   onTutorialReset: () => void;
+  language: Language;
+  copy: Copy;
 }) {
   const fileInput = useRef<HTMLInputElement | null>(null);
 
@@ -614,7 +870,7 @@ function FiltersPanel({
     <section className={classNames("panel filters", tutorialTarget === "layout" && "tutorial-highlight")}>
       <h2>
         <Filter aria-hidden="true" />
-        Filtros
+        {copy.filters}
       </h2>
 
       <div className="search-row">
@@ -623,7 +879,7 @@ function FiltersPanel({
           <input
             value={filters.query}
             onChange={(event) => setFilters({ ...filters, query: event.target.value })}
-            placeholder="Buscar texto, LO o tema"
+            placeholder={copy.searchPlaceholder}
           />
         </label>
         {filtersActive && (
@@ -631,16 +887,16 @@ function FiltersPanel({
             className="icon-button compact"
             type="button"
             onClick={() => setFilters(emptyFilters)}
-            title="Limpiar filtros"
-            aria-label="Limpiar filtros"
-            data-tooltip="Limpiar filtros"
+            title={copy.clearFilters}
+            aria-label={copy.clearFilters}
+            data-tooltip={copy.clearFilters}
           >
             <RotateCcw aria-hidden="true" />
           </button>
         )}
       </div>
 
-      <FilterGroup title="Modelo" highlighted={tutorialTarget === "modes"}>
+      <FilterGroup title={copy.model} highlighted={tutorialTarget === "modes"}>
         {models.map((model) => (
           <label className="check-pill" key={model}>
             <input
@@ -653,9 +909,9 @@ function FiltersPanel({
         ))}
       </FilterGroup>
 
-      <FilterGroup title="Capítulo" highlighted={tutorialTarget === "chapters"}>
+      <FilterGroup title={copy.chapter} highlighted={tutorialTarget === "chapters"}>
         {chapters.map((chapter) => (
-          <label className="check-pill wide" key={chapter.id}>
+          <label className="check-pill wide" key={chapter.id} title={localizedChapterName(chapter.id, language)}>
             <input
               type="checkbox"
               checked={filters.chapters.includes(chapter.id)}
@@ -666,7 +922,7 @@ function FiltersPanel({
         ))}
       </FilterGroup>
 
-      <FilterGroup title="Nivel K" highlighted={tutorialTarget === "k-level"}>
+      <FilterGroup title="K-Level" highlighted={tutorialTarget === "k-level"}>
         {kLevels.map((level) => (
           <label className="check-pill" key={level}>
             <input
@@ -680,14 +936,14 @@ function FiltersPanel({
       </FilterGroup>
 
       <label className={classNames("field-label", tutorialTarget === "reference-status" && "tutorial-highlight")}>
-        Referencia
+        {copy.reference}
         <select
           value={filters.references[0] ?? ""}
           onChange={(event) =>
             setFilters({ ...filters, references: event.target.value ? [event.target.value] : [] })
           }
         >
-          <option value="">Todas</option>
+          <option value="">{copy.all}</option>
           {references.map((reference) => (
             <option value={reference} key={reference}>
               {reference}
@@ -697,35 +953,35 @@ function FiltersPanel({
       </label>
 
       <label className={classNames("field-label", tutorialTarget === "reference-status" && "tutorial-highlight")}>
-        Estado
+        {copy.status}
         <select
           value={filters.status}
           onChange={(event) => setFilters({ ...filters, status: event.target.value as QuestionFilters["status"] })}
         >
-          <option value="all">Todas</option>
-          <option value="unseen">Sin responder</option>
-          <option value="correct">Última correcta</option>
-          <option value="incorrect">Última incorrecta</option>
-          <option value="flagged">Marcadas</option>
+          <option value="all">{copy.all}</option>
+          <option value="unseen">{copy.unseen}</option>
+          <option value="correct">{copy.lastCorrect}</option>
+          <option value="incorrect">{copy.lastIncorrect}</option>
+          <option value="flagged">{copy.flagged}</option>
         </select>
       </label>
 
       <div className={classNames("filter-actions", tutorialTarget === "progress-actions" && "tutorial-highlight")}>
         <button className="secondary" type="button" onClick={onExport}>
           <Download aria-hidden="true" />
-          Exportar
+          {copy.export}
         </button>
         <button className="secondary" type="button" onClick={() => fileInput.current?.click()}>
           <FileUp aria-hidden="true" />
-          Importar
+          {copy.import}
         </button>
         <button className="secondary" type="button" onClick={onTutorialReset}>
           <CircleHelp aria-hidden="true" />
-          Tutorial
+          {copy.tutorial}
         </button>
         <button className="danger" type="button" onClick={onReset}>
           <Trash2 aria-hidden="true" />
-          Borrar
+          {copy.delete}
         </button>
       </div>
       <input ref={fileInput} className="visually-hidden" type="file" accept="application/json" onChange={readImport} />
@@ -764,6 +1020,9 @@ function StudyView({
   onSelectIndex,
   onFlag,
   highlighted,
+  language,
+  onLanguageChange,
+  copy,
 }: {
   filteredQuestions: Question[];
   currentQuestion: Question | undefined;
@@ -778,11 +1037,14 @@ function StudyView({
   onSelectIndex: (index: number) => void;
   onFlag: (questionId: string) => void;
   highlighted: boolean;
+  language: Language;
+  onLanguageChange: (language: Language) => void;
+  copy: Copy;
 }) {
   if (!currentQuestion) {
     return (
       <main className="workspace">
-        <EmptyState title="No hay preguntas con esos filtros" text="Cambia los filtros para recuperar el banco." />
+        <EmptyState title={copy.noQuestions} text={copy.changeFilters} />
       </main>
     );
   }
@@ -793,12 +1055,13 @@ function StudyView({
     <main className={classNames("workspace", highlighted && "tutorial-highlight")}>
       <header className="workspace-header">
         <div>
-          <span className="eyebrow">Práctica</span>
-          <h2>Preguntas sueltas</h2>
+          <span className="eyebrow">{copy.practice}</span>
+          <h2>{copy.practiceTitle}</h2>
         </div>
         <div className="header-metrics">
-          <Metric label="Filtradas" value={filteredQuestions.length} />
-          <Metric label="Actual" value={`${currentIndex + 1}/${filteredQuestions.length}`} />
+          <Metric label={copy.filtered} value={filteredQuestions.length} />
+          <Metric label={copy.current} value={`${currentIndex + 1}/${filteredQuestions.length}`} />
+          <FlagLanguageToggle language={language} onChange={onLanguageChange} />
         </div>
       </header>
 
@@ -806,27 +1069,29 @@ function StudyView({
         question={currentQuestion}
         selected={selected}
         revealed={revealed}
-        progressText={progressLabel(progress, currentQuestion)}
+        progressText={progressLabel(progress, currentQuestion, copy)}
         flagged={progress.questionProgress[currentQuestion.id]?.flagged ?? false}
         locked={revealed}
         onToggle={(optionKey) => onToggle(currentQuestion, optionKey)}
         onFlag={() => onFlag(currentQuestion.id)}
+        language={language}
+        copy={copy}
       />
 
       {revealed && (
         <section className={classNames("feedback", isCorrect ? "correct" : "incorrect")}>
           <div className="feedback-title">
             {isCorrect ? <CheckCircle2 aria-hidden="true" /> : <XCircle aria-hidden="true" />}
-            <strong>{isCorrect ? "Correcta" : "Incorrecta"}</strong>
+            <strong>{isCorrect ? copy.correctAnswer : language === "es" ? "Incorrecta" : "Incorrect"}</strong>
           </div>
-          <ExplanationPanel question={currentQuestion} selected={selected} />
+          <ExplanationPanel question={currentQuestion} selected={selected} language={language} copy={copy} />
         </section>
       )}
 
       <div className="action-bar">
         <button className="secondary" type="button" onClick={() => onMove(-1)} disabled={currentIndex === 0}>
           <ChevronLeft aria-hidden="true" />
-          Anterior
+          {copy.previous}
         </button>
         <button
           className="primary"
@@ -835,11 +1100,11 @@ function StudyView({
           disabled={selected.length === 0 || revealed}
         >
           <CheckCircle2 aria-hidden="true" />
-          Comprobar
+          {copy.check}
         </button>
         <button className="secondary" type="button" onClick={onRandom} disabled={filteredQuestions.length <= 1}>
           <Shuffle aria-hidden="true" />
-          Aleatoria
+          {copy.random}
         </button>
         <button
           className="secondary"
@@ -847,13 +1112,38 @@ function StudyView({
           onClick={() => onMove(1)}
           disabled={currentIndex >= filteredQuestions.length - 1}
         >
-          Siguiente
+          {copy.next}
           <ChevronRight aria-hidden="true" />
         </button>
       </div>
 
-      <QuestionRail questions={filteredQuestions} currentIndex={currentIndex} progress={progress} onSelect={onSelectIndex} />
+      <QuestionRail questions={filteredQuestions} currentIndex={currentIndex} progress={progress} onSelect={onSelectIndex} copy={copy} />
     </main>
+  );
+}
+
+function FlagLanguageToggle({ language, onChange }: { language: Language; onChange: (language: Language) => void }) {
+  return (
+    <div className="flag-language-toggle" aria-label="Language">
+      <button
+        className={language === "en" ? "active" : undefined}
+        type="button"
+        onClick={() => onChange("en")}
+        aria-label="English"
+        title="English"
+      >
+        <span className="flag-icon uk" aria-hidden="true" />
+      </button>
+      <button
+        className={language === "es" ? "active" : undefined}
+        type="button"
+        onClick={() => onChange("es")}
+        aria-label="Español"
+        title="Español"
+      >
+        <span className="flag-icon spain" aria-hidden="true" />
+      </button>
+    </div>
   );
 }
 
@@ -869,6 +1159,8 @@ function ExamView({
   onJump,
   onCancel,
   onFinish,
+  language,
+  copy,
 }: {
   activeExam: ExamState | null;
   timerMode: TimerMode;
@@ -881,25 +1173,27 @@ function ExamView({
   onJump: (index: number) => void;
   onCancel: () => void;
   onFinish: () => void;
+  language: Language;
+  copy: Copy;
 }) {
   if (!activeExam) {
     return (
       <main className="workspace">
         <header className="workspace-header">
           <div>
-            <span className="eyebrow">Simulacro</span>
-            <h2>Examen de 40 preguntas</h2>
+            <span className="eyebrow">{copy.exam}</span>
+            <h2>{copy.examTitle}</h2>
           </div>
           <div className="header-metrics">
-            <Metric label="Aprobado" value="26/40" />
-            <Metric label="Tiempo" value={timerMode === "off" ? "Sin límite" : timerMode === "standard" ? "60 min" : "75 min"} />
+            <Metric label={copy.passedMetric} value="26/40" />
+            <Metric label={copy.time} value={timerMode === "off" ? copy.noLimit : timerMode === "standard" ? "60 min" : "75 min"} />
           </div>
         </header>
 
-        <section className="timer-panel" aria-label="Temporizador del simulacro">
+        <section className="timer-panel" aria-label={copy.timer}>
           <div>
             <Timer aria-hidden="true" />
-            <strong>Temporizador</strong>
+            <strong>{copy.timer}</strong>
           </div>
           <div className="timer-options">
             <label className="check-pill">
@@ -927,7 +1221,7 @@ function ExamView({
                 checked={timerMode === "off"}
                 onChange={() => onTimerModeChange("off")}
               />
-              Sin tiempo
+              {copy.noTime}
             </label>
           </div>
         </section>
@@ -936,14 +1230,14 @@ function ExamView({
           {models.map((model) => (
             <button className="start-card" type="button" onClick={() => onStartModel(model)} key={model}>
               <Play aria-hidden="true" />
-              <strong>Modelo {model}</strong>
-              <span>40 preguntas oficiales en orden original.</span>
+              <strong>{copy.modelTitle} {model}</strong>
+              <span>{copy.modelSubtitle}</span>
             </button>
           ))}
           <button className="start-card accent" type="button" onClick={onStartRandom}>
             <Shuffle aria-hidden="true" />
-            <strong>Aleatorio</strong>
-            <span>40 preguntas sin duplicados con distribución por capítulo.</span>
+            <strong>{copy.random}</strong>
+            <span>{copy.randomSubtitle}</span>
           </button>
         </section>
       </main>
@@ -955,26 +1249,26 @@ function ExamView({
   const answered = examQuestions.filter((question) => activeExam.answers[question.id]?.length).length;
   const remainingMs = activeExam.endsAt ? activeExam.endsAt - now : null;
   const timeIsUp = remainingMs !== null && remainingMs <= 0;
-  const timeLabel = remainingMs === null ? "Sin límite" : formatRemainingTime(Math.max(remainingMs, 0));
+  const timeLabel = remainingMs === null ? copy.noLimit : formatRemainingTime(Math.max(remainingMs, 0));
 
   return (
     <main className="workspace">
       <header className="workspace-header">
         <div>
-          <span className="eyebrow">Simulacro activo</span>
+          <span className="eyebrow">{copy.activeExam}</span>
           <h2>{activeExam.blueprint.title}</h2>
         </div>
         <div className="header-metrics">
-          <Metric label="Respondidas" value={`${answered}/40`} />
-          <Metric label="Pregunta" value={`${activeExam.currentIndex + 1}/40`} />
-          <Metric label="Tiempo" value={timeIsUp ? "Agotado" : timeLabel} />
+          <Metric label={copy.answered} value={`${answered}/40`} />
+          <Metric label={copy.question} value={`${activeExam.currentIndex + 1}/40`} />
+          <Metric label={copy.time} value={timeIsUp ? copy.timeUp.replace(".", "") : timeLabel} />
         </div>
       </header>
 
       {timeIsUp && (
         <section className="time-warning">
-          <strong>Tiempo agotado.</strong>
-          <span>Puedes finalizar el simulacro para corregirlo o cancelarlo sin guardar.</span>
+          <strong>{copy.timeUp}</strong>
+          <span>{copy.timeUpText}</span>
         </section>
       )}
 
@@ -982,24 +1276,26 @@ function ExamView({
         question={currentQuestion}
         selected={activeExam.answers[currentQuestion.id] ?? []}
         revealed={false}
-        progressText="Sin corrección hasta finalizar"
+        progressText={copy.noCorrection}
         flagged={false}
         locked={false}
         onToggle={(optionKey) => onToggle(currentQuestion, optionKey)}
+        language={language}
+        copy={copy}
       />
 
       <div className="action-bar">
         <button className="secondary" type="button" onClick={() => onMove(-1)} disabled={activeExam.currentIndex === 0}>
           <ChevronLeft aria-hidden="true" />
-          Anterior
+          {copy.previous}
         </button>
         <button className="primary" type="button" onClick={onFinish}>
           <CheckCircle2 aria-hidden="true" />
-          Finalizar
+          {copy.finish}
         </button>
         <button className="danger" type="button" onClick={onCancel}>
           <X aria-hidden="true" />
-          Cancelar
+          {copy.cancel}
         </button>
         <button
           className="secondary"
@@ -1007,7 +1303,7 @@ function ExamView({
           onClick={() => onMove(1)}
           disabled={activeExam.currentIndex >= activeExam.blueprint.questionIds.length - 1}
         >
-          Siguiente
+          {copy.next}
           <ChevronRight aria-hidden="true" />
         </button>
       </div>
@@ -1026,6 +1322,8 @@ function QuestionCard({
   locked,
   onToggle,
   onFlag,
+  language,
+  copy,
 }: {
   question: Question;
   selected: string[];
@@ -1035,8 +1333,11 @@ function QuestionCard({
   locked: boolean;
   onToggle: (optionKey: string) => void;
   onFlag?: () => void;
+  language: Language;
+  copy: Copy;
 }) {
-  const displayOptions = useMemo(() => getDisplayOptions(question), [question]);
+  const localized = localizedQuestion(question, language);
+  const displayOptions = useMemo(() => getDisplayOptions(question, language), [question, language]);
 
   return (
     <section className="question-card">
@@ -1045,18 +1346,18 @@ function QuestionCard({
         <span>{question.chapter}</span>
         <span>{question.reference}</span>
         <span>{question.kLevel}</span>
-        <span>{question.selectionMode === "multiple" ? "Selección múltiple" : "Selección única"}</span>
+        <span>{question.selectionMode === "multiple" ? copy.multiple : copy.single}</span>
       </div>
       <div className="question-title-row">
-        <p className="prompt">{question.prompt}</p>
+        <p className="prompt">{localized.prompt}</p>
         {onFlag && (
           <button
             className="icon-button"
             type="button"
             onClick={onFlag}
-            title={flagged ? "Quitar de marcadas" : "Marcar para repasar"}
-            aria-label={flagged ? "Quitar pregunta de marcadas" : "Marcar pregunta para repasar"}
-            data-tooltip={flagged ? "Quitar de marcadas" : "Marcar para repasar"}
+            title={flagged ? copy.removeFlag : copy.addFlag}
+            aria-label={flagged ? copy.removeFlagAria : copy.addFlagAria}
+            data-tooltip={flagged ? copy.removeFlag : copy.addFlag}
           >
             {flagged ? <BookmarkCheck aria-hidden="true" /> : <Bookmark aria-hidden="true" />}
           </button>
@@ -1093,15 +1394,26 @@ function QuestionCard({
 
       <div className="question-foot">
         <span>{progressText}</span>
-        <span>{question.selector}</span>
+        <span>{selectorLabel(question, copy)}</span>
       </div>
     </section>
   );
 }
 
-function ExplanationPanel({ question, selected }: { question: Question; selected: string[] }) {
-  const parsed = parseExplanation(question.explanation);
-  const displayOptions = useMemo(() => getDisplayOptions(question), [question]);
+function ExplanationPanel({
+  question,
+  selected,
+  language,
+  copy,
+}: {
+  question: Question;
+  selected: string[];
+  language: Language;
+  copy: Copy;
+}) {
+  const localized = localizedQuestion(question, language);
+  const parsed = parseExplanation(localized.explanation);
+  const displayOptions = useMemo(() => getDisplayOptions(question, language), [question, language]);
   const displayKeyByOriginalKey = new Map(displayOptions.map((option) => [option.key, option.displayKey]));
   const displayOrderByOriginalKey = new Map(displayOptions.map((option, index) => [option.key, index]));
   const [isTheoryOpen, setIsTheoryOpen] = useState(false);
@@ -1110,16 +1422,16 @@ function ExplanationPanel({ question, selected }: { question: Question; selected
   if (!parsed.options.length) {
     return (
       <div className="explanation-panel">
-        <TheoryButton objective={objective} onOpen={() => setIsTheoryOpen(true)} />
-        <p className="explanation-text">{question.explanation}</p>
-        {isTheoryOpen && objective && <TheoryModal objective={objective} onClose={() => setIsTheoryOpen(false)} />}
+        <TheoryButton objective={objective} onOpen={() => setIsTheoryOpen(true)} language={language} copy={copy} />
+        <p className="explanation-text">{localized.explanation}</p>
+        {isTheoryOpen && objective && <TheoryModal objective={objective} onClose={() => setIsTheoryOpen(false)} language={language} copy={copy} />}
       </div>
     );
   }
 
   return (
     <div className="explanation-panel">
-      <TheoryButton objective={objective} onOpen={() => setIsTheoryOpen(true)} />
+      <TheoryButton objective={objective} onOpen={() => setIsTheoryOpen(true)} language={language} copy={copy} />
       {parsed.intro && <p className="explanation-intro">{parsed.intro}</p>}
       <div className="explanation-options">
         {[...parsed.options].sort((left, right) => {
@@ -1139,32 +1451,54 @@ function ExplanationPanel({ question, selected }: { question: Question; selected
             >
               <div className="explanation-option-head">
                 <span className="option-key">{displayKeyByOriginalKey.get(item.key) ?? item.key.toUpperCase()}</span>
-                {isCorrect && <span className="reason-pill correct">Correcta</span>}
-                {isSelected && <span className="reason-pill selected">Tu respuesta</span>}
+                {isCorrect && <span className="reason-pill correct">{copy.correctAnswer}</span>}
+                {isSelected && <span className="reason-pill selected">{copy.yourAnswer}</span>}
               </div>
               <p>{cleanExplanationText(item.text)}</p>
             </div>
           );
         })}
       </div>
-      {isTheoryOpen && objective && <TheoryModal objective={objective} onClose={() => setIsTheoryOpen(false)} />}
+      {isTheoryOpen && objective && <TheoryModal objective={objective} onClose={() => setIsTheoryOpen(false)} language={language} copy={copy} />}
     </div>
   );
 }
 
-function TheoryButton({ objective, onOpen }: { objective: Objective | undefined; onOpen: () => void }) {
+function TheoryButton({
+  objective,
+  onOpen,
+  language,
+  copy,
+}: {
+  objective: Objective | undefined;
+  onOpen: () => void;
+  language: Language;
+  copy: Copy;
+}) {
   if (!objective) return null;
+  const localized = localizedObjective(objective, language);
 
   return (
     <button className="theory-button" type="button" onClick={onOpen}>
       <BookOpen aria-hidden="true" />
-      Ver teoría
-      {objective.syllabusPage ? <span>p. {objective.syllabusPage}</span> : null}
+      {copy.theory}
+      {localized.syllabusPage ? <span>p. {localized.syllabusPage}</span> : null}
     </button>
   );
 }
 
-function TheoryModal({ objective, onClose }: { objective: Objective; onClose: () => void }) {
+function TheoryModal({
+  objective,
+  onClose,
+  language,
+  copy,
+}: {
+  objective: Objective;
+  onClose: () => void;
+  language: Language;
+  copy: Copy;
+}) {
+  const localized = localizedObjective(objective, language);
   return (
     <div className="theory-backdrop" role="presentation" onClick={onClose}>
       <section
@@ -1174,31 +1508,30 @@ function TheoryModal({ objective, onClose }: { objective: Objective; onClose: ()
         aria-labelledby="theory-title"
         onClick={(event) => event.stopPropagation()}
       >
-        <button className="icon-button theory-close" type="button" onClick={onClose} title="Cerrar">
+        <button className="icon-button theory-close" type="button" onClick={onClose} title={language === "es" ? "Cerrar" : "Close"}>
           <X aria-hidden="true" />
         </button>
-        <span className="eyebrow">Syllabus CTFL v4.0.1</span>
+        <span className="eyebrow">{language === "es" ? "Syllabus CTFL v4.0" : "CTFL v4.0.1 Syllabus"}</span>
         <h2 id="theory-title">{objective.code}</h2>
         <dl className="theory-details">
           <div>
-            <dt>Objetivo</dt>
-            <dd>{objective.text}</dd>
+            <dt>{copy.objective}</dt>
+            <dd>{localized.text}</dd>
           </div>
           <div>
-            <dt>Sección</dt>
+            <dt>{copy.section}</dt>
             <dd>
               {objective.section}
-              {objective.sectionTitle ? ` - ${objective.sectionTitle}` : ""}
+              {localized.sectionTitle ? ` - ${localized.sectionTitle}` : ""}
             </dd>
           </div>
           <div>
-            <dt>Página del PDF</dt>
-            <dd>{objective.syllabusPage ? objective.syllabusPage : "No disponible"}</dd>
+            <dt>{copy.pdfPage}</dt>
+            <dd>{localized.syllabusPage ? localized.syllabusPage : copy.unavailable}</dd>
           </div>
         </dl>
         <p className="theory-note">
-          Consulta esa página en <strong>Docs/ISTQB_CTFL_Syllabus_v4.0.1.pdf</strong>. El rationale oficial puede apoyarse
-          también en conceptos de otras secciones del syllabus.
+          {copy.syllabusNote}
         </p>
       </section>
     </div>
@@ -1210,11 +1543,13 @@ function QuestionRail({
   currentIndex,
   progress,
   onSelect,
+  copy,
 }: {
   questions: Question[];
   currentIndex: number;
   progress: ProgressState;
   onSelect: (index: number) => void;
+  copy: Copy;
 }) {
   return (
     <section className="question-rail">
@@ -1232,7 +1567,7 @@ function QuestionRail({
             type="button"
             onClick={() => onSelect(index)}
             key={question.id}
-            title={`${questionLabel(question)} - ${progressLabel(progress, question)}`}
+            title={`${questionLabel(question)} - ${progressLabel(progress, question, copy)}`}
           >
             {questionLabel(question)}
           </button>
@@ -1271,18 +1606,28 @@ function ExamRail({
   );
 }
 
-function ReviewView({ review, sessions }: { review: ReviewState | null; sessions: StoredSession[] }) {
+function ReviewView({
+  review,
+  sessions,
+  language,
+  copy,
+}: {
+  review: ReviewState | null;
+  sessions: StoredSession[];
+  language: Language;
+  copy: Copy;
+}) {
   if (!review) {
     return (
       <main className="workspace">
         <header className="workspace-header">
           <div>
-            <span className="eyebrow">Revisión</span>
-            <h2>Historial reciente</h2>
+            <span className="eyebrow">{copy.review}</span>
+            <h2>{copy.recentHistory}</h2>
           </div>
         </header>
         {sessions.length === 0 ? (
-          <EmptyState title="Aún no hay simulacros terminados" text="Completa un simulacro para ver la revisión aquí." />
+          <EmptyState title={copy.noSessions} text={copy.completeExam} />
         ) : (
           <section className="session-list">
             {sessions.map((session) => (
@@ -1306,20 +1651,22 @@ function ReviewView({ review, sessions }: { review: ReviewState | null; sessions
     <main className="workspace">
       <header className="workspace-header">
         <div>
-          <span className="eyebrow">Revisión</span>
+          <span className="eyebrow">{copy.review}</span>
           <h2>{review.title}</h2>
         </div>
         <div className="header-metrics">
-          <Metric label="Puntos" value={`${review.score.score}/40`} />
-          <Metric label="Resultado" value={review.score.passed ? "Apto" : "No apto"} />
-          <Metric label="Porcentaje" value={`${review.score.percent}%`} />
+          <Metric label={copy.points} value={`${review.score.score}/40`} />
+          <Metric label={copy.result} value={review.score.passed ? copy.passed : copy.failed} />
+          <Metric label={copy.percent} value={`${review.score.percent}%`} />
         </div>
       </header>
 
       <section className={classNames("result-banner", review.score.passed ? "passed" : "failed")}>
-        <strong>{review.score.passed ? "Aprobado" : "No aprobado"}</strong>
+        <strong>{review.score.passed ? copy.passed : copy.notPassed}</strong>
         <span>
-          {review.score.correct} correctas, {review.score.incorrect} incorrectas y {review.score.blank} en blanco.
+          {language === "es"
+            ? `${review.score.correct} correctas, ${review.score.incorrect} incorrectas y ${review.score.blank} en blanco.`
+            : `${review.score.correct} correct, ${review.score.incorrect} incorrect and ${review.score.blank} blank.`}
         </span>
       </section>
 
@@ -1327,20 +1674,21 @@ function ReviewView({ review, sessions }: { review: ReviewState | null; sessions
         {review.questions.map((question) => {
           const selected = review.answers[question.id] ?? [];
           const correct = isCorrectAnswer(question, selected);
+          const localized = localizedQuestion(question, language);
           return (
             <article className="review-item" key={question.id}>
               <div className="review-head">
                 <strong>{questionLabel(question)}</strong>
                 <span className={classNames("score-pill", correct ? "passed" : "failed")}>
-                  {correct ? "Correcta" : selected.length ? "Incorrecta" : "Blanco"}
+                  {correct ? copy.correctAnswer : selected.length ? (language === "es" ? "Incorrecta" : "Incorrect") : copy.blank}
                 </span>
               </div>
-              <p>{question.prompt}</p>
+              <p>{localized.prompt}</p>
               <div className="answer-lines">
-                <span>Tu respuesta: {selected.length ? displayAnswerLabels(question, selected) : "Sin responder"}</span>
-                <span>Correcta: {displayAnswerLabels(question, question.correctAnswers)}</span>
+                <span>{copy.yourAnswer}: {selected.length ? displayAnswerLabels(question, selected, language) : copy.unanswered}</span>
+                <span>{copy.correctAnswer}: {displayAnswerLabels(question, question.correctAnswers, language)}</span>
               </div>
-              <ExplanationPanel question={question} selected={selected} />
+              <ExplanationPanel question={question} selected={selected} language={language} copy={copy} />
             </article>
           );
         })}

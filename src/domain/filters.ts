@@ -25,6 +25,7 @@ export function filterQuestions(
   questions: Question[],
   filters: QuestionFilters,
   progress: ProgressState,
+  language: "en" | "es" = "en",
 ): Question[] {
   const query = filters.query.trim().toLowerCase();
 
@@ -41,13 +42,17 @@ export function filterQuestions(
     if (filters.status === "flagged" && !questionProgress?.flagged) return false;
 
     if (!query) return true;
+    const translated = language === "es" ? question.translations?.es : undefined;
     const searchable = [
       question.id,
       question.prompt,
+      translated?.prompt,
       question.reference,
       question.kLevel,
       question.chapter,
       ...question.options.map((option) => option.text),
+      ...(translated?.options?.map((option) => option.text) ?? []),
+      translated?.explanation,
     ]
       .join(" ")
       .toLowerCase();
