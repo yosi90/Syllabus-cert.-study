@@ -21,6 +21,13 @@ type Question = {
   explanation: string;
   notes: string[];
   points: number;
+  translations?: {
+    es?: {
+      prompt?: string;
+      options?: Option[];
+      selector?: string;
+    };
+  };
 };
 
 type QuestionBank = {
@@ -89,6 +96,20 @@ for (const question of bank.questions) {
   assert(question.points === 1, `${question.id}: expected 1 point, found ${question.points}`);
 
   const optionKeys = new Set(question.options.map((option) => option.key));
+  const spanish = question.translations?.es;
+  assert(spanish !== undefined, `${question.id}: missing Spanish translation`);
+  assert(Boolean(spanish?.prompt?.trim()), `${question.id}: missing Spanish prompt`);
+  assert(Boolean(spanish?.selector?.trim()), `${question.id}: missing Spanish selector`);
+  assert(spanish?.options?.length === question.options.length, `${question.id}: Spanish option count does not match source`);
+  for (const option of spanish?.options ?? []) {
+    assert(optionKeys.has(option.key), `${question.id}: Spanish option ${option.key} is not a source option`);
+    assert(Boolean(option.text?.trim()), `${question.id}: Spanish option ${option.key} is empty`);
+    assert(
+      !/(?:sample exams?|exámenes? de muestra|pruebas? de muestra)\s*(?:set|conjunto)?\s*[A-D]?$/i.test(option.text),
+      `${question.id}: Spanish option ${option.key} contains a PDF footer`,
+    );
+  }
+
   for (const option of question.options) {
     assert(/^[a-e]$/.test(option.key), `${question.id}: invalid option key ${option.key}`);
     assert(option.text.trim().length > 0, `${question.id}: empty option ${option.key}`);

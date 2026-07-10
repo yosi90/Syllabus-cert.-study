@@ -1987,7 +1987,7 @@
             },
             {
               "key": "d",
-              "text": "Las retrospectivas abarcan cinco valores, incluyendo el valor y el respeto, que son cruciales para mantener una mejora continua en la organización Exámenes de muestra conjunto A"
+              "text": "Las retrospectivas abarcan cinco valores, entre ellos el valor y el respeto, que son cruciales para mantener la mejora continua en la organización"
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -2093,7 +2093,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Usted es prueba una historia de usuario con tres criterios de aceptación: AC1, AC2 y AC3. A C1 está cubierto por caso de prueba TC1, AC2 por TC2, y AC3 por TC3. La historia de la eyecucion de prueba tuvo tres carreras de prueba en tres versiones consecutivas del software como sigue: Ejecución 1 Ejecución 2 Ejecución 3 TC1 (1) Fallado (4) Pasado (7) TC2 (2) Pasado (5) Failed (8) Pasado TC3 (3) Failed (6) Failed (9) Los exámenes pasados se repiten una vez que se le informa que todos los defectos encontrados en la prueba son corregidos del software nuevo y una versión disponible. ¿Cuál de las pruebas anteriores se ejecutan como pruebas de regresión?",
+          "prompt": "Está probando una historia de usuario con tres criterios de aceptación: AC1, AC2 y AC3. AC1 está cubierto por el caso de prueba TC1, AC2 por TC2 y AC3 por TC3. El historial de ejecución de las pruebas recoge tres ejecuciones en tres versiones consecutivas del software: Ejecución 1 Ejecución 2 Ejecución 3 TC1 (1) Falló (4) Aprobó (7) Aprobó TC2 (2) Aprobó (5) Falló (8) Aprobó TC3 (3) Falló (6) Falló (9) Aprobó. Los casos de prueba se repiten cuando se informa de que todos los defectos encontrados en la ejecución se han corregido y hay disponible una nueva versión del software. ¿Cuáles de las pruebas anteriores se ejecutan como pruebas de regresión?",
           "options": [
             {
               "key": "a",
@@ -2109,7 +2109,7 @@
             },
             {
               "key": "d",
-              "text": "Sólo 5, 6 Exámenes de muestra establecer A"
+              "text": "Solo 5, 6"
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -2353,7 +2353,7 @@
             },
             {
               "key": "d",
-              "text": "falas encontradas deben ser reconocidas, apreciadas y manejadas objetivamente Exámenes de muestra conjunto A"
+              "text": "Los fallos encontrados deben reconocerse, valorarse y gestionarse objetivamente"
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -2459,7 +2459,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Usted es pruebas un formulario de búsqueda simplificado de apartamentos que tiene sólo dos criterios de búsqueda: • planta (con tres opciones posibles: planta baja; primera planta; segundo o planta superior) • tipo jardín (con tres opciones posibles: no jardín; pequeño jardín; gran jardín) Cada apartamento en la planta baja tiene un jardín, los apartamentos en pisos superiores no lo hacen. La forma tiene un mecanismo de validación incorporado que no le permitirá utilizar los criterios de búsqueda que violan esta regla. Cada prueba tiene dos valores de entrada: suelo y tipo de jardín. Usted quiere aplicar partición de equivalencia (EP) para cubrir cada piso y cada tipo de jardín en sus pruebas. ¿Cuál es el número mínimo de casos de prueba para lograr cobertura de EP 100% para particiónes válidas?",
+          "prompt": "Está probando un formulario simplificado de búsqueda de apartamentos que solo tiene dos criterios: • planta (con tres opciones: planta baja, primera planta y segunda planta o superior) • tipo de jardín (con tres opciones: sin jardín, jardín pequeño y jardín grande). Todos los apartamentos de la planta baja tienen jardín; los de plantas superiores no. El formulario incorpora una validación que impide utilizar criterios de búsqueda que incumplan esta regla. Cada prueba tiene dos valores de entrada: planta y tipo de jardín. Quiere aplicar particiones de equivalencia (EP) para cubrir en las pruebas cada planta y cada tipo de jardín. ¿Cuál es el número mínimo de casos de prueba necesario para lograr una cobertura EP del 100 % de las particiones válidas?",
           "options": [
             {
               "key": "a",
@@ -2475,7 +2475,7 @@
             },
             {
               "key": "d",
-              "text": "6 Exámenes de muestra set A"
+              "text": "6"
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -2536,7 +2536,7 @@
             },
             {
               "key": "d",
-              "text": "Exámenes de muestra 100% set A"
+              "text": "100 %"
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -2581,7 +2581,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Su tienda de alquiler diaria de bicicletas favorita acaba de introducir un nuevo sistema de gestión de elaciones de cliente R y le pidió, uno de sus miembros más leales, que lo probara. Las características implementadas son las siguientes: • Cualquier persona puede alquilar una bicicleta, pero los miembros reciben un 20% de descuento • Sin embargo, si se pierde el plazo de retorno, el descuento ya no está disponible • Después de 15 alquileres, los miembros obtienen un regalo: una tabla de decisiónes de camisetas que describe las características implementadas se ve como sigue: condiciónes R1 R2 R3 R4 R5 R6 R7 R8 Siendo miembro T T T F F F F F F F Fecha límite faltada T F T F T F F T 15o alquiler F F T F T F T F T Actuaciones 20% descuento X X T-Shirt X X X X X Basado únicamente en la descripción de características del sistema de gestión de relaciones con el cliente, ¿cuál de las reglas anteriores describe una situación imposible?",
+          "prompt": "Su tienda favorita de alquiler diario de bicicletas acaba de implantar un nuevo sistema de gestión de relaciones con clientes y le ha pedido a usted, uno de sus miembros más fieles, que lo pruebe. Las funcionalidades implantadas son: • Cualquiera puede alquilar una bicicleta, pero los miembros reciben un descuento del 20 %. • Sin embargo, si se incumple el plazo de devolución, el descuento deja de estar disponible. • Tras 15 alquileres, los miembros reciben una camiseta de regalo. La tabla de decisión que describe estas funcionalidades es la siguiente: Condiciones R1 R2 R3 R4 R5 R6 R7 R8 Es miembro V V V V F F F F Incumplió el plazo V F V F V F F V Decimoquinto alquiler F F V V F F V V Acciones Descuento del 20 % X X Camiseta de regalo X X X. Basándose SOLO en la descripción de las funcionalidades del sistema de gestión de relaciones con clientes, ¿cuál de las reglas anteriores describe una situación imposible?",
           "options": [
             {
               "key": "a",
@@ -2642,7 +2642,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Prueba un sistema cuyo ciclo de vida es modelado por el di agrama de transición estatal que se muestra a continuación. El sistema comienza en el estado INIT y termina su operación en el estado OFF. ¿Cuál es el número MINIMAL de casos de prueba para lograr cobertura de transiciónes válidas?",
+          "prompt": "Está probando un sistema cuyo ciclo de vida se modela mediante el diagrama de transición de estados que se muestra a continuación. El sistema comienza en el estado INIT y finaliza su funcionamiento en el estado OFF. ¿Cuál es el número MÍNIMO de casos de prueba necesario para lograr cobertura de transiciones válidas?",
           "options": [
             {
               "key": "a",
@@ -2658,7 +2658,7 @@
             },
             {
               "key": "d",
-              "text": "3 Exámenes de muestra set A"
+              "text": "3"
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -2886,7 +2886,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "En su proyecto ha habido un retraso en la liberación de una nueva aplicación y eyecucion de prueba comenzó tarde, pero tiene conocimientos de dominio muy detallados y buenas habilidades analíticas. La lista completa de requisitos aún no se ha compartido con el equipo, pero la administración está pidiendo que se presenten algunos resultados de prueba. ¿Qué técnica de prueba encaja mejor en esta situación?",
+          "prompt": "En su proyecto se ha retrasado la entrega de una aplicación completamente nueva y la ejecución de las pruebas comenzó tarde, pero usted tiene un conocimiento muy detallado del dominio y buenas capacidades analíticas. La lista completa de requisitos aún no se ha compartido con el equipo, pero la dirección solicita que se presenten algunos resultados de prueba. ¿Qué técnica de prueba encaja MEJOR en esta situación?",
           "options": [
             {
               "key": "a",
@@ -2894,7 +2894,7 @@
             },
             {
               "key": "b",
-              "text": "Adiciones de error"
+              "text": "Adivinación de errores"
             },
             {
               "key": "c",
@@ -2902,7 +2902,7 @@
             },
             {
               "key": "d",
-              "text": "Pruebas de rama Pruebas de muestra set A"
+              "text": "Pruebas de rama"
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -3277,7 +3277,7 @@
             },
             {
               "key": "d",
-              "text": "TC 001 Muestras set A"
+              "text": "TC 001"
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -3399,7 +3399,7 @@
             },
             {
               "key": "d",
-              "text": "Transferencia de riesgo Pruebas de muestra set A"
+              "text": "Transferencia del riesgo"
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -3582,7 +3582,7 @@
             },
             {
               "key": "d",
-              "text": "Prioridad y severidad Exámenes de muestra set A"
+              "text": "Prioridad y gravedad"
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -7549,7 +7549,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Está diseñando casos de prueba basados ​​en el siguiente diagrama de transición de estado: ¿Cuál es el número MÍNIMO de casos de prueba necesarios para lograr una cobertura de transiciónes válida al 100 %?",
+          "prompt": "Está diseñando casos de prueba basados en el siguiente diagrama de transición de estados. ¿Cuál es el número MÍNIMO de casos de prueba necesario para lograr una cobertura del 100 % de las transiciones válidas?",
           "options": [
             {
               "key": "a",
@@ -9998,7 +9998,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Está aplicando pruebas de transición de estado al sistema de reserva de habitaciones de hotel modelado mediante la siguiente tabla de transición de estado, con 4 estados y 5 eventos diferentes: Eventos Estado Disponible No disponible Cambio de habitación Cancelar Pagar S1: Solicitando S2 S3 S2: Confirmado S1 S4 S4 S3: Lista de espera S2 S4 S4: Fin Suponiendo que todos los casos de prueba comienzan en el estado \"Solicitando\", ¿cuál de los siguientes casos de prueba, representados como secuencias de eventos, logra las transiciónes válidas más altas? cobertura?",
+          "prompt": "Está aplicando pruebas de transición de estados al sistema de reserva de habitaciones de hotel que se modela mediante la siguiente tabla de transición de estados, con 4 estados y 5 eventos: Eventos Estado Disponible No disponible Cambiar habitación Cancelar Pagar S1: Solicitando S2 S3 S2: Confirmado S1 S4 S4 S3: Lista de espera S2 S4 S4: Fin. Suponiendo que todos los casos de prueba comienzan en el estado «Solicitando», ¿cuál de los siguientes casos de prueba, representado como una secuencia de eventos, alcanza la mayor cobertura de transiciones válidas?",
           "options": [
             {
               "key": "a",
@@ -10006,11 +10006,11 @@
             },
             {
               "key": "b",
-              "text": "Disponible, ChangeRoom, No disponible, Disponible, Pagar"
+              "text": "Disponible, Cambiar habitación, No disponible, Disponible, Pagar"
             },
             {
               "key": "c",
-              "text": "Disponible, ChangeRoom, Disponible, ChangeRoom, No disponible"
+              "text": "Disponible, Cambiar habitación, Disponible, Cambiar habitación, No disponible"
             },
             {
               "key": "d",
@@ -10380,7 +10380,7 @@
             },
             {
               "key": "d",
-              "text": "Ingrese a la página web con tres navegadores diferentes: Edge, Chrome y Opera. En cada conjunto de filtros de cejas entre $ 90 y $ 110. Resultado esperado: los resultados incluyen los productos A y B y el diseño de los resultados es el mismo en los tres navegadores."
+              "text": "Acceda a la página web con tres navegadores diferentes: Edge, Chrome y Opera. En cada navegador, configure el filtro entre 90 $ y 110 $. Resultado esperado: los resultados incluyen los productos A y B y su diseño es el mismo en los tres navegadores."
             }
           ],
           "selector": "Selecciona UNA opción.",

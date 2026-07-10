@@ -11,7 +11,7 @@ import {
   Download,
   FileUp,
   Filter,
-  ListChecks,
+  Menu,
   Play,
   RotateCcw,
   Search,
@@ -66,6 +66,8 @@ const uiCopy = {
   en: {
     trainer: "Trainer",
     modesLabel: "Modes",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
     practice: "Practice",
     exam: "Exam",
     review: "Review",
@@ -151,6 +153,8 @@ const uiCopy = {
   es: {
     trainer: "Entrenador",
     modesLabel: "Modos",
+    openMenu: "Abrir menú",
+    closeMenu: "Cerrar menú",
     practice: "Práctica",
     exam: "Simulacro",
     review: "Revisión",
@@ -459,6 +463,7 @@ function formatRemainingTime(milliseconds: number) {
 function AppShell() {
   const navigate = useNavigate();
   const [language, setLanguage] = useState<Language>("en");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showSpanishNotice, setShowSpanishNotice] = useState(false);
   const copy = uiCopy[language];
   const [progress, setProgress] = useState<ProgressState>(() => loadProgress());
@@ -481,6 +486,24 @@ function AppShell() {
     const interval = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(interval);
   }, [activeExam?.endsAt]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return undefined;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMenuOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMenuOpen]);
 
   const filteredQuestions = useMemo(() => filterQuestions(questions, filters, progress, language), [filters, progress, language]);
   const progressSummary = useMemo(() => summarizeProgress(questions, progress), [progress]);
@@ -673,24 +696,41 @@ function AppShell() {
 
   return (
     <div className="app">
-      <aside className={classNames("sidebar", tutorialTarget === "layout" && "tutorial-highlight")}>
+      <button
+        className="mobile-menu-toggle"
+        type="button"
+        aria-label={isMenuOpen ? copy.closeMenu : copy.openMenu}
+        aria-expanded={isMenuOpen}
+        aria-controls="main-menu"
+        onClick={() => setIsMenuOpen((current) => !current)}
+      >
+        {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+      </button>
+
+      {isMenuOpen && <button className="menu-backdrop" type="button" aria-label={copy.closeMenu} onClick={() => setIsMenuOpen(false)} />}
+
+      <aside
+        className={classNames("sidebar", isMenuOpen && "is-open", tutorialTarget === "layout" && "tutorial-highlight")}
+        id="main-menu"
+      >
         <div className="brand">
-          <div>
+          <div className="brand-copy">
             <span className="eyebrow">ISTQB CTFL v4.0</span>
             <h1>{copy.trainer}</h1>
           </div>
-          <ListChecks aria-hidden="true" />
+          <div className="brand-language">
+            <FlagLanguageToggle language={language} onChange={handleLanguageChange} />
+          </div>
         </div>
 
         <nav className={classNames("mode-tabs", tutorialTarget === "modes" && "tutorial-highlight")} aria-label={copy.modesLabel}>
-          <NavLink to="/" end>
+          <NavLink to="/" end onClick={() => setIsMenuOpen(false)}>
             {copy.practice}
           </NavLink>
-          <NavLink to="/exam">{copy.exam}</NavLink>
-          <NavLink to="/review">{copy.review}</NavLink>
+          <NavLink to="/exam" onClick={() => setIsMenuOpen(false)}>{copy.exam}</NavLink>
+          <NavLink to="/review" onClick={() => setIsMenuOpen(false)}>{copy.review}</NavLink>
         </nav>
 
-        <StatsPanel progressSummary={progressSummary} highlighted={tutorialTarget === "progress-actions"} copy={copy} />
         <FiltersPanel
           filters={filters}
           setFilters={setFilters}
@@ -703,6 +743,7 @@ function AppShell() {
           language={language}
           copy={copy}
         />
+        <StatsPanel progressSummary={progressSummary} highlighted={tutorialTarget === "progress-actions"} copy={copy} />
       </aside>
 
       <Routes>
@@ -807,7 +848,7 @@ function StatsPanel({
   copy: Copy;
 }) {
   return (
-    <section className={classNames("panel compact", highlighted && "tutorial-highlight")}>
+    <section className={classNames("panel compact progress-panel", highlighted && "tutorial-highlight")}>
       <h2>{copy.localProgress}</h2>
       <div className="stat-grid">
         <Metric label={copy.viewed} value={progressSummary.attempted} />
@@ -1088,7 +1129,7 @@ function StudyView({
         </section>
       )}
 
-      <div className="action-bar">
+      <div className="action-bar study-actions">
         <button className="secondary" type="button" onClick={() => onMove(-1)} disabled={currentIndex === 0}>
           <ChevronLeft aria-hidden="true" />
           {copy.previous}
