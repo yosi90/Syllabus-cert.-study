@@ -52,6 +52,7 @@ const SPANISH_TRANSLATION_NOTICE_KEY = "istqb-ctfl-v4-spanish-translation-notice
 const THEME_STORAGE_KEY = "istqb-ctfl-v4-theme";
 
 type ReviewState = {
+  sessionId: string;
   title: string;
   questions: Question[];
   answers: AnswerMap;
@@ -135,6 +136,12 @@ const uiCopy = {
     finish: "Finish",
     cancel: "Cancel",
     recentHistory: "Recent history",
+    backToHistory: "Back to history",
+    openReview: "Open review",
+    officialExam: "Official model",
+    randomExam: "Random exam",
+    adaptiveSession: "Adaptive session",
+    incompatibleSession: "This review is unavailable because some questions no longer exist in this version.",
     noSessions: "No finished exams yet",
     completeExam: "Complete an exam to see its review here.",
     points: "Points",
@@ -151,6 +158,13 @@ const uiCopy = {
     translationNoticeText:
       "This site was originally built in English. The Spanish translation may contain inconsistencies or errors, so use the official English wording when precision matters.",
     translationNoticeAction: "I understand",
+    cancelExamTitle: "Cancel exam?",
+    cancelExamText: "Current answers will not be saved.",
+    resetTitle: "Delete local progress?",
+    resetText: "This will delete all progress stored by this site in this browser.",
+    confirmCancelExam: "Cancel exam",
+    confirmReset: "Delete progress",
+    keepWorking: "Go back",
   },
   es: {
     trainer: "Entrenador",
@@ -226,6 +240,12 @@ const uiCopy = {
     finish: "Finalizar",
     cancel: "Cancelar",
     recentHistory: "Historial reciente",
+    backToHistory: "Volver al historial",
+    openReview: "Abrir revisión",
+    officialExam: "Modelo oficial",
+    randomExam: "Simulacro aleatorio",
+    adaptiveSession: "Sesión adaptativa",
+    incompatibleSession: "Esta revisión no está disponible porque algunas preguntas ya no existen en esta versión.",
     noSessions: "Aún no hay simulacros terminados",
     completeExam: "Completa un simulacro para ver la revisión aquí.",
     points: "Puntos",
@@ -242,6 +262,13 @@ const uiCopy = {
     translationNoticeText:
       "Esta web se construyó originalmente en inglés. La traducción al español puede contener inconsistencias o errores, así que consulta el texto oficial en inglés cuando necesites máxima precisión.",
     translationNoticeAction: "Entendido",
+    cancelExamTitle: "¿Cancelar el simulacro?",
+    cancelExamText: "Las respuestas actuales no se guardarán.",
+    resetTitle: "¿Borrar el progreso local?",
+    resetText: "Se borrará todo el progreso guardado por esta web en este navegador.",
+    confirmCancelExam: "Cancelar simulacro",
+    confirmReset: "Borrar progreso",
+    keepWorking: "Volver",
   },
 } as const;
 
@@ -468,6 +495,26 @@ function formatRemainingTime(milliseconds: number) {
   return `${minutes}:${String(seconds).padStart(2, "0")}`;
 }
 
+function getSessionType(session: StoredSession): "official" | "random" | "adaptive" {
+  if (session.sessionType) return session.sessionType;
+  if (session.id.startsWith("model-") || /^Modelo [A-D]$/.test(session.title)) return "official";
+  if (session.mode === "study") return "adaptive";
+  return "random";
+}
+
+function restoreReview(session: StoredSession | undefined): ReviewState | null {
+  if (!session) return null;
+  const sessionQuestions = findQuestionsByIds(questions, session.questionIds);
+  if (sessionQuestions.length !== session.questionIds.length) return null;
+  return {
+    sessionId: session.id,
+    title: session.title,
+    questions: sessionQuestions,
+    answers: session.answers,
+    score: scoreQuestions(sessionQuestions, session.answers, examRules),
+  };
+}
+
 function AppShell() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -494,7 +541,10 @@ function AppShell() {
   const [activeExam, setActiveExam] = useState<ExamState | null>(() => progress.activeExam);
   const [examTimerMode, setExamTimerMode] = useState<TimerMode>(() => progress.activeExam?.timerMode ?? "standard");
   const [now, setNow] = useState(() => Date.now());
-  const [review, setReview] = useState<ReviewState | null>(null);
+  const [review, setReview] = useState<ReviewState | null>(() =>
+    restoreReview(progress.sessions.find((session) => session.id === progress.review.sessionId)),
+  );
+  const [pendingConfirmation, setPendingConfirmation] = useState<"cancel-exam" | "reset-progress" | null>(null);
   const [tutorialStep, setTutorialStep] = useState(0);
   const routeWasRestored = useRef(false);
 
@@ -579,8 +629,11 @@ function AppShell() {
         revealed: studyRevealed,
       },
       activeExam,
+      review: {
+        sessionId: review?.sessionId ?? null,
+      },
     }));
-  }, [activeExam, filters, language, location.pathname, studyAnswers, studyQuestionId, studyRevealed, theme]);
+  }, [activeExam, filters, language, location.pathname, review?.sessionId, studyAnswers, studyQuestionId, studyRevealed, theme]);
 
   function updateProgress(next: ProgressState) {
     setProgress(next);
@@ -641,10 +694,7 @@ function AppShell() {
   }
 
   function cancelExam() {
-    if (confirm(language === "es" ? "¿Cancelar este simulacro? Las respuestas actuales no se guardarán." : "Cancel this exam? Current answers will not be saved.")) {
-      setActiveExam(null);
-      navigate("/exam");
-    }
+    setPendingConfirmation("cancel-exam");
   }
 
   function updateExamAnswer(question: Question, optionKey: string) {
@@ -685,6 +735,10 @@ function AppShell() {
       id: `${activeExam.blueprint.id}-${Date.now()}`,
       title: activeExam.blueprint.title,
       mode: "exam",
+      sessionType: activeExam.blueprint.id.startsWith("model-") ? "official" : "random",
+      sourceModel: activeExam.blueprint.id.startsWith("model-")
+        ? (activeExam.blueprint.id.slice(-1) as SourceModel)
+        : undefined,
       questionIds: activeExam.blueprint.questionIds,
       answers: activeExam.answers,
       score: scoreSummary,
@@ -693,6 +747,7 @@ function AppShell() {
 
     updateProgress(addSession(nextProgress, session));
     setReview({
+      sessionId: session.id,
       title: activeExam.blueprint.title,
       questions: examQuestions,
       answers: activeExam.answers,
@@ -714,6 +769,7 @@ function AppShell() {
       setStudyRevealed(imported.study.revealed);
       setActiveExam(imported.activeExam);
       setExamTimerMode(imported.activeExam?.timerMode ?? "standard");
+      setReview(restoreReview(imported.sessions.find((session) => session.id === imported.review.sessionId)));
       navigate(imported.preferences.lastRoute);
     } catch (error) {
       alert(error instanceof Error ? error.message : language === "es" ? "No se pudo importar el progreso." : "Progress could not be imported.");
@@ -731,7 +787,14 @@ function AppShell() {
   }
 
   function handleReset() {
-    if (confirm(language === "es" ? "Esto borrará todo el progreso local de esta web." : "This will delete all local progress for this site.")) {
+    setPendingConfirmation("reset-progress");
+  }
+
+  function confirmPendingAction() {
+    if (pendingConfirmation === "cancel-exam") {
+      setActiveExam(null);
+      navigate("/exam");
+    } else if (pendingConfirmation === "reset-progress") {
       updateProgress(clearProgress());
       setTutorialStep(0);
       setFilters(emptyFilters);
@@ -742,6 +805,14 @@ function AppShell() {
       setActiveExam(null);
       navigate("/");
     }
+    setPendingConfirmation(null);
+  }
+
+  function openSessionReview(session: StoredSession) {
+    const restored = restoreReview(session);
+    if (!restored) return;
+    setReview(restored);
+    navigate("/review");
   }
 
   function handleTutorialReset() {
@@ -883,7 +954,19 @@ function AppShell() {
             />
           }
         />
-        <Route path="/review" element={<ReviewView review={review} sessions={progress.sessions} language={language} copy={copy} />} />
+        <Route
+          path="/review"
+          element={
+            <ReviewView
+              review={review}
+              sessions={progress.sessions}
+              language={language}
+              copy={copy}
+              onOpenReview={openSessionReview}
+              onBackToHistory={() => setReview(null)}
+            />
+          }
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
@@ -916,6 +999,66 @@ function AppShell() {
         />
       )}
       {showSpanishNotice && <TranslationNotice copy={copy} onClose={closeSpanishNotice} />}
+      {pendingConfirmation && (
+        <ConfirmDialog
+          title={pendingConfirmation === "cancel-exam" ? copy.cancelExamTitle : copy.resetTitle}
+          text={pendingConfirmation === "cancel-exam" ? copy.cancelExamText : copy.resetText}
+          confirmLabel={pendingConfirmation === "cancel-exam" ? copy.confirmCancelExam : copy.confirmReset}
+          cancelLabel={copy.keepWorking}
+          destructive
+          onConfirm={confirmPendingAction}
+          onCancel={() => setPendingConfirmation(null)}
+        />
+      )}
+    </div>
+  );
+}
+
+function ConfirmDialog({
+  title,
+  text,
+  confirmLabel,
+  cancelLabel,
+  destructive,
+  onConfirm,
+  onCancel,
+}: {
+  title: string;
+  text: string;
+  confirmLabel: string;
+  cancelLabel: string;
+  destructive?: boolean;
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  const cancelRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    cancelRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onCancel();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onCancel]);
+
+  return (
+    <div className="notice-backdrop" role="presentation" onClick={onCancel}>
+      <section
+        className="notice-modal confirm-dialog"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="confirm-dialog-title"
+        aria-describedby="confirm-dialog-text"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <h2 id="confirm-dialog-title">{title}</h2>
+        <p id="confirm-dialog-text">{text}</p>
+        <div className="confirm-actions">
+          <button ref={cancelRef} className="secondary" type="button" onClick={onCancel}>{cancelLabel}</button>
+          <button className={destructive ? "danger" : "primary"} type="button" onClick={onConfirm}>{confirmLabel}</button>
+        </div>
+      </section>
     </div>
   );
 }
@@ -1821,11 +1964,15 @@ function ReviewView({
   sessions,
   language,
   copy,
+  onOpenReview,
+  onBackToHistory,
 }: {
   review: ReviewState | null;
   sessions: StoredSession[];
   language: Language;
   copy: Copy;
+  onOpenReview: (session: StoredSession) => void;
+  onBackToHistory: () => void;
 }) {
   if (!review) {
     return (
@@ -1840,17 +1987,31 @@ function ReviewView({
           <EmptyState title={copy.noSessions} text={copy.completeExam} />
         ) : (
           <section className="session-list">
-            {sessions.map((session) => (
-              <article className="session-row" key={session.id}>
-                <div>
-                  <strong>{session.title}</strong>
-                  <span>{new Date(session.completedAt).toLocaleString()}</span>
-                </div>
-                <div className={classNames("score-pill", session.score.passed ? "passed" : "failed")}>
-                  {session.score.score}/40
-                </div>
-              </article>
-            ))}
+            {sessions.map((session) => {
+              const compatible = findQuestionsByIds(questions, session.questionIds).length === session.questionIds.length;
+              const type = getSessionType(session);
+              const typeLabel = type === "official" ? copy.officialExam : type === "random" ? copy.randomExam : copy.adaptiveSession;
+              return (
+                <article className={classNames("session-row", !compatible && "incompatible")} key={session.id}>
+                  <div className="session-copy">
+                    <div className="session-heading">
+                      <strong>{session.title}</strong>
+                      <span className="session-type">{typeLabel}</span>
+                    </div>
+                    <span>{new Date(session.completedAt).toLocaleString(language === "es" ? "es-ES" : "en-GB")}</span>
+                    {!compatible && <span className="session-warning">{copy.incompatibleSession}</span>}
+                  </div>
+                  <div className="session-result">
+                    <div className={classNames("score-pill", session.score.passed ? "passed" : "failed")}>
+                      {session.score.score}/{session.score.total} · {session.score.passed ? copy.passed : copy.failed}
+                    </div>
+                    <button className="secondary compact" type="button" disabled={!compatible} onClick={() => onOpenReview(session)}>
+                      {copy.openReview}
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
           </section>
         )}
       </main>
@@ -1865,10 +2026,14 @@ function ReviewView({
           <h2>{review.title}</h2>
         </div>
         <div className="header-metrics">
-          <Metric label={copy.points} value={`${review.score.score}/40`} />
+          <Metric label={copy.points} value={`${review.score.score}/${review.score.total}`} />
           <Metric label={copy.result} value={review.score.passed ? copy.passed : copy.failed} />
           <Metric label={copy.percent} value={`${review.score.percent}%`} />
         </div>
+        <button className="secondary" type="button" onClick={onBackToHistory}>
+          <ChevronLeft aria-hidden="true" />
+          {copy.backToHistory}
+        </button>
       </header>
 
       <section className={classNames("result-banner", review.score.passed ? "passed" : "failed")}>

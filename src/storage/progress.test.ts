@@ -129,6 +129,16 @@ describe("progress storage", () => {
     expect(importProgress(exportProgress(restored)).activeExam).toEqual(progress.activeExam);
   });
 
+  it("persists the selected historical review", () => {
+    const storage = memoryStorage();
+    const progress = createEmptyProgress();
+    progress.review.sessionId = "model-A-2026";
+    saveProgress(progress, storage);
+
+    expect(loadProgress(storage).review.sessionId).toBe("model-A-2026");
+    expect(importProgress(exportProgress(progress)).review.sessionId).toBe("model-A-2026");
+  });
+
   it("rejects incompatible progress exports", () => {
     expect(() =>
       importProgress(

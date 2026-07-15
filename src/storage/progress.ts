@@ -17,6 +17,8 @@ export type StoredSession = {
   id: string;
   title: string;
   mode: "study" | "exam";
+  sessionType?: "official" | "random" | "adaptive";
+  sourceModel?: SourceModel;
   questionIds: string[];
   answers: AnswerMap;
   score: Omit<SessionScore, "results">;
@@ -64,6 +66,9 @@ export type ProgressState = {
     revealed: boolean;
   };
   activeExam: PersistedExam | null;
+  review: {
+    sessionId: string | null;
+  };
 };
 
 type LegacyProgressState = {
@@ -110,6 +115,9 @@ export function createEmptyProgress(): ProgressState {
       revealed: false,
     },
     activeExam: null,
+    review: {
+      sessionId: null,
+    },
   };
 }
 
@@ -175,6 +183,9 @@ function normalizeProgress(value: ProgressState): ProgressState {
       revealed: Boolean(study.revealed),
     },
     activeExam: isObject(value.activeExam) ? (value.activeExam as PersistedExam) : null,
+    review: {
+      sessionId: typeof value.review?.sessionId === "string" ? value.review.sessionId : null,
+    },
   };
 }
 

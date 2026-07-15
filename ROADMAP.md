@@ -53,13 +53,28 @@ Este documento es la fuente de verdad del estado del proyecto. `ROADMAP_CTFL_V4_
 
 ## Hito 3 — Historial y revisiones recuperables
 
-- [ ] Convertir las sesiones del historial en elementos interactivos.
-- [ ] Reconstruir una revisión desde preguntas y respuestas almacenadas.
-- [ ] Mostrar fecha, modelo, puntuación y resultado.
-- [ ] Distinguir simulacros oficiales, aleatorios y futuras sesiones adaptativas.
-- [ ] Añadir estado vacío y manejo de sesiones incompatibles.
-- [ ] Sustituir confirmaciones nativas relevantes por diálogos accesibles.
-- [ ] Cerrar el hito reabriendo una revisión antes y después de recargar.
+- [x] Convertir las sesiones del historial en elementos interactivos.
+- [x] Reconstruir una revisión desde preguntas y respuestas almacenadas.
+- [x] Mostrar fecha, modelo, puntuación y resultado.
+- [x] Distinguir simulacros oficiales, aleatorios y futuras sesiones adaptativas.
+- [x] Añadir estado vacío y manejo de sesiones incompatibles.
+- [x] Sustituir confirmaciones nativas relevantes por diálogos accesibles.
+- [x] Cerrar el hito reabriendo una revisión antes y después de recargar.
+
+**Cerrado el 15/07/2026.** Validación: historial interactivo y revisiones reconstruidas desde sesiones actuales y antiguas; reapertura persistente antes y después de recargar; sesiones incompatibles aisladas; confirmaciones de cancelar y borrar verificadas mediante teclado; banco de 160 preguntas, 15 pruebas unitarias, compilación y 35 recorridos E2E superados en escritorio y móvil.
+
+## Hito 3.5 — Arquitectura y mantenibilidad
+
+- [ ] Definir límites de módulos y una estructura de carpetas estable.
+- [ ] Extraer tipos, constantes, traducciones y contenido del tutorial.
+- [ ] Extraer utilidades puras de presentación y reconstrucción de revisiones.
+- [ ] Separar componentes compartidos de navegación, filtros, preguntas y diálogos.
+- [ ] Separar las vistas de Práctica, Simulacro y Revisión por ruta.
+- [ ] Encapsular la sincronización de preferencias y progreso en hooks especializados.
+- [ ] Reducir `App.tsx` a composición de rutas y orquestación de alto nivel.
+- [ ] Evitar dependencias circulares y mantener contratos tipados entre módulos.
+- [ ] Documentar la arquitectura y las reglas para añadir nuevas funcionalidades.
+- [ ] Cerrar el hito ejecutando datos, unitarias, compilación y E2E sin regresiones.
 
 ## Hito 4 — Panel de estudio
 

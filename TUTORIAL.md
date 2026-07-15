@@ -8,7 +8,7 @@ La web tiene tres secciones principales:
 
 - `Practica`: preguntas sueltas para estudiar, filtrar, corregir al momento y marcar dudas.
 - `Simulacro`: examenes de 40 preguntas, con modelos oficiales o combinacion aleatoria.
-- `Revision`: resultados del ultimo simulacro y resumen de simulacros recientes.
+- `Revision`: historial de simulacros y revisiones completas que pueden abrirse de nuevo.
 
 En el lateral izquierdo estan los filtros, el progreso local y las acciones de exportar, importar o borrar progreso.
 
@@ -46,6 +46,14 @@ Reglas aplicadas:
 - Duracion oficial CTFL v4.0: 60 minutos, o 75 minutos con extension del 25%.
 
 Durante el simulacro no se muestra la correccion hasta finalizar. Al terminar, la web guarda la sesion y abre la revision.
+
+## Historial y Revisiones
+
+La seccion `Revision` conserva hasta 20 sesiones terminadas. Cada fila indica la fecha, el tipo de sesion, la puntuacion y el resultado.
+
+Pulsa `Abrir revision` para reconstruir la correccion completa con las preguntas y respuestas guardadas. La revision abierta se recupera tambien despues de recargar la pagina. Los modelos oficiales, simulacros aleatorios y futuras sesiones adaptativas se identifican por separado.
+
+Si una exportacion antigua contiene una sesion cuyas preguntas ya no existen en la version actual del banco, la web mantiene la entrada en el historial, la marca como incompatible y evita abrir una revision incompleta.
 
 ## Que Son los Modelos A, B, C y D
 
@@ -147,7 +155,7 @@ Se guarda:
 - Preguntas intentadas.
 - Ultimo resultado de cada pregunta.
 - Preguntas marcadas.
-- Simulacros recientes.
+- Simulacros recientes y la revision historica abierta.
 - Respuestas de sesiones terminadas.
 - Idioma, tema, filtros, ultima seccion y pregunta actual.
 - Respuestas, posicion y temporizador de un simulacro sin terminar.

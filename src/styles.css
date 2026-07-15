@@ -1181,6 +1181,60 @@ button:disabled {
   gap: 12px;
 }
 
+.session-copy,
+.session-result {
+  display: grid;
+  gap: 8px;
+}
+
+.session-copy {
+  min-width: 0;
+}
+
+.session-heading,
+.session-result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.session-heading {
+  flex-wrap: wrap;
+}
+
+.session-type {
+  width: fit-content;
+  padding: 3px 7px;
+  border-radius: 999px;
+  color: #315a75 !important;
+  background: #e8f2f7;
+  font-size: 11px !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.session-warning {
+  max-width: 68ch;
+  color: #8e3030 !important;
+}
+
+.session-row.incompatible {
+  border-style: dashed;
+}
+
+.secondary.compact {
+  min-height: 34px;
+  padding: 6px 10px;
+}
+
+.confirm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
 .session-row span {
   display: block;
   color: #69788b;
@@ -1664,6 +1718,15 @@ button:disabled {
     flex-direction: column;
   }
 
+  .session-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .session-result {
+    justify-content: space-between;
+  }
+
   .study-actions {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1764,6 +1827,15 @@ button:disabled {
   border-color: #2b3a4e;
   color: #dce6ef;
   background: #101927;
+}
+
+.app[data-theme="dark"] .session-type {
+  color: #b9dbef !important;
+  background: #183247;
+}
+
+.app[data-theme="dark"] .session-warning {
+  color: #ffb4b4 !important;
 }
 
 .app[data-theme="dark"] .prompt,
