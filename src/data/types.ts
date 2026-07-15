@@ -14,6 +14,14 @@ export type QuestionTranslation = {
   explanation?: string;
 };
 
+export type QuestionVisual = {
+  src: string;
+  alt: {
+    en: string;
+    es: string;
+  };
+};
+
 export type LocalizedText = {
   es?: {
     name?: string;
@@ -40,6 +48,7 @@ export type Question = {
   explanation: string;
   notes: string[];
   points: number;
+  visual?: QuestionVisual;
   translations?: {
     es?: QuestionTranslation;
   };

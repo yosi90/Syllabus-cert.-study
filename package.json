@@ -9,6 +9,8 @@
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest run",
     "extract:data": "python scripts/extract_data.py",
+    "extract:visuals": "python scripts/extract_visuals.py",
+    "translate:data": "python scripts/translate_es.py",
     "validate:data": "tsx scripts/validate-data.ts"
   },
   "dependencies": {

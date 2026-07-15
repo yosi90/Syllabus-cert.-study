@@ -121,6 +121,73 @@ button:disabled {
   background: #e9f6f2;
 }
 
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid #28364d;
+  border-radius: 8px;
+  color: #dce6ef;
+  background: #172338;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.theme-toggle:hover {
+  border-color: #3b4f6c;
+  background: #1b2a42;
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid #58c3b4;
+  outline-offset: 2px;
+}
+
+.theme-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-toggle-label svg {
+  width: 17px;
+  height: 17px;
+  color: #8ed8ce;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+  width: 38px;
+  height: 22px;
+  padding: 2px;
+  border: 1px solid #3b4f6c;
+  border-radius: 999px;
+  background: #0d1523;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.theme-switch span {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #a9b7c8;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.theme-toggle[aria-checked="true"] .theme-switch {
+  border-color: #58c3b4;
+  background: #2f887a;
+}
+
+.theme-toggle[aria-checked="true"] .theme-switch span {
+  background: #ffffff;
+  transform: translateX(16px);
+}
+
 .panel {
   border: 1px solid #26344b;
   border-radius: 8px;
@@ -398,7 +465,7 @@ button:disabled {
 
 .question-card,
 .feedback,
-.question-rail,
+.question-list,
 .empty-state,
 .exam-start-grid,
 .session-list,
@@ -447,6 +514,88 @@ button:disabled {
   font-weight: 650;
   line-height: 1.55;
   white-space: pre-wrap;
+}
+
+.question-visual {
+  margin: 16px 0 0;
+}
+
+.question-visual-trigger {
+  position: relative;
+  display: grid;
+  width: 100%;
+  min-height: 120px;
+  padding: 14px;
+  border: 1px solid #d7e0e8;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: zoom-in;
+}
+
+.question-visual-trigger:hover,
+.question-visual-trigger:focus-visible {
+  border-color: #5aa7ba;
+  box-shadow: 0 0 0 3px rgb(90 167 186 / 15%);
+}
+
+.question-visual-trigger img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 440px;
+  margin: auto;
+  object-fit: contain;
+}
+
+.question-visual-trigger span {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  color: #ffffff;
+  background: rgb(23 32 51 / 82%);
+  font-size: 11px;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+.image-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgb(10 18 30 / 72%);
+}
+
+.image-modal {
+  position: relative;
+  display: grid;
+  width: min(1200px, 100%);
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+  padding: 18px;
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 38%);
+}
+
+.image-modal img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 72px);
+  margin: auto;
+}
+
+.image-close {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  justify-self: end;
+  margin-bottom: -36px;
 }
 
 .icon-button {
@@ -834,6 +983,23 @@ button:disabled {
   border: 1px solid #b64747;
   color: #ffffff;
   background: #b64747;
+}
+
+.question-list {
+  overflow: hidden;
+}
+
+.question-list summary {
+  padding: 14px;
+  color: #314256;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  user-select: none;
+}
+
+.question-list[open] summary {
+  border-bottom: 1px solid #dbe2ea;
 }
 
 .question-rail {
@@ -1485,4 +1651,179 @@ button:disabled {
     align-items: stretch;
     flex-direction: column;
   }
+}
+
+:root[data-theme="dark"] {
+  color: #e6edf5;
+  background: #0b111c;
+}
+
+.app[data-theme="dark"] {
+  color: #e6edf5;
+  background: #0b111c;
+}
+
+.app[data-theme="dark"] .header-metrics .metric,
+.app[data-theme="dark"] .flag-language-toggle,
+.app[data-theme="dark"] .question-card,
+.app[data-theme="dark"] .feedback,
+.app[data-theme="dark"] .question-list,
+.app[data-theme="dark"] .empty-state,
+.app[data-theme="dark"] .exam-start-grid,
+.app[data-theme="dark"] .session-list,
+.app[data-theme="dark"] .review-list,
+.app[data-theme="dark"] .result-banner,
+.app[data-theme="dark"] .theory-button,
+.app[data-theme="dark"] .explanation-option,
+.app[data-theme="dark"] .theory-modal,
+.app[data-theme="dark"] .notice-modal,
+.app[data-theme="dark"] .timer-panel,
+.app[data-theme="dark"] .tutorial-modal,
+.app[data-theme="dark"] .secondary,
+.app[data-theme="dark"] .rail-button {
+  border-color: #2b3a4e;
+  color: #dce6ef;
+  background: #151e2d;
+}
+
+.app[data-theme="dark"] .flag-language-toggle button,
+.app[data-theme="dark"] .icon-button,
+.app[data-theme="dark"] .option-row,
+.app[data-theme="dark"] .start-card,
+.app[data-theme="dark"] .timer-panel .check-pill,
+.app[data-theme="dark"] .review-item,
+.app[data-theme="dark"] .session-row {
+  border-color: #2b3a4e;
+  color: #dce6ef;
+  background: #101927;
+}
+
+.app[data-theme="dark"] .prompt,
+.app[data-theme="dark"] .theory-modal h2,
+.app[data-theme="dark"] .theory-details dd,
+.app[data-theme="dark"] .notice-modal h2,
+.app[data-theme="dark"] .start-card,
+.app[data-theme="dark"] .empty-state strong,
+.app[data-theme="dark"] .tutorial-header h2 {
+  color: #f1f5f9;
+}
+
+.app[data-theme="dark"] .question-foot,
+.app[data-theme="dark"] .theory-button span,
+.app[data-theme="dark"] .theory-details dt,
+.app[data-theme="dark"] .theory-note,
+.app[data-theme="dark"] .start-card span,
+.app[data-theme="dark"] .session-row span,
+.app[data-theme="dark"] .answer-lines,
+.app[data-theme="dark"] .empty-state {
+  color: #99a9bc;
+}
+
+.app[data-theme="dark"] .explanation-intro,
+.app[data-theme="dark"] .explanation-text,
+.app[data-theme="dark"] .explanation-option p,
+.app[data-theme="dark"] .notice-modal p,
+.app[data-theme="dark"] .explanation,
+.app[data-theme="dark"] .tutorial-modal p,
+.app[data-theme="dark"] .tutorial-modal ul {
+  color: #c5d0dd;
+}
+
+.app[data-theme="dark"] .question-meta span,
+.app[data-theme="dark"] .score-pill {
+  color: #b9d8df;
+  background: #20313d;
+}
+
+.app[data-theme="dark"] .flag-language-toggle button.active {
+  border-color: #58a6b6;
+  background: #17303a;
+  box-shadow: inset 0 0 0 1px #58a6b6;
+}
+
+.app[data-theme="dark"] .option-row.is-selected {
+  border-color: #58a6b6;
+  background: #132d38;
+}
+
+.app[data-theme="dark"] .option-row.is-correct,
+.app[data-theme="dark"] .feedback.correct,
+.app[data-theme="dark"] .explanation-option.correct {
+  border-color: #438765;
+  background: #142d24;
+}
+
+.app[data-theme="dark"] .option-row.is-wrong,
+.app[data-theme="dark"] .feedback.incorrect,
+.app[data-theme="dark"] .explanation-option.selected-wrong {
+  border-color: #9c5458;
+  background: #321a20;
+}
+
+.app[data-theme="dark"] .reason-pill.correct,
+.app[data-theme="dark"] .result-banner.passed,
+.app[data-theme="dark"] .score-pill.passed {
+  color: #9ed9bb;
+  background: #193629;
+}
+
+.app[data-theme="dark"] .reason-pill.selected {
+  color: #b9cce0;
+  background: #26384c;
+}
+
+.app[data-theme="dark"] .result-banner.failed,
+.app[data-theme="dark"] .score-pill.failed {
+  color: #f0aaaa;
+  background: #3a2024;
+}
+
+.app[data-theme="dark"] .time-warning {
+  border-color: #9b762f;
+  color: #e8c77c;
+  background: #332813;
+}
+
+.app[data-theme="dark"] .rail-button.active {
+  border-color: #5b8ca3;
+  color: #ffffff;
+  background: #315f76;
+}
+
+.app[data-theme="dark"] .rail-button.answered {
+  border-color: #4f8e9c;
+  background: #16303a;
+}
+
+.app[data-theme="dark"] .question-list[open] summary,
+.app[data-theme="dark"] .theory-details div {
+  border-color: #2b3a4e;
+}
+
+.app[data-theme="dark"] .question-list summary {
+  color: #dce6ef;
+}
+
+.app[data-theme="dark"] .tutorial-dot {
+  background: #344357;
+}
+
+.app[data-theme="dark"] .tutorial-dot.active {
+  background: #4fb7a5;
+}
+
+.app[data-theme="dark"] .question-visual-trigger {
+  border-color: #3b4b60;
+  background: #ffffff;
+}
+
+.app[data-theme="dark"] .image-modal {
+  border-color: #3b4b60;
+  background: #ffffff;
+}
+
+.app[data-theme="dark"] .image-close {
+  border-color: #d7e0e8;
+  color: #314256;
+  background: #f8fafc;
 }

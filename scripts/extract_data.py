@@ -164,6 +164,32 @@ CHAPTER_DISTRIBUTION = {
 
 MULTI_ANSWER_IDS = ["A-06", "A-31", "B-26", "C-04", "D-20", "D-30", "D-35"]
 
+QUESTION_VISUALS = {
+    "A-14": ("Test execution results table for TC1, TC2 and TC3.", "Tabla de resultados de ejecución de TC1, TC2 y TC3."),
+    "A-21": ("Final result and final grade table for the course-grade system.", "Tabla de resultado final y calificación final del sistema de notas."),
+    "A-22": ("Decision table for bicycle rental discounts and gifts.", "Tabla de decisiones para descuentos y regalos del alquiler de bicicletas."),
+    "A-23": ("State transition diagram from INIT to OFF through the system lifecycle.", "Diagrama de transición de estados desde INIT hasta OFF durante el ciclo de vida del sistema."),
+    "A-33": ("Table of test cases, covered conditions, priorities and logical dependencies.", "Tabla de casos de prueba, condiciones cubiertas, prioridades y dependencias lógicas."),
+    "B-22": ("Decision table for determining atherosclerosis risk.", "Tabla de decisiones para determinar el riesgo de aterosclerosis."),
+    "B-23": ("State transition diagram for a storage system with START, NOT FULL and FULL states.", "Diagrama de transición de estados de un sistema de almacenamiento con los estados START, NOT FULL y FULL."),
+    "B-31": ("Historical project table with development and test effort.", "Tabla de proyectos históricos con el esfuerzo de desarrollo y de pruebas."),
+    "B-32": ("Table of seven test cases and their execution priorities.", "Tabla de siete casos de prueba y sus prioridades de ejecución."),
+    "B-38": ("Test execution log for the sort function.", "Registro de ejecución de pruebas de la función de ordenación."),
+    "C-21": ("Pseudocode for the boundary-value business rule.", "Pseudocódigo de la regla de negocio para el análisis de valores límite."),
+    "C-22": ("Decision table for issuing or requesting a driving license.", "Tabla de decisiones para expedir o solicitar un permiso de conducir."),
+    "C-23": ("State transition diagram with REQUESTING, WAITING LIST, CONFIRMED and END states.", "Diagrama de transición con los estados REQUESTING, WAITING LIST, CONFIRMED y END."),
+    "C-24": ("Control flow graph used for branch testing.", "Grafo de flujo de control utilizado para las pruebas de ramas."),
+    "C-29": ("User story and acceptance criteria for electronic floor-card access.", "Historia de usuario y criterios de aceptación para el acceso con tarjeta electrónica."),
+    "C-31": ("Bar chart comparing estimated and actual effort over four iterations.", "Gráfico de barras que compara el esfuerzo estimado y real durante cuatro iteraciones."),
+    "C-32": ("Dependency graph and priorities for test cases TC1 to TC7.", "Grafo de dependencias y prioridades de los casos de prueba TC1 a TC7."),
+    "C-38": ("Defect report for the WebShop login button.", "Informe de defecto del botón de inicio de sesión de WebShop."),
+    "D-22": ("Decision table for assigning categories by age, experience and registration.", "Tabla de decisiones para asignar categorías según edad, experiencia y registro."),
+    "D-23": ("State transition table for the hotel room reservation system.", "Tabla de transición de estados del sistema de reserva de habitaciones."),
+    "D-29": ("User story and acceptance criteria for filtering products by price.", "Historia de usuario y criterios de aceptación para filtrar productos por precio."),
+    "D-32": ("Traceability matrix from test cases TC1 to TC4 to requirements Req1 to Req7.", "Matriz de trazabilidad de los casos TC1 a TC4 con los requisitos Req1 a Req7."),
+    "D-38": ("Defect report for returning a book in the Book Lending System.", "Informe de defecto sobre la devolución de un libro en el sistema de préstamos."),
+}
+
 
 def ensure_pypdf():
     try:
@@ -196,6 +222,37 @@ def ensure_pypdf():
 PdfReader = ensure_pypdf()
 
 
+def ensure_pymupdf():
+    try:
+        import fitz  # type: ignore
+
+        return fitz
+    except Exception:
+        cache = ROOT / ".cache" / "python-pymupdf"
+        if not (cache / "fitz").exists():
+            cache.mkdir(parents=True, exist_ok=True)
+            subprocess.check_call(
+                [
+                    sys.executable,
+                    "-m",
+                    "pip",
+                    "install",
+                    "--quiet",
+                    "--no-user",
+                    "--target",
+                    str(cache),
+                    "pymupdf",
+                ]
+            )
+        sys.path.insert(0, str(cache))
+        import fitz  # type: ignore
+
+        return fitz
+
+
+fitz = ensure_pymupdf()
+
+
 def load_existing_question_translations() -> dict[str, dict[str, Any]]:
     if not OUT.exists():
         return {}
@@ -211,10 +268,10 @@ def load_existing_question_translations() -> dict[str, dict[str, Any]]:
 
 
 def read_pdf(path: Path) -> str:
-    reader = PdfReader(str(path))
+    document = fitz.open(path)
     chunks = []
-    for index, page in enumerate(reader.pages, start=1):
-        chunks.append(f"\n\n===== PAGE {index} =====\n{page.extract_text() or ''}")
+    for index, page in enumerate(document, start=1):
+        chunks.append(f"\n\n===== PAGE {index} =====\n{page.get_text()}")
     return "".join(chunks)
 
 
@@ -227,13 +284,26 @@ def normalize_spaces(value: str) -> str:
 
 
 def clean_pdf_lines(text: str, kind: str) -> str:
+    text = re.sub(
+        r"Question\s+Number\s+\(#\)\s+Correct\s+Answer\s+Explanation / Rationale\s+"
+        r"Learning\s+Objective\s+\(LO\)\s+K-Level Number\s+of\s+Points",
+        "",
+        text,
+    )
     skipped = [
         r"^===== PAGE \d+ =====$",
         r"^Certified Tester, Foundation Level",
-        r"^Sample Exam set [A-D]",
+        r"^Sample Exams? set [A-D]",
         rf"^Sample Exam .* {kind}$",
-        r"^Version .* Page \d+ of \d+",
+        r"^Version \S+\s*$",
+        r"^Page \d+ of \d+\s*$",
+        r"^(?:Release )?(?:January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4}\s*$",
         r"^© International Software Testing Qualifications Board",
+        r"^Question \(#\)\s*$",
+        r"^Explanation / Rationale\s*$",
+        r"^Learning Objective \(LO\)\s*$",
+        r"^K-Level\s*$",
+        r"^Number of\s*$",
         r"^International$",
         r"^Software Testing$",
         r"^Qualifications Board$",
@@ -551,6 +621,12 @@ def build_bank() -> dict[str, Any]:
                 "notes": q["notes"],
                 "points": g["points"],
             }
+            if question_id in QUESTION_VISUALS:
+                alt_en, alt_es = QUESTION_VISUALS[question_id]
+                item["visual"] = {
+                    "src": f"/question-assets/{question_id.lower()}.png",
+                    "alt": {"en": alt_en, "es": alt_es},
+                }
             if question_id in existing_translations:
                 item["translations"] = existing_translations[question_id]
             questions.append(item)

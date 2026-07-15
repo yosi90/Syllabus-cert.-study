@@ -12,6 +12,7 @@ import {
   FileUp,
   Filter,
   Menu,
+  Moon,
   Play,
   RotateCcw,
   Search,
@@ -51,7 +52,9 @@ type ExamState = {
 
 type TimerMode = "off" | "standard" | "extended";
 type Language = "en" | "es";
+type Theme = "light" | "dark";
 const SPANISH_TRANSLATION_NOTICE_KEY = "istqb-ctfl-v4-spanish-translation-notice-seen";
+const THEME_STORAGE_KEY = "istqb-ctfl-v4-theme";
 
 type ReviewState = {
   title: string;
@@ -68,6 +71,7 @@ const uiCopy = {
     modesLabel: "Modes",
     openMenu: "Open menu",
     closeMenu: "Close menu",
+    darkMode: "Dark mode",
     practice: "Practice",
     exam: "Exam",
     review: "Review",
@@ -96,6 +100,7 @@ const uiCopy = {
     practiceTitle: "Single questions",
     filtered: "Filtered",
     current: "Current",
+    questionList: "Question list",
     previous: "Previous",
     check: "Check",
     random: "Random",
@@ -108,6 +113,8 @@ const uiCopy = {
     addFlag: "Flag for review",
     removeFlagAria: "Remove question from flagged",
     addFlagAria: "Flag question for review",
+    expandImage: "Expand image",
+    closeImage: "Close image",
     theory: "View theory",
     objective: "Objective",
     section: "Section",
@@ -155,6 +162,7 @@ const uiCopy = {
     modesLabel: "Modos",
     openMenu: "Abrir menú",
     closeMenu: "Cerrar menú",
+    darkMode: "Modo oscuro",
     practice: "Práctica",
     exam: "Simulacro",
     review: "Revisión",
@@ -183,6 +191,7 @@ const uiCopy = {
     practiceTitle: "Preguntas sueltas",
     filtered: "Filtradas",
     current: "Actual",
+    questionList: "Listado de preguntas",
     previous: "Anterior",
     check: "Comprobar",
     random: "Aleatoria",
@@ -195,6 +204,8 @@ const uiCopy = {
     addFlag: "Marcar para repasar",
     removeFlagAria: "Quitar pregunta de marcadas",
     addFlagAria: "Marcar pregunta para repasar",
+    expandImage: "Ampliar imagen",
+    closeImage: "Cerrar imagen",
     theory: "Ver teoría",
     objective: "Objetivo",
     section: "Sección",
@@ -463,6 +474,11 @@ function formatRemainingTime(milliseconds: number) {
 function AppShell() {
   const navigate = useNavigate();
   const [language, setLanguage] = useState<Language>("en");
+  const [theme, setTheme] = useState<Theme>(() => {
+    const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+    if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showSpanishNotice, setShowSpanishNotice] = useState(false);
   const copy = uiCopy[language];
@@ -480,6 +496,12 @@ function AppShell() {
   useEffect(() => {
     saveProgress(progress);
   }, [progress]);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme]);
 
   useEffect(() => {
     if (!activeExam?.endsAt) return undefined;
@@ -695,7 +717,7 @@ function AppShell() {
   }
 
   return (
-    <div className="app">
+    <div className="app" data-theme={theme}>
       <button
         className="mobile-menu-toggle"
         type="button"
@@ -730,6 +752,20 @@ function AppShell() {
           <NavLink to="/exam" onClick={() => setIsMenuOpen(false)}>{copy.exam}</NavLink>
           <NavLink to="/review" onClick={() => setIsMenuOpen(false)}>{copy.review}</NavLink>
         </nav>
+
+        <button
+          className="theme-toggle"
+          type="button"
+          role="switch"
+          aria-checked={theme === "dark"}
+          onClick={() => setTheme((current) => current === "light" ? "dark" : "light")}
+        >
+          <span className="theme-toggle-label">
+            <Moon aria-hidden="true" />
+            {copy.darkMode}
+          </span>
+          <span className="theme-switch" aria-hidden="true"><span /></span>
+        </button>
 
         <FiltersPanel
           filters={filters}
@@ -1349,7 +1385,7 @@ function ExamView({
         </button>
       </div>
 
-      <ExamRail questions={examQuestions} activeExam={activeExam} onSelect={onJump} />
+      <ExamRail questions={examQuestions} activeExam={activeExam} onSelect={onJump} copy={copy} />
     </main>
   );
 }
@@ -1405,6 +1441,8 @@ function QuestionCard({
         )}
       </div>
 
+      <QuestionVisual question={question} language={language} copy={copy} />
+
       <div className="options-list">
         {displayOptions.map((option) => {
           const isSelected = selected.includes(option.key);
@@ -1438,6 +1476,62 @@ function QuestionCard({
         <span>{selectorLabel(question, copy)}</span>
       </div>
     </section>
+  );
+}
+
+function QuestionVisual({ question, language, copy }: { question: Question; language: Language; copy: Copy }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const visual = question.visual;
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [isOpen]);
+
+  if (!visual) return null;
+
+  const alt = visual.alt[language];
+  return (
+    <>
+      <figure className="question-visual">
+        <button
+          className="question-visual-trigger"
+          type="button"
+          onClick={() => setIsOpen(true)}
+          aria-label={`${copy.expandImage}: ${alt}`}
+        >
+          <img src={visual.src} alt={alt} loading="lazy" />
+          <span>{copy.expandImage}</span>
+        </button>
+      </figure>
+      {isOpen && (
+        <div className="image-backdrop" role="presentation" onClick={() => setIsOpen(false)}>
+          <section
+            className="image-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={alt}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              className="icon-button image-close"
+              type="button"
+              onClick={() => setIsOpen(false)}
+              title={copy.closeImage}
+              aria-label={copy.closeImage}
+            >
+              <X aria-hidden="true" />
+            </button>
+            <img src={visual.src} alt={alt} />
+          </section>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -1593,28 +1687,31 @@ function QuestionRail({
   copy: Copy;
 }) {
   return (
-    <section className="question-rail">
-      {questions.map((question, index) => {
-        const questionProgress = progress.questionProgress[question.id];
-        return (
-          <button
-            className={classNames(
-              "rail-button",
-              index === currentIndex && "active",
-              questionProgress?.lastCorrect && "correct",
-              Boolean(questionProgress?.attempts) && !questionProgress?.lastCorrect && "incorrect",
-              questionProgress?.flagged && "flagged",
-            )}
-            type="button"
-            onClick={() => onSelect(index)}
-            key={question.id}
-            title={`${questionLabel(question)} - ${progressLabel(progress, question, copy)}`}
-          >
-            {questionLabel(question)}
-          </button>
-        );
-      })}
-    </section>
+    <details className="question-list">
+      <summary>{copy.questionList} ({questions.length})</summary>
+      <section className="question-rail">
+        {questions.map((question, index) => {
+          const questionProgress = progress.questionProgress[question.id];
+          return (
+            <button
+              className={classNames(
+                "rail-button",
+                index === currentIndex && "active",
+                questionProgress?.lastCorrect && "correct",
+                Boolean(questionProgress?.attempts) && !questionProgress?.lastCorrect && "incorrect",
+                questionProgress?.flagged && "flagged",
+              )}
+              type="button"
+              onClick={() => onSelect(index)}
+              key={question.id}
+              title={`${questionLabel(question)} - ${progressLabel(progress, question, copy)}`}
+            >
+              {questionLabel(question)}
+            </button>
+          );
+        })}
+      </section>
+    </details>
   );
 }
 
@@ -1622,28 +1719,33 @@ function ExamRail({
   questions,
   activeExam,
   onSelect,
+  copy,
 }: {
   questions: Question[];
   activeExam: ExamState;
   onSelect: (index: number) => void;
+  copy: Copy;
 }) {
   return (
-    <section className="question-rail">
-      {questions.map((question, index) => (
-        <button
-          className={classNames(
-            "rail-button",
-            index === activeExam.currentIndex && "active",
-            Boolean(activeExam.answers[question.id]?.length) && "answered",
-          )}
-          type="button"
-          onClick={() => onSelect(index)}
-          key={question.id}
-        >
-          {index + 1}
-        </button>
-      ))}
-    </section>
+    <details className="question-list">
+      <summary>{copy.questionList} ({questions.length})</summary>
+      <section className="question-rail">
+        {questions.map((question, index) => (
+          <button
+            className={classNames(
+              "rail-button",
+              index === activeExam.currentIndex && "active",
+              Boolean(activeExam.answers[question.id]?.length) && "answered",
+            )}
+            type="button"
+            onClick={() => onSelect(index)}
+            key={question.id}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </section>
+    </details>
   );
 }
 
@@ -1725,6 +1827,7 @@ function ReviewView({
                 </span>
               </div>
               <p>{localized.prompt}</p>
+              <QuestionVisual question={question} language={language} copy={copy} />
               <div className="answer-lines">
                 <span>{copy.yourAnswer}: {selected.length ? displayAnswerLabels(question, selected, language) : copy.unanswered}</span>
                 <span>{copy.correctAnswer}: {displayAnswerLabels(question, question.correctAnswers, language)}</span>
