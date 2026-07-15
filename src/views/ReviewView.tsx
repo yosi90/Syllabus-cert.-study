@@ -10,11 +10,12 @@ import {
   displayAnswerLabels,
   getSessionType,
   localizedChapterName,
-  localizedQuestion,
   questionLabel,
 } from "../app/presentation";
 import { EmptyState, Metric } from "../components/common/CommonUi";
 import { ExplanationPanel, QuestionVisual } from "../components/questions/QuestionUi";
+import { QuestionPromptContent, SpeechButton } from "../components/questions/QuestionContent";
+import { buildQuestionSpeech } from "../app/speech";
 
 export function ReviewView({
   review,
@@ -114,7 +115,6 @@ export function ReviewView({
         {review.questions.map((question) => {
           const selected = review.answers[question.id] ?? [];
           const correct = isCorrectAnswer(question, selected);
-          const localized = localizedQuestion(question, language);
           return (
             <article className="review-item" key={question.id} aria-labelledby={`review-${question.id}-title`}>
               <div className="review-head">
@@ -123,7 +123,15 @@ export function ReviewView({
                   {correct ? copy.correctAnswer : selected.length ? (language === "es" ? "Incorrecta" : "Incorrect") : copy.blank}
                 </span>
               </div>
-              <h3 className="review-question-title" id={`review-${question.id}-title`}>{localized.prompt}</h3>
+              <div className="review-question-row">
+                <h3 className="review-question-title" id={`review-${question.id}-title`}><QuestionPromptContent question={question} language={language} /></h3>
+                <SpeechButton
+                  text={buildQuestionSpeech(question, language, copy, review.optionMode, review.optionSeed)}
+                  language={language}
+                  copy={copy}
+                  kind="question"
+                />
+              </div>
               <QuestionVisual question={question} language={language} copy={copy} />
               <div className="answer-lines">
                 <span>{copy.yourAnswer}: {selected.length ? displayAnswerLabels(question, selected, language, review.optionMode, review.optionSeed) : copy.unanswered}</span>

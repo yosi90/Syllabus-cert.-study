@@ -112,8 +112,8 @@ GLOSSARY = {
     "test automation": "automatización de pruebas",
     "work products": "productos de trabajo",
     "work product": "producto de trabajo",
-    "testers": "probadores",
-    "tester": "probador",
+    "testers": "testers",
+    "tester": "tester",
     "branches": "ramas",
     "branch": "rama",
 }
@@ -146,13 +146,13 @@ def polish_translation(question_id: str, field: str, text: str) -> str:
     text = re.sub(r"\bpruebas de integracion\b", "pruebas de integración", text, flags=re.IGNORECASE)
     text = re.sub(r"\bpruebas de aceptacion\b", "pruebas de aceptación", text, flags=re.IGNORECASE)
     text = re.sub(r"\bActions\b", "Acciones", text)
-    text = re.sub(r"\bevaluadores\b", "probadores", text, flags=re.IGNORECASE)
-    text = re.sub(r"\bevaluador\b", "probador", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(?:evaluadores|provadores|probadores)\b", "testers", text, flags=re.IGNORECASE)
+    text = re.sub(r"\b(?:evaluador|provador|probador)\b", "tester", text, flags=re.IGNORECASE)
     text = re.sub(r"\bdiseño de prueba y herramientas de implementación\b", "herramientas de diseño e implementación de pruebas", text, flags=re.IGNORECASE)
     text = re.sub(r"\bherramientas de diseño de prueba e implementación de prueba\b", "herramientas de diseño e implementación de pruebas", text, flags=re.IGNORECASE)
 
     for subject in [
-        "probadores",
+        "testers",
         "pruebas de sistema",
         "pruebas de integración de sistemas",
         "pruebas de integración de componentes",
@@ -161,9 +161,9 @@ def polish_translation(question_id: str, field: str, text: str) -> str:
         "pruebas exploratorias",
         "pruebas funcionales",
     ]:
-        text = re.sub(rf"(^|(?<=[.!?])\s+)({re.escape(subject)})\b", rf"\1Los \2" if subject == "probadores" else rf"\1Las \2", text, flags=re.IGNORECASE)
+        text = re.sub(rf"(^|(?<=[.!?])\s+)({re.escape(subject)})\b", rf"\1Los \2" if subject == "testers" else rf"\1Las \2", text, flags=re.IGNORECASE)
 
-    text = re.sub(r"\bLos probadores trabajará\b", "Los probadores trabajarán", text, flags=re.IGNORECASE)
+    text = re.sub(r"\bLos testers trabajará\b", "Los testers trabajarán", text, flags=re.IGNORECASE)
     text = re.sub(r"\bLas (pruebas [^.]{0,70}?) es\b", r"Las \1 son", text, flags=re.IGNORECASE)
     text = re.sub(r"\bLas (pruebas [^.]{0,70}?) examina\b", r"Las \1 examinan", text, flags=re.IGNORECASE)
     text = re.sub(r"\bLas (pruebas [^.]{0,70}?) incluye\b", r"Las \1 incluyen", text, flags=re.IGNORECASE)
@@ -178,8 +178,8 @@ def polish_translation(question_id: str, field: str, text: str) -> str:
         text = text.replace("orden de ejecución vs. casos de prueba", "orden de ejecución v. Casos de prueba")
     if question_id == "D-08" and field == "prompt":
         text = text.replace(
-            "responsables de la calidad versus los probadores que tienen sesgos diferentes a los de los desarrolladores",
-            "responsables de la calidad v. Los probadores tienen sesgos diferentes a los de los desarrolladores",
+            "responsables de la calidad versus los testers que tienen sesgos diferentes a los de los desarrolladores",
+            "responsables de la calidad v. Los testers tienen sesgos diferentes a los de los desarrolladores",
         )
     if question_id == "D-39" and field == "prompt":
         text = text.replace(

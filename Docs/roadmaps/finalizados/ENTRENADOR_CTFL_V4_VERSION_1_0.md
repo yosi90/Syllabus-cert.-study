@@ -1,6 +1,6 @@
-# Roadmap incremental — Entrenador ISTQB CTFL v4.0
+# Roadmap finalizado — Entrenador ISTQB CTFL v4.0, versión 1.0
 
-Este documento es la fuente de verdad del estado del proyecto. `ROADMAP_CTFL_V4_UPDATE.md` se conserva como historial de la migración desde CTFL 2018.
+**Estado:** finalizado el 15/07/2026. Este documento conserva el historial de construcción de la versión 1.0. La siguiente mejora se cerró en [`MEJORAS_CONTENIDO_VOZ_Y_EXPERIENCIA_MOVIL.md`](./MEJORAS_CONTENIDO_VOZ_Y_EXPERIENCIA_MOVIL.md) y la migración desde CTFL 2018 se conserva en [`MIGRACION_CTFL_2018_A_CTFL_V4.md`](./MIGRACION_CTFL_2018_A_CTFL_V4.md).
 
 ## Estado de partida
 

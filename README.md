@@ -26,7 +26,7 @@ Entrenador local construido con React, TypeScript y Vite a partir de los modelos
 
 La compilación se puede instalar desde un navegador compatible. Tras la primera carga completa, la aplicación, el banco y los 23 recursos gráficos quedan disponibles sin conexión. El progreso, las sesiones y la importación/exportación siguen almacenándose únicamente en el navegador. Las actualizaciones se anuncian y solo se aplican cuando el usuario elige recargar.
 
-Las referencias visuales solo deben actualizarse después de revisar que el cambio de interfaz es intencionado. El estado y el orden de los próximos hitos se mantienen en [ROADMAP.md](./ROADMAP.md). Los límites de módulos y las reglas para ampliar la aplicación están en [ARCHITECTURE.md](./ARCHITECTURE.md).
+Las referencias visuales solo deben actualizarse después de revisar que el cambio de interfaz es intencionado. Los roadmaps activos se crean en [`Docs/roadmaps/`](./Docs/roadmaps/) y los cerrados se conservan en [`Docs/roadmaps/finalizados/`](./Docs/roadmaps/finalizados/); actualmente no hay ningún roadmap activo. Los límites de módulos y las reglas para ampliar la aplicación están en [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 ## Fuente de datos
 

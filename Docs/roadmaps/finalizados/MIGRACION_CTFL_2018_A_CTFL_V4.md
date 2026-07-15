@@ -1,4 +1,6 @@
-# Roadmap - Update de la Web a ISTQB CTFL v4.0
+# Roadmap finalizado — Migración de CTFL 2018 a CTFL v4.0
+
+**Estado:** finalizado y archivado el 15/07/2026. Las casillas abiertas se conservan como registro histórico de revisiones manuales opcionales, no como trabajo activo.
 
 ## Objetivo
 
@@ -179,7 +181,7 @@ Actualizar la web local de estudio desde CTFL 2018 a CTFL v4.0, manteniendo la e
 
 ## Fase 9 - Documentacion y Cierre
 
-- [ ] Actualizar `ROADMAP.md` con el estado final del update cuando se implemente.
+- [x] Consolidar el estado final en [`ENTRENADOR_CTFL_V4_VERSION_1_0.md`](./ENTRENADOR_CTFL_V4_VERSION_1_0.md).
 - [x] Mantener este archivo como checklist historico de migracion.
 - [x] Documentar fuentes exactas, versiones y fechas finales.
 - [x] Documentar incidencias conocidas de extraccion.

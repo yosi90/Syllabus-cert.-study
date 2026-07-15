@@ -30,8 +30,18 @@ test("filters and secondary actions remain in the mobile side menu", async ({ pa
 
   await page.getByRole("button", { name: "Open menu" }).click();
   await expect(page.locator("#main-menu")).toBeVisible();
+  await expect(page.locator("#main-menu .mode-tabs")).toBeHidden();
+  await expect(page.locator("#main-menu .progress-panel")).toBeHidden();
+  await expect(page.locator("#main-menu").getByRole("heading", { name: "Trainer" })).toBeHidden();
+  await expect(page.getByRole("button", { name: "Light theme" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Dark theme" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Export" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Import" })).toBeVisible();
+  const lightMenuColor = await page.locator("#main-menu").evaluate((element) => getComputedStyle(element).backgroundColor);
+  await expect(page).toHaveScreenshot("menu-mobile-open.png", { animations: "disabled" });
+  await page.getByRole("button", { name: "Dark theme" }).click();
+  const darkMenuColor = await page.locator("#main-menu").evaluate((element) => getComputedStyle(element).backgroundColor);
+  expect(darkMenuColor).not.toBe(lightMenuColor);
   await page.locator(".mobile-menu-toggle").click();
   await expect(page.locator("#main-menu")).not.toHaveClass(/is-open/);
   await expect(page.locator(".menu-backdrop")).toHaveCount(0);

@@ -67,6 +67,7 @@ export function localizedQuestion(question: Question, language: Language) {
   const translation = language === "es" ? question.translations?.es : undefined;
   return {
     prompt: translation?.prompt ?? question.prompt,
+    promptParts: question.promptParts?.[language],
     options: translation?.options?.length ? translation.options : question.options,
     selector: translation?.selector ?? question.selector,
     explanation: translation?.explanation ?? question.explanation,
@@ -106,8 +107,20 @@ export function cleanOptionText(text: string) {
 
 export function cleanExplanationText(text: string) {
   return text
-    .replace(/^(?:is\s+)?not\s+correct\.?\s*/i, "")
-    .replace(/^(?:is\s+)?correct\.?\s*/i, "")
+    .replace(/^(?:is\s+)?not\s+correct[.:;,-]?\s*/i, "")
+    .replace(/^(?:is\s+)?correct[.:;,-]?\s*/i, "")
+    .replace(/^no\s+es\s+correct[oa]s?[.:;,-]?\s*/i, "")
+    .replace(/^es\s+correct[oa]s?[.:;,-]?\s*/i, "")
+    .trim();
+}
+
+export function questionSpeechText(question: Question, language: Language) {
+  const localized = localizedQuestion(question, language);
+  if (!localized.promptParts?.length) return localized.prompt;
+  return localized.promptParts
+    .map((part) => part.type === "math" ? part.spoken : part.text)
+    .join(" ")
+    .replace(/\s+/g, " ")
     .trim();
 }
 

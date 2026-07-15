@@ -158,7 +158,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "Los probadores utilizan las condiciones de prueba para generar casos de prueba y ejecutar pruebas. Aunque las condiciones de prueba siguen siendo las mismas, los casos de prueba varían cada vez. ¿Cuál de los siguientes “principios de prueba” se aborda mediante la variación de casos de prueba?",
+        "prompt": "Los testers utilizan las condiciones de prueba para generar casos de prueba y ejecutar pruebas. Aunque las condiciones de prueba siguen siendo las mismas, los casos de prueba varían cada vez. ¿Cuál de los siguientes “principios de prueba” se aborda mediante la variación de casos de prueba?",
         "options": [
           {
             "key": "a",
@@ -422,7 +422,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) Es correcto. El enfoque de equipo completo promueve una comunicación y colaboración sólida entre los miembros del equipo b) No es correcto. Si bien el enfoque de equipo completo prioriza la responsabilidad colectiva por la calidad, cada miembro individual del equipo sigue siendo igualmente responsable de la calidad. c) No es correcto. El enfoque de equipo completo trata sobre cómo el equipo trabaja en conjunto, con el objetivo de obtener entregables de mayor calidad, pero no necesariamente resulta en una implementación más rápida para los usuarios finales. d) No es correcto. Cuando se utiliza el enfoque de equipo completo, los probadores trabajan con representantes comerciales para crear pruebas de aceptación. No hay ninguna sugerencia de que el enfoque reduzca la colaboración con usuarios comerciales externos"
+        "explanation": "a) Es correcto. El enfoque de equipo completo promueve una comunicación y colaboración sólida entre los miembros del equipo b) No es correcto. Si bien el enfoque de equipo completo prioriza la responsabilidad colectiva por la calidad, cada miembro individual del equipo sigue siendo igualmente responsable de la calidad. c) No es correcto. El enfoque de equipo completo trata sobre cómo el equipo trabaja en conjunto, con el objetivo de obtener entregables de mayor calidad, pero no necesariamente resulta en una implementación más rápida para los usuarios finales. d) No es correcto. Cuando se utiliza el enfoque de equipo completo, los testers trabajan con representantes comerciales para crear pruebas de aceptación. No hay ninguna sugerencia de que el enfoque reduzca la colaboración con usuarios comerciales externos"
       }
     }
   },
@@ -463,7 +463,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "Considerando los siguientes beneficios y desventajas de la independencia de las pruebas: i. Los probadores trabajan en un lugar diferente al de los desarrolladores ii. Los probadores cuestionan las suposiciones que hacen los programadores mientras escriben código iii. Se ha establecido una dinámica de confrontación entre probadores y desarrolladores iv. Los desarrolladores se han convencido a sí mismos de que los probadores son en su mayoría responsables de la calidad v. Los probadores tienen sesgos diferentes a los de los desarrolladores. ¿Cuáles son MÁS probables de ser considerados beneficios?",
+        "prompt": "Considerando los siguientes beneficios y desventajas de la independencia de las pruebas: i. Los testers trabajan en un lugar diferente al de los desarrolladores ii. Los testers cuestionan las suposiciones que hacen los programadores mientras escriben código iii. Se ha establecido una dinámica de confrontación entre testers y desarrolladores iv. Los desarrolladores se han convencido a sí mismos de que los testers son en su mayoría responsables de la calidad v. Los testers tienen sesgos diferentes a los de los desarrolladores. ¿Cuáles son MÁS probables de ser considerados beneficios?",
         "options": [
           {
             "key": "a",
@@ -483,7 +483,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "Considerando cada uno de los beneficios e inconvenientes enumerados de la independencia de las pruebas: i. Idealmente, queremos una colaboración estrecha entre probadores y desarrolladores, que no aumente con el aislamiento. Por tanto, esto es una desventaja ii. Los probadores y desarrolladores tienen diversos antecedentes, puntos de vista técnicos y posibles sesgos, lo que permite a los probadores desafiar de manera útil las suposiciones hechas por las partes interesadas durante la especificación e implementación del sistema. Por tanto, esto es una ventaja iii. La principal desventaja de la independencia de las pruebas es que los probadores pueden quedar aislados del equipo de desarrollo, lo que genera problemas de comunicación, falta de colaboración y, potencialmente, una relación de confrontación, en la que se culpa a los probadores de retrasos y cuellos de botella en el proceso de lanzamiento. Por tanto, esto es una desventaja iv. Una de las desventajas de la independencia de las pruebas es que los probadores pueden quedar aislados del equipo de desarrollo, lo que hace que los desarrolladores se sientan menos responsables de la calidad. Por lo tanto, esto es una desventaja v. El principal beneficio de la independencia de las pruebas es que los probadores tienen más probabilidades de identificar diferentes tipos de fallas y defectos en comparación con los desarrolladores, debido a sus variados antecedentes, puntos de vista técnicos y posibles sesgos, incluido el sesgo cognitivo. Por lo tanto: a) No es correcto b) Es correcto. Las entradas de la lista que muestran los beneficios son ii y v c) No es correcto d) No es correcto"
+        "explanation": "Considerando cada uno de los beneficios e inconvenientes enumerados de la independencia de las pruebas: i. Idealmente, queremos una colaboración estrecha entre testers y desarrolladores, que no aumente con el aislamiento. Por tanto, esto es una desventaja ii. Los testers y desarrolladores tienen diversos antecedentes, puntos de vista técnicos y posibles sesgos, lo que permite a los testers desafiar de manera útil las suposiciones hechas por las partes interesadas durante la especificación e implementación del sistema. Por tanto, esto es una ventaja iii. La principal desventaja de la independencia de las pruebas es que los testers pueden quedar aislados del equipo de desarrollo, lo que genera problemas de comunicación, falta de colaboración y, potencialmente, una relación de confrontación, en la que se culpa a los testers de retrasos y cuellos de botella en el proceso de lanzamiento. Por tanto, esto es una desventaja iv. Una de las desventajas de la independencia de las pruebas es que los testers pueden quedar aislados del equipo de desarrollo, lo que hace que los desarrolladores se sientan menos responsables de la calidad. Por lo tanto, esto es una desventaja v. El principal beneficio de la independencia de las pruebas es que los testers tienen más probabilidades de identificar diferentes tipos de fallas y defectos en comparación con los desarrolladores, debido a sus variados antecedentes, puntos de vista técnicos y posibles sesgos, incluido el sesgo cognitivo. Por lo tanto: a) No es correcto b) Es correcto. Las entradas de la lista que muestran los beneficios son ii y v c) No es correcto d) No es correcto"
       }
     }
   },
@@ -536,7 +536,7 @@
           },
           {
             "key": "c",
-            "text": "Los probadores deben comenzar el diseño de prueba tan pronto como estén disponibles los borradores de los productos de trabajo relevantes."
+            "text": "Los testers deben comenzar el diseño de prueba tan pronto como estén disponibles los borradores de los productos de trabajo relevantes."
           },
           {
             "key": "d",
@@ -658,7 +658,7 @@
           },
           {
             "key": "c",
-            "text": "La necesidad de más probadores manuales con experiencia adecuada"
+            "text": "La necesidad de más testers manuales con experiencia adecuada"
           },
           {
             "key": "d",
@@ -715,7 +715,7 @@
           },
           {
             "key": "b",
-            "text": "Las retrospectivas brindan a los probadores la oportunidad de identificar actividades que tuvieron éxito para conservarlas cuando se realicen posibles mejoras en el futuro."
+            "text": "Las retrospectivas brindan a los testers la oportunidad de identificar actividades que tuvieron éxito para conservarlas cuando se realicen posibles mejoras en el futuro."
           },
           {
             "key": "c",
@@ -727,7 +727,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Los beneficios de las retrospectivas incluyen la unión del equipo y el aprendizaje al compartir problemas, y una mejor colaboración entre desarrolladores y probadores mediante la revisión y mejora de las prácticas de trabajo. Llamar a las personas que un miembro del equipo puede sentir que no contribuyeron plenamente a lograr la calidad como lo exige el enfoque de equipo completo no contribuirá a la vinculación y colaboración del equipo b) Es correcto. Durante la retrospectiva, el grupo discute qué aspectos del proyecto tuvieron éxito y deberían conservarse, así como las áreas que podrían mejorarse y cómo hacerlo. c) No es correcto. Los beneficios de las retrospectivas se basan en una mayor eficacia y eficiencia a través de mejoras en los procesos; no son una oportunidad para desahogarse y criticar a la dirección y a los clientes. Además, los resultados de las pruebas se registran, generalmente en el informe de finalización de la prueba, de modo que cualquier cosa que se diga en la reunión pueda ser leída por otras partes interesadas. d) No es correcto. Las retrospectivas son reuniones que normalmente se llevan a cabo al final de una iteración donde los miembros del equipo se centrarán en discutir problemas relacionados con la calidad que han ocurrido en la iteración actual. No se utilizan para hacer planes o decisiones técnicas para la siguiente iteración; esto se haría en la reunión de planificación de iteraciones al inicio de la siguiente iteración"
+        "explanation": "a) No es correcto. Los beneficios de las retrospectivas incluyen la unión del equipo y el aprendizaje al compartir problemas, y una mejor colaboración entre desarrolladores y testers mediante la revisión y mejora de las prácticas de trabajo. Llamar a las personas que un miembro del equipo puede sentir que no contribuyeron plenamente a lograr la calidad como lo exige el enfoque de equipo completo no contribuirá a la vinculación y colaboración del equipo b) Es correcto. Durante la retrospectiva, el grupo discute qué aspectos del proyecto tuvieron éxito y deberían conservarse, así como las áreas que podrían mejorarse y cómo hacerlo. c) No es correcto. Los beneficios de las retrospectivas se basan en una mayor eficacia y eficiencia a través de mejoras en los procesos; no son una oportunidad para desahogarse y criticar a la dirección y a los clientes. Además, los resultados de las pruebas se registran, generalmente en el informe de finalización de la prueba, de modo que cualquier cosa que se diga en la reunión pueda ser leída por otras partes interesadas. d) No es correcto. Las retrospectivas son reuniones que normalmente se llevan a cabo al final de una iteración donde los miembros del equipo se centrarán en discutir problemas relacionados con la calidad que han ocurrido en la iteración actual. No se utilizan para hacer planes o decisiones técnicas para la siguiente iteración; esto se haría en la reunión de planificación de iteraciones al inicio de la siguiente iteración"
       }
     }
   },
@@ -833,7 +833,7 @@
         "options": [
           {
             "key": "a",
-            "text": "Los desarrolladores informaron que cambiar el sistema de cambio de moneda era difícil y los probadores decidieron comprobar si esto era cierto."
+            "text": "Los desarrolladores informaron que cambiar el sistema de cambio de moneda era difícil y los testers decidieron comprobar si esto era cierto."
           },
           {
             "key": "b",
@@ -849,7 +849,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Suponiendo que los probadores pudieran verificar la facilidad de cambiar el sistema de cambio de moneda, entonces esto se haría mediante pruebas de mantenibilidad en lugar de pruebas de mantenimiento, por lo que esto no es un desencadenante para las pruebas de mantenimiento. b) Es correcto. Una modificación del sistema (como una corrección o mejora) es un ejemplo de un desencadenante para las pruebas de mantenimiento. La eliminación de la opción de reembolso del sistema de cambio de moneda fue una solución que llevaría a pruebas de mantenimiento c) No es correcto. Si el equipo ágil ha comenzado a desarrollar una historia de usuario que agrega una nueva función de fidelización del cliente al sistema de cambio de divisas, esto resultará en que prueben la nueva función y luego realizarían pruebas de regresión. No se requieren pruebas de mantenimiento en esta situación d) No es correcto. La reconfiguración del sistema de cambio de moneda para admitir transacciones en moneda local e inglesa no es una modificación del sistema, un cambio en el entorno operativo o un retiro del sistema, que son los tres factores desencadenantes de las pruebas de mantenimiento"
+        "explanation": "a) No es correcto. Suponiendo que los testers pudieran verificar la facilidad de cambiar el sistema de cambio de moneda, entonces esto se haría mediante pruebas de mantenibilidad en lugar de pruebas de mantenimiento, por lo que esto no es un desencadenante para las pruebas de mantenimiento. b) Es correcto. Una modificación del sistema (como una corrección o mejora) es un ejemplo de un desencadenante para las pruebas de mantenimiento. La eliminación de la opción de reembolso del sistema de cambio de moneda fue una solución que llevaría a pruebas de mantenimiento c) No es correcto. Si el equipo ágil ha comenzado a desarrollar una historia de usuario que agrega una nueva función de fidelización del cliente al sistema de cambio de divisas, esto resultará en que prueben la nueva función y luego realizarían pruebas de regresión. No se requieren pruebas de mantenimiento en esta situación d) No es correcto. La reconfiguración del sistema de cambio de moneda para admitir transacciones en moneda local e inglesa no es una modificación del sistema, un cambio en el entorno operativo o un retiro del sistema, que son los tres factores desencadenantes de las pruebas de mantenimiento"
       }
     }
   },
@@ -1584,7 +1584,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "¿Cuál de los siguientes NO anticipa el probador al aplicar predicción de errores?",
+        "prompt": "¿Cuál de los siguientes NO anticipa el tester al aplicar predicción de errores?",
         "options": [
           {
             "key": "a",
@@ -1604,7 +1604,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "La estrategia de errores consiste en anticipar los errores, defectos y fallas basándose en el conocimiento del probador. a) No es correcto. Este es un ejemplo de cómo anticipar el error del desarrollador b) No es correcto. Este es un ejemplo de anticipación del defecto c) Es correcto. Este es un ejemplo de una posible causa raíz de un defecto, que no es ni un error, ni un defecto, ni una falla, y que es difícil de anticipar para el probador. d) No es correcta. Este es un ejemplo de anticipación de una falla, quizás basado en la experiencia de sistemas anteriores en este dominio de aplicación"
+        "explanation": "La estrategia de errores consiste en anticipar los errores, defectos y fallas basándose en el conocimiento del tester. a) No es correcto. Este es un ejemplo de cómo anticipar el error del desarrollador b) No es correcto. Este es un ejemplo de anticipación del defecto c) Es correcto. Este es un ejemplo de una posible causa raíz de un defecto, que no es ni un error, ni un defecto, ni una falla, y que es difícil de anticipar para el tester. d) No es correcta. Este es un ejemplo de anticipación de una falla, quizás basado en la experiencia de sistemas anteriores en este dominio de aplicación"
       }
     }
   },
@@ -1653,7 +1653,7 @@
           },
           {
             "key": "b",
-            "text": "El probador puede realizar ejecución de prueba, pero no puede realizar diseño de prueba."
+            "text": "El tester puede realizar ejecución de prueba, pero no puede realizar diseño de prueba."
           },
           {
             "key": "c",
@@ -1661,11 +1661,11 @@
           },
           {
             "key": "d",
-            "text": "Durante las pruebas exploratorias el probador podrá utilizar técnicas de prueba de caja negra."
+            "text": "Durante las pruebas exploratorias el tester podrá utilizar técnicas de prueba de caja negra."
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. En pruebas exploratorias, los casos de prueba generalmente se crean durante la sesión de pruebas exploratorias, junto con el análisis de prueba, la implementación de prueba y la ejecución de prueba b) No es correcto. En las pruebas exploratorias, las pruebas se diseñan, ejecutan y evalúan simultáneamente mientras el probador aprende sobre el objeto de prueba c) No es correcto. Los resultados de las pruebas exploratorias dependen en gran medida de la experiencia del probador. Entonces, incluso si los resultados de las pruebas exploratorias pueden usarse como un predictor de riesgo y usarse para evaluar si habrá menos o más defectos, en comparación con la sesión anterior de pruebas exploratorias, no son un buen ejemplo de modelos confiables de predicción de defectos que puedan predecir el número de defectos restantes d) Es correcto. Durante las pruebas exploratorias, los probadores pueden utilizar cualquier técnica de prueba que consideren útil."
+        "explanation": "a) No es correcto. En pruebas exploratorias, los casos de prueba generalmente se crean durante la sesión de pruebas exploratorias, junto con el análisis de prueba, la implementación de prueba y la ejecución de prueba b) No es correcto. En las pruebas exploratorias, las pruebas se diseñan, ejecutan y evalúan simultáneamente mientras el tester aprende sobre el objeto de prueba c) No es correcto. Los resultados de las pruebas exploratorias dependen en gran medida de la experiencia del tester. Entonces, incluso si los resultados de las pruebas exploratorias pueden usarse como un predictor de riesgo y usarse para evaluar si habrá menos o más defectos, en comparación con la sesión anterior de pruebas exploratorias, no son un buen ejemplo de modelos confiables de predicción de defectos que puedan predecir el número de defectos restantes d) Es correcto. Durante las pruebas exploratorias, los testers pueden utilizar cualquier técnica de prueba que consideren útil."
       }
     }
   },
@@ -1905,7 +1905,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "El equipo quiere estimar el tiempo necesario para que un probador ejecute cuatro casos de prueba para un componente de software. El equipo ha reunido las siguientes medidas del esfuerzo utilizado para ejecutar un solo caso de prueba: • Mejor escenario: 1 hora • Peor escenario: 8 horas • Escenario más probable: 3 horas Dado que se está utilizando la técnica de estimación de tres puntos, ¿cuál es la estimación final del tiempo necesario para ejecutar los cuatro casos de prueba?",
+        "prompt": "El equipo quiere estimar el tiempo necesario para que un tester ejecute cuatro casos de prueba para un componente de software. El equipo ha reunido las siguientes medidas del esfuerzo utilizado para ejecutar un solo caso de prueba: • Mejor escenario: 1 hora • Peor escenario: 8 horas • Escenario más probable: 3 horas Dado que se está utilizando la técnica de estimación de tres puntos, ¿cuál es la estimación final del tiempo necesario para ejecutar los cuatro casos de prueba?",
         "options": [
           {
             "key": "a",
@@ -1925,7 +1925,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "Utilizando la técnica de estimación de tres puntos, la estimación final (E) se calcula como: E = (a + 4*m + b) / 6, donde a es la estimación más optimista, m es la estimación más probable y b es la estimación más pesimista. Así: a) Es correcta. En este caso, la estimación para ejecutar un solo caso de prueba es: E = (1h + 4*3h + 8h) / 6 = 3.5 horas Entonces, el tiempo total necesario para que el probador ejecute 4 casos de prueba es: 3.5h * 4 = 14 horas b) No es correcto c) No es correcto d) No es correcto"
+        "explanation": "Utilizando la técnica de estimación de tres puntos, la estimación final (E) se calcula como: E = (a + 4*m + b) / 6, donde a es la estimación más optimista, m es la estimación más probable y b es la estimación más pesimista. Así: a) Es correcta. En este caso, la estimación para ejecutar un solo caso de prueba es: E = (1h + 4*3h + 8h) / 6 = 3.5 horas Entonces, el tiempo total necesario para que el tester ejecute 4 casos de prueba es: 3.5h * 4 = 14 horas b) No es correcto c) No es correcto d) No es correcto"
       }
     }
   },
@@ -2307,7 +2307,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. La gestión de riesgos consiste en el análisis de riesgos y el control de riesgos. Ninguna de estas actividades soporta el reensamblaje de los archivos que componían la versión, porque estas actividades tratan con riesgos, no con elementos de configuración. b) No es correcto. El seguimiento de la prueba se ocupa de recopilar información sobre las pruebas. Esta información se utiliza para evaluar el progreso de las pruebas y medir si se cumplen los criterios de salida o las tareas de prueba asociadas con los criterios de salida, como el cumplimiento de los objetivos de cobertura de riesgos de producto, requisitos u otros criterios de aceptación. control de la prueba utiliza la información del seguimiento de la prueba para proporcionar, en forma de directivas de control, orientación y las acciones correctivas necesarias para lograr las pruebas más efectivas y eficientes. Ninguna de estas actividades tiene que ver con la gestión de elementos de configuración c) No es correcto. El enfoque de equipo completo se basa en la habilidad del probador para trabajar eficazmente en un contexto de equipo y contribuir positivamente a los objetivos del equipo. Por lo tanto, se centra en cuestiones relacionadas con el equipo, no en elementos de configuración. d) Es correcto. La gestión de la configuración proporciona una disciplina para identificar, controlar y rastrear los productos de trabajo. Gestión de la configuración mantiene un registro de los elementos de configuración modificados cuando se crea una nueva línea base. Usando la gestión de la configuración, es posible volver a una línea de base anterior para reproducir resultados de pruebas anteriores"
+        "explanation": "a) No es correcto. La gestión de riesgos consiste en el análisis de riesgos y el control de riesgos. Ninguna de estas actividades soporta el reensamblaje de los archivos que componían la versión, porque estas actividades tratan con riesgos, no con elementos de configuración. b) No es correcto. El seguimiento de la prueba se ocupa de recopilar información sobre las pruebas. Esta información se utiliza para evaluar el progreso de las pruebas y medir si se cumplen los criterios de salida o las tareas de prueba asociadas con los criterios de salida, como el cumplimiento de los objetivos de cobertura de riesgos de producto, requisitos u otros criterios de aceptación. control de la prueba utiliza la información del seguimiento de la prueba para proporcionar, en forma de directivas de control, orientación y las acciones correctivas necesarias para lograr las pruebas más efectivas y eficientes. Ninguna de estas actividades tiene que ver con la gestión de elementos de configuración c) No es correcto. El enfoque de equipo completo se basa en la habilidad del tester para trabajar eficazmente en un contexto de equipo y contribuir positivamente a los objetivos del equipo. Por lo tanto, se centra en cuestiones relacionadas con el equipo, no en elementos de configuración. d) Es correcto. La gestión de la configuración proporciona una disciplina para identificar, controlar y rastrear los productos de trabajo. Gestión de la configuración mantiene un registro de los elementos de configuración modificados cuando se crea una nueva línea base. Usando la gestión de la configuración, es posible volver a una línea de base anterior para reproducir resultados de pruebas anteriores"
       }
     }
   },
@@ -2436,7 +2436,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "Considerando cada una de las categorías de herramientas enumeradas: i. Herramientas de colaboración: facilitan la comunicación. La comunicación no incluye la facilitación de la ejecución de prueba ii. Herramientas DevOps: respaldan el proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de compilación automatizados y CI/CD. Tanto el proceso de entrega como el CI/CD incluyen la facilitación de la ejecución de pruebas, como pruebas de componentes para CI iii. Herramientas de gestión: aumente la eficiencia del proceso de prueba facilitando la gestión del SDLC, requisitos, pruebas, defectos y configuración. La gestión de estos elementos no incluye la facilitación de la ejecución de prueba iv. Herramientas de pruebas no funcionales: permiten al probador realizar pruebas no funcionales que son difíciles o imposibles de realizar manualmente. Las pruebas no funcionales pueden incluir tanto pruebas estáticas como pruebas dinámicas, incluida la ejecución de prueba v. herramientas de diseño e implementación de pruebas: facilitan la generación de casos de prueba, datos de prueba y procedimientos de prueba. La generación de este testware no incluye la facilitación de la ejecución de prueba Por lo tanto: a) No es correcto b) Es correcto. Tanto las herramientas DevOps (ii) como las herramientas de pruebas no funcionales (iv) facilitan la ejecución de la prueba c) No es correcto d) No es correcto"
+        "explanation": "Considerando cada una de las categorías de herramientas enumeradas: i. Herramientas de colaboración: facilitan la comunicación. La comunicación no incluye la facilitación de la ejecución de prueba ii. Herramientas DevOps: respaldan el proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de compilación automatizados y CI/CD. Tanto el proceso de entrega como el CI/CD incluyen la facilitación de la ejecución de pruebas, como pruebas de componentes para CI iii. Herramientas de gestión: aumente la eficiencia del proceso de prueba facilitando la gestión del SDLC, requisitos, pruebas, defectos y configuración. La gestión de estos elementos no incluye la facilitación de la ejecución de prueba iv. Herramientas de pruebas no funcionales: permiten al tester realizar pruebas no funcionales que son difíciles o imposibles de realizar manualmente. Las pruebas no funcionales pueden incluir tanto pruebas estáticas como pruebas dinámicas, incluida la ejecución de prueba v. herramientas de diseño e implementación de pruebas: facilitan la generación de casos de prueba, datos de prueba y procedimientos de prueba. La generación de este testware no incluye la facilitación de la ejecución de prueba Por lo tanto: a) No es correcto b) Es correcto. Tanto las herramientas DevOps (ii) como las herramientas de pruebas no funcionales (iv) facilitan la ejecución de la prueba c) No es correcto d) No es correcto"
       }
     }
   },

@@ -11,6 +11,7 @@ La aplicación se organiza por responsabilidad. `App.tsx` compone rutas, conecta
 - `src/components/sidebar/`: filtros y acciones secundarias.
 - `src/components/questions/`: tarjeta, gráficos, explicación, teoría y raíles de preguntas.
 - `src/hooks/`: integración React con persistencia, tema y restauración de ruta.
+- `src/hooks/useSpeechSynthesis.ts`: mejora progresiva de lectura; concentra detección, voz activa y cancelación sin persistir estado.
 - `src/domain/`: reglas puras de filtrado, puntuación, opciones y generación de simulacros.
 - `src/storage/`: esquema, migración, importación y exportación del progreso.
 - `src/data/`: banco maestro, tipos y fragmentos derivados por modelo. `question-bank.json` es la única fuente editable; `npm run prepare:data` regenera `generated/` automáticamente.
@@ -29,6 +30,8 @@ La aplicación se organiza por responsabilidad. `App.tsx` compone rutas, conecta
 9. Todo diálogo o superficie modal usa `useModalAccessibility`: foco inicial, ciclo de tabulación, cierre con `Escape`, bloqueo de desplazamiento y devolución de foco forman un único contrato reutilizable.
 10. El service worker solo cachea recursos estáticos; progreso, sesiones e importaciones continúan bajo `src/storage/` y nunca se sincronizan con un backend.
 11. Los archivos de `src/data/generated/` no se editan a mano. Cualquier corrección se hace en `question-bank.json` y se propaga con `npm run prepare:data`; desarrollo, unitarias y compilación ejecutan este paso previamente.
+12. Las fórmulas se modelan mediante `promptParts` localizados, con LaTeX y una descripción hablada obligatoria; la pregunta conserva `prompt` como fallback y texto de búsqueda.
+13. Los controles de voz solo se muestran si el navegador ofrece Speech Synthesis, y deben cancelar cualquier locución al cambiar de pregunta, idioma o ruta.
 
 ## Flujo de estado
 

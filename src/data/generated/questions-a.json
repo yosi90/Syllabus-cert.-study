@@ -101,23 +101,23 @@
         "options": [
           {
             "key": "a",
-            "text": "Tener probadores involucrados durante diversas actividades del ciclo de vida de desarrollo de software (SDLC) ayudará a detectar defectos en los productos de trabajo."
+            "text": "Tener testers involucrados durante diversas actividades del ciclo de vida de desarrollo de software (SDLC) ayudará a detectar defectos en los productos de trabajo."
           },
           {
             "key": "b",
-            "text": "Los probadores intentan no molestar a los desarrolladores mientras codifican, para que los desarrolladores escriban mejor código."
+            "text": "Los testers intentan no molestar a los desarrolladores mientras codifican, para que los desarrolladores escriban mejor código."
           },
           {
             "key": "c",
-            "text": "Los probadores que colaboran con los usuarios finales ayudan a mejorar la calidad de los informes de defectos durante la integración de componentes y las pruebas de sistema."
+            "text": "Los testers que colaboran con los usuarios finales ayudan a mejorar la calidad de los informes de defectos durante la integración de componentes y las pruebas de sistema."
           },
           {
             "key": "d",
-            "text": "Los probadores certificados diseñarán casos de prueba mucho mejores que los probadores no certificados."
+            "text": "Los testers certificados diseñarán casos de prueba mucho mejores que los testers no certificados."
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) Es correcto. Es importante que los probadores estén involucrados desde el inicio del ciclo de vida de desarrollo de software (SDLC). Aumentará la comprensión de las decisiones de diseño y detectará defectos tempranamente. b) No es correcto. Tanto los desarrolladores como los probadores comprenderán mejor los productos de trabajo de cada uno y cómo probar el código c) No es correcto. Los usuarios finales no ayudarán a los probadores a aumentar la calidad de los informes de defectos; Además, los usuarios normalmente no participan en pruebas de bajo nivel como las pruebas de integración. d) No es correcto. Estar certificado no significa automáticamente que el probador será mejor en diseño de prueba"
+        "explanation": "a) Es correcto. Es importante que los testers estén involucrados desde el inicio del ciclo de vida de desarrollo de software (SDLC). Aumentará la comprensión de las decisiones de diseño y detectará defectos tempranamente. b) No es correcto. Tanto los desarrolladores como los testers comprenderán mejor los productos de trabajo de cada uno y cómo probar el código c) No es correcto. Los usuarios finales no ayudarán a los testers a aumentar la calidad de los informes de defectos; Además, los usuarios normalmente no participan en pruebas de bajo nivel como las pruebas de integración. d) No es correcto. Estar certificado no significa automáticamente que el tester será mejor en diseño de prueba"
       }
     }
   },
@@ -158,7 +158,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "Ha sido asignado como probador a un equipo que produce un nuevo sistema de forma incremental. Ha notado que no se han realizado cambios en los casos de prueba de regresión existentes durante varias iteraciones y no se identificaron nuevos defectos de regresión. Tu jefe está contento, pero tú no. ¿Qué principio de prueba explica su escepticismo?",
+        "prompt": "Ha sido asignado como tester a un equipo que produce un nuevo sistema de forma incremental. Ha notado que no se han realizado cambios en los casos de prueba de regresión existentes durante varias iteraciones y no se identificaron nuevos defectos de regresión. Tu jefe está contento, pero tú no. ¿Qué principio de prueba explica su escepticismo?",
         "options": [
           {
             "key": "a",
@@ -370,7 +370,7 @@
           }
         ],
         "selector": "Selecciona DOS opciones.",
-        "explanation": "a) Es correcto. Esto lo hacen los probadores b) No es correcto. El backlog del producto es creado y mantenido por el propietario del producto c) No es correcto. Esto lo hace el equipo de desarrollo d) No es correcto. Este es un rol gerencial e) Es correcto. Esto lo realizan los probadores ya que su tarea técnica la realiza como parte de un análisis de prueba."
+        "explanation": "a) Es correcto. Esto lo hacen los testers b) No es correcto. El backlog del producto es creado y mantenido por el propietario del producto c) No es correcto. Esto lo hace el equipo de desarrollo d) No es correcto. Este es un rol gerencial e) Es correcto. Esto lo realizan los testers ya que su tarea técnica la realiza como parte de un análisis de prueba."
       }
     }
   },
@@ -411,7 +411,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "¿Cuáles de las siguientes habilidades (i-v) son las MÁS importantes de un probador? i. Tener conocimiento del dominio ii. Crear una visión del producto iii. Ser un buen jugador de equipo iv. Planificar y organizar el trabajo del equipo v. Pensamiento crítico",
+        "prompt": "¿Cuáles de las siguientes habilidades (i-v) son las MÁS importantes de un tester? i. Tener conocimiento del dominio ii. Crear una visión del producto iii. Ser un buen jugador de equipo iv. Planificar y organizar el trabajo del equipo v. Pensamiento crítico",
         "options": [
           {
             "key": "a",
@@ -431,7 +431,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "i. Es verdad. Tener conocimiento del dominio es una habilidad importante del probador ii. Es falso. Esta es una tarea del analista de negocios junto con el representante comercial iii. Es verdad. Ser un buen jugador de equipo es una habilidad importante iv. Es falso. Planificar y organizar el trabajo del equipo es tarea del gestor de pruebas o, sobre todo en un proyecto de desarrollo de software Agile, de todo el equipo y no sólo del probador v. Es cierto. El pensamiento crítico es una de las habilidades más importantes de los probadores Así: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
+        "explanation": "i. Es verdad. Tener conocimiento del dominio es una habilidad importante del tester ii. Es falso. Esta es una tarea del analista de negocios junto con el representante comercial iii. Es verdad. Ser un buen jugador de equipo es una habilidad importante iv. Es falso. Planificar y organizar el trabajo del equipo es tarea del gestor de pruebas o, sobre todo en un proyecto de desarrollo de software Agile, de todo el equipo y no sólo del tester v. Es cierto. El pensamiento crítico es una de las habilidades más importantes de los testers Así: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
       }
     }
   },
@@ -472,7 +472,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "¿Cómo está presente el enfoque de equipo completo en las interacciones entre probadores y representantes empresariales?",
+        "prompt": "¿Cómo está presente el enfoque de equipo completo en las interacciones entre testers y representantes empresariales?",
         "options": [
           {
             "key": "a",
@@ -480,7 +480,7 @@
           },
           {
             "key": "b",
-            "text": "Los probadores ayudan a los representantes empresariales a definir una estrategia de prueba."
+            "text": "Los testers ayudan a los representantes empresariales a definir una estrategia de prueba."
           },
           {
             "key": "c",
@@ -488,11 +488,11 @@
           },
           {
             "key": "d",
-            "text": "Los probadores ayudan a los representantes empresariales a crear pruebas de aceptación adecuadas."
+            "text": "Los testers ayudan a los representantes empresariales a crear pruebas de aceptación adecuadas."
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. El enfoque de automatización de pruebas lo definen probadores con la ayuda de desarrolladores y representantes comerciales b) No es correcto. La estrategia de prueba se decide en colaboración con los desarrolladores c) No es correcta. Los probadores, desarrolladores y representantes comerciales son parte del enfoque de equipo completo d) Es correcto. Los probadores trabajarán estrechamente con representantes comerciales para garantizar que se alcancen los niveles de calidad deseados. Esto incluye apoyarlos y colaborar con ellos para ayudarlos a crear pruebas de aceptación adecuadas."
+        "explanation": "a) No es correcto. El enfoque de automatización de pruebas lo definen testers con la ayuda de desarrolladores y representantes comerciales b) No es correcto. La estrategia de prueba se decide en colaboración con los desarrolladores c) No es correcta. Los testers, desarrolladores y representantes comerciales son parte del enfoque de equipo completo d) Es correcto. Los testers trabajarán estrechamente con representantes comerciales para garantizar que se alcancen los niveles de calidad deseados. Esto incluye apoyarlos y colaborar con ellos para ayudarlos a crear pruebas de aceptación adecuadas."
       }
     }
   },
@@ -1162,7 +1162,7 @@
           },
           {
             "key": "c",
-            "text": "Las técnicas de prueba dependen en gran medida del conocimiento del software y del dominio empresarial del probador."
+            "text": "Las técnicas de prueba dependen en gran medida del conocimiento del software y del dominio empresarial del tester."
           },
           {
             "key": "d",
@@ -1618,7 +1618,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) Es correcto. El concepto básico detrás de la predicción de errores es que el probador intenta adivinar qué errores pudo haber cometido el desarrollador y qué defectos puede haber en el objeto de prueba basándose en experiencias pasadas (y a veces listas de verificación). b) No es correcto. Aunque un probador que fue desarrollador puede utilizar su experiencia personal para ayudarle a la hora de realizar predicción de errores, la técnica de prueba no se basa en conocimientos previos de desarrollo c) No es correcta. La predicción de errores no es una técnica de usabilidad para adivinar cómo los usuarios pueden fallar al interactuar con el objeto de prueba. d) No es correcta. Duplicar la tarea de desarrollo tiene varios defectos que la hacen poco práctica, como que el probador tiene habilidades equivalentes a las del desarrollador y el tiempo necesario para realizar el desarrollo. No es predicción de errores"
+        "explanation": "a) Es correcto. El concepto básico detrás de la predicción de errores es que el tester intenta adivinar qué errores pudo haber cometido el desarrollador y qué defectos puede haber en el objeto de prueba basándose en experiencias pasadas (y a veces listas de verificación). b) No es correcto. Aunque un tester que fue desarrollador puede utilizar su experiencia personal para ayudarle a la hora de realizar predicción de errores, la técnica de prueba no se basa en conocimientos previos de desarrollo c) No es correcta. La predicción de errores no es una técnica de usabilidad para adivinar cómo los usuarios pueden fallar al interactuar con el objeto de prueba. d) No es correcta. Duplicar la tarea de desarrollo tiene varios defectos que la hacen poco práctica, como que el tester tiene habilidades equivalentes a las del desarrollador y el tiempo necesario para realizar el desarrollo. No es predicción de errores"
       }
     }
   },
@@ -1842,27 +1842,27 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "¿Cómo añaden valor los probadores a la planificación de iteraciones y lanzamientos?",
+        "prompt": "¿Cómo añaden valor los testers a la planificación de iteraciones y lanzamientos?",
         "options": [
           {
             "key": "a",
-            "text": "Los probadores determinan la prioridad de las historias de usuario a desarrollar."
+            "text": "Los testers determinan la prioridad de las historias de usuario a desarrollar."
           },
           {
             "key": "b",
-            "text": "Los probadores se centran únicamente en los aspectos funcionales del sistema a probar."
+            "text": "Los testers se centran únicamente en los aspectos funcionales del sistema a probar."
           },
           {
             "key": "c",
-            "text": "Los probadores participan en la identificación detallada de riesgos y la evaluación de riesgos de las historias de usuarios."
+            "text": "Los testers participan en la identificación detallada de riesgos y la evaluación de riesgos de las historias de usuarios."
           },
           {
             "key": "d",
-            "text": "Los probadores garantizan el lanzamiento de software de alta calidad a través del diseño temprano de prueba durante la planificación del lanzamiento"
+            "text": "Los testers garantizan el lanzamiento de software de alta calidad a través del diseño temprano de prueba durante la planificación del lanzamiento"
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Las prioridades para las historias de usuarios las determina el representante comercial junto con el equipo de desarrollo b) No es correcto. Los probadores se centran tanto en los aspectos funcionales como en los no funcionales del sistema a probar. c) Es correcto. Según el plan de estudios, esta es una de las formas en que los probadores agregan valor a la iteración y la planificación de lanzamientos d) No es correcto. El diseño de prueba temprano no forma parte de la planificación del lanzamiento. El diseño temprano de prueba no garantiza automáticamente el lanzamiento de software de calidad"
+        "explanation": "a) No es correcto. Las prioridades para las historias de usuarios las determina el representante comercial junto con el equipo de desarrollo b) No es correcto. Los testers se centran tanto en los aspectos funcionales como en los no funcionales del sistema a probar. c) Es correcto. Según el plan de estudios, esta es una de las formas en que los testers agregan valor a la iteración y la planificación de lanzamientos d) No es correcto. El diseño de prueba temprano no forma parte de la planificación del lanzamiento. El diseño temprano de prueba no garantiza automáticamente el lanzamiento de software de calidad"
       }
     }
   },
@@ -1916,7 +1916,7 @@
           },
           {
             "key": "b",
-            "text": "La capacidad de iniciar sesión en el objeto de prueba mediante el probador."
+            "text": "La capacidad de iniciar sesión en el objeto de prueba mediante el tester."
           },
           {
             "key": "c",

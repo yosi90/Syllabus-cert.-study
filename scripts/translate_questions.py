@@ -123,8 +123,12 @@ FIXUPS = [
     ("particion", "partición"),
     ("decision", "decisión"),
     ("transicion", "transición"),
-    ("evaluadores", "probadores"),
-    ("evaluador", "probador"),
+    ("evaluadores", "testers"),
+    ("evaluador", "tester"),
+    ("provadores", "testers"),
+    ("provador", "tester"),
+    ("probadores", "testers"),
+    ("probador", "tester"),
     ("desarrollado por pruebas", "desarrollo guiado por pruebas"),
 ]
 

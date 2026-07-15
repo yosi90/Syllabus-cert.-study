@@ -77,10 +77,10 @@ export function HomeView({
       </section>
 
       <section className="dashboard-action-grid">
-        <article className="dashboard-section">
-          <span className="eyebrow">{copy.quickStudy}</span>
+        <article className="dashboard-section quick-study-card">
+          <span className="eyebrow quick-study-eyebrow">{copy.quickStudy}</span>
           <h3>{copy.quickStudy}</h3>
-          <p>{copy.quickStudyDescription}</p>
+          <p className="quick-study-description">{copy.quickStudyDescription}</p>
           <div className="dashboard-buttons">
             <button className="primary" type="button" onClick={() => onStartStudy(10)}><Play aria-hidden="true" />{copy.quick10}</button>
             <button className="secondary" type="button" onClick={() => onStartStudy(20)}><BookOpen aria-hidden="true" />{copy.complete20}</button>

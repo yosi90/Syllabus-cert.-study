@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import katex from "katex";
 
 type Option = {
   key: string;
@@ -15,6 +16,9 @@ type Question = {
   kLevel: string;
   rawKLevel: string;
   prompt: string;
+  promptParts?: Record<"en" | "es", Array<
+    { type: "text"; text: string } | { type: "math"; latex: string; spoken: string }
+  >>;
   options: Option[];
   correctAnswers: string[];
   selectionMode: "single" | "multiple";
@@ -110,6 +114,25 @@ for (const question of bank.questions) {
   assert([4, 5].includes(question.options.length), `${question.id}: expected 4 or 5 options`);
   assert(question.points === 1, `${question.id}: expected 1 point, found ${question.points}`);
 
+  if (question.promptParts) {
+    for (const language of ["en", "es"] as const) {
+      assert(question.promptParts[language]?.length > 0, `${question.id}: missing ${language} prompt parts`);
+      for (const part of question.promptParts[language] ?? []) {
+        if (part.type === "text") {
+          assert(Boolean(part.text.trim()), `${question.id}: empty ${language} prompt text part`);
+        } else {
+          assert(Boolean(part.latex.trim()), `${question.id}: empty ${language} formula`);
+          assert(Boolean(part.spoken.trim()), `${question.id}: missing ${language} spoken formula`);
+          try {
+            katex.renderToString(part.latex, { throwOnError: true });
+          } catch {
+            assert(false, `${question.id}: invalid ${language} formula`);
+          }
+        }
+      }
+    }
+  }
+
   if (question.visual) {
     visualCount += 1;
     assert(/^\/question-assets\/[a-d]-\d{2}\.png$/.test(question.visual.src), `${question.id}: invalid visual path`);
@@ -131,6 +154,7 @@ for (const question of bank.questions) {
 
   const sourceTexts = [question.prompt, question.explanation, ...question.options.map((option) => option.text)];
   const spanishTexts = [spanish?.prompt ?? "", spanish?.explanation ?? "", ...(spanish?.options ?? []).map((option) => option.text)];
+  assert(!spanishTexts.some((text) => /\b(?:prob|prov)ad(?:or|ora|ores|oras)\b/i.test(text)), `${question.id}: Spanish text translates tester instead of preserving the anglicism`);
   assert(!sourceTexts.some((text) => pdfArtifactPattern.test(text)), `${question.id}: source text contains a PDF header or footer`);
   assert(!spanishTexts.some((text) => spanishArtifactPattern.test(text)), `${question.id}: Spanish text contains an extraction or translation artifact`);
   for (const brokenWord of knownBrokenSourceWords) {
@@ -198,6 +222,10 @@ assert(examRules.penalty === 0, "Expected no penalty");
 assert(examRules.durationMinutes === 60, "Expected standard duration 60 minutes");
 assert(examRules.extendedDurationMinutes === 75, "Expected extended duration 75 minutes");
 assert((bank.metadata.extractionIssues ?? []).length === 0, "Expected no extraction issues");
+assert(!/\b(?:prob|prov)ad(?:or|ora|ores|oras)\b/i.test(JSON.stringify(bank)), "Spanish bank content translates tester instead of preserving the anglicism");
+
+const c31 = bank.questions.find((question) => question.id === "C-31");
+assert(c31?.promptParts?.en.some((part) => part.type === "math" && part.latex.includes("\\frac") && part.latex.endsWith("{4}")), "C-31: missing fraction with denominator 4");
 
 if (failures.length) {
   console.error(`Data validation failed with ${failures.length} issue(s):`);

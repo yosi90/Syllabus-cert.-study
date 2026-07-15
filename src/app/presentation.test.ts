@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { questions } from "../data/bank";
-import { displayAnswerLabels, getDisplayOptions } from "./presentation";
+import { cleanExplanationText, displayAnswerLabels, getDisplayOptions, questionSpeechText } from "./presentation";
 
 describe("option presentation fidelity", () => {
   it("keeps original letters for official single-answer questions from every model", () => {
@@ -22,5 +22,23 @@ describe("option presentation fidelity", () => {
     expect(first).toEqual(second);
     expect(displayAnswerLabels(question, question.correctAnswers, "es", "shuffled", "adaptive-seed"))
       .toBe(question.correctAnswers.map((key) => displayKeyByAnswer.get(key)).join(", "));
+  });
+});
+
+describe("localized explanation and formula presentation", () => {
+  it.each([
+    ["Is correct. Because it matches.", "Because it matches."],
+    ["Is not correct. Because it differs.", "Because it differs."],
+    ["Es correcta. Porque coincide.", "Porque coincide."],
+    ["No es correcto. Porque difiere.", "Porque difiere."],
+    ["No es correctas: Porque difieren.", "Porque difieren."],
+  ])("removes the status prefix from %s", (source, expected) => {
+    expect(cleanExplanationText(source)).toBe(expected);
+  });
+
+  it("uses the accessible localized wording for the C-31 fraction", () => {
+    const question = questions.find((item) => item.id === "C-31")!;
+    expect(questionSpeechText(question, "en")).toContain("all divided by four");
+    expect(questionSpeechText(question, "es")).toContain("todo dividido entre cuatro");
   });
 });

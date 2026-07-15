@@ -56,7 +56,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. A menudo es posible utilizar pruebas dinámicas para provocar que un objeto de prueba falle de maneras que los usuarios nunca podrían lograr, como mediante el uso de inyección de fallas. Sin embargo, si la falla nunca puede ocurrir con usuarios finales reales, entonces identificarla no es especialmente valiosa ya que las pruebas tienen como objetivo en última instancia mejorar el producto de trabajo para los usuarios finales. Dedicar tiempo a probar fallas que no pueden ocurrir con usuarios reales no es un uso eficiente del tiempo de un probador b) No es correcto. Los desarrolladores utilizan pruebas estáticas en forma de análisis estático para identificar defectos en su código antes de lo que se puede lograr mediante pruebas dinámicas. Tenga en cuenta, sin embargo, que las pruebas estáticas (y el análisis estático) se utilizan para detectar defectos, no fallas, que se encuentran mediante pruebas dinámicas. Por lo tanto, es el uso del término “fracasos” lo que hace que ésta sea una opción incorrecta. c) No es correcta. El análisis estático detecta directamente defectos en el código y normalmente esta es información para el desarrollador, no para el cliente. d) Es correcto. Las revisiones son una forma de pruebas estáticas que se pueden aplicar desde el comienzo del ciclo de vida de desarrollo de software y se utilizan para encontrar defectos que pueden eliminarse antes de que las actividades de desarrollo posteriores desperdicien esfuerzos en requisitos defectuosos. Si los defectos no se detectan y eliminan a tiempo, cuando el defecto se encuentre en productos derivados del trabajo, como el diseño y el código, será necesario cambiar los requisitos."
+        "explanation": "a) No es correcto. A menudo es posible utilizar pruebas dinámicas para provocar que un objeto de prueba falle de maneras que los usuarios nunca podrían lograr, como mediante el uso de inyección de fallas. Sin embargo, si la falla nunca puede ocurrir con usuarios finales reales, entonces identificarla no es especialmente valiosa ya que las pruebas tienen como objetivo en última instancia mejorar el producto de trabajo para los usuarios finales. Dedicar tiempo a probar fallas que no pueden ocurrir con usuarios reales no es un uso eficiente del tiempo de un tester b) No es correcto. Los desarrolladores utilizan pruebas estáticas en forma de análisis estático para identificar defectos en su código antes de lo que se puede lograr mediante pruebas dinámicas. Tenga en cuenta, sin embargo, que las pruebas estáticas (y el análisis estático) se utilizan para detectar defectos, no fallas, que se encuentran mediante pruebas dinámicas. Por lo tanto, es el uso del término “fracasos” lo que hace que ésta sea una opción incorrecta. c) No es correcta. El análisis estático detecta directamente defectos en el código y normalmente esta es información para el desarrollador, no para el cliente. d) Es correcto. Las revisiones son una forma de pruebas estáticas que se pueden aplicar desde el comienzo del ciclo de vida de desarrollo de software y se utilizan para encontrar defectos que pueden eliminarse antes de que las actividades de desarrollo posteriores desperdicien esfuerzos en requisitos defectuosos. Si los defectos no se detectan y eliminan a tiempo, cuando el defecto se encuentre en productos derivados del trabajo, como el diseño y el código, será necesario cambiar los requisitos."
       }
     }
   },
@@ -300,7 +300,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Es poco probable que el equipo de marketing de la organización realice muchas pruebas (aunque en algunas organizaciones pueden estar involucrados con pruebas de aceptación), por lo que su nivel promedio de experiencia (la mayor parte de la cual sería en marketing) probablemente no afecte la forma en que se realizan Las pruebas para un objeto de prueba determinado b) No son correcto. Es poco probable que el nivel de conocimiento de los usuarios de que se está construyendo un nuevo sistema para ellos afecte la forma en que se realizan las pruebas. Es más probable que cualquier participación del usuario que pueda afectar la forma en que se realizan las pruebas sea resultado de decisiones tomadas por los probadores, el cliente y el gerente del proyecto. c) Es correcta. La cantidad de años de experiencia de los miembros del equipo de pruebas de eficiencia del desempeño ayudará a determinar las capacidades y el conocimiento (por ejemplo, de diferentes herramientas y tipos de defectos) que los miembros del equipo aplicarán cuando realicen pruebas. d) No es correcto. La estructura organizativa de los diferentes usuarios finales (que pueden ser variadas) cambiará entre usuarios. Por lo tanto, es posible que ni siquiera se sepa cuándo se está probando la aplicación y, por lo tanto, la estructura organizativa del usuario final puede tener poco efecto en cómo se realizan las pruebas"
+        "explanation": "a) No es correcto. Es poco probable que el equipo de marketing de la organización realice muchas pruebas (aunque en algunas organizaciones pueden estar involucrados con pruebas de aceptación), por lo que su nivel promedio de experiencia (la mayor parte de la cual sería en marketing) probablemente no afecte la forma en que se realizan Las pruebas para un objeto de prueba determinado b) No son correcto. Es poco probable que el nivel de conocimiento de los usuarios de que se está construyendo un nuevo sistema para ellos afecte la forma en que se realizan las pruebas. Es más probable que cualquier participación del usuario que pueda afectar la forma en que se realizan las pruebas sea resultado de decisiones tomadas por los testers, el cliente y el gerente del proyecto. c) Es correcta. La cantidad de años de experiencia de los miembros del equipo de pruebas de eficiencia del desempeño ayudará a determinar las capacidades y el conocimiento (por ejemplo, de diferentes herramientas y tipos de defectos) que los miembros del equipo aplicarán cuando realicen pruebas. d) No es correcto. La estructura organizativa de los diferentes usuarios finales (que pueden ser variadas) cambiará entre usuarios. Por lo tanto, es posible que ni siquiera se sepa cuándo se está probando la aplicación y, por lo tanto, la estructura organizativa del usuario final puede tener poco efecto en cómo se realizan las pruebas"
       }
     }
   },
@@ -353,7 +353,7 @@
           },
           {
             "key": "c",
-            "text": "La trazabilidad entre probadores y casos de prueba que fallaron proporciona un medio para determinar el nivel de habilidad de los probadores."
+            "text": "La trazabilidad entre testers y casos de prueba que fallaron proporciona un medio para determinar el nivel de habilidad de los testers."
           },
           {
             "key": "d",
@@ -361,7 +361,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. La trazabilidad entre los riesgos mitigados y los casos de prueba que pasaron proporciona poca información, porque para ser mitigados (mediante pruebas) los riesgos necesitarían tener un caso de prueba correspondiente que pasó. Para poder evaluar el riesgo residual, es necesario disponer de trazabilidad entre todos los riesgos y los resultados de las pruebas, de modo que los riesgos que no hayan superado la prueba correspondiente puedan identificarse como riesgos residuales b) Es correcto. La trazabilidad entre los requisitos del usuario y los resultados de las pruebas proporciona una indicación de qué requisitos del usuario se han probado y, por lo tanto, proporciona un medio para medir el progreso del proyecto (en el contexto de las pruebas) frente a los objetivos comerciales. c) No es correcto. No está claro que los casos de prueba que fallaron proporcionen una indicación de las habilidades del probador más que los casos de prueba que pasaron. Dependería en parte del objetivo de la prueba (por ejemplo, generar confianza o provocar fallas). Además, dicha medición de probadores basada en casos de prueba que pasaron y fallaron puede ser contraproducente ya que podría hacer que los probadores optimicen sus pruebas basándose en esa métrica en lugar del objetivo de prueba d) No es correcto. La trazabilidad entre los riesgos identificados y las condiciones de prueba escritas proporciona un medio para determinar qué condiciones de prueba adicionales deben escribirse. Determinar qué riesgos vale la pena probar es parte de la gestión de riesgos y, en particular, de la mitigación de riesgos."
+        "explanation": "a) No es correcto. La trazabilidad entre los riesgos mitigados y los casos de prueba que pasaron proporciona poca información, porque para ser mitigados (mediante pruebas) los riesgos necesitarían tener un caso de prueba correspondiente que pasó. Para poder evaluar el riesgo residual, es necesario disponer de trazabilidad entre todos los riesgos y los resultados de las pruebas, de modo que los riesgos que no hayan superado la prueba correspondiente puedan identificarse como riesgos residuales b) Es correcto. La trazabilidad entre los requisitos del usuario y los resultados de las pruebas proporciona una indicación de qué requisitos del usuario se han probado y, por lo tanto, proporciona un medio para medir el progreso del proyecto (en el contexto de las pruebas) frente a los objetivos comerciales. c) No es correcto. No está claro que los casos de prueba que fallaron proporcionen una indicación de las habilidades del tester más que los casos de prueba que pasaron. Dependería en parte del objetivo de la prueba (por ejemplo, generar confianza o provocar fallas). Además, dicha medición de testers basada en casos de prueba que pasaron y fallaron puede ser contraproducente ya que podría hacer que los testers optimicen sus pruebas basándose en esa métrica en lugar del objetivo de prueba d) No es correcto. La trazabilidad entre los riesgos identificados y las condiciones de prueba escritas proporciona un medio para determinar qué condiciones de prueba adicionales deben escribirse. Determinar qué riesgos vale la pena probar es parte de la gestión de riesgos y, en particular, de la mitigación de riesgos."
       }
     }
   },
@@ -402,27 +402,27 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "¿Cuál de los siguientes es MÁS probable que sea un ejemplo de un probador que utiliza una habilidad genérica al realizar pruebas?",
+        "prompt": "¿Cuál de los siguientes es MÁS probable que sea un ejemplo de un tester que utiliza una habilidad genérica al realizar pruebas?",
         "options": [
           {
             "key": "a",
-            "text": "El profundo conocimiento del probador sobre una variedad de juegos de computadora significó que se llevaban bien con uno de los desarrolladores que también estaba interesado en los juegos."
+            "text": "El profundo conocimiento del tester sobre una variedad de juegos de computadora significó que se llevaban bien con uno de los desarrolladores que también estaba interesado en los juegos."
           },
           {
             "key": "b",
-            "text": "El probador era un ex piloto y pudo comprender mejor los criterios de aceptación del sistema de control del helicóptero."
+            "text": "El tester era un ex piloto y pudo comprender mejor los criterios de aceptación del sistema de control del helicóptero."
           },
           {
             "key": "c",
-            "text": "El probador trabajó anteriormente como programador y utilizó sus habilidades en esta área para comunicarse mejor con los analistas de negocios."
+            "text": "El tester trabajó anteriormente como programador y utilizó sus habilidades en esta área para comunicarse mejor con los analistas de negocios."
           },
           {
             "key": "d",
-            "text": "El probador tuvo mucho cuidado de no cometer errores cuando generó metódicamente casos de prueba antes de comenzar su sesión de pruebas exploratorias."
+            "text": "El tester tuvo mucho cuidado de no cometer errores cuando generó metódicamente casos de prueba antes de comenzar su sesión de pruebas exploratorias."
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Fuertes habilidades de comunicación, escucha activa y habilidades de trabajo en equipo permiten que un probador interactúe efectivamente con todas las partes interesadas; sin embargo, un conocimiento profundo de una variedad de juegos de computadora que le permitió llevarse bien con un desarrollador no es un ejemplo de una habilidad genérica útil para los probadores. b) Es correcto. El conocimiento del dominio que se puede utilizar para comprender y comunicarse con los usuarios finales y los representantes comerciales es una de las habilidades genéricas requeridas por los probadores. Un probador con experiencia como piloto le permitiría apreciar mejor los criterios de aceptación del sistema de control del helicóptero. c) No es correcto. Aunque las habilidades de programación podrían considerarse conocimientos técnicos que pueden aumentar la eficiencia al utilizar algunas herramientas de prueba, es poco probable que estas habilidades mejoren su comunicación con los analistas de negocios. d) No es correcto. Aunque la minuciosidad, la atención al detalle, la curiosidad y un enfoque metódico para identificar defectos difíciles de encontrar son habilidades genéricas útiles para los probadores, es dudoso que generen casos de prueba antes de comenzar las pruebas exploratorias. Esto se debe a que uno de los principios principales de Las pruebas exploratorias son que los casos de prueba se generan durante la prueba, no se programan de antemano."
+        "explanation": "a) No es correcto. Fuertes habilidades de comunicación, escucha activa y habilidades de trabajo en equipo permiten que un tester interactúe efectivamente con todas las partes interesadas; sin embargo, un conocimiento profundo de una variedad de juegos de computadora que le permitió llevarse bien con un desarrollador no es un ejemplo de una habilidad genérica útil para los testers. b) Es correcto. El conocimiento del dominio que se puede utilizar para comprender y comunicarse con los usuarios finales y los representantes comerciales es una de las habilidades genéricas requeridas por los testers. Un tester con experiencia como piloto le permitiría apreciar mejor los criterios de aceptación del sistema de control del helicóptero. c) No es correcto. Aunque las habilidades de programación podrían considerarse conocimientos técnicos que pueden aumentar la eficiencia al utilizar algunas herramientas de prueba, es poco probable que estas habilidades mejoren su comunicación con los analistas de negocios. d) No es correcto. Aunque la minuciosidad, la atención al detalle, la curiosidad y un enfoque metódico para identificar defectos difíciles de encontrar son habilidades genéricas útiles para los testers, es dudoso que generen casos de prueba antes de comenzar las pruebas exploratorias. Esto se debe a que uno de los principios principales de Las pruebas exploratorias son que los casos de prueba se generan durante la prueba, no se programan de antemano."
       }
     }
   },
@@ -589,23 +589,23 @@
         "options": [
           {
             "key": "a",
-            "text": "Los probadores deben revisar los productos de trabajo como parte de la próxima fase de desarrollo."
+            "text": "Los testers deben revisar los productos de trabajo como parte de la próxima fase de desarrollo."
           },
           {
             "key": "b",
-            "text": "Los probadores deben revisar los productos de trabajo tan pronto como los borradores estén disponibles."
+            "text": "Los testers deben revisar los productos de trabajo tan pronto como los borradores estén disponibles."
           },
           {
             "key": "c",
-            "text": "Los probadores deben revisar los productos de trabajo antes de que comiencen el análisis de prueba y el diseño de prueba."
+            "text": "Los testers deben revisar los productos de trabajo antes de que comiencen el análisis de prueba y el diseño de prueba."
           },
           {
             "key": "d",
-            "text": "Los probadores deben revisar los productos de trabajo inmediatamente después de su publicación."
+            "text": "Los testers deben revisar los productos de trabajo inmediatamente después de su publicación."
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Los probadores deben revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte de un enfoque de desplazamiento a la izquierda. Si esperaran hasta la siguiente fase de desarrollo, entonces se podrían iniciar trabajos de desarrollo (y pruebas) innecesarios en productos de trabajo defectuosos y no revisados. b) Es correcto. Los probadores deberían revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte de un enfoque de desplazamiento hacia la izquierda. c) No es correcto. Los probadores típicamente revisan los productos de trabajo que forman la base de prueba como parte del análisis de prueba, no antes del análisis de prueba y el diseño de prueba. d) No es correcto. Los probadores deben revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte del enfoque de desplazamiento a la izquierda. Esperar hasta que se publiquen significa que cualquier defecto que pueda encontrarse mediante la revisión del probador estará en el documento publicado."
+        "explanation": "a) No es correcto. Los testers deben revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte de un enfoque de desplazamiento a la izquierda. Si esperaran hasta la siguiente fase de desarrollo, entonces se podrían iniciar trabajos de desarrollo (y pruebas) innecesarios en productos de trabajo defectuosos y no revisados. b) Es correcto. Los testers deberían revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte de un enfoque de desplazamiento hacia la izquierda. c) No es correcto. Los testers típicamente revisan los productos de trabajo que forman la base de prueba como parte del análisis de prueba, no antes del análisis de prueba y el diseño de prueba. d) No es correcto. Los testers deben revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte del enfoque de desplazamiento a la izquierda. Esperar hasta que se publiquen significa que cualquier defecto que pueda encontrarse mediante la revisión del tester estará en el documento publicado."
       }
     }
   },
@@ -719,15 +719,15 @@
           },
           {
             "key": "c",
-            "text": "Para tratar a los desarrolladores y a las operaciones por igual, los probadores asignarán más esfuerzos para publicar las pruebas por operaciones utilizando un enfoque de desplazamiento a la derecha."
+            "text": "Para tratar a los desarrolladores y a las operaciones por igual, los testers asignarán más esfuerzos para publicar las pruebas por operaciones utilizando un enfoque de desplazamiento a la derecha."
           },
           {
             "key": "d",
-            "text": "Para crear una mayor sinergia entre los probadores, los desarrolladores y las operaciones, las pruebas deben automatizarse completamente sin pruebas manuales."
+            "text": "Para crear una mayor sinergia entre los testers, los desarrolladores y las operaciones, las pruebas deben automatizarse completamente sin pruebas manuales."
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. Esto se proporciona en gran medida a través de la integración continua, donde los desarrolladores envían pruebas de componentes (unitarias) con su nuevo código, que deben aprobarse para que el código sea admitido en la compilación. Por lo tanto, los desarrolladores sí necesitan completar pruebas de componentes b) Es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. c) No es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. Los probadores no intentan tratar a los desarrolladores y a las operaciones por igual dedicando más tiempo a las pruebas de lanzamiento, aunque bien se puede utilizar un enfoque de desplazamiento a la derecha para las pruebas (pruebas en producción). d) No es correcto. Los procesos automatizados como la integración continua/entrega continua (CI/CD) en DevOps facilitan entornos de prueba estables y reducen la necesidad de pruebas manuales; sin embargo, existe el riesgo de pasar por alto la importancia de las pruebas manuales, especialmente desde la perspectiva del usuario"
+        "explanation": "a) No es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. Esto se proporciona en gran medida a través de la integración continua, donde los desarrolladores envían pruebas de componentes (unitarias) con su nuevo código, que deben aprobarse para que el código sea admitido en la compilación. Por lo tanto, los desarrolladores sí necesitan completar pruebas de componentes b) Es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. c) No es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. Los testers no intentan tratar a los desarrolladores y a las operaciones por igual dedicando más tiempo a las pruebas de lanzamiento, aunque bien se puede utilizar un enfoque de desplazamiento a la derecha para las pruebas (pruebas en producción). d) No es correcto. Los procesos automatizados como la integración continua/entrega continua (CI/CD) en DevOps facilitan entornos de prueba estables y reducen la necesidad de pruebas manuales; sin embargo, existe el riesgo de pasar por alto la importancia de las pruebas manuales, especialmente desde la perspectiva del usuario"
       }
     }
   },
@@ -1584,11 +1584,11 @@
         "options": [
           {
             "key": "a",
-            "text": "A los probadores no se les ha asignado suficiente tiempo para el diseño de prueba y ejecución de prueba."
+            "text": "A los testers no se les ha asignado suficiente tiempo para el diseño de prueba y ejecución de prueba."
           },
           {
             "key": "b",
-            "text": "La estrategia de prueba existente requiere que los probadores utilicen técnicas de prueba formales de caja negra."
+            "text": "La estrategia de prueba existente requiere que los testers utilicen técnicas de prueba formales de caja negra."
           },
           {
             "key": "c",
@@ -1596,15 +1596,15 @@
           },
           {
             "key": "d",
-            "text": "Los probadores son miembros de un equipo ágil y tienen buenas habilidades de programación."
+            "text": "Los testers son miembros de un equipo ágil y tienen buenas habilidades de programación."
           },
           {
             "key": "e",
-            "text": "Los probadores tienen experiencia en el ámbito empresarial y buenas habilidades analíticas."
+            "text": "Los testers tienen experiencia en el ámbito empresarial y buenas habilidades analíticas."
           }
         ],
         "selector": "Selecciona DOS opciones.",
-        "explanation": "Las pruebas exploratorias son útiles cuando hay pocas o inadecuadas especificaciones o hay una presión de tiempo significativa para las pruebas. Las pruebas exploratorias también son útiles para complementar otras técnicas de prueba más formales. Las pruebas exploratorias serán más efectivas si el probador tiene experiencia, conocimiento del dominio y un alto grado de habilidades esenciales, como habilidades analíticas, curiosidad y creatividad. Así: a) Es correcta. Las pruebas exploratorias son útiles cuando hay pocas o inadecuadas especificaciones o hay una importante presión de tiempo en Las pruebas b) No son correcto. Las pruebas exploratorias no son una técnica de prueba de caja negra c) No es correcto. Las pruebas exploratorias son útiles cuando las especificaciones están mal redactadas d) No es correcta. Las habilidades de programación no tienen nada que ver con Las pruebas exploratorias en principio e) son correcta. Las pruebas exploratorias serán más efectivas si el probador tiene experiencia, tiene conocimiento del dominio y tiene un alto grado de habilidades esenciales, como habilidades analíticas, curiosidad y creatividad"
+        "explanation": "Las pruebas exploratorias son útiles cuando hay pocas o inadecuadas especificaciones o hay una presión de tiempo significativa para las pruebas. Las pruebas exploratorias también son útiles para complementar otras técnicas de prueba más formales. Las pruebas exploratorias serán más efectivas si el tester tiene experiencia, conocimiento del dominio y un alto grado de habilidades esenciales, como habilidades analíticas, curiosidad y creatividad. Así: a) Es correcta. Las pruebas exploratorias son útiles cuando hay pocas o inadecuadas especificaciones o hay una importante presión de tiempo en Las pruebas b) No son correcto. Las pruebas exploratorias no son una técnica de prueba de caja negra c) No es correcto. Las pruebas exploratorias son útiles cuando las especificaciones están mal redactadas d) No es correcta. Las habilidades de programación no tienen nada que ver con Las pruebas exploratorias en principio e) son correcta. Las pruebas exploratorias serán más efectivas si el tester tiene experiencia, tiene conocimiento del dominio y tiene un alto grado de habilidades esenciales, como habilidades analíticas, curiosidad y creatividad"
       }
     }
   },
@@ -1665,7 +1665,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Las listas de verificación deben contener condiciones de prueba a verificar. Este es un ejemplo de error, no una condición de prueba; incluso si el probador pudo deducir algunas condiciones potenciales de prueba a partir de los ejemplos de errores, esta descripción del error es demasiado general b) No es correcta. Las listas de verificación no deben contener elementos que sean más adecuados como criterios de salida. Este es un ejemplo de criterio de salida c) No es correcto. Las listas de verificación no deben contener elementos demasiado generales. Este es un ítem muy general, que prácticamente describe un objetivo de prueba d) Es correcto. Este es un ejemplo de una condición de prueba que puede ser verificada por un humano."
+        "explanation": "a) No es correcto. Las listas de verificación deben contener condiciones de prueba a verificar. Este es un ejemplo de error, no una condición de prueba; incluso si el tester pudo deducir algunas condiciones potenciales de prueba a partir de los ejemplos de errores, esta descripción del error es demasiado general b) No es correcta. Las listas de verificación no deben contener elementos que sean más adecuados como criterios de salida. Este es un ejemplo de criterio de salida c) No es correcto. Las listas de verificación no deben contener elementos demasiado generales. Este es un ítem muy general, que prácticamente describe un objetivo de prueba d) Es correcto. Este es un ejemplo de una condición de prueba que puede ser verificada por un humano."
       }
     }
   },
@@ -2418,7 +2418,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "Teniendo en cuenta cada una de las categorías de herramientas enumeradas y sus descripciones: A. Herramientas de pruebas estáticas: apoyan al probador en la realización de revisiones y análisis estáticos (4) B. Herramientas que respaldan la escalabilidad y la estandarización de la implementación: por ejemplo, máquinas virtuales, herramientas de contenedorización (3) C. Herramientas DevOps: respaldan el proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de construcción automatizados, la integración/entrega continua (CI/CD) (1) D. Herramientas de colaboración: facilitan la comunicación (2) Por lo tanto: a) No es correcto b) No es correcto c) Es correcto. La coincidencia correcta es: 1C, 2D, 3B, 4A d) No es correcta"
+        "explanation": "Teniendo en cuenta cada una de las categorías de herramientas enumeradas y sus descripciones: A. Herramientas de pruebas estáticas: apoyan al tester en la realización de revisiones y análisis estáticos (4) B. Herramientas que respaldan la escalabilidad y la estandarización de la implementación: por ejemplo, máquinas virtuales, herramientas de contenedorización (3) C. Herramientas DevOps: respaldan el proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de construcción automatizados, la integración/entrega continua (CI/CD) (1) D. Herramientas de colaboración: facilitan la comunicación (2) Por lo tanto: a) No es correcto b) No es correcto c) Es correcto. La coincidencia correcta es: 1C, 2D, 3B, 4A d) No es correcta"
       }
     }
   },
@@ -2479,7 +2479,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) Es correcto. La automatización de pruebas puede proporcionar medidas que son demasiado complicadas para que las obtengan los humanos, como medidas de cobertura de pruebas de caja blanca para todos los códigos excepto el más trivial. b) No es correcto. Al utilizar herramientas de prueba, la responsabilidad de las pruebas NO se comparte con el proveedor de la herramienta, ya que el proveedor no participa en Las pruebas y son responsabilidad del probador. La única responsabilidad posible que podría asignarse al proveedor de la herramienta es si la herramienta no funciona como se esperaba y proporciona resultados de prueba incorrectos c) No es correcto. Los probadores aún necesitan aplicar el pensamiento crítico al analizar anomalías en los resultados de las pruebas para determinar su causa probable. d) No es correcto. Ni los probadores ni las herramientas pueden generar casos de prueba simplemente a partir de un análisis del código del programa, ya que el código es la implementación y no proporciona información sobre los resultados esperados, que deberán provenir de otra parte de la base de prueba, como la especificación de diseño."
+        "explanation": "a) Es correcto. La automatización de pruebas puede proporcionar medidas que son demasiado complicadas para que las obtengan los humanos, como medidas de cobertura de pruebas de caja blanca para todos los códigos excepto el más trivial. b) No es correcto. Al utilizar herramientas de prueba, la responsabilidad de las pruebas NO se comparte con el proveedor de la herramienta, ya que el proveedor no participa en Las pruebas y son responsabilidad del tester. La única responsabilidad posible que podría asignarse al proveedor de la herramienta es si la herramienta no funciona como se esperaba y proporciona resultados de prueba incorrectos c) No es correcto. Los testers aún necesitan aplicar el pensamiento crítico al analizar anomalías en los resultados de las pruebas para determinar su causa probable. d) No es correcto. Ni los testers ni las herramientas pueden generar casos de prueba simplemente a partir de un análisis del código del programa, ya que el código es la implementación y no proporciona información sobre los resultados esperados, que deberán provenir de otra parte de la base de prueba, como la especificación de diseño."
       }
     }
   }

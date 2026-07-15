@@ -27,6 +27,8 @@ import {
   questionLabel,
   selectorLabel,
 } from "../../app/presentation";
+import { buildExplanationSpeech, buildQuestionSpeech } from "../../app/speech";
+import { QuestionPromptContent, SpeechButton } from "./QuestionContent";
 
 export function QuestionCard({
   question,
@@ -55,7 +57,6 @@ export function QuestionCard({
   optionMode: OptionMode;
   optionSeed?: string;
 }) {
-  const localized = localizedQuestion(question, language);
   const displayOptions = useMemo(
     () => getDisplayOptions(question, language, optionMode, optionSeed),
     [question, language, optionMode, optionSeed],
@@ -71,19 +72,27 @@ export function QuestionCard({
         <span>{question.selectionMode === "multiple" ? copy.multiple : copy.single}</span>
       </div>
       <div className="question-title-row">
-        <h3 className="prompt" id={`question-${question.id}-title`}>{localized.prompt}</h3>
-        {onFlag && (
-          <button
-            className="icon-button"
-            type="button"
-            onClick={onFlag}
-            title={flagged ? copy.removeFlag : copy.addFlag}
-            aria-label={flagged ? copy.removeFlagAria : copy.addFlagAria}
-            data-tooltip={flagged ? copy.removeFlag : copy.addFlag}
-          >
-            {flagged ? <BookmarkCheck aria-hidden="true" /> : <Bookmark aria-hidden="true" />}
-          </button>
-        )}
+        <h3 className="prompt" id={`question-${question.id}-title`}><QuestionPromptContent question={question} language={language} /></h3>
+        <div className="question-title-actions">
+          <SpeechButton
+            text={buildQuestionSpeech(question, language, copy, optionMode, optionSeed)}
+            language={language}
+            copy={copy}
+            kind="question"
+          />
+          {onFlag && (
+            <button
+              className="icon-button"
+              type="button"
+              onClick={onFlag}
+              title={flagged ? copy.removeFlag : copy.addFlag}
+              aria-label={flagged ? copy.removeFlagAria : copy.addFlagAria}
+              data-tooltip={flagged ? copy.removeFlag : copy.addFlag}
+            >
+              {flagged ? <BookmarkCheck aria-hidden="true" /> : <Bookmark aria-hidden="true" />}
+            </button>
+          )}
+        </div>
       </div>
 
       <QuestionVisual question={question} language={language} copy={copy} />
@@ -204,7 +213,10 @@ export function ExplanationPanel({
   if (!parsed.options.length) {
     return (
       <div className="explanation-panel">
-        <TheoryButton objective={objective} onOpen={() => setIsTheoryOpen(true)} language={language} copy={copy} />
+        <div className="explanation-actions">
+          <TheoryButton objective={objective} onOpen={() => setIsTheoryOpen(true)} language={language} copy={copy} />
+          <SpeechButton text={buildExplanationSpeech(question, selected, language, copy, optionMode, optionSeed)} language={language} copy={copy} kind="explanation" />
+        </div>
         <p className="explanation-text">{localized.explanation}</p>
         {isTheoryOpen && objective && <TheoryModal objective={objective} onClose={() => setIsTheoryOpen(false)} language={language} copy={copy} />}
       </div>
@@ -213,7 +225,10 @@ export function ExplanationPanel({
 
   return (
     <div className="explanation-panel">
-      <TheoryButton objective={objective} onOpen={() => setIsTheoryOpen(true)} language={language} copy={copy} />
+      <div className="explanation-actions">
+        <TheoryButton objective={objective} onOpen={() => setIsTheoryOpen(true)} language={language} copy={copy} />
+        <SpeechButton text={buildExplanationSpeech(question, selected, language, copy, optionMode, optionSeed)} language={language} copy={copy} kind="explanation" />
+      </div>
       {parsed.intro && <p className="explanation-intro">{parsed.intro}</p>}
       <div className="explanation-options">
         {[...parsed.options].sort((left, right) => {
@@ -233,7 +248,9 @@ export function ExplanationPanel({
             >
               <div className="explanation-option-head">
                 <span className="option-key">{displayKeyByOriginalKey.get(item.key) ?? item.key.toUpperCase()}</span>
-                {isCorrect && <span className="reason-pill correct">{copy.correctAnswer}</span>}
+                <span className={classNames("reason-pill", isCorrect ? "correct" : "incorrect")}>
+                  {isCorrect ? copy.correctAnswer : copy.incorrectAnswer}
+                </span>
                 {isSelected && <span className="reason-pill selected">{copy.yourAnswer}</span>}
               </div>
               <p>{cleanExplanationText(item.text)}</p>

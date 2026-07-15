@@ -190,6 +190,46 @@ QUESTION_VISUALS = {
     "D-38": ("Defect report for returning a book in the Book Lending System.", "Informe de defecto sobre la devolución de un libro en el sistema de préstamos."),
 }
 
+C31_PROMPT_EN = (
+    "At the beginning of each iteration, the team estimates the amount of work (in person-days) they will need to "
+    "complete during the iteration. Let E(n) be the estimated amount of work for iteration n, and let A(n) be the "
+    "actual amount of work done in iteration n. From the third iteration, the team uses the following estimation "
+    "model based on extrapolation. The graph shows the estimated and actual amount of work for the first four "
+    "iterations. What is the estimated amount of work for iteration #5?"
+)
+C31_PROMPT_ES = (
+    "Al comienzo de cada iteración, el equipo estima la cantidad de trabajo (en días-persona) que necesitarán completar "
+    "durante la iteración. Sea E(n) la cantidad de trabajo estimada para la iteración n, y sea A(n) la cantidad real de "
+    "trabajo realizado en la iteración n. A partir de la tercera iteración, el equipo utiliza el siguiente modelo de "
+    "estimación basado en extrapolación. El gráfico muestra la cantidad de trabajo estimada y real para las primeras "
+    "cuatro iteraciones. ¿Cuál es la cantidad estimada de trabajo para la iteración n.º 5?"
+)
+C31_PROMPT_PARTS = {
+    "en": [
+        {"type": "text", "text": C31_PROMPT_EN.split(". The graph shows")[0] + "."},
+        {
+            "type": "math",
+            "latex": r"E(n)=\frac{3\times A(n-1)+A(n-2)}{4}",
+            "spoken": "E of n equals three times A of n minus one, plus A of n minus two, all divided by four.",
+        },
+        {"type": "text", "text": "The graph shows" + C31_PROMPT_EN.split(". The graph shows")[1]},
+    ],
+    "es": [
+        {"type": "text", "text": C31_PROMPT_ES.split(". El gráfico muestra")[0] + "."},
+        {
+            "type": "math",
+            "latex": r"E(n)=\frac{3\times A(n-1)+A(n-2)}{4}",
+            "spoken": "E de n es igual a tres por A de n menos uno, más A de n menos dos, todo dividido entre cuatro.",
+        },
+        {"type": "text", "text": "El gráfico muestra" + C31_PROMPT_ES.split(". El gráfico muestra")[1]},
+    ],
+}
+
+
+def preserve_tester_anglicism(text: str) -> str:
+    text = re.sub(r"\b(?:probadores|provadores)\b", "testers", text, flags=re.IGNORECASE)
+    return re.sub(r"\b(?:probador|provador)\b", "tester", text, flags=re.IGNORECASE)
+
 
 def ensure_pypdf():
     try:
@@ -472,7 +512,7 @@ def parse_syllabus_reference() -> dict[str, dict[str, Any]]:
 
     for page_index, page in enumerate(reader.pages, start=1):
         text = page.extract_text() or ""
-        lines = [normalize_spaces(line) for line in text.splitlines()]
+        lines = [preserve_tester_anglicism(normalize_spaces(line)) for line in text.splitlines()]
         for line in lines:
             section_match = re.match(r"^([1-6]\.\d)\.\s+(.+)$", line)
             if section_match:
@@ -522,7 +562,7 @@ def parse_spanish_syllabus_reference() -> dict[str, dict[str, Any]]:
 
     for page_index, page in enumerate(reader.pages, start=1):
         text = page.extract_text() or ""
-        lines = [normalize_spaces(line) for line in text.splitlines()]
+        lines = [preserve_tester_anglicism(normalize_spaces(line)) for line in text.splitlines()]
         for line in lines:
             chapter_match = re.match(r"^([1-6])\.\s+(.+?)\s+[–:-]\s+(\d+)\s+minutos?$", line, re.I)
             if chapter_match:
@@ -629,6 +669,17 @@ def build_bank() -> dict[str, Any]:
                 }
             if question_id in existing_translations:
                 item["translations"] = existing_translations[question_id]
+            if question_id == "C-31":
+                item["prompt"] = C31_PROMPT_EN
+                item["promptParts"] = C31_PROMPT_PARTS
+                for option in item["options"]:
+                    if option["key"] == "d":
+                        option["text"] = "9.4 person-days"
+                spanish = item.setdefault("translations", {}).setdefault("es", {})
+                spanish["prompt"] = C31_PROMPT_ES
+                for option in spanish.get("options", []):
+                    if option["key"] == "d":
+                        option["text"] = "9,4 días-persona"
             questions.append(item)
 
     return {

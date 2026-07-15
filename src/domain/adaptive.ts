@@ -24,7 +24,7 @@ export function adaptivePriority(
   now = Date.now(),
 ) {
   const item = progress.questionProgress[question.id];
-  if (!item?.attempts) return 75;
+  if (!item?.attempts) return 1_000;
 
   const accuracy = item.correct / item.attempts;
   const ageDays = Math.max(0, (now - new Date(item.updatedAt).getTime()) / 86_400_000);
@@ -64,23 +64,26 @@ export function createAdaptiveQuestionIds(
   const selectedIds = new Set<string>();
   const chapterCounts = new Map<string, number>();
 
-  for (const candidate of ranked) {
-    if (selected.length >= target) break;
-    const chapterCount = chapterCounts.get(candidate.question.chapter) ?? 0;
-    if (chapterCount >= chapterLimit) continue;
-    selected.push(candidate);
-    selectedIds.add(candidate.question.id);
-    chapterCounts.set(candidate.question.chapter, chapterCount + 1);
-  }
-
-  if (selected.length < target) {
-    for (const candidate of ranked) {
+  function appendCandidates(candidates: AdaptiveCandidate[], enforceChapterLimit: boolean) {
+    for (const candidate of candidates) {
       if (selected.length >= target) break;
       if (selectedIds.has(candidate.question.id)) continue;
+      const chapterCount = chapterCounts.get(candidate.question.chapter) ?? 0;
+      if (enforceChapterLimit && chapterCount >= chapterLimit) continue;
       selected.push(candidate);
       selectedIds.add(candidate.question.id);
+      chapterCounts.set(candidate.question.chapter, chapterCount + 1);
     }
   }
+
+  const unseen = ranked.filter((candidate) => !progress.questionProgress[candidate.question.id]?.attempts);
+  const seen = ranked.filter((candidate) => Boolean(progress.questionProgress[candidate.question.id]?.attempts));
+
+  // Never reuse an answered question while enough unseen material remains.
+  appendCandidates(unseen, true);
+  appendCandidates(unseen, false);
+  appendCandidates(seen, true);
+  appendCandidates(seen, false);
 
   return selected.map((candidate) => candidate.question.id);
 }

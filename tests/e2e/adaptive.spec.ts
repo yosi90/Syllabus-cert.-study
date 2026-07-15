@@ -7,10 +7,10 @@ test.beforeEach(async ({ page }) => {
 
 test("a ten-question adaptive session survives leaving and reloading", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Quick set · 10" }).click();
+  await page.getByRole("button", { name: "Quick · 10" }).click();
   await expect(page.getByRole("heading", { name: "Adaptive session · 10" })).toBeVisible();
 
-  await page.getByRole("radio").first().check();
+  await page.locator('.option-row input[type="radio"], .option-row input[type="checkbox"]').first().check();
   await page.getByRole("button", { name: "Check" }).click();
   await page.getByRole("button", { name: "Next" }).click();
   await expect(page.getByText("2/10", { exact: true })).toBeVisible();
@@ -38,7 +38,7 @@ test("a ten-question adaptive session survives leaving and reloading", async ({ 
 
 test("a recovered twenty-question session finishes and enters history", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Full set · 20" }).click();
+  await page.getByRole("button", { name: "Full · 20" }).click();
   await page.locator(".question-list summary").click();
   const railButtons = page.locator(".question-rail .rail-button");
   await expect(railButtons).toHaveCount(20);

@@ -22,6 +22,10 @@ export type QuestionVisual = {
   };
 };
 
+export type QuestionPromptPart =
+  | { type: "text"; text: string }
+  | { type: "math"; latex: string; spoken: string };
+
 export type LocalizedText = {
   es?: {
     name?: string;
@@ -41,6 +45,10 @@ export type Question = {
   kLevel: KLevel;
   rawKLevel: string;
   prompt: string;
+  promptParts?: {
+    en: QuestionPromptPart[];
+    es: QuestionPromptPart[];
+  };
   options: QuestionOption[];
   correctAnswers: string[];
   selectionMode: SelectionMode;

@@ -21,9 +21,56 @@ test("home shows a neutral dashboard without progress", async ({ page }) => {
   expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
 });
 
+test("mobile home keeps its summary and study actions compact", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile-chromium", "This behavior is specific to the mobile layout.");
+  await page.goto("/");
+
+  await expect(page.locator(".quick-study-eyebrow")).toBeHidden();
+  await expect(page.locator(".quick-study-description")).toBeHidden();
+
+  const quickButton = page.getByRole("button", { name: "Quick · 10" });
+  const fullButton = page.getByRole("button", { name: "Full · 20" });
+  const [quickBox, fullBox, statusBoxes] = await Promise.all([
+    quickButton.boundingBox(),
+    fullButton.boundingBox(),
+    page.locator(".dashboard-status-grid article").evaluateAll((elements) =>
+      elements.map((element) => {
+        const rect = element.getBoundingClientRect();
+        return { top: rect.top, right: rect.right };
+      }),
+    ),
+  ]);
+
+  expect(quickBox).not.toBeNull();
+  expect(fullBox).not.toBeNull();
+  expect(Math.abs(quickBox!.y - fullBox!.y)).toBeLessThan(2);
+  expect(statusBoxes).toHaveLength(3);
+  expect(Math.max(...statusBoxes.map(({ top }) => top)) - Math.min(...statusBoxes.map(({ top }) => top))).toBeLessThan(2);
+  const viewportWidth = page.viewportSize()!.width;
+  expect(Math.max(...statusBoxes.map(({ right }) => right))).toBeLessThanOrEqual(viewportWidth);
+
+  await expect(page).toHaveScreenshot("home-mobile-compact.png", { animations: "disabled", fullPage: true });
+});
+
+for (const width of [320, 390, 768]) {
+  test(`mobile home does not overflow at ${width}px`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop-chromium", "Each width only needs one Chromium pass.");
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto("/");
+
+    await expect(page.locator(".quick-study-eyebrow")).toBeHidden();
+    await expect(page.locator(".quick-study-description")).toBeHidden();
+    const dimensions = await page.evaluate(() => ({
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }));
+    expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
+  });
+}
+
 test("quick study actions open bounded practice sets", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Quick set · 10" }).click();
+  await page.getByRole("button", { name: "Quick · 10" }).click();
 
   await expect(page).toHaveURL(/#\/practice$/);
   await expect(page.getByRole("heading", { name: "Adaptive session · 10" })).toBeVisible();
@@ -32,7 +79,7 @@ test("quick study actions open bounded practice sets", async ({ page }) => {
 
 test("the full study action opens twenty questions", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Full set · 20" }).click();
+  await page.getByRole("button", { name: "Full · 20" }).click();
 
   await expect(page).toHaveURL(/#\/practice$/);
   await expect(page.getByText("1/20", { exact: true })).toBeVisible();

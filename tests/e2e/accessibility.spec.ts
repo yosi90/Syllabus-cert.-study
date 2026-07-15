@@ -64,7 +64,7 @@ test("mobile menu closes with Escape and returns focus", async ({ page }) => {
   await page.goto("/");
   const menuTrigger = page.getByRole("button", { name: "Open menu" });
   await menuTrigger.click();
-  await expect(page.getByRole("complementary", { name: "Study controls" }).getByRole("link", { name: "Home" })).toBeFocused();
+  await expect(page.getByRole("complementary", { name: "Study controls" }).getByRole("button", { name: "English" })).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(menuTrigger).toBeFocused();
 });
@@ -140,11 +140,15 @@ async function contrastRatio(page: Page, foregroundSelector: string, backgroundS
 }
 
 for (const theme of ["light", "dark"] as const) {
-  test(`key text meets WCAG AA contrast in ${theme} theme`, async ({ page }) => {
+  test(`key text meets WCAG AA contrast in ${theme} theme`, async ({ page }, testInfo) => {
     await page.goto("/");
     if (theme === "dark") {
       await openMobileMenu(page);
-      await page.getByRole("switch", { name: "Dark mode" }).click();
+      if (testInfo.project.name === "mobile-chromium") {
+        await page.getByRole("button", { name: "Dark theme" }).click();
+      } else {
+        await page.getByRole("switch", { name: "Dark mode" }).click();
+      }
     }
     expect(await contrastRatio(page, ".workspace-header h2", ":root")).toBeGreaterThanOrEqual(4.5);
     expect(await contrastRatio(page, ".dashboard-section .eyebrow", ".dashboard-section")).toBeGreaterThanOrEqual(4.5);

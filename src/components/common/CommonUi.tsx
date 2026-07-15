@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
+import { CheckCircle2, ChevronLeft, ChevronRight, Moon, Sun } from "lucide-react";
 import { summarizeProgress } from "../../domain/filters";
-import type { Copy, Language, TutorialContent } from "../../app/content";
+import type { Copy, Language, Theme, TutorialContent } from "../../app/content";
 import { classNames } from "../../app/presentation";
 import { useModalAccessibility } from "../../hooks/useModalAccessibility";
 
@@ -110,11 +110,18 @@ export function FlagLanguageToggle({ language, onChange, label = "Language" }: {
       <button
         className={language === "en" ? "active" : undefined}
         type="button"
+        data-initial-focus
         onClick={() => onChange("en")}
         aria-label="English"
         title="English"
       >
-        <span className="flag-icon uk" aria-hidden="true" />
+        <svg className="flag-icon uk" viewBox="0 0 60 30" aria-hidden="true">
+          <rect width="60" height="30" fill="#012169" />
+          <path d="M0 0 60 30M60 0 0 30" stroke="#fff" strokeWidth="6" />
+          <path d="M0 0 60 30M60 0 0 30" stroke="#c8102e" strokeWidth="2" />
+          <path d="M30 0v30M0 15h60" stroke="#fff" strokeWidth="10" />
+          <path d="M30 0v30M0 15h60" stroke="#c8102e" strokeWidth="6" />
+        </svg>
       </button>
       <button
         className={language === "es" ? "active" : undefined}
@@ -124,6 +131,33 @@ export function FlagLanguageToggle({ language, onChange, label = "Language" }: {
         title="Español"
       >
         <span className="flag-icon spain" aria-hidden="true" />
+      </button>
+    </div>
+  );
+}
+
+export function CompactThemeToggle({ theme, onChange, copy }: { theme: Theme; onChange: (theme: Theme) => void; copy: Copy }) {
+  return (
+    <div className="compact-theme-toggle" role="group" aria-label={copy.darkMode}>
+      <button
+        className={theme === "light" ? "active" : undefined}
+        type="button"
+        onClick={() => onChange("light")}
+        aria-pressed={theme === "light"}
+        aria-label={copy.lightTheme}
+        title={copy.lightTheme}
+      >
+        <Sun aria-hidden="true" />
+      </button>
+      <button
+        className={theme === "dark" ? "active" : undefined}
+        type="button"
+        onClick={() => onChange("dark")}
+        aria-pressed={theme === "dark"}
+        aria-label={copy.darkTheme}
+        title={copy.darkTheme}
+      >
+        <Moon aria-hidden="true" />
       </button>
     </div>
   );

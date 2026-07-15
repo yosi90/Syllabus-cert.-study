@@ -13,7 +13,11 @@ test("language, theme, filters and current practice question survive a reload", 
   }
 
   await page.getByRole("button", { name: "Español" }).click();
-  await page.getByRole("switch", { name: "Modo oscuro" }).click();
+  if (testInfo.project.name === "mobile-chromium") {
+    await page.getByRole("button", { name: "Tema oscuro" }).click();
+  } else {
+    await page.getByRole("switch", { name: "Modo oscuro" }).click();
+  }
   const modelFilters = page.locator(".filter-group").filter({ hasText: "Modelo" });
   await modelFilters.getByLabel("B", { exact: true }).check();
   if (testInfo.project.name === "mobile-chromium") {
@@ -25,7 +29,13 @@ test("language, theme, filters and current practice question survive a reload", 
   await page.reload();
 
   await expect(page.getByRole("heading", { name: "Preguntas sueltas" })).toBeVisible();
-  await expect(page.getByRole("switch", { name: "Modo oscuro" })).toBeChecked();
+  if (testInfo.project.name === "mobile-chromium") {
+    await page.getByRole("button", { name: "Abrir menú" }).click();
+    await expect(page.getByRole("button", { name: "Tema oscuro" })).toHaveAttribute("aria-pressed", "true");
+    await page.locator(".mobile-menu-toggle").click();
+  } else {
+    await expect(page.getByRole("switch", { name: "Modo oscuro" })).toBeChecked();
+  }
   await expect(modelFilters.getByLabel("B", { exact: true })).toBeChecked();
   await expect(page.getByText("2/40", { exact: true })).toBeVisible();
 });

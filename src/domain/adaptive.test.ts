@@ -35,11 +35,29 @@ describe("adaptive queue", () => {
       accurate: { attempts: 4, correct: 4, lastCorrect: true, flagged: false, lastAnswers: ["a"], updatedAt: "2026-07-15T00:00:00.000Z" },
     };
 
-    expect(adaptivePriority(question("error"), progress, now)).toBeGreaterThan(adaptivePriority(question("unseen"), progress, now));
-    expect(adaptivePriority(question("unseen"), progress, now)).toBeGreaterThan(adaptivePriority(question("flagged"), progress, now));
+    expect(adaptivePriority(question("unseen"), progress, now)).toBeGreaterThan(adaptivePriority(question("error"), progress, now));
+    expect(adaptivePriority(question("error"), progress, now)).toBeGreaterThan(adaptivePriority(question("flagged"), progress, now));
     expect(adaptivePriority(question("flagged"), progress, now)).toBeGreaterThan(adaptivePriority(question("low"), progress, now));
     expect(adaptivePriority(question("low"), progress, now)).toBeGreaterThan(adaptivePriority(question("old"), progress, now));
     expect(adaptivePriority(question("old"), progress, now)).toBeGreaterThan(adaptivePriority(question("accurate"), progress, now));
+  });
+
+  it("exhausts unseen questions before reusing previous errors", () => {
+    const unseen = Array.from({ length: 12 }, (_, index) => question(`unseen${index}`, "FL-1"));
+    const errors = Array.from({ length: 12 }, (_, index) => question(`error${index}`, index % 2 ? "FL-2" : "FL-3"));
+    const progress = createEmptyProgress();
+    progress.questionProgress = Object.fromEntries(errors.map((item) => [item.id, {
+      attempts: 1,
+      correct: 0,
+      lastCorrect: false,
+      flagged: false,
+      lastAnswers: ["b"],
+      updatedAt: "2026-07-15T00:00:00.000Z",
+    }]));
+
+    const ids = createAdaptiveQuestionIds([...unseen, ...errors], progress, 10, "unseen-first", Date.parse("2026-07-15T00:00:00.000Z"));
+    expect(ids).toHaveLength(10);
+    expect(ids.every((id) => id.startsWith("unseen"))).toBe(true);
   });
 
   it("is reproducible, unique and limits a chapter to forty percent when possible", () => {

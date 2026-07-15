@@ -9,7 +9,9 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           const questionChunk = id.match(/generated\/questions-([a-d])\.json$/i);
-          return questionChunk ? `questions-${questionChunk[1].toLowerCase()}` : undefined;
+          if (questionChunk) return `questions-${questionChunk[1].toLowerCase()}`;
+          if (id.includes("node_modules/katex")) return "math-rendering";
+          return undefined;
         },
       },
     },

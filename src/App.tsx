@@ -38,6 +38,7 @@ import {
 
 import {
   ConfirmDialog,
+  CompactThemeToggle,
   FlagLanguageToggle,
   OnboardingTutorial,
   StatsPanel,
@@ -473,6 +474,7 @@ function AppShell() {
           </div>
           <div className="brand-language">
             <FlagLanguageToggle language={language} onChange={handleLanguageChange} label={copy.languageLabel} />
+            <CompactThemeToggle theme={theme} onChange={setTheme} copy={copy} />
           </div>
         </div>
 

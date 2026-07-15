@@ -990,7 +990,7 @@
       "syllabusPage": 48,
       "translations": {
         "es": {
-          "text": "Reconocer cómo un probador agrega valor a la iteración y la planificación de la entrega",
+          "text": "Reconocer cómo un tester agrega valor a la iteración y la planificación de la entrega",
           "sectionTitle": "Planificación de Pruebas",
           "syllabusPage": 37
         }
@@ -1356,23 +1356,23 @@
           "options": [
             {
               "key": "a",
-              "text": "Tener probadores involucrados durante diversas actividades del ciclo de vida de desarrollo de software (SDLC) ayudará a detectar defectos en los productos de trabajo."
+              "text": "Tener testers involucrados durante diversas actividades del ciclo de vida de desarrollo de software (SDLC) ayudará a detectar defectos en los productos de trabajo."
             },
             {
               "key": "b",
-              "text": "Los probadores intentan no molestar a los desarrolladores mientras codifican, para que los desarrolladores escriban mejor código."
+              "text": "Los testers intentan no molestar a los desarrolladores mientras codifican, para que los desarrolladores escriban mejor código."
             },
             {
               "key": "c",
-              "text": "Los probadores que colaboran con los usuarios finales ayudan a mejorar la calidad de los informes de defectos durante la integración de componentes y las pruebas de sistema."
+              "text": "Los testers que colaboran con los usuarios finales ayudan a mejorar la calidad de los informes de defectos durante la integración de componentes y las pruebas de sistema."
             },
             {
               "key": "d",
-              "text": "Los probadores certificados diseñarán casos de prueba mucho mejores que los probadores no certificados."
+              "text": "Los testers certificados diseñarán casos de prueba mucho mejores que los testers no certificados."
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) Es correcto. Es importante que los probadores estén involucrados desde el inicio del ciclo de vida de desarrollo de software (SDLC). Aumentará la comprensión de las decisiones de diseño y detectará defectos tempranamente. b) No es correcto. Tanto los desarrolladores como los probadores comprenderán mejor los productos de trabajo de cada uno y cómo probar el código c) No es correcto. Los usuarios finales no ayudarán a los probadores a aumentar la calidad de los informes de defectos; Además, los usuarios normalmente no participan en pruebas de bajo nivel como las pruebas de integración. d) No es correcto. Estar certificado no significa automáticamente que el probador será mejor en diseño de prueba"
+          "explanation": "a) Es correcto. Es importante que los testers estén involucrados desde el inicio del ciclo de vida de desarrollo de software (SDLC). Aumentará la comprensión de las decisiones de diseño y detectará defectos tempranamente. b) No es correcto. Tanto los desarrolladores como los testers comprenderán mejor los productos de trabajo de cada uno y cómo probar el código c) No es correcto. Los usuarios finales no ayudarán a los testers a aumentar la calidad de los informes de defectos; Además, los usuarios normalmente no participan en pruebas de bajo nivel como las pruebas de integración. d) No es correcto. Estar certificado no significa automáticamente que el tester será mejor en diseño de prueba"
         }
       }
     },
@@ -1413,7 +1413,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Ha sido asignado como probador a un equipo que produce un nuevo sistema de forma incremental. Ha notado que no se han realizado cambios en los casos de prueba de regresión existentes durante varias iteraciones y no se identificaron nuevos defectos de regresión. Tu jefe está contento, pero tú no. ¿Qué principio de prueba explica su escepticismo?",
+          "prompt": "Ha sido asignado como tester a un equipo que produce un nuevo sistema de forma incremental. Ha notado que no se han realizado cambios en los casos de prueba de regresión existentes durante varias iteraciones y no se identificaron nuevos defectos de regresión. Tu jefe está contento, pero tú no. ¿Qué principio de prueba explica su escepticismo?",
           "options": [
             {
               "key": "a",
@@ -1625,7 +1625,7 @@
             }
           ],
           "selector": "Selecciona DOS opciones.",
-          "explanation": "a) Es correcto. Esto lo hacen los probadores b) No es correcto. El backlog del producto es creado y mantenido por el propietario del producto c) No es correcto. Esto lo hace el equipo de desarrollo d) No es correcto. Este es un rol gerencial e) Es correcto. Esto lo realizan los probadores ya que su tarea técnica la realiza como parte de un análisis de prueba."
+          "explanation": "a) Es correcto. Esto lo hacen los testers b) No es correcto. El backlog del producto es creado y mantenido por el propietario del producto c) No es correcto. Esto lo hace el equipo de desarrollo d) No es correcto. Este es un rol gerencial e) Es correcto. Esto lo realizan los testers ya que su tarea técnica la realiza como parte de un análisis de prueba."
         }
       }
     },
@@ -1666,7 +1666,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "¿Cuáles de las siguientes habilidades (i-v) son las MÁS importantes de un probador? i. Tener conocimiento del dominio ii. Crear una visión del producto iii. Ser un buen jugador de equipo iv. Planificar y organizar el trabajo del equipo v. Pensamiento crítico",
+          "prompt": "¿Cuáles de las siguientes habilidades (i-v) son las MÁS importantes de un tester? i. Tener conocimiento del dominio ii. Crear una visión del producto iii. Ser un buen jugador de equipo iv. Planificar y organizar el trabajo del equipo v. Pensamiento crítico",
           "options": [
             {
               "key": "a",
@@ -1686,7 +1686,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "i. Es verdad. Tener conocimiento del dominio es una habilidad importante del probador ii. Es falso. Esta es una tarea del analista de negocios junto con el representante comercial iii. Es verdad. Ser un buen jugador de equipo es una habilidad importante iv. Es falso. Planificar y organizar el trabajo del equipo es tarea del gestor de pruebas o, sobre todo en un proyecto de desarrollo de software Agile, de todo el equipo y no sólo del probador v. Es cierto. El pensamiento crítico es una de las habilidades más importantes de los probadores Así: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
+          "explanation": "i. Es verdad. Tener conocimiento del dominio es una habilidad importante del tester ii. Es falso. Esta es una tarea del analista de negocios junto con el representante comercial iii. Es verdad. Ser un buen jugador de equipo es una habilidad importante iv. Es falso. Planificar y organizar el trabajo del equipo es tarea del gestor de pruebas o, sobre todo en un proyecto de desarrollo de software Agile, de todo el equipo y no sólo del tester v. Es cierto. El pensamiento crítico es una de las habilidades más importantes de los testers Así: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
         }
       }
     },
@@ -1727,7 +1727,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "¿Cómo está presente el enfoque de equipo completo en las interacciones entre probadores y representantes empresariales?",
+          "prompt": "¿Cómo está presente el enfoque de equipo completo en las interacciones entre testers y representantes empresariales?",
           "options": [
             {
               "key": "a",
@@ -1735,7 +1735,7 @@
             },
             {
               "key": "b",
-              "text": "Los probadores ayudan a los representantes empresariales a definir una estrategia de prueba."
+              "text": "Los testers ayudan a los representantes empresariales a definir una estrategia de prueba."
             },
             {
               "key": "c",
@@ -1743,11 +1743,11 @@
             },
             {
               "key": "d",
-              "text": "Los probadores ayudan a los representantes empresariales a crear pruebas de aceptación adecuadas."
+              "text": "Los testers ayudan a los representantes empresariales a crear pruebas de aceptación adecuadas."
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. El enfoque de automatización de pruebas lo definen probadores con la ayuda de desarrolladores y representantes comerciales b) No es correcto. La estrategia de prueba se decide en colaboración con los desarrolladores c) No es correcta. Los probadores, desarrolladores y representantes comerciales son parte del enfoque de equipo completo d) Es correcto. Los probadores trabajarán estrechamente con representantes comerciales para garantizar que se alcancen los niveles de calidad deseados. Esto incluye apoyarlos y colaborar con ellos para ayudarlos a crear pruebas de aceptación adecuadas."
+          "explanation": "a) No es correcto. El enfoque de automatización de pruebas lo definen testers con la ayuda de desarrolladores y representantes comerciales b) No es correcto. La estrategia de prueba se decide en colaboración con los desarrolladores c) No es correcta. Los testers, desarrolladores y representantes comerciales son parte del enfoque de equipo completo d) Es correcto. Los testers trabajarán estrechamente con representantes comerciales para garantizar que se alcancen los niveles de calidad deseados. Esto incluye apoyarlos y colaborar con ellos para ayudarlos a crear pruebas de aceptación adecuadas."
         }
       }
     },
@@ -2417,7 +2417,7 @@
             },
             {
               "key": "c",
-              "text": "Las técnicas de prueba dependen en gran medida del conocimiento del software y del dominio empresarial del probador."
+              "text": "Las técnicas de prueba dependen en gran medida del conocimiento del software y del dominio empresarial del tester."
             },
             {
               "key": "d",
@@ -2873,7 +2873,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) Es correcto. El concepto básico detrás de la predicción de errores es que el probador intenta adivinar qué errores pudo haber cometido el desarrollador y qué defectos puede haber en el objeto de prueba basándose en experiencias pasadas (y a veces listas de verificación). b) No es correcto. Aunque un probador que fue desarrollador puede utilizar su experiencia personal para ayudarle a la hora de realizar predicción de errores, la técnica de prueba no se basa en conocimientos previos de desarrollo c) No es correcta. La predicción de errores no es una técnica de usabilidad para adivinar cómo los usuarios pueden fallar al interactuar con el objeto de prueba. d) No es correcta. Duplicar la tarea de desarrollo tiene varios defectos que la hacen poco práctica, como que el probador tiene habilidades equivalentes a las del desarrollador y el tiempo necesario para realizar el desarrollo. No es predicción de errores"
+          "explanation": "a) Es correcto. El concepto básico detrás de la predicción de errores es que el tester intenta adivinar qué errores pudo haber cometido el desarrollador y qué defectos puede haber en el objeto de prueba basándose en experiencias pasadas (y a veces listas de verificación). b) No es correcto. Aunque un tester que fue desarrollador puede utilizar su experiencia personal para ayudarle a la hora de realizar predicción de errores, la técnica de prueba no se basa en conocimientos previos de desarrollo c) No es correcta. La predicción de errores no es una técnica de usabilidad para adivinar cómo los usuarios pueden fallar al interactuar con el objeto de prueba. d) No es correcta. Duplicar la tarea de desarrollo tiene varios defectos que la hacen poco práctica, como que el tester tiene habilidades equivalentes a las del desarrollador y el tiempo necesario para realizar el desarrollo. No es predicción de errores"
         }
       }
     },
@@ -3097,27 +3097,27 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "¿Cómo añaden valor los probadores a la planificación de iteraciones y lanzamientos?",
+          "prompt": "¿Cómo añaden valor los testers a la planificación de iteraciones y lanzamientos?",
           "options": [
             {
               "key": "a",
-              "text": "Los probadores determinan la prioridad de las historias de usuario a desarrollar."
+              "text": "Los testers determinan la prioridad de las historias de usuario a desarrollar."
             },
             {
               "key": "b",
-              "text": "Los probadores se centran únicamente en los aspectos funcionales del sistema a probar."
+              "text": "Los testers se centran únicamente en los aspectos funcionales del sistema a probar."
             },
             {
               "key": "c",
-              "text": "Los probadores participan en la identificación detallada de riesgos y la evaluación de riesgos de las historias de usuarios."
+              "text": "Los testers participan en la identificación detallada de riesgos y la evaluación de riesgos de las historias de usuarios."
             },
             {
               "key": "d",
-              "text": "Los probadores garantizan el lanzamiento de software de alta calidad a través del diseño temprano de prueba durante la planificación del lanzamiento"
+              "text": "Los testers garantizan el lanzamiento de software de alta calidad a través del diseño temprano de prueba durante la planificación del lanzamiento"
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Las prioridades para las historias de usuarios las determina el representante comercial junto con el equipo de desarrollo b) No es correcto. Los probadores se centran tanto en los aspectos funcionales como en los no funcionales del sistema a probar. c) Es correcto. Según el plan de estudios, esta es una de las formas en que los probadores agregan valor a la iteración y la planificación de lanzamientos d) No es correcto. El diseño de prueba temprano no forma parte de la planificación del lanzamiento. El diseño temprano de prueba no garantiza automáticamente el lanzamiento de software de calidad"
+          "explanation": "a) No es correcto. Las prioridades para las historias de usuarios las determina el representante comercial junto con el equipo de desarrollo b) No es correcto. Los testers se centran tanto en los aspectos funcionales como en los no funcionales del sistema a probar. c) Es correcto. Según el plan de estudios, esta es una de las formas en que los testers agregan valor a la iteración y la planificación de lanzamientos d) No es correcto. El diseño de prueba temprano no forma parte de la planificación del lanzamiento. El diseño temprano de prueba no garantiza automáticamente el lanzamiento de software de calidad"
         }
       }
     },
@@ -3171,7 +3171,7 @@
             },
             {
               "key": "b",
-              "text": "La capacidad de iniciar sesión en el objeto de prueba mediante el probador."
+              "text": "La capacidad de iniciar sesión en el objeto de prueba mediante el tester."
             },
             {
               "key": "c",
@@ -3804,7 +3804,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. A menudo es posible utilizar pruebas dinámicas para provocar que un objeto de prueba falle de maneras que los usuarios nunca podrían lograr, como mediante el uso de inyección de fallas. Sin embargo, si la falla nunca puede ocurrir con usuarios finales reales, entonces identificarla no es especialmente valiosa ya que las pruebas tienen como objetivo en última instancia mejorar el producto de trabajo para los usuarios finales. Dedicar tiempo a probar fallas que no pueden ocurrir con usuarios reales no es un uso eficiente del tiempo de un probador b) No es correcto. Los desarrolladores utilizan pruebas estáticas en forma de análisis estático para identificar defectos en su código antes de lo que se puede lograr mediante pruebas dinámicas. Tenga en cuenta, sin embargo, que las pruebas estáticas (y el análisis estático) se utilizan para detectar defectos, no fallas, que se encuentran mediante pruebas dinámicas. Por lo tanto, es el uso del término “fracasos” lo que hace que ésta sea una opción incorrecta. c) No es correcta. El análisis estático detecta directamente defectos en el código y normalmente esta es información para el desarrollador, no para el cliente. d) Es correcto. Las revisiones son una forma de pruebas estáticas que se pueden aplicar desde el comienzo del ciclo de vida de desarrollo de software y se utilizan para encontrar defectos que pueden eliminarse antes de que las actividades de desarrollo posteriores desperdicien esfuerzos en requisitos defectuosos. Si los defectos no se detectan y eliminan a tiempo, cuando el defecto se encuentre en productos derivados del trabajo, como el diseño y el código, será necesario cambiar los requisitos."
+          "explanation": "a) No es correcto. A menudo es posible utilizar pruebas dinámicas para provocar que un objeto de prueba falle de maneras que los usuarios nunca podrían lograr, como mediante el uso de inyección de fallas. Sin embargo, si la falla nunca puede ocurrir con usuarios finales reales, entonces identificarla no es especialmente valiosa ya que las pruebas tienen como objetivo en última instancia mejorar el producto de trabajo para los usuarios finales. Dedicar tiempo a probar fallas que no pueden ocurrir con usuarios reales no es un uso eficiente del tiempo de un tester b) No es correcto. Los desarrolladores utilizan pruebas estáticas en forma de análisis estático para identificar defectos en su código antes de lo que se puede lograr mediante pruebas dinámicas. Tenga en cuenta, sin embargo, que las pruebas estáticas (y el análisis estático) se utilizan para detectar defectos, no fallas, que se encuentran mediante pruebas dinámicas. Por lo tanto, es el uso del término “fracasos” lo que hace que ésta sea una opción incorrecta. c) No es correcta. El análisis estático detecta directamente defectos en el código y normalmente esta es información para el desarrollador, no para el cliente. d) Es correcto. Las revisiones son una forma de pruebas estáticas que se pueden aplicar desde el comienzo del ciclo de vida de desarrollo de software y se utilizan para encontrar defectos que pueden eliminarse antes de que las actividades de desarrollo posteriores desperdicien esfuerzos en requisitos defectuosos. Si los defectos no se detectan y eliminan a tiempo, cuando el defecto se encuentre en productos derivados del trabajo, como el diseño y el código, será necesario cambiar los requisitos."
         }
       }
     },
@@ -4048,7 +4048,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Es poco probable que el equipo de marketing de la organización realice muchas pruebas (aunque en algunas organizaciones pueden estar involucrados con pruebas de aceptación), por lo que su nivel promedio de experiencia (la mayor parte de la cual sería en marketing) probablemente no afecte la forma en que se realizan Las pruebas para un objeto de prueba determinado b) No son correcto. Es poco probable que el nivel de conocimiento de los usuarios de que se está construyendo un nuevo sistema para ellos afecte la forma en que se realizan las pruebas. Es más probable que cualquier participación del usuario que pueda afectar la forma en que se realizan las pruebas sea resultado de decisiones tomadas por los probadores, el cliente y el gerente del proyecto. c) Es correcta. La cantidad de años de experiencia de los miembros del equipo de pruebas de eficiencia del desempeño ayudará a determinar las capacidades y el conocimiento (por ejemplo, de diferentes herramientas y tipos de defectos) que los miembros del equipo aplicarán cuando realicen pruebas. d) No es correcto. La estructura organizativa de los diferentes usuarios finales (que pueden ser variadas) cambiará entre usuarios. Por lo tanto, es posible que ni siquiera se sepa cuándo se está probando la aplicación y, por lo tanto, la estructura organizativa del usuario final puede tener poco efecto en cómo se realizan las pruebas"
+          "explanation": "a) No es correcto. Es poco probable que el equipo de marketing de la organización realice muchas pruebas (aunque en algunas organizaciones pueden estar involucrados con pruebas de aceptación), por lo que su nivel promedio de experiencia (la mayor parte de la cual sería en marketing) probablemente no afecte la forma en que se realizan Las pruebas para un objeto de prueba determinado b) No son correcto. Es poco probable que el nivel de conocimiento de los usuarios de que se está construyendo un nuevo sistema para ellos afecte la forma en que se realizan las pruebas. Es más probable que cualquier participación del usuario que pueda afectar la forma en que se realizan las pruebas sea resultado de decisiones tomadas por los testers, el cliente y el gerente del proyecto. c) Es correcta. La cantidad de años de experiencia de los miembros del equipo de pruebas de eficiencia del desempeño ayudará a determinar las capacidades y el conocimiento (por ejemplo, de diferentes herramientas y tipos de defectos) que los miembros del equipo aplicarán cuando realicen pruebas. d) No es correcto. La estructura organizativa de los diferentes usuarios finales (que pueden ser variadas) cambiará entre usuarios. Por lo tanto, es posible que ni siquiera se sepa cuándo se está probando la aplicación y, por lo tanto, la estructura organizativa del usuario final puede tener poco efecto en cómo se realizan las pruebas"
         }
       }
     },
@@ -4101,7 +4101,7 @@
             },
             {
               "key": "c",
-              "text": "La trazabilidad entre probadores y casos de prueba que fallaron proporciona un medio para determinar el nivel de habilidad de los probadores."
+              "text": "La trazabilidad entre testers y casos de prueba que fallaron proporciona un medio para determinar el nivel de habilidad de los testers."
             },
             {
               "key": "d",
@@ -4109,7 +4109,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. La trazabilidad entre los riesgos mitigados y los casos de prueba que pasaron proporciona poca información, porque para ser mitigados (mediante pruebas) los riesgos necesitarían tener un caso de prueba correspondiente que pasó. Para poder evaluar el riesgo residual, es necesario disponer de trazabilidad entre todos los riesgos y los resultados de las pruebas, de modo que los riesgos que no hayan superado la prueba correspondiente puedan identificarse como riesgos residuales b) Es correcto. La trazabilidad entre los requisitos del usuario y los resultados de las pruebas proporciona una indicación de qué requisitos del usuario se han probado y, por lo tanto, proporciona un medio para medir el progreso del proyecto (en el contexto de las pruebas) frente a los objetivos comerciales. c) No es correcto. No está claro que los casos de prueba que fallaron proporcionen una indicación de las habilidades del probador más que los casos de prueba que pasaron. Dependería en parte del objetivo de la prueba (por ejemplo, generar confianza o provocar fallas). Además, dicha medición de probadores basada en casos de prueba que pasaron y fallaron puede ser contraproducente ya que podría hacer que los probadores optimicen sus pruebas basándose en esa métrica en lugar del objetivo de prueba d) No es correcto. La trazabilidad entre los riesgos identificados y las condiciones de prueba escritas proporciona un medio para determinar qué condiciones de prueba adicionales deben escribirse. Determinar qué riesgos vale la pena probar es parte de la gestión de riesgos y, en particular, de la mitigación de riesgos."
+          "explanation": "a) No es correcto. La trazabilidad entre los riesgos mitigados y los casos de prueba que pasaron proporciona poca información, porque para ser mitigados (mediante pruebas) los riesgos necesitarían tener un caso de prueba correspondiente que pasó. Para poder evaluar el riesgo residual, es necesario disponer de trazabilidad entre todos los riesgos y los resultados de las pruebas, de modo que los riesgos que no hayan superado la prueba correspondiente puedan identificarse como riesgos residuales b) Es correcto. La trazabilidad entre los requisitos del usuario y los resultados de las pruebas proporciona una indicación de qué requisitos del usuario se han probado y, por lo tanto, proporciona un medio para medir el progreso del proyecto (en el contexto de las pruebas) frente a los objetivos comerciales. c) No es correcto. No está claro que los casos de prueba que fallaron proporcionen una indicación de las habilidades del tester más que los casos de prueba que pasaron. Dependería en parte del objetivo de la prueba (por ejemplo, generar confianza o provocar fallas). Además, dicha medición de testers basada en casos de prueba que pasaron y fallaron puede ser contraproducente ya que podría hacer que los testers optimicen sus pruebas basándose en esa métrica en lugar del objetivo de prueba d) No es correcto. La trazabilidad entre los riesgos identificados y las condiciones de prueba escritas proporciona un medio para determinar qué condiciones de prueba adicionales deben escribirse. Determinar qué riesgos vale la pena probar es parte de la gestión de riesgos y, en particular, de la mitigación de riesgos."
         }
       }
     },
@@ -4150,27 +4150,27 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "¿Cuál de los siguientes es MÁS probable que sea un ejemplo de un probador que utiliza una habilidad genérica al realizar pruebas?",
+          "prompt": "¿Cuál de los siguientes es MÁS probable que sea un ejemplo de un tester que utiliza una habilidad genérica al realizar pruebas?",
           "options": [
             {
               "key": "a",
-              "text": "El profundo conocimiento del probador sobre una variedad de juegos de computadora significó que se llevaban bien con uno de los desarrolladores que también estaba interesado en los juegos."
+              "text": "El profundo conocimiento del tester sobre una variedad de juegos de computadora significó que se llevaban bien con uno de los desarrolladores que también estaba interesado en los juegos."
             },
             {
               "key": "b",
-              "text": "El probador era un ex piloto y pudo comprender mejor los criterios de aceptación del sistema de control del helicóptero."
+              "text": "El tester era un ex piloto y pudo comprender mejor los criterios de aceptación del sistema de control del helicóptero."
             },
             {
               "key": "c",
-              "text": "El probador trabajó anteriormente como programador y utilizó sus habilidades en esta área para comunicarse mejor con los analistas de negocios."
+              "text": "El tester trabajó anteriormente como programador y utilizó sus habilidades en esta área para comunicarse mejor con los analistas de negocios."
             },
             {
               "key": "d",
-              "text": "El probador tuvo mucho cuidado de no cometer errores cuando generó metódicamente casos de prueba antes de comenzar su sesión de pruebas exploratorias."
+              "text": "El tester tuvo mucho cuidado de no cometer errores cuando generó metódicamente casos de prueba antes de comenzar su sesión de pruebas exploratorias."
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Fuertes habilidades de comunicación, escucha activa y habilidades de trabajo en equipo permiten que un probador interactúe efectivamente con todas las partes interesadas; sin embargo, un conocimiento profundo de una variedad de juegos de computadora que le permitió llevarse bien con un desarrollador no es un ejemplo de una habilidad genérica útil para los probadores. b) Es correcto. El conocimiento del dominio que se puede utilizar para comprender y comunicarse con los usuarios finales y los representantes comerciales es una de las habilidades genéricas requeridas por los probadores. Un probador con experiencia como piloto le permitiría apreciar mejor los criterios de aceptación del sistema de control del helicóptero. c) No es correcto. Aunque las habilidades de programación podrían considerarse conocimientos técnicos que pueden aumentar la eficiencia al utilizar algunas herramientas de prueba, es poco probable que estas habilidades mejoren su comunicación con los analistas de negocios. d) No es correcto. Aunque la minuciosidad, la atención al detalle, la curiosidad y un enfoque metódico para identificar defectos difíciles de encontrar son habilidades genéricas útiles para los probadores, es dudoso que generen casos de prueba antes de comenzar las pruebas exploratorias. Esto se debe a que uno de los principios principales de Las pruebas exploratorias son que los casos de prueba se generan durante la prueba, no se programan de antemano."
+          "explanation": "a) No es correcto. Fuertes habilidades de comunicación, escucha activa y habilidades de trabajo en equipo permiten que un tester interactúe efectivamente con todas las partes interesadas; sin embargo, un conocimiento profundo de una variedad de juegos de computadora que le permitió llevarse bien con un desarrollador no es un ejemplo de una habilidad genérica útil para los testers. b) Es correcto. El conocimiento del dominio que se puede utilizar para comprender y comunicarse con los usuarios finales y los representantes comerciales es una de las habilidades genéricas requeridas por los testers. Un tester con experiencia como piloto le permitiría apreciar mejor los criterios de aceptación del sistema de control del helicóptero. c) No es correcto. Aunque las habilidades de programación podrían considerarse conocimientos técnicos que pueden aumentar la eficiencia al utilizar algunas herramientas de prueba, es poco probable que estas habilidades mejoren su comunicación con los analistas de negocios. d) No es correcto. Aunque la minuciosidad, la atención al detalle, la curiosidad y un enfoque metódico para identificar defectos difíciles de encontrar son habilidades genéricas útiles para los testers, es dudoso que generen casos de prueba antes de comenzar las pruebas exploratorias. Esto se debe a que uno de los principios principales de Las pruebas exploratorias son que los casos de prueba se generan durante la prueba, no se programan de antemano."
         }
       }
     },
@@ -4337,23 +4337,23 @@
           "options": [
             {
               "key": "a",
-              "text": "Los probadores deben revisar los productos de trabajo como parte de la próxima fase de desarrollo."
+              "text": "Los testers deben revisar los productos de trabajo como parte de la próxima fase de desarrollo."
             },
             {
               "key": "b",
-              "text": "Los probadores deben revisar los productos de trabajo tan pronto como los borradores estén disponibles."
+              "text": "Los testers deben revisar los productos de trabajo tan pronto como los borradores estén disponibles."
             },
             {
               "key": "c",
-              "text": "Los probadores deben revisar los productos de trabajo antes de que comiencen el análisis de prueba y el diseño de prueba."
+              "text": "Los testers deben revisar los productos de trabajo antes de que comiencen el análisis de prueba y el diseño de prueba."
             },
             {
               "key": "d",
-              "text": "Los probadores deben revisar los productos de trabajo inmediatamente después de su publicación."
+              "text": "Los testers deben revisar los productos de trabajo inmediatamente después de su publicación."
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Los probadores deben revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte de un enfoque de desplazamiento a la izquierda. Si esperaran hasta la siguiente fase de desarrollo, entonces se podrían iniciar trabajos de desarrollo (y pruebas) innecesarios en productos de trabajo defectuosos y no revisados. b) Es correcto. Los probadores deberían revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte de un enfoque de desplazamiento hacia la izquierda. c) No es correcto. Los probadores típicamente revisan los productos de trabajo que forman la base de prueba como parte del análisis de prueba, no antes del análisis de prueba y el diseño de prueba. d) No es correcto. Los probadores deben revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte del enfoque de desplazamiento a la izquierda. Esperar hasta que se publiquen significa que cualquier defecto que pueda encontrarse mediante la revisión del probador estará en el documento publicado."
+          "explanation": "a) No es correcto. Los testers deben revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte de un enfoque de desplazamiento a la izquierda. Si esperaran hasta la siguiente fase de desarrollo, entonces se podrían iniciar trabajos de desarrollo (y pruebas) innecesarios en productos de trabajo defectuosos y no revisados. b) Es correcto. Los testers deberían revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte de un enfoque de desplazamiento hacia la izquierda. c) No es correcto. Los testers típicamente revisan los productos de trabajo que forman la base de prueba como parte del análisis de prueba, no antes del análisis de prueba y el diseño de prueba. d) No es correcto. Los testers deben revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte del enfoque de desplazamiento a la izquierda. Esperar hasta que se publiquen significa que cualquier defecto que pueda encontrarse mediante la revisión del tester estará en el documento publicado."
         }
       }
     },
@@ -4467,15 +4467,15 @@
             },
             {
               "key": "c",
-              "text": "Para tratar a los desarrolladores y a las operaciones por igual, los probadores asignarán más esfuerzos para publicar las pruebas por operaciones utilizando un enfoque de desplazamiento a la derecha."
+              "text": "Para tratar a los desarrolladores y a las operaciones por igual, los testers asignarán más esfuerzos para publicar las pruebas por operaciones utilizando un enfoque de desplazamiento a la derecha."
             },
             {
               "key": "d",
-              "text": "Para crear una mayor sinergia entre los probadores, los desarrolladores y las operaciones, las pruebas deben automatizarse completamente sin pruebas manuales."
+              "text": "Para crear una mayor sinergia entre los testers, los desarrolladores y las operaciones, las pruebas deben automatizarse completamente sin pruebas manuales."
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. Esto se proporciona en gran medida a través de la integración continua, donde los desarrolladores envían pruebas de componentes (unitarias) con su nuevo código, que deben aprobarse para que el código sea admitido en la compilación. Por lo tanto, los desarrolladores sí necesitan completar pruebas de componentes b) Es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. c) No es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. Los probadores no intentan tratar a los desarrolladores y a las operaciones por igual dedicando más tiempo a las pruebas de lanzamiento, aunque bien se puede utilizar un enfoque de desplazamiento a la derecha para las pruebas (pruebas en producción). d) No es correcto. Los procesos automatizados como la integración continua/entrega continua (CI/CD) en DevOps facilitan entornos de prueba estables y reducen la necesidad de pruebas manuales; sin embargo, existe el riesgo de pasar por alto la importancia de las pruebas manuales, especialmente desde la perspectiva del usuario"
+          "explanation": "a) No es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. Esto se proporciona en gran medida a través de la integración continua, donde los desarrolladores envían pruebas de componentes (unitarias) con su nuevo código, que deben aprobarse para que el código sea admitido en la compilación. Por lo tanto, los desarrolladores sí necesitan completar pruebas de componentes b) Es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. c) No es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. Los testers no intentan tratar a los desarrolladores y a las operaciones por igual dedicando más tiempo a las pruebas de lanzamiento, aunque bien se puede utilizar un enfoque de desplazamiento a la derecha para las pruebas (pruebas en producción). d) No es correcto. Los procesos automatizados como la integración continua/entrega continua (CI/CD) en DevOps facilitan entornos de prueba estables y reducen la necesidad de pruebas manuales; sin embargo, existe el riesgo de pasar por alto la importancia de las pruebas manuales, especialmente desde la perspectiva del usuario"
         }
       }
     },
@@ -5332,11 +5332,11 @@
           "options": [
             {
               "key": "a",
-              "text": "A los probadores no se les ha asignado suficiente tiempo para el diseño de prueba y ejecución de prueba."
+              "text": "A los testers no se les ha asignado suficiente tiempo para el diseño de prueba y ejecución de prueba."
             },
             {
               "key": "b",
-              "text": "La estrategia de prueba existente requiere que los probadores utilicen técnicas de prueba formales de caja negra."
+              "text": "La estrategia de prueba existente requiere que los testers utilicen técnicas de prueba formales de caja negra."
             },
             {
               "key": "c",
@@ -5344,15 +5344,15 @@
             },
             {
               "key": "d",
-              "text": "Los probadores son miembros de un equipo ágil y tienen buenas habilidades de programación."
+              "text": "Los testers son miembros de un equipo ágil y tienen buenas habilidades de programación."
             },
             {
               "key": "e",
-              "text": "Los probadores tienen experiencia en el ámbito empresarial y buenas habilidades analíticas."
+              "text": "Los testers tienen experiencia en el ámbito empresarial y buenas habilidades analíticas."
             }
           ],
           "selector": "Selecciona DOS opciones.",
-          "explanation": "Las pruebas exploratorias son útiles cuando hay pocas o inadecuadas especificaciones o hay una presión de tiempo significativa para las pruebas. Las pruebas exploratorias también son útiles para complementar otras técnicas de prueba más formales. Las pruebas exploratorias serán más efectivas si el probador tiene experiencia, conocimiento del dominio y un alto grado de habilidades esenciales, como habilidades analíticas, curiosidad y creatividad. Así: a) Es correcta. Las pruebas exploratorias son útiles cuando hay pocas o inadecuadas especificaciones o hay una importante presión de tiempo en Las pruebas b) No son correcto. Las pruebas exploratorias no son una técnica de prueba de caja negra c) No es correcto. Las pruebas exploratorias son útiles cuando las especificaciones están mal redactadas d) No es correcta. Las habilidades de programación no tienen nada que ver con Las pruebas exploratorias en principio e) son correcta. Las pruebas exploratorias serán más efectivas si el probador tiene experiencia, tiene conocimiento del dominio y tiene un alto grado de habilidades esenciales, como habilidades analíticas, curiosidad y creatividad"
+          "explanation": "Las pruebas exploratorias son útiles cuando hay pocas o inadecuadas especificaciones o hay una presión de tiempo significativa para las pruebas. Las pruebas exploratorias también son útiles para complementar otras técnicas de prueba más formales. Las pruebas exploratorias serán más efectivas si el tester tiene experiencia, conocimiento del dominio y un alto grado de habilidades esenciales, como habilidades analíticas, curiosidad y creatividad. Así: a) Es correcta. Las pruebas exploratorias son útiles cuando hay pocas o inadecuadas especificaciones o hay una importante presión de tiempo en Las pruebas b) No son correcto. Las pruebas exploratorias no son una técnica de prueba de caja negra c) No es correcto. Las pruebas exploratorias son útiles cuando las especificaciones están mal redactadas d) No es correcta. Las habilidades de programación no tienen nada que ver con Las pruebas exploratorias en principio e) son correcta. Las pruebas exploratorias serán más efectivas si el tester tiene experiencia, tiene conocimiento del dominio y tiene un alto grado de habilidades esenciales, como habilidades analíticas, curiosidad y creatividad"
         }
       }
     },
@@ -5413,7 +5413,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Las listas de verificación deben contener condiciones de prueba a verificar. Este es un ejemplo de error, no una condición de prueba; incluso si el probador pudo deducir algunas condiciones potenciales de prueba a partir de los ejemplos de errores, esta descripción del error es demasiado general b) No es correcta. Las listas de verificación no deben contener elementos que sean más adecuados como criterios de salida. Este es un ejemplo de criterio de salida c) No es correcto. Las listas de verificación no deben contener elementos demasiado generales. Este es un ítem muy general, que prácticamente describe un objetivo de prueba d) Es correcto. Este es un ejemplo de una condición de prueba que puede ser verificada por un humano."
+          "explanation": "a) No es correcto. Las listas de verificación deben contener condiciones de prueba a verificar. Este es un ejemplo de error, no una condición de prueba; incluso si el tester pudo deducir algunas condiciones potenciales de prueba a partir de los ejemplos de errores, esta descripción del error es demasiado general b) No es correcta. Las listas de verificación no deben contener elementos que sean más adecuados como criterios de salida. Este es un ejemplo de criterio de salida c) No es correcto. Las listas de verificación no deben contener elementos demasiado generales. Este es un ítem muy general, que prácticamente describe un objetivo de prueba d) Es correcto. Este es un ejemplo de una condición de prueba que puede ser verificada por un humano."
         }
       }
     },
@@ -6166,7 +6166,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "Teniendo en cuenta cada una de las categorías de herramientas enumeradas y sus descripciones: A. Herramientas de pruebas estáticas: apoyan al probador en la realización de revisiones y análisis estáticos (4) B. Herramientas que respaldan la escalabilidad y la estandarización de la implementación: por ejemplo, máquinas virtuales, herramientas de contenedorización (3) C. Herramientas DevOps: respaldan el proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de construcción automatizados, la integración/entrega continua (CI/CD) (1) D. Herramientas de colaboración: facilitan la comunicación (2) Por lo tanto: a) No es correcto b) No es correcto c) Es correcto. La coincidencia correcta es: 1C, 2D, 3B, 4A d) No es correcta"
+          "explanation": "Teniendo en cuenta cada una de las categorías de herramientas enumeradas y sus descripciones: A. Herramientas de pruebas estáticas: apoyan al tester en la realización de revisiones y análisis estáticos (4) B. Herramientas que respaldan la escalabilidad y la estandarización de la implementación: por ejemplo, máquinas virtuales, herramientas de contenedorización (3) C. Herramientas DevOps: respaldan el proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de construcción automatizados, la integración/entrega continua (CI/CD) (1) D. Herramientas de colaboración: facilitan la comunicación (2) Por lo tanto: a) No es correcto b) No es correcto c) Es correcto. La coincidencia correcta es: 1C, 2D, 3B, 4A d) No es correcta"
         }
       }
     },
@@ -6227,7 +6227,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) Es correcto. La automatización de pruebas puede proporcionar medidas que son demasiado complicadas para que las obtengan los humanos, como medidas de cobertura de pruebas de caja blanca para todos los códigos excepto el más trivial. b) No es correcto. Al utilizar herramientas de prueba, la responsabilidad de las pruebas NO se comparte con el proveedor de la herramienta, ya que el proveedor no participa en Las pruebas y son responsabilidad del probador. La única responsabilidad posible que podría asignarse al proveedor de la herramienta es si la herramienta no funciona como se esperaba y proporciona resultados de prueba incorrectos c) No es correcto. Los probadores aún necesitan aplicar el pensamiento crítico al analizar anomalías en los resultados de las pruebas para determinar su causa probable. d) No es correcto. Ni los probadores ni las herramientas pueden generar casos de prueba simplemente a partir de un análisis del código del programa, ya que el código es la implementación y no proporciona información sobre los resultados esperados, que deberán provenir de otra parte de la base de prueba, como la especificación de diseño."
+          "explanation": "a) Es correcto. La automatización de pruebas puede proporcionar medidas que son demasiado complicadas para que las obtengan los humanos, como medidas de cobertura de pruebas de caja blanca para todos los códigos excepto el más trivial. b) No es correcto. Al utilizar herramientas de prueba, la responsabilidad de las pruebas NO se comparte con el proveedor de la herramienta, ya que el proveedor no participa en Las pruebas y son responsabilidad del tester. La única responsabilidad posible que podría asignarse al proveedor de la herramienta es si la herramienta no funciona como se esperaba y proporciona resultados de prueba incorrectos c) No es correcto. Los testers aún necesitan aplicar el pensamiento crítico al analizar anomalías en los resultados de las pruebas para determinar su causa probable. d) No es correcto. Ni los testers ni las herramientas pueden generar casos de prueba simplemente a partir de un análisis del código del programa, ya que el código es la implementación y no proporciona información sobre los resultados esperados, que deberán provenir de otra parte de la base de prueba, como la especificación de diseño."
         }
       }
     },
@@ -6288,7 +6288,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Validar que se cumplan los requisitos documentados es incorrecto ya que la validación tiene que ver con cumplir con los requisitos y expectativas del usuario, mientras que la verificación tiene que ver con cumplir con requisitos específicos, por lo que sería correcto si reemplazáramos \"validar\" por \"verificar\" b) Es correcto. Provocar fallos e identificar defectos es probablemente el objetivo más común de Las pruebas dinámicas c) No son correcto. Iniciar errores e identificar causas raíz es incorrecto porque los probadores no inician errores, intentan provocar fallas. Los errores generalmente los cometen los desarrolladores (y en realidad no pueden ser iniciados) y resultan en defectos, que los probadores intentan identificar directamente a través de pruebas estáticas o indirectamente a través de fallas con pruebas dinámicas. Identificar causas raíz es útil pero es parte de la depuración, que es una actividad separada de Las pruebas d) No son correcto. Verificar que el objeto de prueba cumpla con las expectativas del usuario es incorrecto ya que la verificación tiene que ver con verificar que se cumplan los requisitos (documentados) especificados, mientras que la validación tiene que ver con cumplir con los requisitos y expectativas del usuario, por lo que esto sería correcto si reemplazáramos \"verificar\" con \"validar\""
+          "explanation": "a) No es correcto. Validar que se cumplan los requisitos documentados es incorrecto ya que la validación tiene que ver con cumplir con los requisitos y expectativas del usuario, mientras que la verificación tiene que ver con cumplir con requisitos específicos, por lo que sería correcto si reemplazáramos \"validar\" por \"verificar\" b) Es correcto. Provocar fallos e identificar defectos es probablemente el objetivo más común de Las pruebas dinámicas c) No son correcto. Iniciar errores e identificar causas raíz es incorrecto porque los testers no inician errores, intentan provocar fallas. Los errores generalmente los cometen los desarrolladores (y en realidad no pueden ser iniciados) y resultan en defectos, que los testers intentan identificar directamente a través de pruebas estáticas o indirectamente a través de fallas con pruebas dinámicas. Identificar causas raíz es útil pero es parte de la depuración, que es una actividad separada de Las pruebas d) No son correcto. Verificar que el objeto de prueba cumpla con las expectativas del usuario es incorrecto ya que la verificación tiene que ver con verificar que se cumplan los requisitos (documentados) especificados, mientras que la validación tiene que ver con cumplir con los requisitos y expectativas del usuario, por lo que esto sería correcto si reemplazáramos \"verificar\" con \"validar\""
         }
       }
     },
@@ -6349,7 +6349,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Las pruebas dinámicas sí provocan fallos (a partir de los cuales se pueden localizar y reparar los defectos). Sin embargo, la depuración se ocupa de localizar defectos y corregirlos. Por lo tanto, la depuración no soluciona los fallos b) No es correcto. Tanto las pruebas como la depuración contribuyen a mejorar la calidad del objeto de prueba, por lo que ambas deben considerarse positivas. La depuración generalmente se considera una actividad positiva, ya que consiste en arreglar algo. Las pruebas dinámicas implican hacer que el objeto de prueba falle intencionalmente, razón por la cual algunas personas lo consideran una actividad negativa, pero esa es una visión muy estrecha (y no la que suelen tener los probadores). Son posibles casos de prueba tanto positivos como negativos. Los casos de prueba positivos verifican que el objeto de prueba realiza correctamente lo que se supone que debe hacer, mientras que las pruebas negativas verifican que el objeto de prueba no hace lo que se supone que no debe hacer c) Es correcto. Las pruebas determinan que los defectos existen ya sea directamente a través de la observación del defecto en las revisiones (o mediante una herramienta de análisis estático), o indirectamente al causar una falla en las pruebas dinámicas. La depuración es una actividad separada de las pruebas (normalmente realizadas por desarrolladores) y se ocupa de localizar defectos (sólo para pruebas dinámicas) y corregir los defectos d) No es correcto. Las causas de los defectos suelen ser errores humanos. Las pruebas encuentran defectos ya sea directamente a través de pruebas estáticas o indirectamente al causar fallas en pruebas dinámicas, y la depuración corrige los defectos. Entonces, las pruebas no encuentran la causa de los defectos y la depuración no soluciona las causas de los defectos"
+          "explanation": "a) No es correcto. Las pruebas dinámicas sí provocan fallos (a partir de los cuales se pueden localizar y reparar los defectos). Sin embargo, la depuración se ocupa de localizar defectos y corregirlos. Por lo tanto, la depuración no soluciona los fallos b) No es correcto. Tanto las pruebas como la depuración contribuyen a mejorar la calidad del objeto de prueba, por lo que ambas deben considerarse positivas. La depuración generalmente se considera una actividad positiva, ya que consiste en arreglar algo. Las pruebas dinámicas implican hacer que el objeto de prueba falle intencionalmente, razón por la cual algunas personas lo consideran una actividad negativa, pero esa es una visión muy estrecha (y no la que suelen tener los testers). Son posibles casos de prueba tanto positivos como negativos. Los casos de prueba positivos verifican que el objeto de prueba realiza correctamente lo que se supone que debe hacer, mientras que las pruebas negativas verifican que el objeto de prueba no hace lo que se supone que no debe hacer c) Es correcto. Las pruebas determinan que los defectos existen ya sea directamente a través de la observación del defecto en las revisiones (o mediante una herramienta de análisis estático), o indirectamente al causar una falla en las pruebas dinámicas. La depuración es una actividad separada de las pruebas (normalmente realizadas por desarrolladores) y se ocupa de localizar defectos (sólo para pruebas dinámicas) y corregir los defectos d) No es correcto. Las causas de los defectos suelen ser errores humanos. Las pruebas encuentran defectos ya sea directamente a través de pruebas estáticas o indirectamente al causar fallas en pruebas dinámicas, y la depuración corrige los defectos. Entonces, las pruebas no encuentran la causa de los defectos y la depuración no soluciona las causas de los defectos"
         }
       }
     },
@@ -6647,7 +6647,7 @@
           "options": [
             {
               "key": "a",
-              "text": "Equipos sin probadores"
+              "text": "Equipos sin testers"
             },
             {
               "key": "b",
@@ -6663,7 +6663,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. En el enfoque de equipo completo, los probadores desempeñan un papel vital al compartir su experiencia en pruebas con el equipo y guiar el desarrollo de productos. Colaboran con otros miembros del equipo para lograr los niveles de calidad deseados y trabajan con representantes comerciales para crear pruebas de aceptación. Los probadores también se asocian con desarrolladores para determinar los enfoques óptimos de estrategia de prueba y automatización de pruebas b) Es correcto. Al aprovechar las diversas habilidades de cada miembro del equipo de manera más efectiva, el enfoque de todo el equipo fomenta una dinámica de equipo superior, promueve una comunicación y colaboración sólidas y genera un efecto sinérgico que beneficia a todo el proyecto. c) No es correcto. El enfoque de equipo completo permite que cualquier miembro del equipo con las habilidades y conocimientos necesarios realice cualquier tarea, por lo que los miembros del equipo especializados no son una ventaja de este enfoque. d) No es correcto. No existe una guía específica sobre el tamaño óptimo de los equipos que utilizan el enfoque de equipo completo, y no hay ninguna sugerencia de que los equipos más grandes sean mejores."
+          "explanation": "a) No es correcto. En el enfoque de equipo completo, los testers desempeñan un papel vital al compartir su experiencia en pruebas con el equipo y guiar el desarrollo de productos. Colaboran con otros miembros del equipo para lograr los niveles de calidad deseados y trabajan con representantes comerciales para crear pruebas de aceptación. Los testers también se asocian con desarrolladores para determinar los enfoques óptimos de estrategia de prueba y automatización de pruebas b) Es correcto. Al aprovechar las diversas habilidades de cada miembro del equipo de manera más efectiva, el enfoque de todo el equipo fomenta una dinámica de equipo superior, promueve una comunicación y colaboración sólidas y genera un efecto sinérgico que beneficia a todo el proyecto. c) No es correcto. El enfoque de equipo completo permite que cualquier miembro del equipo con las habilidades y conocimientos necesarios realice cualquier tarea, por lo que los miembros del equipo especializados no son una ventaja de este enfoque. d) No es correcto. No existe una guía específica sobre el tamaño óptimo de los equipos que utilizan el enfoque de equipo completo, y no hay ninguna sugerencia de que los equipos más grandes sean mejores."
         }
       }
     },
@@ -6708,23 +6708,23 @@
           "options": [
             {
               "key": "a",
-              "text": "Los probadores independientes encontrarán defectos debido a su diferente perspectiva técnica de la de los desarrolladores, pero su independencia puede llevar a una relación de confrontación con los desarrolladores."
+              "text": "Los testers independientes encontrarán defectos debido a su diferente perspectiva técnica de la de los desarrolladores, pero su independencia puede llevar a una relación de confrontación con los desarrolladores."
             },
             {
               "key": "b",
-              "text": "La familiaridad de los desarrolladores con su propio código significa que solo encuentran algunos defectos en él; sin embargo, su experiencia en software compartida con los probadores significa que estos defectos también los encontrarían los probadores."
+              "text": "La familiaridad de los desarrolladores con su propio código significa que solo encuentran algunos defectos en él; sin embargo, su experiencia en software compartida con los testers significa que estos defectos también los encontrarían los testers."
             },
             {
               "key": "c",
-              "text": "Las pruebas independientes requieren probadores que estén fuera del equipo del desarrollador e idealmente fuera de la organización; sin embargo, a estos probadores les resulta difícil comprender el dominio de la aplicación."
+              "text": "Las pruebas independientes requieren testers que estén fuera del equipo del desarrollador e idealmente fuera de la organización; sin embargo, a estos testers les resulta difícil comprender el dominio de la aplicación."
             },
             {
               "key": "d",
-              "text": "Los probadores externos al equipo de desarrollo son más independientes que los probadores internos del equipo, pero es más probable que se culpe a los probadores internos del equipo por los retrasos en el lanzamiento del producto."
+              "text": "Los testers externos al equipo de desarrollo son más independientes que los testers internos del equipo, pero es más probable que se culpe a los testers internos del equipo por los retrasos en el lanzamiento del producto."
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) Es correcto. El principal beneficio de la independencia de las pruebas es que los probadores tienen más probabilidades de identificar diferentes tipos de fallas y defectos en comparación con los desarrolladores, debido a sus variados antecedentes, puntos de vista técnicos y posibles sesgos, incluido el sesgo cognitivo. Sin embargo, la principal desventaja de la independencia de las pruebas es que los probadores pueden quedar aislados del equipo de desarrollo, lo que genera problemas de comunicación, falta de colaboración y, potencialmente, una relación de confrontación, en la que se culpa a los probadores por retrasos y cuellos de botella en el proceso de lanzamiento. b) No es correcto. La familiaridad de un desarrollador con el código no significa que rara vez encuentre defectos en él, sino que esta familiaridad significa que puede encontrar de manera eficiente muchos defectos en su propio código. Y, en lugar de que los desarrolladores y los probadores tengan antecedentes compartidos, normalmente se cita que los desarrolladores tienen antecedentes diferentes a los de los probadores como la razón por la que los probadores y los desarrolladores encuentran diferentes tipos de defectos. c) No es correcto. Las pruebas se pueden realizar en diferentes niveles de independencia, que van desde ninguna independencia para el autor hasta una independencia muy alta para los probadores externos a la organización. En la mayoría de los proyectos, se utilizan múltiples niveles de independencia: los desarrolladores realizan pruebas de componentes y pruebas de integración de componentes, el equipo de pruebas realiza pruebas de sistema y pruebas de integración de sistemas, y los representantes comerciales realizan pruebas de aceptación. Entonces, los probadores pueden estar en el equipo del desarrollador y no es necesario que provengan de fuera de la organización. El conocimiento del dominio de la aplicación cambiará de un caso a otro y no depende del nivel de independencia d) No es correcto. Las pruebas se pueden realizar en diferentes niveles de independencia, que van desde ninguna independencia para el autor hasta una independencia muy alta para los probadores externos a la organización, siendo los probadores externos al equipo del desarrollador generalmente más independientes que los probadores internos del equipo. Sin embargo, hay más razones para creer que los probadores externos al equipo probablemente estén más aislados de los desarrolladores y, por lo tanto, es más probable que se les culpe por los retrasos en el lanzamiento del producto"
+          "explanation": "a) Es correcto. El principal beneficio de la independencia de las pruebas es que los testers tienen más probabilidades de identificar diferentes tipos de fallas y defectos en comparación con los desarrolladores, debido a sus variados antecedentes, puntos de vista técnicos y posibles sesgos, incluido el sesgo cognitivo. Sin embargo, la principal desventaja de la independencia de las pruebas es que los testers pueden quedar aislados del equipo de desarrollo, lo que genera problemas de comunicación, falta de colaboración y, potencialmente, una relación de confrontación, en la que se culpa a los testers por retrasos y cuellos de botella en el proceso de lanzamiento. b) No es correcto. La familiaridad de un desarrollador con el código no significa que rara vez encuentre defectos en él, sino que esta familiaridad significa que puede encontrar de manera eficiente muchos defectos en su propio código. Y, en lugar de que los desarrolladores y los testers tengan antecedentes compartidos, normalmente se cita que los desarrolladores tienen antecedentes diferentes a los de los testers como la razón por la que los testers y los desarrolladores encuentran diferentes tipos de defectos. c) No es correcto. Las pruebas se pueden realizar en diferentes niveles de independencia, que van desde ninguna independencia para el autor hasta una independencia muy alta para los testers externos a la organización. En la mayoría de los proyectos, se utilizan múltiples niveles de independencia: los desarrolladores realizan pruebas de componentes y pruebas de integración de componentes, el equipo de pruebas realiza pruebas de sistema y pruebas de integración de sistemas, y los representantes comerciales realizan pruebas de aceptación. Entonces, los testers pueden estar en el equipo del desarrollador y no es necesario que provengan de fuera de la organización. El conocimiento del dominio de la aplicación cambiará de un caso a otro y no depende del nivel de independencia d) No es correcto. Las pruebas se pueden realizar en diferentes niveles de independencia, que van desde ninguna independencia para el autor hasta una independencia muy alta para los testers externos a la organización, siendo los testers externos al equipo del desarrollador generalmente más independientes que los testers internos del equipo. Sin embargo, hay más razones para creer que los testers externos al equipo probablemente estén más aislados de los desarrolladores y, por lo tanto, es más probable que se les culpe por los retrasos en el lanzamiento del producto"
         }
       }
     },
@@ -6899,15 +6899,15 @@
             },
             {
               "key": "c",
-              "text": "Cuando tienen tiempo libre disponible, los probadores deben automatizar las pruebas de regresión, comenzando con las pruebas de componentes y las pruebas de integración de componentes."
+              "text": "Cuando tienen tiempo libre disponible, los testers deben automatizar las pruebas de regresión, comenzando con las pruebas de componentes y las pruebas de integración de componentes."
             },
             {
               "key": "d",
-              "text": "Cuando están disponibles, los probadores están capacitados para realizar tareas tempranas en el SDLC para permitir que se automaticen más actividades de prueba más adelante en el SDLC."
+              "text": "Cuando están disponibles, los testers están capacitados para realizar tareas tempranas en el SDLC para permitir que se automaticen más actividades de prueba más adelante en el SDLC."
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Las prácticas involucradas en el desplazamiento a la izquierda tienen como objetivo implementar más actividades de prueba en las primeras fases del ciclo de vida de desarrollo de software (SDLC), retratando el SDLC como moviéndose de izquierda a derecha. No existe el lado izquierdo del proceso de prueba b) Es correcto. El desplazamiento hacia la izquierda enfatiza la importancia de comenzar las pruebas antes en el SDLC. La implementación de pruebas de desplazamiento a la izquierda requiere capacitación adicional y un mayor esfuerzo y costos durante las primeras fases del SDLC; sin embargo, los ahorros generales deberían ser mayores. c) No es correcto. Aunque las pruebas de componentes automatizadas y las pruebas de integración de componentes para pruebas de regresión generalmente son valiosas, la creación de estas pruebas normalmente es responsabilidad de los desarrolladores, y si se sigue un enfoque de integración continua/entrega continua (CI/CD), entonces estas pruebas se habrán enviado con el código. En algunas situaciones, el probador puede automatizar pruebas para pruebas de regresión y, a veces, incluso para pruebas de componentes y pruebas de integración de componentes; sin embargo, esto no es parte del cambio a la izquierda que mueve las pruebas más temprano en el SDLC. d) No es correcto. Capacitar a los probadores para que realicen tareas tempranamente en el SDLC respaldaría un enfoque de giro a la izquierda al enfatizar la importancia de comenzar las pruebas antes en el SDLC. Sin embargo, automatizar más actividades de prueba que se realizarán más adelante en el SDLC no es parte del desplazamiento hacia la izquierda"
+          "explanation": "a) No es correcto. Las prácticas involucradas en el desplazamiento a la izquierda tienen como objetivo implementar más actividades de prueba en las primeras fases del ciclo de vida de desarrollo de software (SDLC), retratando el SDLC como moviéndose de izquierda a derecha. No existe el lado izquierdo del proceso de prueba b) Es correcto. El desplazamiento hacia la izquierda enfatiza la importancia de comenzar las pruebas antes en el SDLC. La implementación de pruebas de desplazamiento a la izquierda requiere capacitación adicional y un mayor esfuerzo y costos durante las primeras fases del SDLC; sin embargo, los ahorros generales deberían ser mayores. c) No es correcto. Aunque las pruebas de componentes automatizadas y las pruebas de integración de componentes para pruebas de regresión generalmente son valiosas, la creación de estas pruebas normalmente es responsabilidad de los desarrolladores, y si se sigue un enfoque de integración continua/entrega continua (CI/CD), entonces estas pruebas se habrán enviado con el código. En algunas situaciones, el tester puede automatizar pruebas para pruebas de regresión y, a veces, incluso para pruebas de componentes y pruebas de integración de componentes; sin embargo, esto no es parte del cambio a la izquierda que mueve las pruebas más temprano en el SDLC. d) No es correcto. Capacitar a los testers para que realicen tareas tempranamente en el SDLC respaldaría un enfoque de giro a la izquierda al enfatizar la importancia de comenzar las pruebas antes en el SDLC. Sin embargo, automatizar más actividades de prueba que se realizarán más adelante en el SDLC no es parte del desplazamiento hacia la izquierda"
         }
       }
     },
@@ -6968,7 +6968,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Uno de los propósitos de las retrospectivas es identificar posibles mejoras en los procesos que, si se ponen en práctica, deberían dar como resultado que la calidad de los resultados futuros del proceso de desarrollo (objetos de prueba) sea mayor. Entonces, es probable que esto ocurra como resultado de una retrospectiva b) No es correcto. Un beneficio de las retrospectivas para las pruebas incluye una mayor eficiencia de las pruebas a través de mejoras en los procesos. Entonces, es probable que esto ocurra como resultado de una retrospectiva c) Es correcto. Los participantes en las retrospectivas suelen incluir probadores, desarrolladores, arquitectos, propietarios de productos y analistas de negocios, pero los usuarios finales rara vez son invitados o asisten a estas reuniones, y es poco probable que reciban algún informe de estas reuniones. Por lo tanto, es muy poco probable que aprendan y comprendan más sobre los procesos de desarrollo y prueba a través de retrospectivas. d) No es correcto. Un beneficio de las retrospectivas para las pruebas incluye la mejora de la calidad del software de prueba (incluidos los scripts de prueba automatizados) a través de revisiones conjuntas con los desarrolladores. Por lo tanto, es probable que esto ocurra como resultado de una retrospectiva"
+          "explanation": "a) No es correcto. Uno de los propósitos de las retrospectivas es identificar posibles mejoras en los procesos que, si se ponen en práctica, deberían dar como resultado que la calidad de los resultados futuros del proceso de desarrollo (objetos de prueba) sea mayor. Entonces, es probable que esto ocurra como resultado de una retrospectiva b) No es correcto. Un beneficio de las retrospectivas para las pruebas incluye una mayor eficiencia de las pruebas a través de mejoras en los procesos. Entonces, es probable que esto ocurra como resultado de una retrospectiva c) Es correcto. Los participantes en las retrospectivas suelen incluir testers, desarrolladores, arquitectos, propietarios de productos y analistas de negocios, pero los usuarios finales rara vez son invitados o asisten a estas reuniones, y es poco probable que reciban algún informe de estas reuniones. Por lo tanto, es muy poco probable que aprendan y comprendan más sobre los procesos de desarrollo y prueba a través de retrospectivas. d) No es correcto. Un beneficio de las retrospectivas para las pruebas incluye la mejora de la calidad del software de prueba (incluidos los scripts de prueba automatizados) a través de revisiones conjuntas con los desarrolladores. Por lo tanto, es probable que esto ocurra como resultado de una retrospectiva"
         }
       }
     },
@@ -7009,7 +7009,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "¿Cuál de los siguientes niveles de prueba es MÁS probable que se realice si la prueba se centra en la validación y no la realizan probadores?",
+          "prompt": "¿Cuál de los siguientes niveles de prueba es MÁS probable que se realice si la prueba se centra en la validación y no la realizan testers?",
           "options": [
             {
               "key": "a",
@@ -7029,7 +7029,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Las pruebas de componentes (también llamadas pruebas unitarias) implican probar componentes individuales de forma aislada y son principalmente una verificación de una especificación, en lugar de una validación de las necesidades del usuario. Sin embargo, estas pruebas normalmente no las realizan probadores, ya que los desarrolladores suelen realizar estas pruebas en su entorno de desarrollo. b) No es correcto. Las pruebas de integración de componentes implican probar las interfaces e interacciones entre componentes y son principalmente una verificación de una especificación, en lugar de una validación de las necesidades del usuario. Sin embargo, esta prueba normalmente no la realizan los probadores, ya que los desarrolladores suelen realizar esta prueba. c) No es correcto. Las pruebas de integración de sistemas examinan las interfaces con otros sistemas y servicios externos y son principalmente una verificación de una especificación, en lugar de una validación de las necesidades del usuario. Este tipo de prueba también la realizan con mayor frecuencia los probadores d) Es correcta. Las pruebas de aceptación se enfocan en validar que el sistema cumpla con las necesidades comerciales del usuario y esté listo para su implementación. Idealmente, esta prueba la llevan a cabo los usuarios finales"
+          "explanation": "a) No es correcto. Las pruebas de componentes (también llamadas pruebas unitarias) implican probar componentes individuales de forma aislada y son principalmente una verificación de una especificación, en lugar de una validación de las necesidades del usuario. Sin embargo, estas pruebas normalmente no las realizan testers, ya que los desarrolladores suelen realizar estas pruebas en su entorno de desarrollo. b) No es correcto. Las pruebas de integración de componentes implican probar las interfaces e interacciones entre componentes y son principalmente una verificación de una especificación, en lugar de una validación de las necesidades del usuario. Sin embargo, esta prueba normalmente no la realizan los testers, ya que los desarrolladores suelen realizar esta prueba. c) No es correcto. Las pruebas de integración de sistemas examinan las interfaces con otros sistemas y servicios externos y son principalmente una verificación de una especificación, en lugar de una validación de las necesidades del usuario. Este tipo de prueba también la realizan con mayor frecuencia los testers d) Es correcta. Las pruebas de aceptación se enfocan en validar que el sistema cumpla con las necesidades comerciales del usuario y esté listo para su implementación. Idealmente, esta prueba la llevan a cabo los usuarios finales"
         }
       }
     },
@@ -7395,7 +7395,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. En la mayoría de los casos, se pueden utilizar tanto técnicas de prueba de caja negra como técnicas de prueba basadas en la experiencia para los mismos objetos de prueba. b) No es correcto. Tanto las técnicas de prueba de caja negra como las técnicas de prueba basadas en la experiencia se pueden utilizar en todos los niveles de prueba c) Es correcto. Las técnicas de prueba de caja negra (también conocidas como técnicas basadas en especificaciones) se basan en un análisis del comportamiento especificado del objeto de prueba sin referencia a su estructura interna. Entonces, la base de prueba suele ser una especificación. Las técnicas de prueba basadas en la experiencia utilizan eficazmente el conocimiento y la experiencia de los probadores para el diseño e implementación de casos de prueba. Esto significa que el probador, al diseñar las pruebas, puede no utilizar la especificación en absoluto. d) No es correcta. Las técnicas de prueba basadas en la experiencia pueden detectar defectos que pueden pasar desapercibidos mediante técnicas de prueba de caja negra (y caja blanca). Por lo tanto, las técnicas de prueba basadas en la experiencia son complementarias a las técnicas de prueba de caja negra y a las técnicas de prueba de caja blanca, y tanto las técnicas de prueba de caja negra como las técnicas de prueba basadas en la experiencia se pueden utilizar en todos los SDLC"
+          "explanation": "a) No es correcto. En la mayoría de los casos, se pueden utilizar tanto técnicas de prueba de caja negra como técnicas de prueba basadas en la experiencia para los mismos objetos de prueba. b) No es correcto. Tanto las técnicas de prueba de caja negra como las técnicas de prueba basadas en la experiencia se pueden utilizar en todos los niveles de prueba c) Es correcto. Las técnicas de prueba de caja negra (también conocidas como técnicas basadas en especificaciones) se basan en un análisis del comportamiento especificado del objeto de prueba sin referencia a su estructura interna. Entonces, la base de prueba suele ser una especificación. Las técnicas de prueba basadas en la experiencia utilizan eficazmente el conocimiento y la experiencia de los testers para el diseño e implementación de casos de prueba. Esto significa que el tester, al diseñar las pruebas, puede no utilizar la especificación en absoluto. d) No es correcta. Las técnicas de prueba basadas en la experiencia pueden detectar defectos que pueden pasar desapercibidos mediante técnicas de prueba de caja negra (y caja blanca). Por lo tanto, las técnicas de prueba basadas en la experiencia son complementarias a las técnicas de prueba de caja negra y a las técnicas de prueba de caja blanca, y tanto las técnicas de prueba de caja negra como las técnicas de prueba basadas en la experiencia se pueden utilizar en todos los SDLC"
         }
       }
     },
@@ -7773,11 +7773,11 @@
           "options": [
             {
               "key": "a",
-              "text": "Las medidas de cobertura de caja blanca pueden ayudar a los probadores a evaluar las pruebas de caja negra en términos de la cobertura del código lograda por estas pruebas de caja negra."
+              "text": "Las medidas de cobertura de caja blanca pueden ayudar a los testers a evaluar las pruebas de caja negra en términos de la cobertura del código lograda por estas pruebas de caja negra."
             },
             {
               "key": "b",
-              "text": "El análisis de cobertura de caja blanca puede ayudar a los probadores a identificar fragmentos inalcanzables del código fuente"
+              "text": "El análisis de cobertura de caja blanca puede ayudar a los testers a identificar fragmentos inalcanzables del código fuente"
             },
             {
               "key": "c",
@@ -7830,7 +7830,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Considere la siguiente lista: • No se aceptan entradas correctas • Se aceptan entradas incorrectas • Formato de salida incorrecto • División por cero ¿Qué técnica de prueba es MÁS PROBABLEMENTE utilizada por el probador que utiliza esta lista al realizar las pruebas?",
+          "prompt": "Considere la siguiente lista: • No se aceptan entradas correctas • Se aceptan entradas incorrectas • Formato de salida incorrecto • División por cero ¿Qué técnica de prueba es MÁS PROBABLEMENTE utilizada por el tester que utiliza esta lista al realizar las pruebas?",
           "options": [
             {
               "key": "a",
@@ -7850,7 +7850,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Las pruebas exploratorias utilizan cartas de prueba, no una lista de posibles defectos/fallas. Aunque las pruebas exploratorias pueden incorporar el uso de otras técnicas de prueba, en este caso un ataque de fallo es la opción más probable b) Es correcta. Esta es una lista de posibles fallos. Los ataques a fallas son un enfoque metódico para la implementación de predicción de errores y requieren que el probador cree o adquiera una lista de posibles errores, defectos y fallas, y que diseñe pruebas que identifiquen defectos asociados con los errores, expongan los defectos o causen las fallas. c) No es correcto. El probador utiliza una lista de verificación de elementos para respaldar sus pruebas. Tanto la predicción de errores como las pruebas basadas en listas de comprobación utilizan dichas listas, sin embargo, la lista aquí es de posibles fallas, no de condiciones de prueba, por lo que la técnica de prueba MÁS PROBABLE es el ataque de fallas, que se enfoca en errores, defectos y fallas d) No es correcto. BVA se basa en un análisis de valores límite de particiones de equivalencia. La lista anterior no menciona las particiones de equivalencia ni sus límites"
+          "explanation": "a) No es correcto. Las pruebas exploratorias utilizan cartas de prueba, no una lista de posibles defectos/fallas. Aunque las pruebas exploratorias pueden incorporar el uso de otras técnicas de prueba, en este caso un ataque de fallo es la opción más probable b) Es correcta. Esta es una lista de posibles fallos. Los ataques a fallas son un enfoque metódico para la implementación de predicción de errores y requieren que el tester cree o adquiera una lista de posibles errores, defectos y fallas, y que diseñe pruebas que identifiquen defectos asociados con los errores, expongan los defectos o causen las fallas. c) No es correcto. El tester utiliza una lista de verificación de elementos para respaldar sus pruebas. Tanto la predicción de errores como las pruebas basadas en listas de comprobación utilizan dichas listas, sin embargo, la lista aquí es de posibles fallas, no de condiciones de prueba, por lo que la técnica de prueba MÁS PROBABLE es el ataque de fallas, que se enfoca en errores, defectos y fallas d) No es correcto. BVA se basa en un análisis de valores límite de particiones de equivalencia. La lista anterior no menciona las particiones de equivalencia ni sus límites"
         }
       }
     },
@@ -7895,7 +7895,7 @@
           "options": [
             {
               "key": "a",
-              "text": "Los elementos de la lista de verificación se pueden definir con un nivel de detalle suficientemente bajo, de modo que el probador pueda implementar y ejecutar casos de prueba detallados basados ​​en estos elementos."
+              "text": "Los elementos de la lista de verificación se pueden definir con un nivel de detalle suficientemente bajo, de modo que el tester pueda implementar y ejecutar casos de prueba detallados basados ​​en estos elementos."
             },
             {
               "key": "b",
@@ -7907,11 +7907,11 @@
             },
             {
               "key": "d",
-              "text": "Dos probadores que diseñan y ejecutan pruebas basadas en los mismos elementos de la lista de verificación de alto nivel generalmente realizarán las pruebas de maneras ligeramente diferentes."
+              "text": "Dos testers que diseñan y ejecutan pruebas basadas en los mismos elementos de la lista de verificación de alto nivel generalmente realizarán las pruebas de maneras ligeramente diferentes."
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Si bien es cierto que el probador puede implementar y ejecutar casos de prueba detallados basados ​​en la lista de verificación, no explica cómo esto resultaría en una mayor cobertura b) No es correcto. Los elementos de la lista de verificación no deben automatizarse. Pero incluso si lo son, los scripts de prueba automatizados siempre ejecutan las pruebas de la misma manera, lo que generalmente no resulta en una mayor cobertura. c) No es correcto. Es cierto que cada elemento de la lista de verificación debe probarse por separado e independientemente. Pero esto afecta la orden de ejecución de prueba y no afecta la cobertura lograda, por lo que no resulta en una mayor cobertura d) Es correcto. Si las listas de verificación son de alto nivel, es probable que se produzca cierta variabilidad en las pruebas reales, lo que dará lugar a una cobertura potencialmente mayor pero a una menor repetibilidad. Si dos probadores siguen una lista de verificación de elementos de alto nivel, cada uno de ellos puede usar diferentes datos de prueba, pasos de prueba, etc. De esta manera, un probador probablemente cubrirá algunas áreas no cubiertas por el otro probador y esto dará como resultado una mayor cobertura"
+          "explanation": "a) No es correcto. Si bien es cierto que el tester puede implementar y ejecutar casos de prueba detallados basados ​​en la lista de verificación, no explica cómo esto resultaría en una mayor cobertura b) No es correcto. Los elementos de la lista de verificación no deben automatizarse. Pero incluso si lo son, los scripts de prueba automatizados siempre ejecutan las pruebas de la misma manera, lo que generalmente no resulta en una mayor cobertura. c) No es correcto. Es cierto que cada elemento de la lista de verificación debe probarse por separado e independientemente. Pero esto afecta la orden de ejecución de prueba y no afecta la cobertura lograda, por lo que no resulta en una mayor cobertura d) Es correcto. Si las listas de verificación son de alto nivel, es probable que se produzca cierta variabilidad en las pruebas reales, lo que dará lugar a una cobertura potencialmente mayor pero a una menor repetibilidad. Si dos testers siguen una lista de verificación de elementos de alto nivel, cada uno de ellos puede usar diferentes datos de prueba, pasos de prueba, etc. De esta manera, un tester probablemente cubrirá algunas áreas no cubiertas por el otro tester y esto dará como resultado una mayor cobertura"
         }
       }
     },
@@ -8113,7 +8113,19 @@
       "reference": "FL-5.1.4",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "At the beginning of each iteration, the team estimates the amount of work (in person-days) they will need to complete during the iteration. Let E(n) be the estimated amount of work for iteration n, and let A(n) be the actual amount of work done in iteration n. From the third iteration, the team uses the following estimation model based on extrapolation: 𝐸(𝑛) = 3 ∗𝐴(𝑛−1) + 𝐴(𝑛−2) 4 The graph shows the estimated and actual amount of work for the first four iterations. What is the estimated amount of work for iteration #5?",
+      "prompt": "At the beginning of each iteration, the team estimates the amount of work (in person-days) they will need to complete during the iteration. Let E(n) be the estimated amount of work for iteration n, and let A(n) be the actual amount of work done in iteration n. From the third iteration, the team uses the following estimation model based on extrapolation. The graph shows the estimated and actual amount of work for the first four iterations. What is the estimated amount of work for iteration #5?",
+      "promptParts": {
+        "en": [
+          { "type": "text", "text": "At the beginning of each iteration, the team estimates the amount of work (in person-days) they will need to complete during the iteration. Let E(n) be the estimated amount of work for iteration n, and let A(n) be the actual amount of work done in iteration n. From the third iteration, the team uses the following estimation model based on extrapolation." },
+          { "type": "math", "latex": "E(n)=\\frac{3\\times A(n-1)+A(n-2)}{4}", "spoken": "E of n equals three times A of n minus one, plus A of n minus two, all divided by four." },
+          { "type": "text", "text": "The graph shows the estimated and actual amount of work for the first four iterations. What is the estimated amount of work for iteration #5?" }
+        ],
+        "es": [
+          { "type": "text", "text": "Al comienzo de cada iteración, el equipo estima la cantidad de trabajo (en días-persona) que necesitarán completar durante la iteración. Sea E(n) la cantidad de trabajo estimada para la iteración n, y sea A(n) la cantidad real de trabajo realizado en la iteración n. A partir de la tercera iteración, el equipo utiliza el siguiente modelo de estimación basado en extrapolación." },
+          { "type": "math", "latex": "E(n)=\\frac{3\\times A(n-1)+A(n-2)}{4}", "spoken": "E de n es igual a tres por A de n menos uno, más A de n menos dos, todo dividido entre cuatro." },
+          { "type": "text", "text": "El gráfico muestra la cantidad de trabajo estimada y real para las primeras cuatro iteraciones. ¿Cuál es la cantidad estimada de trabajo para la iteración n.º 5?" }
+        ]
+      },
       "options": [
         {
           "key": "a",
@@ -8129,7 +8141,7 @@
         },
         {
           "key": "d",
-          "text": "9.4 person-days 0 1 2 3 4 5 6 7 8 9 10 11 12 13 Iteration #1 Iteration #2 Iteration #3 Iteration #4 Estimated and actual effort (in person-days) Estimated Actual"
+          "text": "9.4 person-days"
         }
       ],
       "correctAnswers": [
@@ -8149,7 +8161,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Al comienzo de cada iteración, el equipo estima la cantidad de trabajo (en días-persona) que necesitarán completar durante la iteración. Sea E(n) la cantidad de trabajo estimada para la iteración n, y sea A(n) la cantidad real de trabajo realizado en la iteración n. A partir de la tercera iteración, el equipo utiliza el siguiente modelo de estimación basado en extrapolación: 𝐸(𝑛) = 3 ∗𝐴(𝑛−1) + 𝐴(𝑛−2) 4 El gráfico muestra la cantidad de trabajo estimada y real para las primeras cuatro iteraciones. ¿Cuál es la cantidad estimada de trabajo para la iteración n.° 5?",
+          "prompt": "Al comienzo de cada iteración, el equipo estima la cantidad de trabajo (en días-persona) que necesitarán completar durante la iteración. Sea E(n) la cantidad de trabajo estimada para la iteración n, y sea A(n) la cantidad real de trabajo realizado en la iteración n. A partir de la tercera iteración, el equipo utiliza el siguiente modelo de estimación basado en extrapolación. El gráfico muestra la cantidad de trabajo estimada y real para las primeras cuatro iteraciones. ¿Cuál es la cantidad estimada de trabajo para la iteración n.º 5?",
           "options": [
             {
               "key": "a",
@@ -8165,7 +8177,7 @@
             },
             {
               "key": "d",
-              "text": "9,4 días-persona 0 1 2 3 4 5 6 7 8 9 10 11 12 13 Iteración n.° 1 Iteración n.° 2 Iteración n.° 3 Iteración n.° 4 Esfuerzo estimado y real (en días-persona) Estimado real"
+              "text": "9,4 días-persona"
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -8542,7 +8554,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Cuando un usuario reporta una falla de software, gracias a la identificación única de los commits, es posible reensamblar los archivos de la versión de software que fue utilizada por el usuario (así como las versiones correspondientes de los scripts de prueba) y así reproducir la falla y localizar el defecto más rápidamente b) No es correcto. Si un cambio en el entorno de prueba causa problemas inesperados durante la prueba, la gestión de la configuración permite a los probadores retroceder a una versión anterior del entorno. Esto garantiza que Las pruebas puedan continuar sin verse afectadas por el cambio c) No son correcto. La gestión de la configuración garantiza que toda la documentación identificada (p. ej., especificaciones de requisitos) y elementos de software estén referenciados sin ambigüedades en la documentación de prueba (p. ej., planes de prueba) d) Es correcta. Esto lo garantiza la gestión de defectos, no el proceso de gestión de la configuración"
+          "explanation": "a) No es correcto. Cuando un usuario reporta una falla de software, gracias a la identificación única de los commits, es posible reensamblar los archivos de la versión de software que fue utilizada por el usuario (así como las versiones correspondientes de los scripts de prueba) y así reproducir la falla y localizar el defecto más rápidamente b) No es correcto. Si un cambio en el entorno de prueba causa problemas inesperados durante la prueba, la gestión de la configuración permite a los testers retroceder a una versión anterior del entorno. Esto garantiza que Las pruebas puedan continuar sin verse afectadas por el cambio c) No son correcto. La gestión de la configuración garantiza que toda la documentación identificada (p. ej., especificaciones de requisitos) y elementos de software estén referenciados sin ambigüedades en la documentación de prueba (p. ej., planes de prueba) d) Es correcta. Esto lo garantiza la gestión de defectos, no el proceso de gestión de la configuración"
         }
       }
     },
@@ -8594,7 +8606,7 @@
           "options": [
             {
               "key": "a",
-              "text": "Nombre del probador y fecha"
+              "text": "Nombre del tester y fecha"
             },
             {
               "key": "b",
@@ -8732,7 +8744,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. ‘No es posible la capacidad de generar casos de prueba sin acceso a la base de prueba’. La generación de casos de prueba ya sea por probadores o herramientas requiere acceso a la base de prueba b) No es correcto. “El logro de una mayor cobertura a través de una evaluación más objetiva” no es un beneficio directo de la automatización de pruebas. La automatización de pruebas proporcionará una evaluación más objetiva de la cobertura, sin embargo, esa evaluación objetiva no aumentará la cobertura. Sólo utilizando los resultados de la cobertura para escribir más casos de prueba se puede aumentar la cobertura c) No es correcto. “El aumento en los tiempos de ejecución de prueba disponibles con mayor potencia de procesamiento” es una afirmación contradictoria ya que una mayor potencia de procesamiento normalmente reduciría los tiempos de ejecución, y el aumento de los tiempos de ejecución no es un beneficio ya que Las pruebas tomarían más tiempo d) son correcto. La prevención de errores humanos a través de una mayor coherencia y repetibilidad es un beneficio de la automatización de pruebas, ya que la automatización de pruebas no puede sufrir errores humanos. Por ejemplo, significa que las pruebas se derivan consistentemente de los requisitos, los datos de prueba se crean de manera sistemática y las pruebas se ejecutan mediante una herramienta en el mismo orden y con la misma frecuencia."
+          "explanation": "a) No es correcto. ‘No es posible la capacidad de generar casos de prueba sin acceso a la base de prueba’. La generación de casos de prueba ya sea por testers o herramientas requiere acceso a la base de prueba b) No es correcto. “El logro de una mayor cobertura a través de una evaluación más objetiva” no es un beneficio directo de la automatización de pruebas. La automatización de pruebas proporcionará una evaluación más objetiva de la cobertura, sin embargo, esa evaluación objetiva no aumentará la cobertura. Sólo utilizando los resultados de la cobertura para escribir más casos de prueba se puede aumentar la cobertura c) No es correcto. “El aumento en los tiempos de ejecución de prueba disponibles con mayor potencia de procesamiento” es una afirmación contradictoria ya que una mayor potencia de procesamiento normalmente reduciría los tiempos de ejecución, y el aumento de los tiempos de ejecución no es un beneficio ya que Las pruebas tomarían más tiempo d) son correcto. La prevención de errores humanos a través de una mayor coherencia y repetibilidad es un beneficio de la automatización de pruebas, ya que la automatización de pruebas no puede sufrir errores humanos. Por ejemplo, significa que las pruebas se derivan consistentemente de los requisitos, los datos de prueba se crean de manera sistemática y las pruebas se ejecutan mediante una herramienta en el mismo orden y con la misma frecuencia."
         }
       }
     },
@@ -8895,7 +8907,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Los probadores utilizan las condiciones de prueba para generar casos de prueba y ejecutar pruebas. Aunque las condiciones de prueba siguen siendo las mismas, los casos de prueba varían cada vez. ¿Cuál de los siguientes “principios de prueba” se aborda mediante la variación de casos de prueba?",
+          "prompt": "Los testers utilizan las condiciones de prueba para generar casos de prueba y ejecutar pruebas. Aunque las condiciones de prueba siguen siendo las mismas, los casos de prueba varían cada vez. ¿Cuál de los siguientes “principios de prueba” se aborda mediante la variación de casos de prueba?",
           "options": [
             {
               "key": "a",
@@ -9159,7 +9171,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) Es correcto. El enfoque de equipo completo promueve una comunicación y colaboración sólida entre los miembros del equipo b) No es correcto. Si bien el enfoque de equipo completo prioriza la responsabilidad colectiva por la calidad, cada miembro individual del equipo sigue siendo igualmente responsable de la calidad. c) No es correcto. El enfoque de equipo completo trata sobre cómo el equipo trabaja en conjunto, con el objetivo de obtener entregables de mayor calidad, pero no necesariamente resulta en una implementación más rápida para los usuarios finales. d) No es correcto. Cuando se utiliza el enfoque de equipo completo, los probadores trabajan con representantes comerciales para crear pruebas de aceptación. No hay ninguna sugerencia de que el enfoque reduzca la colaboración con usuarios comerciales externos"
+          "explanation": "a) Es correcto. El enfoque de equipo completo promueve una comunicación y colaboración sólida entre los miembros del equipo b) No es correcto. Si bien el enfoque de equipo completo prioriza la responsabilidad colectiva por la calidad, cada miembro individual del equipo sigue siendo igualmente responsable de la calidad. c) No es correcto. El enfoque de equipo completo trata sobre cómo el equipo trabaja en conjunto, con el objetivo de obtener entregables de mayor calidad, pero no necesariamente resulta en una implementación más rápida para los usuarios finales. d) No es correcto. Cuando se utiliza el enfoque de equipo completo, los testers trabajan con representantes comerciales para crear pruebas de aceptación. No hay ninguna sugerencia de que el enfoque reduzca la colaboración con usuarios comerciales externos"
         }
       }
     },
@@ -9200,7 +9212,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Considerando los siguientes beneficios y desventajas de la independencia de las pruebas: i. Los probadores trabajan en un lugar diferente al de los desarrolladores ii. Los probadores cuestionan las suposiciones que hacen los programadores mientras escriben código iii. Se ha establecido una dinámica de confrontación entre probadores y desarrolladores iv. Los desarrolladores se han convencido a sí mismos de que los probadores son en su mayoría responsables de la calidad v. Los probadores tienen sesgos diferentes a los de los desarrolladores. ¿Cuáles son MÁS probables de ser considerados beneficios?",
+          "prompt": "Considerando los siguientes beneficios y desventajas de la independencia de las pruebas: i. Los testers trabajan en un lugar diferente al de los desarrolladores ii. Los testers cuestionan las suposiciones que hacen los programadores mientras escriben código iii. Se ha establecido una dinámica de confrontación entre testers y desarrolladores iv. Los desarrolladores se han convencido a sí mismos de que los testers son en su mayoría responsables de la calidad v. Los testers tienen sesgos diferentes a los de los desarrolladores. ¿Cuáles son MÁS probables de ser considerados beneficios?",
           "options": [
             {
               "key": "a",
@@ -9220,7 +9232,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "Considerando cada uno de los beneficios e inconvenientes enumerados de la independencia de las pruebas: i. Idealmente, queremos una colaboración estrecha entre probadores y desarrolladores, que no aumente con el aislamiento. Por tanto, esto es una desventaja ii. Los probadores y desarrolladores tienen diversos antecedentes, puntos de vista técnicos y posibles sesgos, lo que permite a los probadores desafiar de manera útil las suposiciones hechas por las partes interesadas durante la especificación e implementación del sistema. Por tanto, esto es una ventaja iii. La principal desventaja de la independencia de las pruebas es que los probadores pueden quedar aislados del equipo de desarrollo, lo que genera problemas de comunicación, falta de colaboración y, potencialmente, una relación de confrontación, en la que se culpa a los probadores de retrasos y cuellos de botella en el proceso de lanzamiento. Por tanto, esto es una desventaja iv. Una de las desventajas de la independencia de las pruebas es que los probadores pueden quedar aislados del equipo de desarrollo, lo que hace que los desarrolladores se sientan menos responsables de la calidad. Por lo tanto, esto es una desventaja v. El principal beneficio de la independencia de las pruebas es que los probadores tienen más probabilidades de identificar diferentes tipos de fallas y defectos en comparación con los desarrolladores, debido a sus variados antecedentes, puntos de vista técnicos y posibles sesgos, incluido el sesgo cognitivo. Por lo tanto: a) No es correcto b) Es correcto. Las entradas de la lista que muestran los beneficios son ii y v c) No es correcto d) No es correcto"
+          "explanation": "Considerando cada uno de los beneficios e inconvenientes enumerados de la independencia de las pruebas: i. Idealmente, queremos una colaboración estrecha entre testers y desarrolladores, que no aumente con el aislamiento. Por tanto, esto es una desventaja ii. Los testers y desarrolladores tienen diversos antecedentes, puntos de vista técnicos y posibles sesgos, lo que permite a los testers desafiar de manera útil las suposiciones hechas por las partes interesadas durante la especificación e implementación del sistema. Por tanto, esto es una ventaja iii. La principal desventaja de la independencia de las pruebas es que los testers pueden quedar aislados del equipo de desarrollo, lo que genera problemas de comunicación, falta de colaboración y, potencialmente, una relación de confrontación, en la que se culpa a los testers de retrasos y cuellos de botella en el proceso de lanzamiento. Por tanto, esto es una desventaja iv. Una de las desventajas de la independencia de las pruebas es que los testers pueden quedar aislados del equipo de desarrollo, lo que hace que los desarrolladores se sientan menos responsables de la calidad. Por lo tanto, esto es una desventaja v. El principal beneficio de la independencia de las pruebas es que los testers tienen más probabilidades de identificar diferentes tipos de fallas y defectos en comparación con los desarrolladores, debido a sus variados antecedentes, puntos de vista técnicos y posibles sesgos, incluido el sesgo cognitivo. Por lo tanto: a) No es correcto b) Es correcto. Las entradas de la lista que muestran los beneficios son ii y v c) No es correcto d) No es correcto"
         }
       }
     },
@@ -9273,7 +9285,7 @@
             },
             {
               "key": "c",
-              "text": "Los probadores deben comenzar el diseño de prueba tan pronto como estén disponibles los borradores de los productos de trabajo relevantes."
+              "text": "Los testers deben comenzar el diseño de prueba tan pronto como estén disponibles los borradores de los productos de trabajo relevantes."
             },
             {
               "key": "d",
@@ -9395,7 +9407,7 @@
             },
             {
               "key": "c",
-              "text": "La necesidad de más probadores manuales con experiencia adecuada"
+              "text": "La necesidad de más testers manuales con experiencia adecuada"
             },
             {
               "key": "d",
@@ -9452,7 +9464,7 @@
             },
             {
               "key": "b",
-              "text": "Las retrospectivas brindan a los probadores la oportunidad de identificar actividades que tuvieron éxito para conservarlas cuando se realicen posibles mejoras en el futuro."
+              "text": "Las retrospectivas brindan a los testers la oportunidad de identificar actividades que tuvieron éxito para conservarlas cuando se realicen posibles mejoras en el futuro."
             },
             {
               "key": "c",
@@ -9464,7 +9476,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Los beneficios de las retrospectivas incluyen la unión del equipo y el aprendizaje al compartir problemas, y una mejor colaboración entre desarrolladores y probadores mediante la revisión y mejora de las prácticas de trabajo. Llamar a las personas que un miembro del equipo puede sentir que no contribuyeron plenamente a lograr la calidad como lo exige el enfoque de equipo completo no contribuirá a la vinculación y colaboración del equipo b) Es correcto. Durante la retrospectiva, el grupo discute qué aspectos del proyecto tuvieron éxito y deberían conservarse, así como las áreas que podrían mejorarse y cómo hacerlo. c) No es correcto. Los beneficios de las retrospectivas se basan en una mayor eficacia y eficiencia a través de mejoras en los procesos; no son una oportunidad para desahogarse y criticar a la dirección y a los clientes. Además, los resultados de las pruebas se registran, generalmente en el informe de finalización de la prueba, de modo que cualquier cosa que se diga en la reunión pueda ser leída por otras partes interesadas. d) No es correcto. Las retrospectivas son reuniones que normalmente se llevan a cabo al final de una iteración donde los miembros del equipo se centrarán en discutir problemas relacionados con la calidad que han ocurrido en la iteración actual. No se utilizan para hacer planes o decisiones técnicas para la siguiente iteración; esto se haría en la reunión de planificación de iteraciones al inicio de la siguiente iteración"
+          "explanation": "a) No es correcto. Los beneficios de las retrospectivas incluyen la unión del equipo y el aprendizaje al compartir problemas, y una mejor colaboración entre desarrolladores y testers mediante la revisión y mejora de las prácticas de trabajo. Llamar a las personas que un miembro del equipo puede sentir que no contribuyeron plenamente a lograr la calidad como lo exige el enfoque de equipo completo no contribuirá a la vinculación y colaboración del equipo b) Es correcto. Durante la retrospectiva, el grupo discute qué aspectos del proyecto tuvieron éxito y deberían conservarse, así como las áreas que podrían mejorarse y cómo hacerlo. c) No es correcto. Los beneficios de las retrospectivas se basan en una mayor eficacia y eficiencia a través de mejoras en los procesos; no son una oportunidad para desahogarse y criticar a la dirección y a los clientes. Además, los resultados de las pruebas se registran, generalmente en el informe de finalización de la prueba, de modo que cualquier cosa que se diga en la reunión pueda ser leída por otras partes interesadas. d) No es correcto. Las retrospectivas son reuniones que normalmente se llevan a cabo al final de una iteración donde los miembros del equipo se centrarán en discutir problemas relacionados con la calidad que han ocurrido en la iteración actual. No se utilizan para hacer planes o decisiones técnicas para la siguiente iteración; esto se haría en la reunión de planificación de iteraciones al inicio de la siguiente iteración"
         }
       }
     },
@@ -9570,7 +9582,7 @@
           "options": [
             {
               "key": "a",
-              "text": "Los desarrolladores informaron que cambiar el sistema de cambio de moneda era difícil y los probadores decidieron comprobar si esto era cierto."
+              "text": "Los desarrolladores informaron que cambiar el sistema de cambio de moneda era difícil y los testers decidieron comprobar si esto era cierto."
             },
             {
               "key": "b",
@@ -9586,7 +9598,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Suponiendo que los probadores pudieran verificar la facilidad de cambiar el sistema de cambio de moneda, entonces esto se haría mediante pruebas de mantenibilidad en lugar de pruebas de mantenimiento, por lo que esto no es un desencadenante para las pruebas de mantenimiento. b) Es correcto. Una modificación del sistema (como una corrección o mejora) es un ejemplo de un desencadenante para las pruebas de mantenimiento. La eliminación de la opción de reembolso del sistema de cambio de moneda fue una solución que llevaría a pruebas de mantenimiento c) No es correcto. Si el equipo ágil ha comenzado a desarrollar una historia de usuario que agrega una nueva función de fidelización del cliente al sistema de cambio de divisas, esto resultará en que prueben la nueva función y luego realizarían pruebas de regresión. No se requieren pruebas de mantenimiento en esta situación d) No es correcto. La reconfiguración del sistema de cambio de moneda para admitir transacciones en moneda local e inglesa no es una modificación del sistema, un cambio en el entorno operativo o un retiro del sistema, que son los tres factores desencadenantes de las pruebas de mantenimiento"
+          "explanation": "a) No es correcto. Suponiendo que los testers pudieran verificar la facilidad de cambiar el sistema de cambio de moneda, entonces esto se haría mediante pruebas de mantenibilidad en lugar de pruebas de mantenimiento, por lo que esto no es un desencadenante para las pruebas de mantenimiento. b) Es correcto. Una modificación del sistema (como una corrección o mejora) es un ejemplo de un desencadenante para las pruebas de mantenimiento. La eliminación de la opción de reembolso del sistema de cambio de moneda fue una solución que llevaría a pruebas de mantenimiento c) No es correcto. Si el equipo ágil ha comenzado a desarrollar una historia de usuario que agrega una nueva función de fidelización del cliente al sistema de cambio de divisas, esto resultará en que prueben la nueva función y luego realizarían pruebas de regresión. No se requieren pruebas de mantenimiento en esta situación d) No es correcto. La reconfiguración del sistema de cambio de moneda para admitir transacciones en moneda local e inglesa no es una modificación del sistema, un cambio en el entorno operativo o un retiro del sistema, que son los tres factores desencadenantes de las pruebas de mantenimiento"
         }
       }
     },
@@ -10321,7 +10333,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "¿Cuál de los siguientes NO anticipa el probador al aplicar predicción de errores?",
+          "prompt": "¿Cuál de los siguientes NO anticipa el tester al aplicar predicción de errores?",
           "options": [
             {
               "key": "a",
@@ -10341,7 +10353,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "La estrategia de errores consiste en anticipar los errores, defectos y fallas basándose en el conocimiento del probador. a) No es correcto. Este es un ejemplo de cómo anticipar el error del desarrollador b) No es correcto. Este es un ejemplo de anticipación del defecto c) Es correcto. Este es un ejemplo de una posible causa raíz de un defecto, que no es ni un error, ni un defecto, ni una falla, y que es difícil de anticipar para el probador. d) No es correcta. Este es un ejemplo de anticipación de una falla, quizás basado en la experiencia de sistemas anteriores en este dominio de aplicación"
+          "explanation": "La estrategia de errores consiste en anticipar los errores, defectos y fallas basándose en el conocimiento del tester. a) No es correcto. Este es un ejemplo de cómo anticipar el error del desarrollador b) No es correcto. Este es un ejemplo de anticipación del defecto c) Es correcto. Este es un ejemplo de una posible causa raíz de un defecto, que no es ni un error, ni un defecto, ni una falla, y que es difícil de anticipar para el tester. d) No es correcta. Este es un ejemplo de anticipación de una falla, quizás basado en la experiencia de sistemas anteriores en este dominio de aplicación"
         }
       }
     },
@@ -10390,7 +10402,7 @@
             },
             {
               "key": "b",
-              "text": "El probador puede realizar ejecución de prueba, pero no puede realizar diseño de prueba."
+              "text": "El tester puede realizar ejecución de prueba, pero no puede realizar diseño de prueba."
             },
             {
               "key": "c",
@@ -10398,11 +10410,11 @@
             },
             {
               "key": "d",
-              "text": "Durante las pruebas exploratorias el probador podrá utilizar técnicas de prueba de caja negra."
+              "text": "Durante las pruebas exploratorias el tester podrá utilizar técnicas de prueba de caja negra."
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. En pruebas exploratorias, los casos de prueba generalmente se crean durante la sesión de pruebas exploratorias, junto con el análisis de prueba, la implementación de prueba y la ejecución de prueba b) No es correcto. En las pruebas exploratorias, las pruebas se diseñan, ejecutan y evalúan simultáneamente mientras el probador aprende sobre el objeto de prueba c) No es correcto. Los resultados de las pruebas exploratorias dependen en gran medida de la experiencia del probador. Entonces, incluso si los resultados de las pruebas exploratorias pueden usarse como un predictor de riesgo y usarse para evaluar si habrá menos o más defectos, en comparación con la sesión anterior de pruebas exploratorias, no son un buen ejemplo de modelos confiables de predicción de defectos que puedan predecir el número de defectos restantes d) Es correcto. Durante las pruebas exploratorias, los probadores pueden utilizar cualquier técnica de prueba que consideren útil."
+          "explanation": "a) No es correcto. En pruebas exploratorias, los casos de prueba generalmente se crean durante la sesión de pruebas exploratorias, junto con el análisis de prueba, la implementación de prueba y la ejecución de prueba b) No es correcto. En las pruebas exploratorias, las pruebas se diseñan, ejecutan y evalúan simultáneamente mientras el tester aprende sobre el objeto de prueba c) No es correcto. Los resultados de las pruebas exploratorias dependen en gran medida de la experiencia del tester. Entonces, incluso si los resultados de las pruebas exploratorias pueden usarse como un predictor de riesgo y usarse para evaluar si habrá menos o más defectos, en comparación con la sesión anterior de pruebas exploratorias, no son un buen ejemplo de modelos confiables de predicción de defectos que puedan predecir el número de defectos restantes d) Es correcto. Durante las pruebas exploratorias, los testers pueden utilizar cualquier técnica de prueba que consideren útil."
         }
       }
     },
@@ -10642,7 +10654,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "El equipo quiere estimar el tiempo necesario para que un probador ejecute cuatro casos de prueba para un componente de software. El equipo ha reunido las siguientes medidas del esfuerzo utilizado para ejecutar un solo caso de prueba: • Mejor escenario: 1 hora • Peor escenario: 8 horas • Escenario más probable: 3 horas Dado que se está utilizando la técnica de estimación de tres puntos, ¿cuál es la estimación final del tiempo necesario para ejecutar los cuatro casos de prueba?",
+          "prompt": "El equipo quiere estimar el tiempo necesario para que un tester ejecute cuatro casos de prueba para un componente de software. El equipo ha reunido las siguientes medidas del esfuerzo utilizado para ejecutar un solo caso de prueba: • Mejor escenario: 1 hora • Peor escenario: 8 horas • Escenario más probable: 3 horas Dado que se está utilizando la técnica de estimación de tres puntos, ¿cuál es la estimación final del tiempo necesario para ejecutar los cuatro casos de prueba?",
           "options": [
             {
               "key": "a",
@@ -10662,7 +10674,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "Utilizando la técnica de estimación de tres puntos, la estimación final (E) se calcula como: E = (a + 4*m + b) / 6, donde a es la estimación más optimista, m es la estimación más probable y b es la estimación más pesimista. Así: a) Es correcta. En este caso, la estimación para ejecutar un solo caso de prueba es: E = (1h + 4*3h + 8h) / 6 = 3.5 horas Entonces, el tiempo total necesario para que el probador ejecute 4 casos de prueba es: 3.5h * 4 = 14 horas b) No es correcto c) No es correcto d) No es correcto"
+          "explanation": "Utilizando la técnica de estimación de tres puntos, la estimación final (E) se calcula como: E = (a + 4*m + b) / 6, donde a es la estimación más optimista, m es la estimación más probable y b es la estimación más pesimista. Así: a) Es correcta. En este caso, la estimación para ejecutar un solo caso de prueba es: E = (1h + 4*3h + 8h) / 6 = 3.5 horas Entonces, el tiempo total necesario para que el tester ejecute 4 casos de prueba es: 3.5h * 4 = 14 horas b) No es correcto c) No es correcto d) No es correcto"
         }
       }
     },
@@ -11044,7 +11056,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. La gestión de riesgos consiste en el análisis de riesgos y el control de riesgos. Ninguna de estas actividades soporta el reensamblaje de los archivos que componían la versión, porque estas actividades tratan con riesgos, no con elementos de configuración. b) No es correcto. El seguimiento de la prueba se ocupa de recopilar información sobre las pruebas. Esta información se utiliza para evaluar el progreso de las pruebas y medir si se cumplen los criterios de salida o las tareas de prueba asociadas con los criterios de salida, como el cumplimiento de los objetivos de cobertura de riesgos de producto, requisitos u otros criterios de aceptación. control de la prueba utiliza la información del seguimiento de la prueba para proporcionar, en forma de directivas de control, orientación y las acciones correctivas necesarias para lograr las pruebas más efectivas y eficientes. Ninguna de estas actividades tiene que ver con la gestión de elementos de configuración c) No es correcto. El enfoque de equipo completo se basa en la habilidad del probador para trabajar eficazmente en un contexto de equipo y contribuir positivamente a los objetivos del equipo. Por lo tanto, se centra en cuestiones relacionadas con el equipo, no en elementos de configuración. d) Es correcto. La gestión de la configuración proporciona una disciplina para identificar, controlar y rastrear los productos de trabajo. Gestión de la configuración mantiene un registro de los elementos de configuración modificados cuando se crea una nueva línea base. Usando la gestión de la configuración, es posible volver a una línea de base anterior para reproducir resultados de pruebas anteriores"
+          "explanation": "a) No es correcto. La gestión de riesgos consiste en el análisis de riesgos y el control de riesgos. Ninguna de estas actividades soporta el reensamblaje de los archivos que componían la versión, porque estas actividades tratan con riesgos, no con elementos de configuración. b) No es correcto. El seguimiento de la prueba se ocupa de recopilar información sobre las pruebas. Esta información se utiliza para evaluar el progreso de las pruebas y medir si se cumplen los criterios de salida o las tareas de prueba asociadas con los criterios de salida, como el cumplimiento de los objetivos de cobertura de riesgos de producto, requisitos u otros criterios de aceptación. control de la prueba utiliza la información del seguimiento de la prueba para proporcionar, en forma de directivas de control, orientación y las acciones correctivas necesarias para lograr las pruebas más efectivas y eficientes. Ninguna de estas actividades tiene que ver con la gestión de elementos de configuración c) No es correcto. El enfoque de equipo completo se basa en la habilidad del tester para trabajar eficazmente en un contexto de equipo y contribuir positivamente a los objetivos del equipo. Por lo tanto, se centra en cuestiones relacionadas con el equipo, no en elementos de configuración. d) Es correcto. La gestión de la configuración proporciona una disciplina para identificar, controlar y rastrear los productos de trabajo. Gestión de la configuración mantiene un registro de los elementos de configuración modificados cuando se crea una nueva línea base. Usando la gestión de la configuración, es posible volver a una línea de base anterior para reproducir resultados de pruebas anteriores"
         }
       }
     },
@@ -11173,7 +11185,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "Considerando cada una de las categorías de herramientas enumeradas: i. Herramientas de colaboración: facilitan la comunicación. La comunicación no incluye la facilitación de la ejecución de prueba ii. Herramientas DevOps: respaldan el proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de compilación automatizados y CI/CD. Tanto el proceso de entrega como el CI/CD incluyen la facilitación de la ejecución de pruebas, como pruebas de componentes para CI iii. Herramientas de gestión: aumente la eficiencia del proceso de prueba facilitando la gestión del SDLC, requisitos, pruebas, defectos y configuración. La gestión de estos elementos no incluye la facilitación de la ejecución de prueba iv. Herramientas de pruebas no funcionales: permiten al probador realizar pruebas no funcionales que son difíciles o imposibles de realizar manualmente. Las pruebas no funcionales pueden incluir tanto pruebas estáticas como pruebas dinámicas, incluida la ejecución de prueba v. herramientas de diseño e implementación de pruebas: facilitan la generación de casos de prueba, datos de prueba y procedimientos de prueba. La generación de este testware no incluye la facilitación de la ejecución de prueba Por lo tanto: a) No es correcto b) Es correcto. Tanto las herramientas DevOps (ii) como las herramientas de pruebas no funcionales (iv) facilitan la ejecución de la prueba c) No es correcto d) No es correcto"
+          "explanation": "Considerando cada una de las categorías de herramientas enumeradas: i. Herramientas de colaboración: facilitan la comunicación. La comunicación no incluye la facilitación de la ejecución de prueba ii. Herramientas DevOps: respaldan el proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de compilación automatizados y CI/CD. Tanto el proceso de entrega como el CI/CD incluyen la facilitación de la ejecución de pruebas, como pruebas de componentes para CI iii. Herramientas de gestión: aumente la eficiencia del proceso de prueba facilitando la gestión del SDLC, requisitos, pruebas, defectos y configuración. La gestión de estos elementos no incluye la facilitación de la ejecución de prueba iv. Herramientas de pruebas no funcionales: permiten al tester realizar pruebas no funcionales que son difíciles o imposibles de realizar manualmente. Las pruebas no funcionales pueden incluir tanto pruebas estáticas como pruebas dinámicas, incluida la ejecución de prueba v. herramientas de diseño e implementación de pruebas: facilitan la generación de casos de prueba, datos de prueba y procedimientos de prueba. La generación de este testware no incluye la facilitación de la ejecución de prueba Por lo tanto: a) No es correcto b) Es correcto. Tanto las herramientas DevOps (ii) como las herramientas de pruebas no funcionales (iv) facilitan la ejecución de la prueba c) No es correcto d) No es correcto"
         }
       }
     },
