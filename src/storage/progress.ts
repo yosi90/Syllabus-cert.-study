@@ -1,6 +1,8 @@
+import type { KLevel, SourceModel } from "../data/types";
 import type { AnswerMap, SessionScore } from "../domain/scoring";
 
-export const STORAGE_KEY = "istqb-ctfl-v4-trainer:v1";
+export const STORAGE_KEY = "istqb-ctfl-v4-trainer:v2";
+export const LEGACY_STORAGE_KEY = "istqb-ctfl-v4-trainer:v1";
 
 export type QuestionProgress = {
   attempts: number;
@@ -21,8 +23,29 @@ export type StoredSession = {
   completedAt: string;
 };
 
+export type StoredFilters = {
+  query: string;
+  models: SourceModel[];
+  chapters: string[];
+  kLevels: KLevel[];
+  references: string[];
+  status: "all" | "unseen" | "correct" | "incorrect" | "flagged";
+};
+
+export type PersistedExam = {
+  blueprint: {
+    id: string;
+    title: string;
+    questionIds: string[];
+  };
+  currentIndex: number;
+  answers: AnswerMap;
+  timerMode: "off" | "standard" | "extended";
+  endsAt: number | null;
+};
+
 export type ProgressState = {
-  version: 1;
+  version: 2;
   certification: "ctfl-v4";
   questionProgress: Record<string, QuestionProgress>;
   sessions: StoredSession[];
@@ -30,14 +53,45 @@ export type ProgressState = {
     lastMode: "study" | "exam";
     tutorialCompleted: boolean;
     tutorialCompletedAt: string | null;
+    language: "en" | "es" | null;
+    theme: "light" | "dark" | null;
+    lastRoute: "/" | "/exam" | "/review";
+  };
+  study: {
+    filters: StoredFilters;
+    currentQuestionId: string | null;
+    answers: AnswerMap;
+    revealed: boolean;
+  };
+  activeExam: PersistedExam | null;
+};
+
+type LegacyProgressState = {
+  version: 1;
+  certification: "ctfl-v4";
+  questionProgress: Record<string, QuestionProgress>;
+  sessions: StoredSession[];
+  preferences?: {
+    lastMode?: "study" | "exam";
+    tutorialCompleted?: boolean;
+    tutorialCompletedAt?: string | null;
   };
 };
 
 export type StorageLike = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 
+const emptyFilters: StoredFilters = {
+  query: "",
+  models: [],
+  chapters: [],
+  kLevels: [],
+  references: [],
+  status: "all",
+};
+
 export function createEmptyProgress(): ProgressState {
   return {
-    version: 1,
+    version: 2,
     certification: "ctfl-v4",
     questionProgress: {},
     sessions: [],
@@ -45,52 +99,130 @@ export function createEmptyProgress(): ProgressState {
       lastMode: "study",
       tutorialCompleted: false,
       tutorialCompletedAt: null,
+      language: null,
+      theme: null,
+      lastRoute: "/",
     },
+    study: {
+      filters: { ...emptyFilters },
+      currentQuestionId: null,
+      answers: {},
+      revealed: false,
+    },
+    activeExam: null,
   };
 }
 
-function isProgressState(value: unknown): value is ProgressState {
-  if (!value || typeof value !== "object") return false;
-  const candidate = value as Partial<ProgressState>;
+function isObject(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === "object";
+}
+
+function isLegacyProgressState(value: unknown): value is LegacyProgressState {
+  if (!isObject(value)) return false;
   return (
-    candidate.version === 1 &&
-    candidate.certification === "ctfl-v4" &&
-    typeof candidate.questionProgress === "object" &&
-    Array.isArray(candidate.sessions)
+    value.version === 1 &&
+    value.certification === "ctfl-v4" &&
+    isObject(value.questionProgress) &&
+    Array.isArray(value.sessions)
   );
 }
 
-function normalizeProgress(value: ProgressState): ProgressState {
+function isProgressState(value: unknown): value is ProgressState {
+  if (!isObject(value)) return false;
+  return (
+    value.version === 2 &&
+    value.certification === "ctfl-v4" &&
+    isObject(value.questionProgress) &&
+    Array.isArray(value.sessions)
+  );
+}
+
+function normalizeFilters(value: Partial<StoredFilters> | undefined): StoredFilters {
+  const validStatuses = ["all", "unseen", "correct", "incorrect", "flagged"] as const;
   return {
-    version: 1,
+    query: typeof value?.query === "string" ? value.query : "",
+    models: Array.isArray(value?.models) ? value.models.filter((item): item is SourceModel => ["A", "B", "C", "D"].includes(item)) : [],
+    chapters: Array.isArray(value?.chapters) ? value.chapters.filter((item): item is string => typeof item === "string") : [],
+    kLevels: Array.isArray(value?.kLevels) ? value.kLevels.filter((item): item is KLevel => ["K1", "K2", "K3"].includes(item)) : [],
+    references: Array.isArray(value?.references) ? value.references.filter((item): item is string => typeof item === "string") : [],
+    status: validStatuses.includes(value?.status as (typeof validStatuses)[number])
+      ? (value?.status as StoredFilters["status"])
+      : "all",
+  };
+}
+
+function normalizeProgress(value: ProgressState): ProgressState {
+  const defaults = createEmptyProgress();
+  const preferences = value.preferences ?? defaults.preferences;
+  const study = value.study ?? defaults.study;
+  return {
+    version: 2,
     certification: "ctfl-v4",
+    questionProgress: value.questionProgress ?? {},
+    sessions: Array.isArray(value.sessions) ? value.sessions : [],
+    preferences: {
+      lastMode: preferences.lastMode === "exam" ? "exam" : "study",
+      tutorialCompleted: preferences.tutorialCompleted ?? false,
+      tutorialCompletedAt: preferences.tutorialCompletedAt ?? null,
+      language: preferences.language === "en" || preferences.language === "es" ? preferences.language : null,
+      theme: preferences.theme === "light" || preferences.theme === "dark" ? preferences.theme : null,
+      lastRoute: ["/", "/exam", "/review"].includes(preferences.lastRoute) ? preferences.lastRoute : "/",
+    },
+    study: {
+      filters: normalizeFilters(study.filters),
+      currentQuestionId: typeof study.currentQuestionId === "string" ? study.currentQuestionId : null,
+      answers: isObject(study.answers) ? (study.answers as AnswerMap) : {},
+      revealed: Boolean(study.revealed),
+    },
+    activeExam: isObject(value.activeExam) ? (value.activeExam as PersistedExam) : null,
+  };
+}
+
+function migrateLegacyProgress(value: LegacyProgressState): ProgressState {
+  const migrated = createEmptyProgress();
+  return {
+    ...migrated,
     questionProgress: value.questionProgress ?? {},
     sessions: value.sessions ?? [],
     preferences: {
-      lastMode: value.preferences?.lastMode ?? "study",
+      ...migrated.preferences,
+      lastMode: value.preferences?.lastMode === "exam" ? "exam" : "study",
       tutorialCompleted: value.preferences?.tutorialCompleted ?? false,
       tutorialCompletedAt: value.preferences?.tutorialCompletedAt ?? null,
     },
   };
 }
 
+function parseProgress(raw: string): ProgressState | null {
+  const parsed: unknown = JSON.parse(raw);
+  if (isProgressState(parsed)) return normalizeProgress(parsed);
+  if (isLegacyProgressState(parsed)) return migrateLegacyProgress(parsed);
+  return null;
+}
+
 export function loadProgress(storage: StorageLike = window.localStorage): ProgressState {
   try {
-    const raw = storage.getItem(STORAGE_KEY);
-    if (!raw) return createEmptyProgress();
-    const parsed = JSON.parse(raw);
-    return isProgressState(parsed) ? normalizeProgress(parsed) : createEmptyProgress();
+    const currentRaw = storage.getItem(STORAGE_KEY);
+    if (currentRaw) return parseProgress(currentRaw) ?? createEmptyProgress();
+
+    const legacyRaw = storage.getItem(LEGACY_STORAGE_KEY);
+    if (!legacyRaw) return createEmptyProgress();
+    const migrated = parseProgress(legacyRaw);
+    if (!migrated) return createEmptyProgress();
+    storage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+    return migrated;
   } catch {
     return createEmptyProgress();
   }
 }
 
 export function saveProgress(progress: ProgressState, storage: StorageLike = window.localStorage): void {
-  storage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  storage.setItem(STORAGE_KEY, JSON.stringify(normalizeProgress(progress)));
 }
 
 export function clearProgress(storage: StorageLike = window.localStorage): ProgressState {
   storage.removeItem(STORAGE_KEY);
+  storage.removeItem(LEGACY_STORAGE_KEY);
   return createEmptyProgress();
 }
 
@@ -159,13 +291,15 @@ export function setTutorialCompleted(
 }
 
 export function exportProgress(progress: ProgressState): string {
-  return JSON.stringify(progress, null, 2);
+  return JSON.stringify(normalizeProgress(progress), null, 2);
 }
 
 export function importProgress(raw: string): ProgressState {
-  const parsed = JSON.parse(raw);
-  if (!isProgressState(parsed)) {
-    throw new Error("El archivo no tiene el formato de progreso CTFL v4 esperado.");
+  try {
+    const parsed = parseProgress(raw);
+    if (parsed) return parsed;
+  } catch {
+    // Use the same user-facing compatibility error for malformed JSON.
   }
-  return normalizeProgress(parsed);
+  throw new Error("El archivo no tiene el formato de progreso CTFL v4 esperado.");
 }

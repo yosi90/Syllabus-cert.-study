@@ -22,7 +22,7 @@ import {
   X,
   XCircle,
 } from "lucide-react";
-import { HashRouter, NavLink, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { HashRouter, NavLink, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { chapters, examRules, questionBank, questions } from "./data/bank";
 import type { KLevel, Objective, Question, SourceModel } from "./data/types";
 import { createModelExam, createRandomExam, findQuestionsByIds, type ExamBlueprint } from "./domain/exams";
@@ -39,16 +39,11 @@ import {
   setTutorialCompleted,
   toggleFlag,
   type ProgressState,
+  type PersistedExam,
   type StoredSession,
 } from "./storage/progress";
 
-type ExamState = {
-  blueprint: ExamBlueprint;
-  currentIndex: number;
-  answers: AnswerMap;
-  timerMode: TimerMode;
-  endsAt: number | null;
-};
+type ExamState = PersistedExam;
 
 type TimerMode = "off" | "standard" | "extended";
 type Language = "en" | "es";
@@ -475,8 +470,14 @@ function formatRemainingTime(milliseconds: number) {
 
 function AppShell() {
   const navigate = useNavigate();
-  const [language, setLanguage] = useState<Language>("en");
+  const location = useLocation();
+  const [progress, setProgress] = useState<ProgressState>(() => loadProgress());
+  const [language, setLanguage] = useState<Language>(() => {
+    if (progress.preferences.language) return progress.preferences.language;
+    return navigator.language.toLowerCase().startsWith("es") ? "es" : "en";
+  });
   const [theme, setTheme] = useState<Theme>(() => {
+    if (progress.preferences.theme) return progress.preferences.theme;
     const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
     if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -486,20 +487,28 @@ function AppShell() {
   const copy = uiCopy[language];
   const tutorial = tutorialContent[language];
   const tutorialSteps = tutorial.steps;
-  const [progress, setProgress] = useState<ProgressState>(() => loadProgress());
-  const [filters, setFilters] = useState<QuestionFilters>(emptyFilters);
-  const [studyIndex, setStudyIndex] = useState(0);
-  const [studyAnswers, setStudyAnswers] = useState<AnswerMap>({});
-  const [studyRevealed, setStudyRevealed] = useState(false);
-  const [activeExam, setActiveExam] = useState<ExamState | null>(null);
-  const [examTimerMode, setExamTimerMode] = useState<TimerMode>("standard");
+  const [filters, setFilters] = useState<QuestionFilters>(() => progress.study.filters);
+  const [studyQuestionId, setStudyQuestionId] = useState<string | null>(() => progress.study.currentQuestionId);
+  const [studyAnswers, setStudyAnswers] = useState<AnswerMap>(() => progress.study.answers);
+  const [studyRevealed, setStudyRevealed] = useState(() => progress.study.revealed);
+  const [activeExam, setActiveExam] = useState<ExamState | null>(() => progress.activeExam);
+  const [examTimerMode, setExamTimerMode] = useState<TimerMode>(() => progress.activeExam?.timerMode ?? "standard");
   const [now, setNow] = useState(() => Date.now());
   const [review, setReview] = useState<ReviewState | null>(null);
   const [tutorialStep, setTutorialStep] = useState(0);
+  const routeWasRestored = useRef(false);
 
   useEffect(() => {
     saveProgress(progress);
   }, [progress]);
+
+  useEffect(() => {
+    if (routeWasRestored.current) return;
+    routeWasRestored.current = true;
+    if (location.pathname === "/" && progress.preferences.lastRoute !== "/") {
+      navigate(progress.preferences.lastRoute, { replace: true });
+    }
+  }, [location.pathname, navigate, progress.preferences.lastRoute]);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -535,13 +544,43 @@ function AppShell() {
   const progressSummary = useMemo(() => summarizeProgress(questions, progress), [progress]);
   const references = useMemo(() => Array.from(new Set(questions.map((question) => question.reference))).sort(), []);
   const tutorialTarget = progress.preferences.tutorialCompleted ? undefined : tutorialSteps[tutorialStep]?.target;
+  const storedStudyIndex = filteredQuestions.findIndex((question) => question.id === studyQuestionId);
+  const studyIndex = storedStudyIndex >= 0 ? storedStudyIndex : 0;
+  const currentStudyQuestion = filteredQuestions[studyIndex];
 
   useEffect(() => {
-    setStudyIndex(0);
-    setStudyRevealed(false);
-  }, [filters]);
+    if (!filteredQuestions.length) {
+      if (studyQuestionId !== null) setStudyQuestionId(null);
+      return;
+    }
+    if (storedStudyIndex < 0) {
+      setStudyQuestionId(filteredQuestions[0].id);
+      setStudyRevealed(false);
+    }
+  }, [filteredQuestions, storedStudyIndex, studyQuestionId]);
 
-  const currentStudyQuestion = filteredQuestions[Math.min(studyIndex, Math.max(filteredQuestions.length - 1, 0))];
+  useEffect(() => {
+    const lastRoute = ["/", "/exam", "/review"].includes(location.pathname)
+      ? (location.pathname as ProgressState["preferences"]["lastRoute"])
+      : "/";
+    setProgress((current) => ({
+      ...current,
+      preferences: {
+        ...current.preferences,
+        lastMode: lastRoute === "/exam" ? "exam" : "study",
+        language,
+        theme,
+        lastRoute,
+      },
+      study: {
+        filters,
+        currentQuestionId: studyQuestionId,
+        answers: studyAnswers,
+        revealed: studyRevealed,
+      },
+      activeExam,
+    }));
+  }, [activeExam, filters, language, location.pathname, studyAnswers, studyQuestionId, studyRevealed, theme]);
 
   function updateProgress(next: ProgressState) {
     setProgress(next);
@@ -563,22 +602,18 @@ function AppShell() {
   }
 
   function handleStudyNext(direction: 1 | -1) {
-    setStudyIndex((current) => {
-      const next = Math.min(Math.max(current + direction, 0), Math.max(filteredQuestions.length - 1, 0));
-      return next;
-    });
+    const next = Math.min(Math.max(studyIndex + direction, 0), Math.max(filteredQuestions.length - 1, 0));
+    setStudyQuestionId(filteredQuestions[next]?.id ?? null);
     setStudyRevealed(false);
   }
 
   function handleStudyRandom() {
-    setStudyIndex((current) => {
-      if (filteredQuestions.length <= 1) return current;
-      let next = current;
-      while (next === current) {
-        next = Math.floor(Math.random() * filteredQuestions.length);
-      }
-      return next;
-    });
+    if (filteredQuestions.length <= 1) return;
+    let next = studyIndex;
+    while (next === studyIndex) {
+      next = Math.floor(Math.random() * filteredQuestions.length);
+    }
+    setStudyQuestionId(filteredQuestions[next]?.id ?? null);
     setStudyRevealed(false);
   }
 
@@ -671,6 +706,15 @@ function AppShell() {
     try {
       const imported = importProgress(raw);
       updateProgress(imported);
+      setLanguage(imported.preferences.language ?? language);
+      setTheme(imported.preferences.theme ?? theme);
+      setFilters(imported.study.filters);
+      setStudyQuestionId(imported.study.currentQuestionId);
+      setStudyAnswers(imported.study.answers);
+      setStudyRevealed(imported.study.revealed);
+      setActiveExam(imported.activeExam);
+      setExamTimerMode(imported.activeExam?.timerMode ?? "standard");
+      navigate(imported.preferences.lastRoute);
     } catch (error) {
       alert(error instanceof Error ? error.message : language === "es" ? "No se pudo importar el progreso." : "Progress could not be imported.");
     }
@@ -690,6 +734,8 @@ function AppShell() {
     if (confirm(language === "es" ? "Esto borrará todo el progreso local de esta web." : "This will delete all local progress for this site.")) {
       updateProgress(clearProgress());
       setTutorialStep(0);
+      setFilters(emptyFilters);
+      setStudyQuestionId(null);
       setStudyAnswers({});
       setStudyRevealed(false);
       setReview(null);
@@ -802,7 +848,7 @@ function AppShell() {
               onMove={handleStudyNext}
               onRandom={handleStudyRandom}
               onSelectIndex={(index) => {
-                setStudyIndex(index);
+                setStudyQuestionId(filteredQuestions[index]?.id ?? null);
                 setStudyRevealed(false);
               }}
               onFlag={handleFlag}

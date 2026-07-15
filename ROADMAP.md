@@ -39,15 +39,17 @@ Este documento es la fuente de verdad del estado del proyecto. `ROADMAP_CTFL_V4_
 
 ## Hito 2 — Persistencia y recuperación
 
-- [ ] Diseñar el almacenamiento local versión 2.
-- [ ] Implementar migración automática desde versión 1.
-- [ ] Persistir idioma, tema, filtros, ruta y pregunta actual.
-- [ ] Persistir simulacro activo, respuestas, posición y temporizador.
-- [ ] Recuperar correctamente un simulacro tras recargar.
-- [ ] Conservar el estado de tiempo agotado sin perder respuestas.
-- [ ] Incluir el nuevo estado en exportación e importación.
-- [ ] Añadir pruebas unitarias de migración y recuperación.
-- [ ] Cerrar el hito comprobando compatibilidad con exportaciones antiguas.
+- [x] Diseñar el almacenamiento local versión 2.
+- [x] Implementar migración automática desde versión 1.
+- [x] Persistir idioma, tema, filtros, ruta y pregunta actual.
+- [x] Persistir simulacro activo, respuestas, posición y temporizador.
+- [x] Recuperar correctamente un simulacro tras recargar.
+- [x] Conservar el estado de tiempo agotado sin perder respuestas.
+- [x] Incluir el nuevo estado en exportación e importación.
+- [x] Añadir pruebas unitarias de migración y recuperación.
+- [x] Cerrar el hito comprobando compatibilidad con exportaciones antiguas.
+
+**Cerrado el 15/07/2026.** Validación: migración automática v1→v2 y exportaciones antiguas verificadas; preferencias, práctica y simulacro activo recuperados tras recarga en escritorio y móvil; temporizador vencido restaurado sin perder respuestas; 14 pruebas unitarias y 27 recorridos E2E superados.
 
 ## Hito 3 — Historial y revisiones recuperables
 

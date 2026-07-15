@@ -149,6 +149,10 @@ Se guarda:
 - Preguntas marcadas.
 - Simulacros recientes.
 - Respuestas de sesiones terminadas.
+- Idioma, tema, filtros, ultima seccion y pregunta actual.
+- Respuestas, posicion y temporizador de un simulacro sin terminar.
+
+Si recargas o cierras la pestana durante un simulacro, la web lo recupera al volver. Si el tiempo termina mientras esta cerrada, conserva las respuestas y muestra el estado `Tiempo agotado` para que puedas finalizar o cancelar.
 
 El progreso CTFL v4.0 usa una clave separada del progreso CTFL 2018 para evitar mezclar bancos distintos.
 
@@ -156,11 +160,11 @@ El progreso CTFL v4.0 usa una clave separada del progreso CTFL 2018 para evitar 
 
 ### Exportar
 
-Descarga un archivo JSON con tu progreso. Sirve para copia de seguridad o para moverlo a otro navegador.
+Descarga un archivo JSON con tu progreso y el estado recuperable de la web. Sirve para copia de seguridad o para moverlo a otro navegador.
 
 ### Importar
 
-Carga un archivo JSON exportado previamente y sustituye el progreso actual.
+Carga un archivo JSON exportado previamente y sustituye el progreso y estado actual. Las exportaciones anteriores con formato v1 se migran automaticamente a v2.
 
 ### Borrar
 
