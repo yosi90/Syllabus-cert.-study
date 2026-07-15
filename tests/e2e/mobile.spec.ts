@@ -1,0 +1,52 @@
+import { expect, test } from "@playwright/test";
+import { prepareApp } from "./fixtures";
+
+test.beforeEach(async ({ page }) => {
+  await prepareApp(page);
+});
+
+test("mobile primary navigation reaches every current mode", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile-chromium", "This behavior is specific to the mobile layout.");
+  await page.goto("/");
+
+  const navigation = page.locator(".mobile-primary-nav");
+  await expect(navigation).toBeVisible();
+  await expect(navigation.getByRole("link")).toHaveCount(3);
+  await navigation.getByRole("link", { name: "Exam" }).click();
+  await expect(page).toHaveURL(/#\/exam$/);
+  await navigation.getByRole("link", { name: "Review" }).click();
+  await expect(page).toHaveURL(/#\/review$/);
+  await navigation.getByRole("link", { name: "Practice" }).click();
+  await expect(page).toHaveURL(/#\/$/);
+});
+
+test("filters and secondary actions remain in the mobile side menu", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile-chromium", "This behavior is specific to the mobile layout.");
+  await page.goto("/");
+
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await expect(page.locator("#main-menu")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Export" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Import" })).toBeVisible();
+  await page.locator(".mobile-menu-toggle").click();
+  await expect(page.locator("#main-menu")).not.toHaveClass(/is-open/);
+  await expect(page.locator(".menu-backdrop")).toHaveCount(0);
+});
+
+for (const width of [320, 390, 768]) {
+  test(`the layout has no horizontal overflow at ${width}px`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop-chromium", "Each width only needs one Chromium pass.");
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto("/");
+
+    await expect(page.locator(".mobile-primary-nav")).toBeVisible();
+    const dimensions = await page.evaluate(() => ({
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }));
+    expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
+    if (width === 390) {
+      await expect(page).toHaveScreenshot("practice-mobile-390.png", { animations: "disabled" });
+    }
+  });
+}

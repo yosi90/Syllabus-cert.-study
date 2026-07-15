@@ -7,7 +7,10 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "vitest run",
+    "test": "vitest run src",
+    "test:e2e": "playwright test",
+    "test:e2e:update": "playwright test --update-snapshots",
+    "validate": "npm run validate:data && npm test && npm run build && npm run test:e2e",
     "extract:data": "python scripts/extract_data.py",
     "extract:visuals": "python scripts/extract_visuals.py",
     "translate:data": "python scripts/translate_es.py",
@@ -23,6 +26,7 @@
     "vite": "^7.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

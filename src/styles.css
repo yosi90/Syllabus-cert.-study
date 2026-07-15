@@ -43,7 +43,8 @@ button:disabled {
 }
 
 .mobile-menu-toggle,
-.menu-backdrop {
+.menu-backdrop,
+.mobile-primary-nav {
   display: none;
 }
 
@@ -1279,24 +1280,16 @@ button:disabled {
   pointer-events: none;
 }
 
-.tutorial-highlight::after {
-  position: absolute;
-  top: -17px;
-  right: 10px;
-  z-index: 1;
-  padding: 3px 8px;
-  border-radius: 999px;
-  color: #06241f;
-  background: #79ead7;
-  content: "zona explicada";
-  font-size: 11px;
-  font-weight: 900;
-  line-height: 1;
-  text-transform: uppercase;
+.tutorial-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
 }
 
-.tutorial-header {
-  margin-bottom: 12px;
+.tutorial-header > div {
+  min-width: 0;
 }
 
 .tutorial-header h2 {
@@ -1304,6 +1297,23 @@ button:disabled {
   color: #172033;
   font-size: 28px;
   line-height: 1.15;
+}
+
+.tutorial-skip {
+  flex: 0 0 auto;
+  padding: 5px 0;
+  border: 0;
+  color: #3c687f;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tutorial-skip:hover,
+.tutorial-skip:focus-visible {
+  color: #245166;
 }
 
 .tutorial-modal p {
@@ -1503,7 +1513,62 @@ button:disabled {
 
   .workspace {
     padding: calc(14px + env(safe-area-inset-top, 0px)) calc(18px + env(safe-area-inset-right, 0px))
-      calc(18px + env(safe-area-inset-bottom, 0px)) calc(18px + env(safe-area-inset-left, 0px));
+      calc(84px + env(safe-area-inset-bottom, 0px)) calc(18px + env(safe-area-inset-left, 0px));
+  }
+
+  .mobile-primary-nav {
+    position: fixed;
+    right: 10px;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    left: 10px;
+    z-index: 40;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+    padding: 5px;
+    border: 1px solid #d3dce6;
+    border-radius: 12px;
+    background: rgb(255 255 255 / 96%);
+    box-shadow: 0 10px 30px rgb(10 18 30 / 20%);
+    backdrop-filter: blur(12px);
+  }
+
+  .mobile-primary-nav a {
+    display: grid;
+    place-items: center;
+    gap: 2px;
+    min-width: 0;
+    min-height: 48px;
+    padding: 5px 4px;
+    border-radius: 8px;
+    color: #5e6e81;
+    font-size: 11px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .mobile-primary-nav a.active {
+    color: #175c52;
+    background: #e6f6f2;
+  }
+
+  .mobile-primary-nav svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .tutorial-modal,
+  .tutorial-modal.placement-center,
+  .tutorial-modal.placement-bottom,
+  .tutorial-modal.placement-right {
+    top: auto;
+    right: max(12px, env(safe-area-inset-right, 0px));
+    bottom: max(12px, env(safe-area-inset-bottom, 0px));
+    left: max(12px, env(safe-area-inset-left, 0px));
+    width: auto;
+    max-height: calc(100dvh - 24px);
+    padding: 20px;
+    transform: none;
   }
 
   .workspace-header {
@@ -1564,7 +1629,7 @@ button:disabled {
 @media (max-width: 640px) {
   .workspace {
     padding: calc(14px + env(safe-area-inset-top, 0px)) calc(14px + env(safe-area-inset-right, 0px))
-      calc(14px + env(safe-area-inset-bottom, 0px)) calc(14px + env(safe-area-inset-left, 0px));
+      calc(82px + env(safe-area-inset-bottom, 0px)) calc(14px + env(safe-area-inset-left, 0px));
   }
 
   .brand h1 {
@@ -1629,27 +1694,30 @@ button:disabled {
   }
 
   .tutorial-modal {
-    right: 14px;
-    left: 14px;
-    width: auto;
-    padding: 18px;
-  }
-
-  .tutorial-modal.placement-center,
-  .tutorial-modal.placement-right {
-    top: auto;
-    bottom: 14px;
-    transform: none;
-  }
-
-  .tutorial-modal.placement-bottom {
-    bottom: 14px;
-    transform: none;
+    padding: 16px;
   }
 
   .tutorial-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
-    flex-direction: column;
+  }
+
+  .tutorial-actions button {
+    min-width: 0;
+    padding: 9px 8px;
+  }
+
+  .tutorial-header {
+    gap: 10px;
+  }
+
+  .tutorial-header h2 {
+    font-size: 24px;
+  }
+
+  .tutorial-modal p {
+    font-size: 15px;
   }
 }
 
@@ -1810,6 +1878,24 @@ button:disabled {
 
 .app[data-theme="dark"] .tutorial-dot.active {
   background: #4fb7a5;
+}
+
+.app[data-theme="dark"] .mobile-primary-nav {
+  border-color: #2b3a4e;
+  background: rgb(16 25 39 / 96%);
+}
+
+.app[data-theme="dark"] .mobile-primary-nav a {
+  color: #99a9bc;
+}
+
+.app[data-theme="dark"] .mobile-primary-nav a.active {
+  color: #9edfd5;
+  background: #17332f;
+}
+
+.app[data-theme="dark"] .tutorial-skip {
+  color: #8fc8dc;
 }
 
 .app[data-theme="dark"] .question-visual-trigger {

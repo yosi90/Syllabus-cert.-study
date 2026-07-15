@@ -251,86 +251,88 @@ const uiCopy = {
 } as const;
 
 type Copy = (typeof uiCopy)[Language];
-const tutorialSteps = [
-  {
-    title: "Bienvenida",
-    target: "layout",
-    placement: "center",
-    body: "Esta web está pensada para estudiar ISTQB CTFL v4.0 con preguntas oficiales, práctica por filtros y simulacros de 40 preguntas.",
-    points: [
-      "El lateral contiene filtros, progreso y acciones.",
-      "La zona central cambia entre Práctica, Simulacro y Revisión.",
-      "El progreso se guarda solo en este navegador.",
+type TutorialStep = {
+  title: string;
+  target: string;
+  placement: "center" | "bottom" | "right";
+  body: string;
+  points: string[];
+};
+
+type TutorialContent = {
+  label: string;
+  skip: string;
+  back: string;
+  next: string;
+  complete: string;
+  stepLabel: (current: number, total: number) => string;
+  steps: TutorialStep[];
+};
+
+const tutorialContent: Record<Language, TutorialContent> = {
+  en: {
+    label: "Quick tutorial",
+    skip: "Skip tutorial",
+    back: "Back",
+    next: "Next",
+    complete: "Start studying",
+    stepLabel: (current, total) => `Step ${current} of ${total}`,
+    steps: [
+      {
+        title: "Welcome",
+        target: "layout",
+        placement: "center",
+        body: "Study ISTQB CTFL v4.0 with 160 official sample questions and progress stored only in this browser.",
+        points: ["Use the side menu for filters and progress.", "Switch between Practice, Exam and Review at any time."],
+      },
+      {
+        title: "Practice with feedback",
+        target: "practice",
+        placement: "bottom",
+        body: "Answer one question at a time, check it immediately and read the official rationale.",
+        points: ["Filter by model, chapter, K-Level or learning objective.", "Flag difficult questions for focused review."],
+      },
+      {
+        title: "Official exam practice",
+        target: "modes",
+        placement: "right",
+        body: "Run models A–D or a 40-question random exam using the official CTFL distribution.",
+        points: ["Choose 60, 75 or unlimited minutes.", "Review your score and explanations after finishing."],
+      },
     ],
   },
-  {
-    title: "Práctica",
-    target: "practice",
-    placement: "bottom",
-    body: "Práctica sirve para trabajar pregunta a pregunta con corrección inmediata.",
-    points: [
-      "Elige una opción y pulsa Comprobar.",
-      "Verás si acertaste y la explicación oficial.",
-      "Puedes marcar preguntas para repasarlas después.",
+  es: {
+    label: "Tutorial rápido",
+    skip: "Omitir tutorial",
+    back: "Anterior",
+    next: "Siguiente",
+    complete: "Empezar a estudiar",
+    stepLabel: (current, total) => `Paso ${current} de ${total}`,
+    steps: [
+      {
+        title: "Bienvenida",
+        target: "layout",
+        placement: "center",
+        body: "Estudia ISTQB CTFL v4.0 con 160 preguntas oficiales y progreso guardado solo en este navegador.",
+        points: ["Usa el menú lateral para filtros y progreso.", "Cambia entre Práctica, Simulacro y Revisión cuando quieras."],
+      },
+      {
+        title: "Práctica con corrección",
+        target: "practice",
+        placement: "bottom",
+        body: "Responde pregunta a pregunta, comprueba al instante y consulta la justificación oficial.",
+        points: ["Filtra por modelo, capítulo, nivel K u objetivo.", "Marca las preguntas difíciles para repasarlas."],
+      },
+      {
+        title: "Simulacros oficiales",
+        target: "modes",
+        placement: "right",
+        body: "Realiza los modelos A–D o un simulacro aleatorio de 40 preguntas con la distribución oficial.",
+        points: ["Elige 60, 75 minutos o sin límite.", "Revisa la puntuación y las explicaciones al terminar."],
+      },
     ],
   },
-  {
-    title: "Simulacros y modelos",
-    target: "modes",
-    placement: "right",
-    body: "Los modelos A, B, C y D son cuatro exámenes oficiales de ejemplo, cada uno con 40 preguntas.",
-    points: [
-      "Elegir un modelo en Simulacro reproduce ese examen concreto.",
-      "Filtrar por modelo en Práctica muestra solo preguntas de ese documento.",
-      "El modo Aleatorio mezcla preguntas del banco respetando la distribución CTFL v4.0 por capítulos.",
-    ],
-  },
-  {
-    title: "Capítulos",
-    target: "chapters",
-    placement: "right",
-    body: "Los capítulos FL-1 a FL-6 son las áreas del syllabus CTFL v4.0.",
-    points: [
-      "FL-1 cubre fundamentos de prueba.",
-      "FL-4 concentra análisis y diseño de pruebas y tiene bastante peso.",
-      "Filtra por capítulo cuando quieras estudiar un bloque completo.",
-    ],
-  },
-  {
-    title: "Nivel K",
-    target: "k-level",
-    placement: "right",
-    body: "El nivel K indica el tipo de esfuerzo cognitivo que pide la pregunta.",
-    points: [
-      "K1 es recordar definiciones o términos.",
-      "K2 es comprender, comparar o distinguir conceptos.",
-      "K3 es aplicar técnicas en casos prácticos.",
-    ],
-  },
-  {
-    title: "Referencia y estado",
-    target: "reference-status",
-    placement: "right",
-    body: "La referencia apunta al objetivo concreto del syllabus y el estado usa tu progreso local.",
-    points: [
-      "Usa Referencia para estudiar un objetivo como FL-4.2.2.",
-      "Usa Estado para ver sin responder, últimas incorrectas o marcadas.",
-      "Combina ambos filtros para repasar con precisión.",
-    ],
-  },
-  {
-    title: "Revisión y progreso",
-    target: "progress-actions",
-    placement: "right",
-    body: "Al finalizar un simulacro verás puntuación, aprobado/no aprobado y explicaciones.",
-    points: [
-      "Aprobado significa al menos 26 de 40.",
-      "La duración oficial es 60 minutos, o 75 minutos con extensión del 25%.",
-      "Exportar guarda una copia JSON de tu progreso.",
-      "Importar restaura ese progreso en otro navegador o sesión.",
-    ],
-  },
-];
+};
 
 function classNames(...values: Array<string | false | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -482,6 +484,8 @@ function AppShell() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showSpanishNotice, setShowSpanishNotice] = useState(false);
   const copy = uiCopy[language];
+  const tutorial = tutorialContent[language];
+  const tutorialSteps = tutorial.steps;
   const [progress, setProgress] = useState<ProgressState>(() => loadProgress());
   const [filters, setFilters] = useState<QuestionFilters>(emptyFilters);
   const [studyIndex, setStudyIndex] = useState(0);
@@ -530,7 +534,7 @@ function AppShell() {
   const filteredQuestions = useMemo(() => filterQuestions(questions, filters, progress, language), [filters, progress, language]);
   const progressSummary = useMemo(() => summarizeProgress(questions, progress), [progress]);
   const references = useMemo(() => Array.from(new Set(questions.map((question) => question.reference))).sort(), []);
-  const tutorialTarget = progress.preferences.tutorialCompleted ? undefined : tutorialSteps[tutorialStep].target;
+  const tutorialTarget = progress.preferences.tutorialCompleted ? undefined : tutorialSteps[tutorialStep]?.target;
 
   useEffect(() => {
     setStudyIndex(0);
@@ -837,14 +841,31 @@ function AppShell() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
+      <nav className="mobile-primary-nav" aria-label={copy.modesLabel}>
+        <NavLink to="/" end onClick={() => setIsMenuOpen(false)}>
+          <BookOpen aria-hidden="true" />
+          <span>{copy.practice}</span>
+        </NavLink>
+        <NavLink to="/exam" onClick={() => setIsMenuOpen(false)}>
+          <Timer aria-hidden="true" />
+          <span>{copy.exam}</span>
+        </NavLink>
+        <NavLink to="/review" onClick={() => setIsMenuOpen(false)}>
+          <RotateCcw aria-hidden="true" />
+          <span>{copy.review}</span>
+        </NavLink>
+      </nav>
+
       {!progress.preferences.tutorialCompleted && (
         <OnboardingTutorial
+          content={tutorial}
           currentStep={tutorialStep}
           totalSteps={tutorialSteps.length}
           onBack={() => setTutorialStep((current) => Math.max(current - 1, 0))}
           onNext={() =>
             setTutorialStep((current) => Math.min(current + 1, tutorialSteps.length - 1))
           }
+          onSkip={handleTutorialComplete}
           onComplete={handleTutorialComplete}
         />
       )}
@@ -1851,19 +1872,23 @@ function EmptyState({ title, text }: { title: string; text: string }) {
 }
 
 function OnboardingTutorial({
+  content,
   currentStep,
   totalSteps,
   onBack,
   onNext,
+  onSkip,
   onComplete,
 }: {
+  content: TutorialContent;
   currentStep: number;
   totalSteps: number;
   onBack: () => void;
   onNext: () => void;
+  onSkip: () => void;
   onComplete: () => void;
 }) {
-  const step = tutorialSteps[currentStep];
+  const step = content.steps[currentStep];
   const isLastStep = currentStep === totalSteps - 1;
 
   return (
@@ -1876,8 +1901,13 @@ function OnboardingTutorial({
         aria-labelledby="tutorial-title"
       >
         <div className="tutorial-header">
-          <span className="eyebrow">Tutorial obligatorio</span>
-          <h2 id="tutorial-title">{step.title}</h2>
+          <div>
+            <span className="eyebrow">{content.label}</span>
+            <h2 id="tutorial-title">{step.title}</h2>
+          </div>
+          <button className="tutorial-skip" type="button" onClick={onSkip}>
+            {content.skip}
+          </button>
         </div>
         <p>{step.body}</p>
         <ul>
@@ -1885,8 +1915,8 @@ function OnboardingTutorial({
             <li key={point}>{point}</li>
           ))}
         </ul>
-        <div className="tutorial-progress" aria-label={`Paso ${currentStep + 1} de ${totalSteps}`}>
-          {tutorialSteps.map((item, index) => (
+        <div className="tutorial-progress" aria-label={content.stepLabel(currentStep + 1, totalSteps)}>
+          {content.steps.map((item, index) => (
             <span
               className={classNames("tutorial-dot", index === currentStep && "active")}
               key={item.title}
@@ -1896,16 +1926,16 @@ function OnboardingTutorial({
         <div className="tutorial-actions">
           <button className="secondary" type="button" onClick={onBack} disabled={currentStep === 0}>
             <ChevronLeft aria-hidden="true" />
-            Anterior
+            {content.back}
           </button>
           {isLastStep ? (
             <button className="primary" type="button" onClick={onComplete}>
               <CheckCircle2 aria-hidden="true" />
-              Completar tutorial
+              {content.complete}
             </button>
           ) : (
             <button className="primary" type="button" onClick={onNext}>
-              Siguiente
+              {content.next}
               <ChevronRight aria-hidden="true" />
             </button>
           )}

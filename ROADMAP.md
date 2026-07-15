@@ -1,78 +1,144 @@
-# Roadmap - Web de Tests ISTQB CTFL 2018
+# Roadmap incremental — Entrenador ISTQB CTFL v4.0
 
-## Objetivo
+Este documento es la fuente de verdad del estado del proyecto. `ROADMAP_CTFL_V4_UPDATE.md` se conserva como historial de la migración desde CTFL 2018.
 
-Construir una web local de estudio para la certificación ISTQB CTFL 2018 en español, con preguntas sueltas, simulacros de examen, revisión explicada, filtros por trazabilidad y progreso persistente en el navegador.
+## Estado de partida
 
-## Fuentes Revisadas
+- [x] Banco de 160 preguntas de los modelos A–D.
+- [x] Limpieza de palabras fragmentadas y traducciones.
+- [x] Validación automática del banco de preguntas.
+- [x] Listado de preguntas plegado por defecto.
+- [x] Modo oscuro persistente.
+- [x] Extracción e integración de 23 gráficos y tablas.
+- [x] Práctica, simulacros, corrección y progreso local básicos.
 
-- `Docs/ISTQB syllabus 2018 español.pdf`: syllabus oficial CTFL 2018 en español.
-- `Docs/ISTQB-CTFL-2018-ES-EJEMPLO_DE_EXAMEN-PREGUNTAS-MODELO_A-SSTQB.pdf`
-- `Docs/ISTQB-CTFL-2018-ES-EJEMPLO_DE_EXAMEN-PREGUNTAS-MODELO_B-SSTQB.pdf`
-- `Docs/ISTQB-CTFL-2018-ES-EJEMPLO_DE_EXAMEN-PREGUNTAS-MODELO_C-SSTQB.pdf`
-- `Docs/ISTQB-CTFL-2018-ES-EJEMPLO_DE_EXAMEN-RESPUESTAS-MODELO_A-SSTQB.pdf`
-- `Docs/ISTQB-CTFL-2018-ES-EJEMPLO_DE_EXAMEN-RESPUESTAS-MODELO_B-SSTQB.pdf`
-- `Docs/ISTQB-CTFL-2018-ES-EJEMPLO_DE_EXAMEN-RESPUESTAS-MODELO_C-SSTQB.pdf`
-- `Docs/Especificación Técnica y Base de Datos_ Simulador ISTQB CTFL 2018.docx`
+## Hito 0 — Base de calidad y navegador
 
-## Decisiones Técnicas
+- [x] Instalar y configurar Playwright con Chromium.
+- [x] Añadir proyectos de escritorio y móvil.
+- [x] Automatizar el arranque de Vite durante las pruebas.
+- [x] Crear pruebas de humo para práctica, simulacro y revisión.
+- [x] Capturar una referencia visual inicial en claro y oscuro.
+- [x] Documentar los comandos de validación.
+- [x] Cerrar el hito ejecutando datos, unitarias, compilación y Playwright sin errores.
 
-- SPA con Vite, React, TypeScript y datos estáticos.
-- Persistencia local con `localStorage`; sin backend ni base de datos en v1.
-- Enrutado implícito por estado de React para evitar configuración de servidor.
-- Datos oficiales extraidos a JSON/TS desde los PDFs locales sin modificar `Docs/`.
+**Cerrado el 15/07/2026.** Validación: 160 preguntas verificadas, 12 pruebas unitarias superadas, compilación de producción correcta y 8 recorridos E2E superados en Chromium de escritorio y móvil. Se guardaron referencias visuales canónicas de escritorio para los temas claro y oscuro.
 
-## Reglas del Examen
+## Hito 1 — Tutorial y experiencia móvil
 
-- 40 preguntas por examen.
-- 1 punto por acierto, 0 puntos por error o blanco.
-- Aprobado con 26 aciertos de 40, equivalente al 65%.
-- Sin penalización por respuestas incorrectas.
-- Formato general de opción múltiple; el Modelo A contiene preguntas multi-respuesta que se conservan.
+- [x] Reducir el tutorial a tres pasos.
+- [x] Añadir la acción “Omitir tutorial”.
+- [x] Traducir completamente tutorial y controles.
+- [x] Corregir anchura, altura y desplazamiento del modal móvil.
+- [x] Añadir navegación móvil para Práctica, Simulacro y Revisión; `Inicio` se incorporará cuando exista su pantalla en el Hito 4.
+- [x] Mantener filtros y acciones secundarias en el menú lateral.
+- [x] Verificar que no haya desbordamientos a 320, 390 y 768 píxeles.
+- [x] Cerrar el hito con pruebas móviles de tutorial, menú y navegación.
 
-## Estructura del Banco
+**Cerrado el 15/07/2026.** Validación: tutorial bilingüe de tres pasos completado y omitido en escritorio y móvil; navegación inferior y menú lateral verificados; ausencia de desbordamiento horizontal comprobada a 320, 390 y 768 px; 12 pruebas unitarias y 19 recorridos E2E superados. Se guardaron referencias visuales canónicas del tutorial y de la práctica móvil a 390 px.
 
-Cada pregunta normalizada tendrá: `id`, `sourceModel`, `sourceNumber`, `chapter`, `reference`, `kLevel`, `rawKLevel`, `prompt`, `options`, `correctAnswers`, `selectionMode` y `explanation`.
+## Hito 2 — Persistencia y recuperación
 
-## Incidencias Conocidas de Extraccion
+- [ ] Diseñar el almacenamiento local versión 2.
+- [ ] Implementar migración automática desde versión 1.
+- [ ] Persistir idioma, tema, filtros, ruta y pregunta actual.
+- [ ] Persistir simulacro activo, respuestas, posición y temporizador.
+- [ ] Recuperar correctamente un simulacro tras recargar.
+- [ ] Conservar el estado de tiempo agotado sin perder respuestas.
+- [ ] Incluir el nuevo estado en exportación e importación.
+- [ ] Añadir pruebas unitarias de migración y recuperación.
+- [ ] Cerrar el hito comprobando compatibilidad con exportaciones antiguas.
 
-- El Modelo C tiene una errata `K33`; se normaliza como `K3` y se conserva `rawKLevel`.
-- El Modelo A contiene al menos dos preguntas con dos respuestas correctas.
-- Algunas preguntas incluyen listas internas numeradas o letras A-D que no son opciones de respuesta; la extracción debe validarse manualmente.
-- Las filas `NB-1.x` y `NB-4.x` del Modelo A se tratan como referencias amplias a palabras clave de capítulo.
+## Hito 3 — Historial y revisiones recuperables
 
-## Funcionalidades
+- [ ] Convertir las sesiones del historial en elementos interactivos.
+- [ ] Reconstruir una revisión desde preguntas y respuestas almacenadas.
+- [ ] Mostrar fecha, modelo, puntuación y resultado.
+- [ ] Distinguir simulacros oficiales, aleatorios y futuras sesiones adaptativas.
+- [ ] Añadir estado vacío y manejo de sesiones incompatibles.
+- [ ] Sustituir confirmaciones nativas relevantes por diálogos accesibles.
+- [ ] Cerrar el hito reabriendo una revisión antes y después de recargar.
 
-### Completado
+## Hito 4 — Panel de estudio
 
-- Plan de producto y alcance v1.
-- Esqueleto inicial del proyecto.
-- Ingesta y normalización del banco de preguntas.
-- Banco generado con 120 preguntas oficiales: 40 por Modelo A, 40 por Modelo B y 40 por Modelo C.
-- Validador `npm run validate:data` con comprobaciones de estructura, respuestas, LO/K y casos especiales.
-- Motor de corrección para respuesta única y múltiple.
-- Generación de simulacros exactos A/B/C y simulacro aleatorio con distribución `NB-1:8`, `NB-2:5`, `NB-3:5`, `NB-4:11`, `NB-5:9`, `NB-6:2`.
-- Persistencia local de progreso, sesiones, marcadas, exportación e importación.
-- UI de práctica, simulacros, revisión, filtros y estadísticas locales.
-- Tutorial obligatorio de primera visita dentro de la web, con resaltado contextual y opción de relanzarlo desde el lateral.
-- Tests unitarios de scoring, exámenes y persistencia.
+- [ ] Crear la ruta y pantalla de Inicio.
+- [ ] Incorporar Inicio como cuarto acceso de la navegación móvil.
+- [ ] Mover la práctica a `/practice`.
+- [ ] Mostrar cobertura y precisión global.
+- [ ] Mostrar progreso por capítulo y nivel K.
+- [ ] Mostrar errores pendientes, marcadas y preguntas no vistas.
+- [ ] Identificar capítulos débiles sin presentar predicciones de aprobado.
+- [ ] Añadir accesos a sesión rápida de 10 y completa de 20.
+- [ ] Permitir continuar una sesión o simulacro pendiente.
+- [ ] Cerrar el hito validando cálculos, navegación y estados sin progreso.
 
-### Pendiente / Siguiente Iteracion
+## Hito 5 — Cola adaptativa
 
-- Afinar copy o terminología si se detecta alguna frase mal extraída del PDF.
-- Añadir temporizador solo si se decide una duración oficial para el contexto de uso.
-- Ampliar analíticas por objetivo de aprendizaje si el estudio diario lo necesita.
-- Añadir un modo de repaso espaciado basado en fallos recurrentes.
+- [ ] Implementar el cálculo de prioridad por pregunta.
+- [ ] Priorizar errores recientes, marcadas, baja precisión, antigüedad y no vistas.
+- [ ] Limitar inicialmente un capítulo al 40 % de la sesión.
+- [ ] Generar sesiones reproducibles de 10 o 20 preguntas sin duplicados.
+- [ ] Persistir preguntas, posición, respuestas y semilla de la sesión.
+- [ ] Permitir abandonar y continuar posteriormente.
+- [ ] Mostrar resumen y recomendación al terminar.
+- [ ] Registrar la sesión adaptativa en el historial.
+- [ ] Añadir pruebas del ranking, equilibrio y casos con pocos candidatos.
+- [ ] Cerrar el hito completando y recuperando sesiones de ambos tamaños.
 
-## Comandos Utiles
+## Hito 6 — Fidelidad de opciones y simulacros
 
-- `npm install`: instalar dependencias.
-- `npm run extract:data`: regenerar banco desde `Docs/`.
-- `npm run validate:data`: validar estructura del banco.
-- `npm test`: ejecutar tests unitarios.
-- `npm run build`: compilar producción.
-- `npm run dev`: levantar servidor local de desarrollo.
+- [ ] Introducir modos explícitos de opciones `original` y `shuffled`.
+- [ ] Mantener letras y orden originales en todos los simulacros.
+- [ ] Barajar de forma estable en práctica y sesiones adaptativas.
+- [ ] Mantener el mismo orden en pregunta, corrección y revisión.
+- [ ] Añadir pruebas para preguntas simples y múltiples.
+- [ ] Verificar manualmente muestras de los cuatro PDF.
+- [ ] Cerrar el hito sin discrepancias entre respuesta seleccionada y explicación.
 
-## Documentacion de Uso
+## Hito 7 — Accesibilidad y pulido
 
-- `TUTORIAL.md`: guía de uso de la web, modelos, capítulos, niveles K, referencias, estados y estrategia de estudio.
+- [ ] Gestionar foco inicial y devolución de foco en modales.
+- [ ] Añadir cierre con `Escape` y bloqueo de desplazamiento.
+- [ ] Revisar nombres accesibles, encabezados y regiones.
+- [ ] Garantizar foco visible y navegación completa por teclado.
+- [ ] Respetar `prefers-reduced-motion`.
+- [ ] Comprobar contraste en temas claro y oscuro.
+- [ ] Añadir estados de carga, éxito y error para importar/exportar.
+- [ ] Cerrar el hito con recorridos Playwright mediante teclado.
+
+## Hito 8 — PWA y funcionamiento offline
+
+- [ ] Añadir manifest e iconos instalables.
+- [ ] Configurar service worker y estrategia de actualización.
+- [ ] Cachear aplicación, banco y recursos gráficos.
+- [ ] Mostrar estado offline y aviso de nueva versión.
+- [ ] Verificar que progreso e importación sigan siendo locales.
+- [ ] Probar instalación y funcionamiento sin conexión.
+- [ ] Cerrar el hito con una auditoría de la compilación de producción.
+
+## Hito 9 — Estabilización final
+
+- [ ] Ejecutar validación completa del banco.
+- [ ] Ejecutar todas las pruebas unitarias y E2E.
+- [ ] Revisar escritorio y móvil en ambos temas e idiomas.
+- [ ] Comprobar los cuatro modelos y el simulacro aleatorio.
+- [ ] Revisar migración, exportación y restauración.
+- [ ] Resolver errores de consola y regresiones visuales.
+- [ ] Revisar y reducir el bundle principal, actualmente por encima del aviso de 500 kB de Vite.
+- [ ] Actualizar documentación de uso y desarrollo.
+- [ ] Marcar la versión como preparada para entrega.
+
+## Normas de seguimiento
+
+- Una tarea solo cambia a `[x]` cuando el comportamiento está implementado y verificado.
+- Si una tarea queda parcialmente hecha, permanece como `[ ]` y se añade una nota breve con el bloqueo.
+- Al completar un hito, se añade fecha y resumen de validación.
+- Cada sesión de trabajo aborda un único hito o una porción coherente del mismo.
+- Los hallazgos nuevos se añaden al hito correspondiente antes de implementarlos.
+- Playwright y la actualización de este documento forman parte de la definición de terminado de cada hito.
+
+## Supuestos
+
+- Los hitos se ejecutan en el orden indicado, salvo tareas independientes claramente documentadas.
+- La PWA se implementa después del entrenador adaptativo y la persistencia.
+- El proyecto continúa siendo local, privado y sin cuentas ni backend.

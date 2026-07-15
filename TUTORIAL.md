@@ -12,7 +12,9 @@ La web tiene tres secciones principales:
 
 En el lateral izquierdo estan los filtros, el progreso local y las acciones de exportar, importar o borrar progreso.
 
-La primera vez que abras la web aparece un tutorial obligatorio. Debes completarlo para usar la aplicacion libremente. Si quieres verlo otra vez, usa el boton `Tutorial` del lateral.
+En pantallas moviles, una barra inferior permite cambiar entre `Practica`, `Simulacro` y `Revision`. Los filtros, el progreso y las acciones secundarias siguen disponibles desde el boton de menu.
+
+La primera vez que abras la web aparece un tutorial breve de tres pasos. Puedes completarlo u omitirlo; si quieres verlo otra vez, usa el boton `Tutorial` del lateral.
 
 ## Practica
 
