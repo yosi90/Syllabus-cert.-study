@@ -70,7 +70,7 @@ export function useWorkspacePersistence({
   review: ReviewState | null;
 }) {
   useEffect(() => {
-    const lastRoute = ["/", "/exam", "/review"].includes(pathname)
+    const lastRoute = ["/", "/practice", "/exam", "/review"].includes(pathname)
       ? (pathname as ProgressState["preferences"]["lastRoute"])
       : "/";
     setProgress((current) => ({

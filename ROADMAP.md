@@ -80,16 +80,18 @@ Este documento es la fuente de verdad del estado del proyecto. `ROADMAP_CTFL_V4_
 
 ## Hito 4 — Panel de estudio
 
-- [ ] Crear la ruta y pantalla de Inicio.
-- [ ] Incorporar Inicio como cuarto acceso de la navegación móvil.
-- [ ] Mover la práctica a `/practice`.
-- [ ] Mostrar cobertura y precisión global.
-- [ ] Mostrar progreso por capítulo y nivel K.
-- [ ] Mostrar errores pendientes, marcadas y preguntas no vistas.
-- [ ] Identificar capítulos débiles sin presentar predicciones de aprobado.
-- [ ] Añadir accesos a sesión rápida de 10 y completa de 20.
-- [ ] Permitir continuar una sesión o simulacro pendiente.
-- [ ] Cerrar el hito validando cálculos, navegación y estados sin progreso.
+- [x] Crear la ruta y pantalla de Inicio.
+- [x] Incorporar Inicio como cuarto acceso de la navegación móvil.
+- [x] Mover la práctica a `/practice`.
+- [x] Mostrar cobertura y precisión global.
+- [x] Mostrar progreso por capítulo y nivel K.
+- [x] Mostrar errores pendientes, marcadas y preguntas no vistas.
+- [x] Identificar capítulos débiles sin presentar predicciones de aprobado.
+- [x] Añadir accesos a sesión rápida de 10 y completa de 20.
+- [x] Permitir continuar una sesión o simulacro pendiente.
+- [x] Cerrar el hito validando cálculos, navegación y estados sin progreso.
+
+**Cerrado el 15/07/2026.** Validación: Inicio y `/practice` verificados en ambos idiomas, temas y tamaños; cobertura y precisión calculadas desde intentos reales, desgloses por capítulo/K y áreas débiles cubiertos por unitarias; bloques ordenados de 10/20 y continuidad de práctica/simulacro comprobados; banco de 160 preguntas, 17 pruebas unitarias, compilación y 47 recorridos E2E superados.
 
 ## Hito 5 — Cola adaptativa
 

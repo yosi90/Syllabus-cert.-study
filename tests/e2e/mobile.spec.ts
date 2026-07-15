@@ -11,12 +11,16 @@ test("mobile primary navigation reaches every current mode", async ({ page }, te
 
   const navigation = page.locator(".mobile-primary-nav");
   await expect(navigation).toBeVisible();
-  await expect(navigation.getByRole("link")).toHaveCount(3);
+  await expect(navigation.getByRole("link")).toHaveCount(4);
+  await navigation.getByRole("link", { name: "Practice" }).click();
+  await expect(page).toHaveURL(/#\/practice$/);
   await navigation.getByRole("link", { name: "Exam" }).click();
   await expect(page).toHaveURL(/#\/exam$/);
   await navigation.getByRole("link", { name: "Review" }).click();
   await expect(page).toHaveURL(/#\/review$/);
   await navigation.getByRole("link", { name: "Practice" }).click();
+  await expect(page).toHaveURL(/#\/practice$/);
+  await navigation.getByRole("link", { name: "Home" }).click();
   await expect(page).toHaveURL(/#\/$/);
 });
 
@@ -37,7 +41,7 @@ for (const width of [320, 390, 768]) {
   test(`the layout has no horizontal overflow at ${width}px`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chromium", "Each width only needs one Chromium pass.");
     await page.setViewportSize({ width, height: 844 });
-    await page.goto("/");
+    await page.goto("/#/practice");
 
     await expect(page.locator(".mobile-primary-nav")).toBeVisible();
     const dimensions = await page.evaluate(() => ({

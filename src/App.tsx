@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Menu, Moon, X } from "lucide-react";
 import { HashRouter, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { examRules, questionBank, questions } from "./data/bank";
+import { chapters, examRules, questionBank, questions } from "./data/bank";
 import type { Question, SourceModel } from "./data/types";
 import { createModelExam, createRandomExam, findQuestionsByIds, type ExamBlueprint } from "./domain/exams";
 import { emptyFilters, filterQuestions, summarizeProgress, type QuestionFilters } from "./domain/filters";
+import { summarizeStudyDashboard } from "./domain/dashboard";
 import { isCorrectAnswer, scoreQuestions, toggleAnswer, type AnswerMap } from "./domain/scoring";
 import {
   addSession,
@@ -46,6 +47,7 @@ import { MobilePrimaryNavigation, ModeNavigation } from "./components/navigation
 import { ExamView } from "./views/ExamView";
 import { ReviewView } from "./views/ReviewView";
 import { StudyView } from "./views/StudyView";
+import { HomeView } from "./views/HomeView";
 import {
   useLastRouteRestoration,
   usePersistentTheme,
@@ -71,6 +73,7 @@ function AppShell() {
   const [studyQuestionId, setStudyQuestionId] = useState<string | null>(() => progress.study.currentQuestionId);
   const [studyAnswers, setStudyAnswers] = useState<AnswerMap>(() => progress.study.answers);
   const [studyRevealed, setStudyRevealed] = useState(() => progress.study.revealed);
+  const [studyBatchSize, setStudyBatchSize] = useState<10 | 20 | null>(null);
   const [activeExam, setActiveExam] = useState<ExamState | null>(() => progress.activeExam);
   const [examTimerMode, setExamTimerMode] = useState<TimerMode>(() => progress.activeExam?.timerMode ?? "standard");
   const [now, setNow] = useState(() => Date.now());
@@ -119,23 +122,28 @@ function AppShell() {
   }, [isMenuOpen]);
 
   const filteredQuestions = useMemo(() => filterQuestions(questions, filters, progress, language), [filters, progress, language]);
+  const studyQuestions = useMemo(
+    () => studyBatchSize ? filteredQuestions.slice(0, studyBatchSize) : filteredQuestions,
+    [filteredQuestions, studyBatchSize],
+  );
   const progressSummary = useMemo(() => summarizeProgress(questions, progress), [progress]);
+  const dashboard = useMemo(() => summarizeStudyDashboard(questions, chapters, progress), [progress]);
   const references = useMemo(() => Array.from(new Set(questions.map((question) => question.reference))).sort(), []);
   const tutorialTarget = progress.preferences.tutorialCompleted ? undefined : tutorialSteps[tutorialStep]?.target;
-  const storedStudyIndex = filteredQuestions.findIndex((question) => question.id === studyQuestionId);
+  const storedStudyIndex = studyQuestions.findIndex((question) => question.id === studyQuestionId);
   const studyIndex = storedStudyIndex >= 0 ? storedStudyIndex : 0;
-  const currentStudyQuestion = filteredQuestions[studyIndex];
+  const currentStudyQuestion = studyQuestions[studyIndex];
 
   useEffect(() => {
-    if (!filteredQuestions.length) {
+    if (!studyQuestions.length) {
       if (studyQuestionId !== null) setStudyQuestionId(null);
       return;
     }
     if (storedStudyIndex < 0) {
-      setStudyQuestionId(filteredQuestions[0].id);
+      setStudyQuestionId(studyQuestions[0].id);
       setStudyRevealed(false);
     }
-  }, [filteredQuestions, storedStudyIndex, studyQuestionId]);
+  }, [studyQuestions, storedStudyIndex, studyQuestionId]);
 
   function updateProgress(next: ProgressState) {
     setProgress(next);
@@ -157,18 +165,18 @@ function AppShell() {
   }
 
   function handleStudyNext(direction: 1 | -1) {
-    const next = Math.min(Math.max(studyIndex + direction, 0), Math.max(filteredQuestions.length - 1, 0));
-    setStudyQuestionId(filteredQuestions[next]?.id ?? null);
+    const next = Math.min(Math.max(studyIndex + direction, 0), Math.max(studyQuestions.length - 1, 0));
+    setStudyQuestionId(studyQuestions[next]?.id ?? null);
     setStudyRevealed(false);
   }
 
   function handleStudyRandom() {
-    if (filteredQuestions.length <= 1) return;
+    if (studyQuestions.length <= 1) return;
     let next = studyIndex;
     while (next === studyIndex) {
-      next = Math.floor(Math.random() * filteredQuestions.length);
+      next = Math.floor(Math.random() * studyQuestions.length);
     }
-    setStudyQuestionId(filteredQuestions[next]?.id ?? null);
+    setStudyQuestionId(studyQuestions[next]?.id ?? null);
     setStudyRevealed(false);
   }
 
@@ -317,6 +325,14 @@ function AppShell() {
     navigate("/review");
   }
 
+  function startStudyBatch(size: 10 | 20) {
+    setFilters(emptyFilters);
+    setStudyBatchSize(size);
+    setStudyQuestionId(questions[0]?.id ?? null);
+    setStudyRevealed(false);
+    navigate("/practice");
+  }
+
   function handleTutorialReset() {
     setTutorialStep(0);
     updateProgress(setTutorialCompleted(progress, false));
@@ -403,8 +419,24 @@ function AppShell() {
         <Route
           path="/"
           element={
+            <HomeView
+              dashboard={dashboard}
+              language={language}
+              copy={copy}
+              canContinuePractice={studyBatchSize !== null || progressSummary.attempted > 0 || Object.keys(studyAnswers).length > 0}
+              hasActiveExam={Boolean(activeExam)}
+              onStartStudy={startStudyBatch}
+              onContinuePractice={() => navigate("/practice")}
+              onContinueExam={() => navigate("/exam")}
+              onLanguageChange={handleLanguageChange}
+            />
+          }
+        />
+        <Route
+          path="/practice"
+          element={
             <StudyView
-              filteredQuestions={filteredQuestions}
+              filteredQuestions={studyQuestions}
               currentQuestion={currentStudyQuestion}
               currentIndex={studyIndex}
               selected={currentStudyQuestion ? studyAnswers[currentStudyQuestion.id] ?? [] : []}
@@ -415,7 +447,7 @@ function AppShell() {
               onMove={handleStudyNext}
               onRandom={handleStudyRandom}
               onSelectIndex={(index) => {
-                setStudyQuestionId(filteredQuestions[index]?.id ?? null);
+                setStudyQuestionId(studyQuestions[index]?.id ?? null);
                 setStudyRevealed(false);
               }}
               onFlag={handleFlag}

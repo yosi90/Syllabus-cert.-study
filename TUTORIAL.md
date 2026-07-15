@@ -4,17 +4,33 @@ Este documento explica cada parte de la web y como usarla para estudiar ISTQB CT
 
 ## Vista General
 
-La web tiene tres secciones principales:
+La web tiene cuatro secciones principales:
 
+- `Inicio`: panel con cobertura, precision, progreso por bloques y accesos para continuar.
 - `Practica`: preguntas sueltas para estudiar, filtrar, corregir al momento y marcar dudas.
 - `Simulacro`: examenes de 40 preguntas, con modelos oficiales o combinacion aleatoria.
 - `Revision`: historial de simulacros y revisiones completas que pueden abrirse de nuevo.
 
 En el lateral izquierdo estan los filtros, el progreso local y las acciones de exportar, importar o borrar progreso.
 
-En pantallas moviles, una barra inferior permite cambiar entre `Practica`, `Simulacro` y `Revision`. Los filtros, el progreso y las acciones secundarias siguen disponibles desde el boton de menu.
+En pantallas moviles, una barra inferior permite cambiar entre `Inicio`, `Practica`, `Simulacro` y `Revision`. Los filtros, el progreso y las acciones secundarias siguen disponibles desde el boton de menu.
 
 La primera vez que abras la web aparece un tutorial breve de tres pasos. Puedes completarlo u omitirlo; si quieres verlo otra vez, usa el boton `Tutorial` del lateral.
+
+## Inicio y Panel de Estudio
+
+`Inicio` resume exclusivamente el progreso registrado en este navegador:
+
+- Cobertura: porcentaje de las 160 preguntas que se ha intentado al menos una vez.
+- Precision: porcentaje de aciertos sobre el total de intentos realizados.
+- Errores pendientes: preguntas cuyo ultimo intento fue incorrecto.
+- Marcadas y no vistas.
+- Cobertura y precision por capitulo y nivel K.
+- Hasta dos capitulos a reforzar cuando ya existen intentos suficientes para compararlos.
+
+El panel no predice si aprobaras el examen. Los bloques de 10 y 20 abren conjuntos ordenados y acotados de practica; la priorizacion adaptativa y su recuperacion forman parte del siguiente hito.
+
+Si hay progreso de practica o un simulacro activo, `Inicio` muestra acciones para continuar donde lo dejaste.
 
 ## Practica
 

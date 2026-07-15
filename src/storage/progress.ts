@@ -57,7 +57,7 @@ export type ProgressState = {
     tutorialCompletedAt: string | null;
     language: "en" | "es" | null;
     theme: "light" | "dark" | null;
-    lastRoute: "/" | "/exam" | "/review";
+    lastRoute: "/" | "/practice" | "/exam" | "/review";
   };
   study: {
     filters: StoredFilters;
@@ -174,7 +174,7 @@ function normalizeProgress(value: ProgressState): ProgressState {
       tutorialCompletedAt: preferences.tutorialCompletedAt ?? null,
       language: preferences.language === "en" || preferences.language === "es" ? preferences.language : null,
       theme: preferences.theme === "light" || preferences.theme === "dark" ? preferences.theme : null,
-      lastRoute: ["/", "/exam", "/review"].includes(preferences.lastRoute) ? preferences.lastRoute : "/",
+      lastRoute: ["/", "/practice", "/exam", "/review"].includes(preferences.lastRoute) ? preferences.lastRoute : "/",
     },
     study: {
       filters: normalizeFilters(study.filters),

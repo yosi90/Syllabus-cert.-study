@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("practice allows answering and checking a question", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/#/practice");
 
   await expect(page.getByRole("heading", { name: "Single questions" })).toBeVisible();
   const answers = page.getByRole("radio");

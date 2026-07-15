@@ -6,7 +6,7 @@ test("language, theme, filters and current practice question survive a reload", 
   await page.addInitScript(() => {
     window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
   });
-  await page.goto("/");
+  await page.goto("/#/practice");
 
   if (testInfo.project.name === "mobile-chromium") {
     await page.getByRole("button", { name: "Open menu" }).click();
