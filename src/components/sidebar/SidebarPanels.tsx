@@ -15,6 +15,7 @@ import {
   kLevels,
   models,
   type Copy,
+  type FileOperationStatus,
   type Language,
 } from "../../app/content";
 import {
@@ -32,6 +33,7 @@ export function FiltersPanel({
   onImport,
   onReset,
   onTutorialReset,
+  fileStatus,
   language,
   copy,
 }: {
@@ -40,9 +42,10 @@ export function FiltersPanel({
   references: string[];
   tutorialTarget: string | undefined;
   onExport: () => void;
-  onImport: (raw: string) => void;
+  onImport: (file: File) => Promise<void>;
   onReset: () => void;
   onTutorialReset: () => void;
+  fileStatus: FileOperationStatus;
   language: Language;
   copy: Copy;
 }) {
@@ -55,7 +58,7 @@ export function FiltersPanel({
   function readImport(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (!file) return;
-    file.text().then(onImport);
+    void onImport(file);
     event.target.value = "";
   }
 
@@ -72,6 +75,7 @@ export function FiltersPanel({
         <label className="search-box">
           <Search aria-hidden="true" />
           <input
+            aria-label={copy.searchPlaceholder}
             value={filters.query}
             onChange={(event) => setFilters({ ...filters, query: event.target.value })}
             placeholder={copy.searchPlaceholder}
@@ -162,11 +166,11 @@ export function FiltersPanel({
       </label>
 
       <div className={classNames("filter-actions", tutorialTarget === "progress-actions" && "tutorial-highlight")}>
-        <button className="secondary" type="button" onClick={onExport}>
+        <button className="secondary" type="button" onClick={onExport} disabled={fileStatus?.kind === "loading"}>
           <Download aria-hidden="true" />
           {copy.export}
         </button>
-        <button className="secondary" type="button" onClick={() => fileInput.current?.click()}>
+        <button className="secondary" type="button" onClick={() => fileInput.current?.click()} disabled={fileStatus?.kind === "loading"}>
           <FileUp aria-hidden="true" />
           {copy.import}
         </button>
@@ -179,6 +183,15 @@ export function FiltersPanel({
           {copy.delete}
         </button>
       </div>
+      {fileStatus && (
+        <p
+          className={classNames("file-status", fileStatus.kind)}
+          role={fileStatus.kind === "error" ? "alert" : "status"}
+          aria-live={fileStatus.kind === "error" ? "assertive" : "polite"}
+        >
+          {fileStatus.message}
+        </p>
+      )}
       <input ref={fileInput} className="visually-hidden" type="file" accept="application/json" onChange={readImport} />
     </section>
   );

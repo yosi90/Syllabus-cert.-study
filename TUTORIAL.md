@@ -192,9 +192,17 @@ Descarga un archivo JSON con tu progreso y el estado recuperable de la web. Sirv
 
 Carga un archivo JSON exportado previamente y sustituye el progreso y estado actual. Las exportaciones anteriores con formato v1 se migran automaticamente a v2.
 
+La interfaz anuncia los estados de carga, exito y error de importacion y exportacion sin depender de alertas nativas. Los dialogos y el menu movil se pueden recorrer completamente con teclado y cerrar con `Escape`.
+
 ### Borrar
 
 Elimina todo el progreso local. No borra preguntas ni documentos; solo reinicia tu historial de estudio.
+
+## Instalacion y Uso sin Conexion
+
+En navegadores compatibles puedes instalar el entrenador como aplicacion. Tras abrir una vez la version completa, la interfaz, el banco de preguntas y sus graficos quedan disponibles sin conexion.
+
+El aviso `Sin conexion` confirma que sigues trabajando localmente. El progreso, los simulacros y los archivos importados no se envian a ningun servidor. Cuando haya una nueva version, la web la anuncia y espera a que elijas `Recargar ahora`, evitando interrumpir una sesion activa.
 
 ## Estrategia Recomendada de Estudio
 

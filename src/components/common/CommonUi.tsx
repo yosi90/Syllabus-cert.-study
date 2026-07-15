@@ -1,8 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
 import { summarizeProgress } from "../../domain/filters";
 import type { Copy, Language, TutorialContent } from "../../app/content";
 import { classNames } from "../../app/presentation";
+import { useModalAccessibility } from "../../hooks/useModalAccessibility";
 
 export function ConfirmDialog({
   title,
@@ -22,19 +23,12 @@ export function ConfirmDialog({
   onCancel: () => void;
 }) {
   const cancelRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    cancelRef.current?.focus();
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onCancel();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onCancel]);
+  const dialogRef = useModalAccessibility<HTMLElement>(true, onCancel, cancelRef);
 
   return (
     <div className="notice-backdrop" role="presentation" onClick={onCancel}>
       <section
+        ref={dialogRef}
         className="notice-modal confirm-dialog"
         role="alertdialog"
         aria-modal="true"
@@ -54,18 +48,22 @@ export function ConfirmDialog({
 }
 
 export function TranslationNotice({ copy, onClose }: { copy: Copy; onClose: () => void }) {
+  const actionRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useModalAccessibility<HTMLElement>(true, onClose, actionRef);
   return (
     <div className="notice-backdrop" role="presentation" onClick={onClose}>
       <section
+        ref={dialogRef}
         className="notice-modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="translation-notice-title"
+        aria-describedby="translation-notice-text"
         onClick={(event) => event.stopPropagation()}
       >
         <h2 id="translation-notice-title">{copy.translationNoticeTitle}</h2>
-        <p>{copy.translationNoticeText}</p>
-        <button className="primary" type="button" onClick={onClose}>
+        <p id="translation-notice-text">{copy.translationNoticeText}</p>
+        <button ref={actionRef} className="primary" type="button" onClick={onClose}>
           <CheckCircle2 aria-hidden="true" />
           {copy.translationNoticeAction}
         </button>
@@ -106,9 +104,9 @@ export function Metric({ label, value }: { label: string; value: number | string
 }
 
 
-export function FlagLanguageToggle({ language, onChange }: { language: Language; onChange: (language: Language) => void }) {
+export function FlagLanguageToggle({ language, onChange, label = "Language" }: { language: Language; onChange: (language: Language) => void; label?: string }) {
   return (
-    <div className="flag-language-toggle" aria-label="Language">
+    <div className="flag-language-toggle" role="group" aria-label={label}>
       <button
         className={language === "en" ? "active" : undefined}
         type="button"
@@ -160,26 +158,30 @@ export function OnboardingTutorial({
 }) {
   const step = content.steps[currentStep];
   const isLastStep = currentStep === totalSteps - 1;
+  const skipRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useModalAccessibility<HTMLElement>(true, onSkip, skipRef);
 
   return (
     <>
       <div className="tutorial-backdrop" role="presentation" />
       <section
+        ref={dialogRef}
         className={classNames("tutorial-modal", `placement-${step.placement}`)}
         role="dialog"
         aria-modal="true"
         aria-labelledby="tutorial-title"
+        aria-describedby="tutorial-body"
       >
         <div className="tutorial-header">
           <div>
             <span className="eyebrow">{content.label}</span>
             <h2 id="tutorial-title">{step.title}</h2>
           </div>
-          <button className="tutorial-skip" type="button" onClick={onSkip}>
+          <button ref={skipRef} className="tutorial-skip" type="button" onClick={onSkip}>
             {content.skip}
           </button>
         </div>
-        <p>{step.body}</p>
+        <p id="tutorial-body">{step.body}</p>
         <ul>
           {step.points.map((point) => (
             <li key={point}>{point}</li>
@@ -189,6 +191,7 @@ export function OnboardingTutorial({
           {content.steps.map((item, index) => (
             <span
               className={classNames("tutorial-dot", index === currentStep && "active")}
+              aria-current={index === currentStep ? "step" : undefined}
               key={item.title}
             />
           ))}
@@ -214,4 +217,3 @@ export function OnboardingTutorial({
     </>
   );
 }
-

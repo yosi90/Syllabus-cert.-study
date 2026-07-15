@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 test("home shows a neutral dashboard without progress", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByRole("heading", { name: "Study dashboard" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Dashboard" })).toBeVisible();
   await expect(page.getByText("0/160", { exact: true })).toBeVisible();
   await expect(page.getByText("No attempts yet", { exact: true })).toHaveCount(2);
   await expect(page.getByRole("heading", { name: "Progress by chapter" })).toBeVisible();

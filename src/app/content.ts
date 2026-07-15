@@ -8,6 +8,7 @@ export type ExamState = PersistedExam;
 export type TimerMode = "off" | "standard" | "extended";
 export type Language = "en" | "es";
 export type Theme = "light" | "dark";
+export type FileOperationStatus = { kind: "loading" | "success" | "error"; message: string } | null;
 export const SPANISH_TRANSLATION_NOTICE_KEY = "istqb-ctfl-v4-spanish-translation-notice-seen";
 export const THEME_STORAGE_KEY = "istqb-ctfl-v4-theme";
 
@@ -28,7 +29,7 @@ export const uiCopy = {
   en: {
     trainer: "Trainer",
     home: "Home",
-    dashboardTitle: "Study dashboard",
+    dashboardTitle: "Dashboard",
     dashboardSubtitle: "A factual view of your local progress, without pass predictions.",
     coverage: "Coverage",
     accuracy: "Accuracy",
@@ -55,6 +56,8 @@ export const uiCopy = {
     recommendation: "Recommended review",
     recommendationText: "Reinforce {chapter}; it concentrated the most missed or unanswered questions in this session.",
     modesLabel: "Modes",
+    studyControls: "Study controls",
+    languageLabel: "Language",
     openMenu: "Open menu",
     closeMenu: "Close menu",
     darkMode: "Dark mode",
@@ -79,6 +82,18 @@ export const uiCopy = {
     lastIncorrect: "Last incorrect",
     export: "Export",
     import: "Import",
+    importingProgress: "Importing progress…",
+    importSuccess: "Progress imported successfully.",
+    importError: "Progress could not be imported.",
+    exportingProgress: "Preparing export…",
+    exportSuccess: "Progress export downloaded.",
+    exportError: "Progress could not be exported.",
+    offlineTitle: "Offline",
+    offlineText: "The trainer and your local progress remain available.",
+    updateAvailable: "New version available",
+    updateAvailableText: "Reload when you are ready to use the latest version.",
+    updateNow: "Reload now",
+    dismissUpdate: "Dismiss update",
     tutorial: "Tutorial",
     delete: "Delete",
     noQuestions: "No questions match these filters",
@@ -159,7 +174,7 @@ export const uiCopy = {
   es: {
     trainer: "Entrenador",
     home: "Inicio",
-    dashboardTitle: "Panel de estudio",
+    dashboardTitle: "Dashboard",
     dashboardSubtitle: "Una vista factual de tu progreso local, sin predicciones de aprobado.",
     coverage: "Cobertura",
     accuracy: "Precisión",
@@ -186,6 +201,8 @@ export const uiCopy = {
     recommendation: "Repaso recomendado",
     recommendationText: "Refuerza {chapter}; concentró más preguntas falladas o sin responder en esta sesión.",
     modesLabel: "Modos",
+    studyControls: "Controles de estudio",
+    languageLabel: "Idioma",
     openMenu: "Abrir menú",
     closeMenu: "Cerrar menú",
     darkMode: "Modo oscuro",
@@ -210,6 +227,18 @@ export const uiCopy = {
     lastIncorrect: "Última incorrecta",
     export: "Exportar",
     import: "Importar",
+    importingProgress: "Importando progreso…",
+    importSuccess: "Progreso importado correctamente.",
+    importError: "No se pudo importar el progreso.",
+    exportingProgress: "Preparando exportación…",
+    exportSuccess: "Exportación del progreso descargada.",
+    exportError: "No se pudo exportar el progreso.",
+    offlineTitle: "Sin conexión",
+    offlineText: "El entrenador y tu progreso local siguen disponibles.",
+    updateAvailable: "Nueva versión disponible",
+    updateAvailableText: "Recarga cuando quieras utilizar la versión más reciente.",
+    updateNow: "Recargar ahora",
+    dismissUpdate: "Descartar actualización",
     tutorial: "Tutorial",
     delete: "Borrar",
     noQuestions: "No hay preguntas con esos filtros",

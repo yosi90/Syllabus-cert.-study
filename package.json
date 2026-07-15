@@ -1,20 +1,25 @@
 {
   "name": "istqb-ctfl-v4-trainer",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
+    "predev": "npm run prepare:data",
     "build": "tsc -b && vite build",
+    "prebuild": "npm run prepare:data",
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest run src",
-    "test:e2e": "playwright test",
-    "test:e2e:update": "playwright test --update-snapshots",
-    "validate": "npm run validate:data && npm test && npm run build && npm run test:e2e",
+    "pretest": "npm run prepare:data",
+    "test:e2e": "npm run build && playwright test",
+    "test:e2e:update": "npm run build && playwright test --update-snapshots",
+    "validate": "npm run validate:data && npm test && npm run build && npm run validate:pwa && playwright test",
     "extract:data": "python scripts/extract_data.py",
     "extract:visuals": "python scripts/extract_visuals.py",
     "translate:data": "python scripts/translate_es.py",
-    "validate:data": "tsx scripts/validate-data.ts"
+    "prepare:data": "tsx scripts/prepare-question-bank.ts",
+    "validate:data": "tsx scripts/validate-data.ts",
+    "validate:pwa": "tsx scripts/validate-pwa.ts"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
@@ -31,6 +36,8 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "tsx": "^4.19.0",
-    "vitest": "^3.0.0"
+    "vite-plugin-pwa": "^1.3.0",
+    "vitest": "^3.0.0",
+    "workbox-window": "^7.4.1"
   }
 }

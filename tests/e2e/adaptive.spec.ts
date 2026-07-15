@@ -31,7 +31,7 @@ test("a ten-question adaptive session survives leaving and reloading", async ({ 
   expect(afterReload).toEqual(beforeReload);
 
   await page.getByRole("button", { name: "Leave and continue later" }).click();
-  await expect(page.getByRole("heading", { name: "Study dashboard" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Dashboard" })).toBeVisible();
   await page.getByRole("button", { name: "Continue practice" }).click();
   await expect(page.getByText("2/10", { exact: true })).toBeVisible();
 });

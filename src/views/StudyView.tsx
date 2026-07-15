@@ -68,7 +68,7 @@ export function StudyView({
         <div className="header-metrics">
           <Metric label={copy.filtered} value={filteredQuestions.length} />
           <Metric label={copy.current} value={`${currentIndex + 1}/${filteredQuestions.length}`} />
-          <FlagLanguageToggle language={language} onChange={onLanguageChange} />
+          <FlagLanguageToggle language={language} onChange={onLanguageChange} label={copy.languageLabel} />
         </div>
       </header>
 

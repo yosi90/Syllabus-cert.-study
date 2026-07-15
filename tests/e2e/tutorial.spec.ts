@@ -15,11 +15,14 @@ test("the first visit has a three-step tutorial", async ({ page }) => {
   await expect(dialog).toBeHidden();
 });
 
-test("the tutorial can be skipped", async ({ page }) => {
+test("the tutorial owns focus and closes with Escape", async ({ page }) => {
   await page.goto("/");
 
-  await page.getByRole("button", { name: "Skip tutorial" }).click();
+  await expect(page.getByRole("button", { name: "Skip tutorial" })).toBeFocused();
+  await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe("hidden");
+  await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toBeHidden();
+  await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe("");
 });
 
 test("the tutorial is fully translated into Spanish", async ({ page }, testInfo) => {

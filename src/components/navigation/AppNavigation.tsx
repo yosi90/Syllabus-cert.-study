@@ -14,7 +14,7 @@ export function ModeNavigation({
 }) {
   return (
     <nav className={classNames("mode-tabs", highlighted && "tutorial-highlight")} aria-label={copy.modesLabel}>
-      <NavLink to="/" end onClick={onNavigate}>{copy.home}</NavLink>
+      <NavLink to="/" end onClick={onNavigate} data-initial-focus>{copy.home}</NavLink>
       <NavLink to="/practice" onClick={onNavigate}>{copy.practice}</NavLink>
       <NavLink to="/exam" onClick={onNavigate}>{copy.exam}</NavLink>
       <NavLink to="/review" onClick={onNavigate}>{copy.review}</NavLink>

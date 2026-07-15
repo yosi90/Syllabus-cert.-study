@@ -22,13 +22,13 @@ test("practice dark theme baseline", async ({ page }) => {
 test("home light theme baseline", async ({ page }) => {
   await prepareApp(page, "light");
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Study dashboard" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Dashboard" })).toBeVisible();
   await expect(page).toHaveScreenshot("home-light.png", { fullPage: true, animations: "disabled" });
 });
 
 test("home dark theme baseline", async ({ page }) => {
   await prepareApp(page, "dark");
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Study dashboard" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Dashboard" })).toBeVisible();
   await expect(page).toHaveScreenshot("home-dark.png", { fullPage: true, animations: "disabled" });
 });

@@ -122,36 +122,42 @@ Este documento es la fuente de verdad del estado del proyecto. `ROADMAP_CTFL_V4_
 
 ## Hito 7 — Accesibilidad y pulido
 
-- [ ] Gestionar foco inicial y devolución de foco en modales.
-- [ ] Añadir cierre con `Escape` y bloqueo de desplazamiento.
-- [ ] Revisar nombres accesibles, encabezados y regiones.
-- [ ] Garantizar foco visible y navegación completa por teclado.
-- [ ] Respetar `prefers-reduced-motion`.
-- [ ] Comprobar contraste en temas claro y oscuro.
-- [ ] Añadir estados de carga, éxito y error para importar/exportar.
-- [ ] Cerrar el hito con recorridos Playwright mediante teclado.
+- [x] Gestionar foco inicial y devolución de foco en modales.
+- [x] Añadir cierre con `Escape` y bloqueo de desplazamiento.
+- [x] Revisar nombres accesibles, encabezados y regiones.
+- [x] Garantizar foco visible y navegación completa por teclado.
+- [x] Respetar `prefers-reduced-motion`.
+- [x] Comprobar contraste en temas claro y oscuro.
+- [x] Añadir estados de carga, éxito y error para importar/exportar.
+- [x] Cerrar el hito con recorridos Playwright mediante teclado.
+
+**Cerrado el 15/07/2026.** Validación: contrato modal reutilizable con foco inicial, ciclo de tabulación, `Escape`, bloqueo de desplazamiento y devolución de foco aplicado a confirmaciones, tutorial, teoría, imágenes y menú móvil; regiones, encabezados, controles con nombre, foco visible, navegación con `Tab`/`Enter` y `prefers-reduced-motion` verificados; contraste WCAG AA comprobado en superficies clave de ambos temas; importación y exportación anuncian carga, éxito y error sin alertas nativas. Banco de 160 preguntas, 27 pruebas unitarias, compilación y 80 pruebas E2E superadas, con 12 omisiones intencionadas por proyecto.
 
 ## Hito 8 — PWA y funcionamiento offline
 
-- [ ] Añadir manifest e iconos instalables.
-- [ ] Configurar service worker y estrategia de actualización.
-- [ ] Cachear aplicación, banco y recursos gráficos.
-- [ ] Mostrar estado offline y aviso de nueva versión.
-- [ ] Verificar que progreso e importación sigan siendo locales.
-- [ ] Probar instalación y funcionamiento sin conexión.
-- [ ] Cerrar el hito con una auditoría de la compilación de producción.
+- [x] Añadir manifest e iconos instalables.
+- [x] Configurar service worker y estrategia de actualización.
+- [x] Cachear aplicación, banco y recursos gráficos.
+- [x] Mostrar estado offline y aviso de nueva versión.
+- [x] Verificar que progreso e importación sigan siendo locales.
+- [x] Probar instalación y funcionamiento sin conexión.
+- [x] Cerrar el hito con una auditoría de la compilación de producción.
+
+**Cerrado el 15/07/2026.** Validación: manifest instalable con iconos 192, 512 y maskable generado desde el favicon transparente; service worker Workbox con estrategia de actualización bajo confirmación y limpieza de cachés antiguas; 32 recursos precacheados (2,14 MiB), incluidos aplicación, banco integrado y 23 gráficos. Chromium sobre `vite preview` verificó registro y control del service worker, recarga offline, recuperación de respuestas, carga de gráficos e importación local sin red. Auditoría PWA automatizada, banco de 160 preguntas, 27 pruebas unitarias, compilación y 82 pruebas E2E superadas, con 14 omisiones intencionadas por proyecto.
 
 ## Hito 9 — Estabilización final
 
-- [ ] Ejecutar validación completa del banco.
-- [ ] Ejecutar todas las pruebas unitarias y E2E.
-- [ ] Revisar escritorio y móvil en ambos temas e idiomas.
-- [ ] Comprobar los cuatro modelos y el simulacro aleatorio.
-- [ ] Revisar migración, exportación y restauración.
-- [ ] Resolver errores de consola y regresiones visuales.
-- [ ] Revisar y reducir el bundle principal, actualmente por encima del aviso de 500 kB de Vite.
-- [ ] Actualizar documentación de uso y desarrollo.
-- [ ] Marcar la versión como preparada para entrega.
+- [x] Ejecutar validación completa del banco.
+- [x] Ejecutar todas las pruebas unitarias y E2E.
+- [x] Revisar escritorio y móvil en ambos temas e idiomas.
+- [x] Comprobar los cuatro modelos y el simulacro aleatorio.
+- [x] Revisar migración, exportación y restauración.
+- [x] Resolver errores de consola y regresiones visuales.
+- [x] Revisar y reducir el bundle principal, anteriormente por encima del aviso de 500 kB de Vite.
+- [x] Actualizar documentación de uso y desarrollo.
+- [x] Marcar la versión como preparada para entrega.
+
+**Cerrado el 15/07/2026.** Validación final: banco maestro con 160 preguntas y distribución A–D 40/40/40/40; 27 pruebas unitarias y 96 recorridos E2E superados en Chromium de escritorio y móvil, con 14 omisiones intencionadas por proyecto. Se recorrieron las rutas principales en ambos idiomas y temas sin desbordamiento, los cuatro modelos oficiales y un aleatorio de 40 preguntas únicas, migración v1→v2, recuperación de simulacro, exportación→importación→restauración, PWA offline, contraste, teclado, consola y referencias visuales. El banco se divide automáticamente en cuatro fragmentos y el bundle principal bajó de 879,91 kB a 332,93 kB, sin advertencias de tamaño. Versión 1.0.0 preparada para entrega local.
 
 ## Normas de seguimiento
 

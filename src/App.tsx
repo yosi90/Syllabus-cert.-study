@@ -26,6 +26,7 @@ import {
   tutorialContent,
   uiCopy,
   type ExamState,
+  type FileOperationStatus,
   type Language,
   type ReviewState,
   type TimerMode,
@@ -44,6 +45,7 @@ import {
 } from "./components/common/CommonUi";
 
 import { FiltersPanel } from "./components/sidebar/SidebarPanels";
+import { PwaStatus } from "./components/common/PwaStatus";
 import { MobilePrimaryNavigation, ModeNavigation } from "./components/navigation/AppNavigation";
 
 import { ExamView } from "./views/ExamView";
@@ -56,6 +58,7 @@ import {
   useTrainerProgress,
   useWorkspacePersistence,
 } from "./hooks/useTrainerPersistence";
+import { useModalAccessibility } from "./hooks/useModalAccessibility";
 
 function AppShell() {
   const navigate = useNavigate();
@@ -68,6 +71,7 @@ function AppShell() {
   const [theme, setTheme] = usePersistentTheme(progress.preferences.theme);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showSpanishNotice, setShowSpanishNotice] = useState(false);
+  const [fileStatus, setFileStatus] = useState<FileOperationStatus>(null);
   const copy = uiCopy[language];
   const tutorial = tutorialContent[language];
   const tutorialSteps = tutorial.steps;
@@ -84,6 +88,7 @@ function AppShell() {
   );
   const [pendingConfirmation, setPendingConfirmation] = useState<"cancel-exam" | "reset-progress" | null>(null);
   const [tutorialStep, setTutorialStep] = useState(0);
+  const menuRef = useModalAccessibility<HTMLElement>(isMenuOpen, () => setIsMenuOpen(false));
   useLastRouteRestoration(location.pathname, progress.preferences.lastRoute, navigate);
 
   useWorkspacePersistence({
@@ -105,24 +110,6 @@ function AppShell() {
     const interval = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(interval);
   }, [activeExam?.endsAt]);
-
-  useEffect(() => {
-    if (!isMenuOpen) return undefined;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsMenuOpen(false);
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isMenuOpen]);
-
-  useEffect(() => {
-    if (!isMenuOpen) return undefined;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [isMenuOpen]);
 
   const filteredQuestions = useMemo(() => filterQuestions(questions, filters, progress, language), [filters, progress, language]);
   const studyQuestions = useMemo(
@@ -307,8 +294,10 @@ function AppShell() {
     navigate("/review");
   }
 
-  function handleImport(raw: string) {
+  async function handleImport(file: File) {
+    setFileStatus({ kind: "loading", message: copy.importingProgress });
     try {
+      const raw = await file.text();
       const imported = importProgress(raw);
       updateProgress(imported);
       setLanguage(imported.preferences.language ?? language);
@@ -321,20 +310,30 @@ function AppShell() {
       setActiveExam(imported.activeExam);
       setExamTimerMode(imported.activeExam?.timerMode ?? "standard");
       setReview(restoreReview(imported.sessions.find((session) => session.id === imported.review.sessionId)));
+      setFileStatus({ kind: "success", message: copy.importSuccess });
       navigate(imported.preferences.lastRoute);
     } catch (error) {
-      alert(error instanceof Error ? error.message : language === "es" ? "No se pudo importar el progreso." : "Progress could not be imported.");
+      setFileStatus({
+        kind: "error",
+        message: error instanceof Error ? error.message : copy.importError,
+      });
     }
   }
 
   function handleExport() {
-    const blob = new Blob([exportProgress(progress)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = language === "es" ? "istqb-ctfl-v4-progreso.json" : "istqb-ctfl-v4-progress.json";
-    link.click();
-    URL.revokeObjectURL(url);
+    setFileStatus({ kind: "loading", message: copy.exportingProgress });
+    try {
+      const blob = new Blob([exportProgress(progress)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = language === "es" ? "istqb-ctfl-v4-progreso.json" : "istqb-ctfl-v4-progress.json";
+      link.click();
+      URL.revokeObjectURL(url);
+      setFileStatus({ kind: "success", message: copy.exportSuccess });
+    } catch {
+      setFileStatus({ kind: "error", message: copy.exportError });
+    }
   }
 
   function handleReset() {
@@ -461,8 +460,11 @@ function AppShell() {
       {isMenuOpen && <button className="menu-backdrop" type="button" aria-label={copy.closeMenu} onClick={() => setIsMenuOpen(false)} />}
 
       <aside
+        ref={menuRef}
         className={classNames("sidebar", isMenuOpen && "is-open", tutorialTarget === "layout" && "tutorial-highlight")}
         id="main-menu"
+        aria-label={copy.studyControls}
+        tabIndex={-1}
       >
         <div className="brand">
           <div className="brand-copy">
@@ -470,7 +472,7 @@ function AppShell() {
             <h1>{copy.trainer}</h1>
           </div>
           <div className="brand-language">
-            <FlagLanguageToggle language={language} onChange={handleLanguageChange} />
+            <FlagLanguageToggle language={language} onChange={handleLanguageChange} label={copy.languageLabel} />
           </div>
         </div>
 
@@ -499,6 +501,7 @@ function AppShell() {
           onImport={handleImport}
           onReset={handleReset}
           onTutorialReset={handleTutorialReset}
+          fileStatus={fileStatus}
           language={language}
           copy={copy}
         />
@@ -602,6 +605,7 @@ function AppShell() {
       </Routes>
 
       <MobilePrimaryNavigation copy={copy} onNavigate={() => setIsMenuOpen(false)} />
+      <PwaStatus copy={copy} />
 
       {!progress.preferences.tutorialCompleted && (
         <OnboardingTutorial

@@ -51,15 +51,13 @@ export function HomeView({
     <main className="workspace dashboard-workspace">
       <header className="workspace-header">
         <div>
-          <span className="eyebrow">{copy.home}</span>
           <h2>{copy.dashboardTitle}</h2>
-          <p className="workspace-subtitle">{copy.dashboardSubtitle}</p>
         </div>
         <div className="header-metrics">
           <Metric label={copy.coverage} value={`${dashboard.coverage}%`} />
           <Metric label={copy.accuracy} value={dashboard.accuracy === null ? "—" : `${dashboard.accuracy}%`} />
           <Metric label={copy.attempts} value={dashboard.attempts} />
-          <FlagLanguageToggle language={language} onChange={onLanguageChange} />
+          <FlagLanguageToggle language={language} onChange={onLanguageChange} label={copy.languageLabel} />
         </div>
       </header>
 

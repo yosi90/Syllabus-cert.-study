@@ -116,14 +116,14 @@ export function ReviewView({
           const correct = isCorrectAnswer(question, selected);
           const localized = localizedQuestion(question, language);
           return (
-            <article className="review-item" key={question.id}>
+            <article className="review-item" key={question.id} aria-labelledby={`review-${question.id}-title`}>
               <div className="review-head">
                 <strong>{questionLabel(question)}</strong>
                 <span className={classNames("score-pill", correct ? "passed" : "failed")}>
                   {correct ? copy.correctAnswer : selected.length ? (language === "es" ? "Incorrecta" : "Incorrect") : copy.blank}
                 </span>
               </div>
-              <p>{localized.prompt}</p>
+              <h3 className="review-question-title" id={`review-${question.id}-title`}>{localized.prompt}</h3>
               <QuestionVisual question={question} language={language} copy={copy} />
               <div className="answer-lines">
                 <span>{copy.yourAnswer}: {selected.length ? displayAnswerLabels(question, selected, language, review.optionMode, review.optionSeed) : copy.unanswered}</span>

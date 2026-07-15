@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   BookOpen,
   Bookmark,
@@ -11,6 +11,7 @@ import {
 import type { Objective, Question } from "../../data/types";
 import { isCorrectAnswer } from "../../domain/scoring";
 import type { OptionMode } from "../../domain/options";
+import { useModalAccessibility } from "../../hooks/useModalAccessibility";
 import type { ProgressState } from "../../storage/progress";
 import type { Copy, ExamState, Language } from "../../app/content";
 import {
@@ -61,7 +62,7 @@ export function QuestionCard({
   );
 
   return (
-    <section className="question-card">
+    <section className="question-card" aria-labelledby={`question-${question.id}-title`}>
       <div className="question-meta">
         <span>{questionLabel(question)}</span>
         <span>{question.chapter}</span>
@@ -70,7 +71,7 @@ export function QuestionCard({
         <span>{question.selectionMode === "multiple" ? copy.multiple : copy.single}</span>
       </div>
       <div className="question-title-row">
-        <p className="prompt">{localized.prompt}</p>
+        <h3 className="prompt" id={`question-${question.id}-title`}>{localized.prompt}</h3>
         {onFlag && (
           <button
             className="icon-button"
@@ -125,17 +126,9 @@ export function QuestionCard({
 
 export function QuestionVisual({ question, language, copy }: { question: Question; language: Language; copy: Copy }) {
   const [isOpen, setIsOpen] = useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useModalAccessibility<HTMLElement>(isOpen, () => setIsOpen(false), closeRef);
   const visual = question.visual;
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsOpen(false);
-    };
-    document.addEventListener("keydown", closeOnEscape);
-    return () => document.removeEventListener("keydown", closeOnEscape);
-  }, [isOpen]);
 
   if (!visual) return null;
 
@@ -156,13 +149,16 @@ export function QuestionVisual({ question, language, copy }: { question: Questio
       {isOpen && (
         <div className="image-backdrop" role="presentation" onClick={() => setIsOpen(false)}>
           <section
+            ref={dialogRef}
             className="image-modal"
             role="dialog"
             aria-modal="true"
             aria-label={alt}
+            tabIndex={-1}
             onClick={(event) => event.stopPropagation()}
           >
             <button
+              ref={closeRef}
               className="icon-button image-close"
               type="button"
               onClick={() => setIsOpen(false)}
@@ -285,16 +281,27 @@ export function TheoryModal({
   copy: Copy;
 }) {
   const localized = localizedObjective(objective, language);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useModalAccessibility<HTMLElement>(true, onClose, closeRef);
   return (
     <div className="theory-backdrop" role="presentation" onClick={onClose}>
       <section
+        ref={dialogRef}
         className="theory-modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="theory-title"
+        tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
       >
-        <button className="icon-button theory-close" type="button" onClick={onClose} title={language === "es" ? "Cerrar" : "Close"}>
+        <button
+          ref={closeRef}
+          className="icon-button theory-close"
+          type="button"
+          onClick={onClose}
+          title={language === "es" ? "Cerrar" : "Close"}
+          aria-label={language === "es" ? "Cerrar" : "Close"}
+        >
           <X aria-hidden="true" />
         </button>
         <span className="eyebrow">{language === "es" ? "Syllabus CTFL v4.0" : "CTFL v4.0.1 Syllabus"}</span>
