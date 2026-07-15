@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import type { Objective, Question } from "../../data/types";
 import { isCorrectAnswer } from "../../domain/scoring";
+import type { OptionMode } from "../../domain/options";
 import type { ProgressState } from "../../storage/progress";
 import type { Copy, ExamState, Language } from "../../app/content";
 import {
@@ -37,6 +38,8 @@ export function QuestionCard({
   onFlag,
   language,
   copy,
+  optionMode,
+  optionSeed,
 }: {
   question: Question;
   selected: string[];
@@ -48,9 +51,14 @@ export function QuestionCard({
   onFlag?: () => void;
   language: Language;
   copy: Copy;
+  optionMode: OptionMode;
+  optionSeed?: string;
 }) {
   const localized = localizedQuestion(question, language);
-  const displayOptions = useMemo(() => getDisplayOptions(question, language), [question, language]);
+  const displayOptions = useMemo(
+    () => getDisplayOptions(question, language, optionMode, optionSeed),
+    [question, language, optionMode, optionSeed],
+  );
 
   return (
     <section className="question-card">
@@ -176,15 +184,22 @@ export function ExplanationPanel({
   selected,
   language,
   copy,
+  optionMode,
+  optionSeed,
 }: {
   question: Question;
   selected: string[];
   language: Language;
   copy: Copy;
+  optionMode: OptionMode;
+  optionSeed?: string;
 }) {
   const localized = localizedQuestion(question, language);
   const parsed = parseExplanation(localized.explanation);
-  const displayOptions = useMemo(() => getDisplayOptions(question, language), [question, language]);
+  const displayOptions = useMemo(
+    () => getDisplayOptions(question, language, optionMode, optionSeed),
+    [question, language, optionMode, optionSeed],
+  );
   const displayKeyByOriginalKey = new Map(displayOptions.map((option) => [option.key, option.displayKey]));
   const displayOrderByOriginalKey = new Map(displayOptions.map((option, index) => [option.key, index]));
   const [isTheoryOpen, setIsTheoryOpen] = useState(false);

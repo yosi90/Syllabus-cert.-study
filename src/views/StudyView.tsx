@@ -83,6 +83,8 @@ export function StudyView({
         onFlag={() => onFlag(currentQuestion.id)}
         language={language}
         copy={copy}
+        optionMode="shuffled"
+        optionSeed={adaptiveSession?.optionSeed}
       />
 
       {revealed && (
@@ -91,7 +93,14 @@ export function StudyView({
             {isCorrect ? <CheckCircle2 aria-hidden="true" /> : <XCircle aria-hidden="true" />}
             <strong>{isCorrect ? copy.correctAnswer : language === "es" ? "Incorrecta" : "Incorrect"}</strong>
           </div>
-          <ExplanationPanel question={currentQuestion} selected={selected} language={language} copy={copy} />
+          <ExplanationPanel
+            question={currentQuestion}
+            selected={selected}
+            language={language}
+            copy={copy}
+            optionMode="shuffled"
+            optionSeed={adaptiveSession?.optionSeed}
+          />
         </section>
       )}
 

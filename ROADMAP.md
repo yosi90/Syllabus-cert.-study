@@ -110,13 +110,15 @@ Este documento es la fuente de verdad del estado del proyecto. `ROADMAP_CTFL_V4_
 
 ## Hito 6 — Fidelidad de opciones y simulacros
 
-- [ ] Introducir modos explícitos de opciones `original` y `shuffled`.
-- [ ] Mantener letras y orden originales en todos los simulacros.
-- [ ] Barajar de forma estable en práctica y sesiones adaptativas.
-- [ ] Mantener el mismo orden en pregunta, corrección y revisión.
-- [ ] Añadir pruebas para preguntas simples y múltiples.
-- [ ] Verificar manualmente muestras de los cuatro PDF.
-- [ ] Cerrar el hito sin discrepancias entre respuesta seleccionada y explicación.
+- [x] Introducir modos explícitos de opciones `original` y `shuffled`.
+- [x] Mantener letras y orden originales en todos los simulacros.
+- [x] Barajar de forma estable en práctica y sesiones adaptativas.
+- [x] Mantener el mismo orden en pregunta, corrección y revisión.
+- [x] Añadir pruebas para preguntas simples y múltiples.
+- [x] Verificar manualmente muestras de los cuatro PDF.
+- [x] Cerrar el hito sin discrepancias entre respuesta seleccionada y explicación.
+
+**Cerrado el 15/07/2026.** Validación: los modos `original` y `shuffled` forman parte explícita de simulacros, sesiones adaptativas e historial, con migración compatible para datos v2 anteriores; los modelos oficiales y el aleatorio conservan letras y orden originales, mientras práctica y sesiones adaptativas mantienen un barajado estable en pregunta, corrección y revisión. Se contrastó la pregunta 1 de los PDF A–D —incluidas las fragmentaciones `syst em` y `quali ty` de A-01— y se cubrieron preguntas simples y múltiples. Banco de 160 preguntas, 27 pruebas unitarias, compilación y 61 pruebas E2E superadas, con 11 omisiones intencionadas por proyecto.
 
 ## Hito 7 — Accesibilidad y pulido
 

@@ -1,5 +1,6 @@
 import type { KLevel, SourceModel } from "../data/types";
 import type { AnswerMap, SessionScore } from "../domain/scoring";
+import type { OptionMode } from "../domain/options";
 
 export const STORAGE_KEY = "istqb-ctfl-v4-trainer:v2";
 export const LEGACY_STORAGE_KEY = "istqb-ctfl-v4-trainer:v1";
@@ -18,6 +19,8 @@ export type StoredSession = {
   title: string;
   mode: "study" | "exam";
   sessionType?: "official" | "random" | "adaptive";
+  optionMode?: OptionMode;
+  optionSeed?: string;
   sourceModel?: SourceModel;
   questionIds: string[];
   answers: AnswerMap;
@@ -44,6 +47,7 @@ export type PersistedExam = {
   answers: AnswerMap;
   timerMode: "off" | "standard" | "extended";
   endsAt: number | null;
+  optionMode: "original";
 };
 
 export type PersistedStudySession = {
@@ -51,6 +55,8 @@ export type PersistedStudySession = {
   title: string;
   size: 10 | 20;
   seed: string;
+  optionMode: "shuffled";
+  optionSeed: string;
   questionIds: string[];
   currentIndex: number;
   answers: AnswerMap;
@@ -182,7 +188,19 @@ function normalizeProgress(value: ProgressState): ProgressState {
     version: 2,
     certification: "ctfl-v4",
     questionProgress: value.questionProgress ?? {},
-    sessions: Array.isArray(value.sessions) ? value.sessions : [],
+    sessions: Array.isArray(value.sessions)
+      ? value.sessions.map((session) => {
+          if (!isObject(session)) return session as StoredSession;
+          const type = session.sessionType === "adaptive" || session.mode === "study" ? "adaptive" : session.sessionType;
+          return {
+            ...(session as StoredSession),
+            optionMode: session.optionMode === "shuffled" || session.optionMode === "original"
+              ? session.optionMode
+              : type === "adaptive" ? "shuffled" : "original",
+            optionSeed: typeof session.optionSeed === "string" ? session.optionSeed : String(session.id ?? "legacy-session"),
+          };
+        })
+      : [],
     preferences: {
       lastMode: preferences.lastMode === "exam" ? "exam" : "study",
       tutorialCompleted: preferences.tutorialCompleted ?? false,
@@ -197,10 +215,16 @@ function normalizeProgress(value: ProgressState): ProgressState {
       answers: isObject(study.answers) ? (study.answers as AnswerMap) : {},
       revealed: Boolean(study.revealed),
     },
-    activeExam: isObject(value.activeExam) ? (value.activeExam as PersistedExam) : null,
+    activeExam: isObject(value.activeExam)
+      ? { ...(value.activeExam as PersistedExam), optionMode: "original" }
+      : null,
     activeStudySession: isObject(value.activeStudySession)
       ? {
           ...(value.activeStudySession as PersistedStudySession),
+          optionMode: "shuffled",
+          optionSeed: typeof value.activeStudySession.optionSeed === "string"
+            ? value.activeStudySession.optionSeed
+            : String(value.activeStudySession.seed ?? value.activeStudySession.id ?? "adaptive-session"),
           checkedQuestionIds: Array.isArray(value.activeStudySession.checkedQuestionIds)
             ? value.activeStudySession.checkedQuestionIds.filter((id): id is string => typeof id === "string")
             : [],

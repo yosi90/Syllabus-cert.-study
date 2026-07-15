@@ -232,6 +232,7 @@ function AppShell() {
       answers: {},
       timerMode: examTimerMode,
       endsAt: duration ? Date.now() + duration * 60 * 1000 : null,
+      optionMode: "original",
     });
     setReview(null);
     navigate("/exam");
@@ -280,6 +281,8 @@ function AppShell() {
       title: activeExam.blueprint.title,
       mode: "exam",
       sessionType: activeExam.blueprint.id.startsWith("model-") ? "official" : "random",
+      optionMode: activeExam.optionMode,
+      optionSeed: activeExam.blueprint.id,
       sourceModel: activeExam.blueprint.id.startsWith("model-")
         ? (activeExam.blueprint.id.slice(-1) as SourceModel)
         : undefined,
@@ -293,6 +296,8 @@ function AppShell() {
     setReview({
       sessionId: session.id,
       sessionType: activeExam.blueprint.id.startsWith("model-") ? "official" : "random",
+      optionMode: activeExam.optionMode,
+      optionSeed: activeExam.blueprint.id,
       title: activeExam.blueprint.title,
       questions: examQuestions,
       answers: activeExam.answers,
@@ -370,6 +375,8 @@ function AppShell() {
       title: language === "es" ? `Sesión adaptativa · ${size}` : `Adaptive session · ${size}`,
       size,
       seed,
+      optionMode: "shuffled",
+      optionSeed: seed,
       questionIds,
       currentIndex: 0,
       answers: {},
@@ -394,6 +401,8 @@ function AppShell() {
       title: activeStudySession.title,
       mode: "study",
       sessionType: "adaptive",
+      optionMode: activeStudySession.optionMode,
+      optionSeed: activeStudySession.optionSeed,
       questionIds: activeStudySession.questionIds,
       answers: activeStudySession.answers,
       score: scoreSummary,
@@ -403,6 +412,8 @@ function AppShell() {
     setReview({
       sessionId: session.id,
       sessionType: "adaptive",
+      optionMode: activeStudySession.optionMode,
+      optionSeed: activeStudySession.optionSeed,
       title: session.title,
       questions: sessionQuestions,
       answers: session.answers,

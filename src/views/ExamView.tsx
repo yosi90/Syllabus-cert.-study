@@ -142,6 +142,8 @@ export function ExamView({
         onToggle={(optionKey) => onToggle(currentQuestion, optionKey)}
         language={language}
         copy={copy}
+        optionMode={activeExam.optionMode}
+        optionSeed={activeExam.blueprint.id}
       />
 
       <div className="action-bar">
@@ -172,4 +174,3 @@ export function ExamView({
     </main>
   );
 }
-

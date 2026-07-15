@@ -3,6 +3,7 @@ import type { Objective, Question } from "../data/types";
 import { findQuestionsByIds } from "../domain/exams";
 import type { QuestionFilters } from "../domain/filters";
 import { scoreQuestions } from "../domain/scoring";
+import { orderOptions, type OptionMode } from "../domain/options";
 import type { ProgressState, StoredSession } from "../storage/progress";
 import type { Copy, Language, ReviewState } from "./content";
 
@@ -83,36 +84,18 @@ export function hasActiveFilters(filters: QuestionFilters) {
   );
 }
 
-export function hashString(value: string): number {
-  let hash = 2166136261;
-  for (let index = 0; index < value.length; index += 1) {
-    hash ^= value.charCodeAt(index);
-    hash = Math.imul(hash, 16777619);
-  }
-  return hash >>> 0;
-}
-
-export function shuffledOptions(question: Question, language: Language) {
-  const options = [...localizedQuestion(question, language).options];
-  const originalOrder = options.map((option) => option.key).join("");
-  let state = hashString(question.id);
-  for (let index = options.length - 1; index > 0; index -= 1) {
-    state = Math.imul(state ^ (state >>> 15), 2246822507) >>> 0;
-    const swapIndex = state % (index + 1);
-    [options[index], options[swapIndex]] = [options[swapIndex], options[index]];
-  }
-  if (options.length > 1 && options.map((option) => option.key).join("") === originalOrder) {
-    options.push(options.shift()!);
-  }
-  return options;
-}
-
 const displayLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-export function getDisplayOptions(question: Question, language: Language) {
-  return shuffledOptions(question, language).map((option, index) => ({
+export function getDisplayOptions(
+  question: Question,
+  language: Language,
+  optionMode: OptionMode = "shuffled",
+  optionSeed?: string,
+) {
+  const stableSeed = optionSeed ? `${optionSeed}:${question.id}` : question.id;
+  return orderOptions(localizedQuestion(question, language).options, optionMode, stableSeed).map((option, index) => ({
     ...option,
-    displayKey: displayLetters[index] ?? String(index + 1),
+    displayKey: optionMode === "original" ? option.key.toUpperCase() : displayLetters[index] ?? String(index + 1),
     text: cleanOptionText(option.text),
   }));
 }
@@ -128,8 +111,14 @@ export function cleanExplanationText(text: string) {
     .trim();
 }
 
-export function displayAnswerLabels(question: Question, answerKeys: string[], language: Language) {
-  const displayKeyByOriginalKey = new Map(getDisplayOptions(question, language).map((option) => [option.key, option.displayKey]));
+export function displayAnswerLabels(
+  question: Question,
+  answerKeys: string[],
+  language: Language,
+  optionMode: OptionMode,
+  optionSeed?: string,
+) {
+  const displayKeyByOriginalKey = new Map(getDisplayOptions(question, language, optionMode, optionSeed).map((option) => [option.key, option.displayKey]));
   return answerKeys.map((key) => displayKeyByOriginalKey.get(key) ?? key.toUpperCase()).join(", ");
 }
 
@@ -159,10 +148,11 @@ export function restoreReview(session: StoredSession | undefined): ReviewState |
   return {
     sessionId: session.id,
     sessionType: getSessionType(session),
+    optionMode: session.optionMode ?? (getSessionType(session) === "adaptive" ? "shuffled" : "original"),
+    optionSeed: session.optionSeed ?? session.id,
     title: session.title,
     questions: sessionQuestions,
     answers: session.answers,
     score: scoreQuestions(sessionQuestions, session.answers, examRules),
   };
 }
-

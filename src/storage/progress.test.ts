@@ -118,6 +118,7 @@ describe("progress storage", () => {
       answers: { "B-01": ["a"] },
       timerMode: "standard",
       endsAt: 1_800_000,
+      optionMode: "original",
     };
 
     saveProgress(progress, storage);
@@ -147,6 +148,8 @@ describe("progress storage", () => {
       title: "Adaptive session · 10",
       size: 10,
       seed: "seed",
+      optionMode: "shuffled",
+      optionSeed: "seed",
       questionIds: ["A-01", "B-02"],
       currentIndex: 1,
       answers: { "A-01": ["a"] },
@@ -158,6 +161,21 @@ describe("progress storage", () => {
     saveProgress(progress, storage);
     expect(loadProgress(storage).activeStudySession).toEqual(progress.activeStudySession);
     expect(importProgress(exportProgress(progress)).activeStudySession?.seed).toBe("seed");
+  });
+
+  it("adds compatible option modes to older version 2 sessions", () => {
+    const imported = importProgress(JSON.stringify({
+      ...createEmptyProgress(),
+      sessions: [
+        { id: "model-A-old", title: "Model A", mode: "exam", sessionType: "official", questionIds: [], answers: {}, score: {}, completedAt: "2026-01-01" },
+        { id: "adaptive-old", title: "Adaptive", mode: "study", sessionType: "adaptive", questionIds: [], answers: {}, score: {}, completedAt: "2026-01-01" },
+      ],
+      activeExam: { blueprint: { id: "random", title: "Random", questionIds: [] }, currentIndex: 0, answers: {}, timerMode: "off", endsAt: null },
+    }));
+
+    expect(imported.sessions[0]).toMatchObject({ optionMode: "original", optionSeed: "model-A-old" });
+    expect(imported.sessions[1]).toMatchObject({ optionMode: "shuffled", optionSeed: "adaptive-old" });
+    expect(imported.activeExam?.optionMode).toBe("original");
   });
 
   it("rejects incompatible progress exports", () => {

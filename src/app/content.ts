@@ -1,6 +1,7 @@
 import type { KLevel, Question, SourceModel } from "../data/types";
 import type { AnswerMap, SessionScore } from "../domain/scoring";
 import type { PersistedExam } from "../storage/progress";
+import type { OptionMode } from "../domain/options";
 
 export type ExamState = PersistedExam;
 
@@ -13,6 +14,8 @@ export const THEME_STORAGE_KEY = "istqb-ctfl-v4-theme";
 export type ReviewState = {
   sessionId: string;
   sessionType: "official" | "random" | "adaptive";
+  optionMode: OptionMode;
+  optionSeed: string;
   title: string;
   questions: Question[];
   answers: AnswerMap;

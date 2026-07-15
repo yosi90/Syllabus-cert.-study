@@ -126,10 +126,17 @@ export function ReviewView({
               <p>{localized.prompt}</p>
               <QuestionVisual question={question} language={language} copy={copy} />
               <div className="answer-lines">
-                <span>{copy.yourAnswer}: {selected.length ? displayAnswerLabels(question, selected, language) : copy.unanswered}</span>
-                <span>{copy.correctAnswer}: {displayAnswerLabels(question, question.correctAnswers, language)}</span>
+                <span>{copy.yourAnswer}: {selected.length ? displayAnswerLabels(question, selected, language, review.optionMode, review.optionSeed) : copy.unanswered}</span>
+                <span>{copy.correctAnswer}: {displayAnswerLabels(question, question.correctAnswers, language, review.optionMode, review.optionSeed)}</span>
               </div>
-              <ExplanationPanel question={question} selected={selected} language={language} copy={copy} />
+              <ExplanationPanel
+                question={question}
+                selected={selected}
+                language={language}
+                copy={copy}
+                optionMode={review.optionMode}
+                optionSeed={review.optionSeed}
+              />
             </article>
           );
         })}

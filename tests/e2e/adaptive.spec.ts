@@ -14,6 +14,7 @@ test("a ten-question adaptive session survives leaving and reloading", async ({ 
   await page.getByRole("button", { name: "Check" }).click();
   await page.getByRole("button", { name: "Next" }).click();
   await expect(page.getByText("2/10", { exact: true })).toBeVisible();
+  const optionOrderBeforeReload = await page.locator(".option-row").allTextContents();
 
   const beforeReload = await page.evaluate(() => {
     const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null");
@@ -22,6 +23,7 @@ test("a ten-question adaptive session survives leaving and reloading", async ({ 
   await page.reload();
   await expect(page.getByRole("heading", { name: "Adaptive session · 10" })).toBeVisible();
   await expect(page.getByText("2/10", { exact: true })).toBeVisible();
+  await expect(page.locator(".option-row")).toHaveText(optionOrderBeforeReload);
   const afterReload = await page.evaluate(() => {
     const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null");
     return { seed: progress.activeStudySession.seed, questionIds: progress.activeStudySession.questionIds };
