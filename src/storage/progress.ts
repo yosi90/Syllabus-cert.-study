@@ -46,6 +46,19 @@ export type PersistedExam = {
   endsAt: number | null;
 };
 
+export type PersistedStudySession = {
+  id: string;
+  title: string;
+  size: 10 | 20;
+  seed: string;
+  questionIds: string[];
+  currentIndex: number;
+  answers: AnswerMap;
+  revealed: boolean;
+  checkedQuestionIds: string[];
+  startedAt: string;
+};
+
 export type ProgressState = {
   version: 2;
   certification: "ctfl-v4";
@@ -66,6 +79,7 @@ export type ProgressState = {
     revealed: boolean;
   };
   activeExam: PersistedExam | null;
+  activeStudySession: PersistedStudySession | null;
   review: {
     sessionId: string | null;
   };
@@ -115,6 +129,7 @@ export function createEmptyProgress(): ProgressState {
       revealed: false,
     },
     activeExam: null,
+    activeStudySession: null,
     review: {
       sessionId: null,
     },
@@ -183,6 +198,14 @@ function normalizeProgress(value: ProgressState): ProgressState {
       revealed: Boolean(study.revealed),
     },
     activeExam: isObject(value.activeExam) ? (value.activeExam as PersistedExam) : null,
+    activeStudySession: isObject(value.activeStudySession)
+      ? {
+          ...(value.activeStudySession as PersistedStudySession),
+          checkedQuestionIds: Array.isArray(value.activeStudySession.checkedQuestionIds)
+            ? value.activeStudySession.checkedQuestionIds.filter((id): id is string => typeof id === "string")
+            : [],
+        }
+      : null,
     review: {
       sessionId: typeof value.review?.sessionId === "string" ? value.review.sessionId : null,
     },

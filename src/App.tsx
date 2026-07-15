@@ -6,6 +6,7 @@ import type { Question, SourceModel } from "./data/types";
 import { createModelExam, createRandomExam, findQuestionsByIds, type ExamBlueprint } from "./domain/exams";
 import { emptyFilters, filterQuestions, summarizeProgress, type QuestionFilters } from "./domain/filters";
 import { summarizeStudyDashboard } from "./domain/dashboard";
+import { createAdaptiveQuestionIds } from "./domain/adaptive";
 import { isCorrectAnswer, scoreQuestions, toggleAnswer, type AnswerMap } from "./domain/scoring";
 import {
   addSession,
@@ -16,6 +17,7 @@ import {
   setTutorialCompleted,
   toggleFlag,
   type ProgressState,
+  type PersistedStudySession,
   type StoredSession,
 } from "./storage/progress";
 
@@ -73,7 +75,7 @@ function AppShell() {
   const [studyQuestionId, setStudyQuestionId] = useState<string | null>(() => progress.study.currentQuestionId);
   const [studyAnswers, setStudyAnswers] = useState<AnswerMap>(() => progress.study.answers);
   const [studyRevealed, setStudyRevealed] = useState(() => progress.study.revealed);
-  const [studyBatchSize, setStudyBatchSize] = useState<10 | 20 | null>(null);
+  const [activeStudySession, setActiveStudySession] = useState<PersistedStudySession | null>(() => progress.activeStudySession);
   const [activeExam, setActiveExam] = useState<ExamState | null>(() => progress.activeExam);
   const [examTimerMode, setExamTimerMode] = useState<TimerMode>(() => progress.activeExam?.timerMode ?? "standard");
   const [now, setNow] = useState(() => Date.now());
@@ -94,6 +96,7 @@ function AppShell() {
     studyAnswers,
     studyRevealed,
     activeExam,
+    activeStudySession,
     review,
   });
 
@@ -123,18 +126,21 @@ function AppShell() {
 
   const filteredQuestions = useMemo(() => filterQuestions(questions, filters, progress, language), [filters, progress, language]);
   const studyQuestions = useMemo(
-    () => studyBatchSize ? filteredQuestions.slice(0, studyBatchSize) : filteredQuestions,
-    [filteredQuestions, studyBatchSize],
+    () => activeStudySession ? findQuestionsByIds(questions, activeStudySession.questionIds) : filteredQuestions,
+    [activeStudySession, filteredQuestions],
   );
   const progressSummary = useMemo(() => summarizeProgress(questions, progress), [progress]);
   const dashboard = useMemo(() => summarizeStudyDashboard(questions, chapters, progress), [progress]);
   const references = useMemo(() => Array.from(new Set(questions.map((question) => question.reference))).sort(), []);
   const tutorialTarget = progress.preferences.tutorialCompleted ? undefined : tutorialSteps[tutorialStep]?.target;
   const storedStudyIndex = studyQuestions.findIndex((question) => question.id === studyQuestionId);
-  const studyIndex = storedStudyIndex >= 0 ? storedStudyIndex : 0;
+  const studyIndex = activeStudySession
+    ? Math.min(activeStudySession.currentIndex, Math.max(studyQuestions.length - 1, 0))
+    : storedStudyIndex >= 0 ? storedStudyIndex : 0;
   const currentStudyQuestion = studyQuestions[studyIndex];
 
   useEffect(() => {
+    if (activeStudySession) return;
     if (!studyQuestions.length) {
       if (studyQuestionId !== null) setStudyQuestionId(null);
       return;
@@ -143,14 +149,24 @@ function AppShell() {
       setStudyQuestionId(studyQuestions[0].id);
       setStudyRevealed(false);
     }
-  }, [studyQuestions, storedStudyIndex, studyQuestionId]);
+  }, [activeStudySession, studyQuestions, storedStudyIndex, studyQuestionId]);
 
   function updateProgress(next: ProgressState) {
     setProgress(next);
   }
 
   function handleStudyToggle(question: Question, optionKey: string) {
-    if (studyRevealed) return;
+    const revealed = activeStudySession
+      ? activeStudySession.revealed || activeStudySession.checkedQuestionIds.includes(question.id)
+      : studyRevealed;
+    if (revealed) return;
+    if (activeStudySession) {
+      setActiveStudySession((current) => current ? {
+        ...current,
+        answers: { ...current.answers, [question.id]: toggleAnswer(question, current.answers[question.id], optionKey) },
+      } : current);
+      return;
+    }
     setStudyAnswers((current) => ({
       ...current,
       [question.id]: toggleAnswer(question, current[question.id], optionKey),
@@ -158,19 +174,37 @@ function AppShell() {
   }
 
   function handleStudyCheck(question: Question) {
-    const selected = studyAnswers[question.id] ?? [];
+    if (activeStudySession?.checkedQuestionIds.includes(question.id)) return;
+    const selected = activeStudySession?.answers[question.id] ?? studyAnswers[question.id] ?? [];
     const correct = isCorrectAnswer(question, selected);
     updateProgress(recordQuestionAttempt(progress, question.id, selected, correct));
-    setStudyRevealed(true);
+    if (activeStudySession) {
+      setActiveStudySession((current) => current ? {
+        ...current,
+        revealed: true,
+        checkedQuestionIds: [...current.checkedQuestionIds, question.id],
+      } : current);
+    } else {
+      setStudyRevealed(true);
+    }
   }
 
   function handleStudyNext(direction: 1 | -1) {
     const next = Math.min(Math.max(studyIndex + direction, 0), Math.max(studyQuestions.length - 1, 0));
+    if (activeStudySession) {
+      setActiveStudySession((current) => current ? {
+        ...current,
+        currentIndex: next,
+        revealed: current.checkedQuestionIds.includes(current.questionIds[next]),
+      } : current);
+      return;
+    }
     setStudyQuestionId(studyQuestions[next]?.id ?? null);
     setStudyRevealed(false);
   }
 
   function handleStudyRandom() {
+    if (activeStudySession) return;
     if (studyQuestions.length <= 1) return;
     let next = studyIndex;
     while (next === studyIndex) {
@@ -258,6 +292,7 @@ function AppShell() {
     updateProgress(addSession(nextProgress, session));
     setReview({
       sessionId: session.id,
+      sessionType: activeExam.blueprint.id.startsWith("model-") ? "official" : "random",
       title: activeExam.blueprint.title,
       questions: examQuestions,
       answers: activeExam.answers,
@@ -277,6 +312,7 @@ function AppShell() {
       setStudyQuestionId(imported.study.currentQuestionId);
       setStudyAnswers(imported.study.answers);
       setStudyRevealed(imported.study.revealed);
+      setActiveStudySession(imported.activeStudySession);
       setActiveExam(imported.activeExam);
       setExamTimerMode(imported.activeExam?.timerMode ?? "standard");
       setReview(restoreReview(imported.sessions.find((session) => session.id === imported.review.sessionId)));
@@ -311,6 +347,7 @@ function AppShell() {
       setStudyQuestionId(null);
       setStudyAnswers({});
       setStudyRevealed(false);
+      setActiveStudySession(null);
       setReview(null);
       setActiveExam(null);
       navigate("/");
@@ -326,11 +363,53 @@ function AppShell() {
   }
 
   function startStudyBatch(size: 10 | 20) {
-    setFilters(emptyFilters);
-    setStudyBatchSize(size);
-    setStudyQuestionId(questions[0]?.id ?? null);
-    setStudyRevealed(false);
+    const seed = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const questionIds = createAdaptiveQuestionIds(questions, progress, size, seed);
+    setActiveStudySession({
+      id: `adaptive-${seed}`,
+      title: language === "es" ? `Sesión adaptativa · ${size}` : `Adaptive session · ${size}`,
+      size,
+      seed,
+      questionIds,
+      currentIndex: 0,
+      answers: {},
+      revealed: false,
+      checkedQuestionIds: [],
+      startedAt: new Date().toISOString(),
+    });
     navigate("/practice");
+  }
+
+  function finishStudySession() {
+    if (!activeStudySession) return;
+    const sessionQuestions = findQuestionsByIds(questions, activeStudySession.questionIds);
+    const score = scoreQuestions(sessionQuestions, activeStudySession.answers, {
+      ...examRules,
+      questionsPerExam: sessionQuestions.length,
+      passingScore: sessionQuestions.length + 1,
+    });
+    const { results: _results, ...scoreSummary } = score;
+    const session: StoredSession = {
+      id: activeStudySession.id,
+      title: activeStudySession.title,
+      mode: "study",
+      sessionType: "adaptive",
+      questionIds: activeStudySession.questionIds,
+      answers: activeStudySession.answers,
+      score: scoreSummary,
+      completedAt: new Date().toISOString(),
+    };
+    updateProgress(addSession(progress, session));
+    setReview({
+      sessionId: session.id,
+      sessionType: "adaptive",
+      title: session.title,
+      questions: sessionQuestions,
+      answers: session.answers,
+      score,
+    });
+    setActiveStudySession(null);
+    navigate("/review");
   }
 
   function handleTutorialReset() {
@@ -423,7 +502,7 @@ function AppShell() {
               dashboard={dashboard}
               language={language}
               copy={copy}
-              canContinuePractice={studyBatchSize !== null || progressSummary.attempted > 0 || Object.keys(studyAnswers).length > 0}
+              canContinuePractice={Boolean(activeStudySession) || progressSummary.attempted > 0 || Object.keys(studyAnswers).length > 0}
               hasActiveExam={Boolean(activeExam)}
               onStartStudy={startStudyBatch}
               onContinuePractice={() => navigate("/practice")}
@@ -439,22 +518,35 @@ function AppShell() {
               filteredQuestions={studyQuestions}
               currentQuestion={currentStudyQuestion}
               currentIndex={studyIndex}
-              selected={currentStudyQuestion ? studyAnswers[currentStudyQuestion.id] ?? [] : []}
-              revealed={studyRevealed}
+              selected={currentStudyQuestion ? activeStudySession?.answers[currentStudyQuestion.id] ?? studyAnswers[currentStudyQuestion.id] ?? [] : []}
+              revealed={activeStudySession
+                ? activeStudySession.revealed || activeStudySession.checkedQuestionIds.includes(currentStudyQuestion?.id ?? "")
+                : studyRevealed}
               progress={progress}
               onToggle={handleStudyToggle}
               onCheck={handleStudyCheck}
               onMove={handleStudyNext}
               onRandom={handleStudyRandom}
               onSelectIndex={(index) => {
-                setStudyQuestionId(studyQuestions[index]?.id ?? null);
-                setStudyRevealed(false);
+                if (activeStudySession) {
+                  setActiveStudySession((current) => current ? {
+                    ...current,
+                    currentIndex: index,
+                    revealed: current.checkedQuestionIds.includes(current.questionIds[index]),
+                  } : current);
+                } else {
+                  setStudyQuestionId(studyQuestions[index]?.id ?? null);
+                  setStudyRevealed(false);
+                }
               }}
               onFlag={handleFlag}
               highlighted={tutorialTarget === "practice"}
               language={language}
               onLanguageChange={handleLanguageChange}
               copy={copy}
+              adaptiveSession={activeStudySession}
+              onFinishSession={finishStudySession}
+              onLeaveSession={() => navigate("/")}
             />
           }
         />

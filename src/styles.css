@@ -1158,6 +1158,12 @@ button:disabled {
   background: #fdeaea;
 }
 
+.result-banner.adaptive,
+.score-pill.adaptive {
+  color: #315a75;
+  background: #e8f2f7;
+}
+
 .review-list,
 .session-list {
   display: grid;
@@ -1981,6 +1987,11 @@ button:disabled {
 
 .app[data-theme="dark"] .session-warning {
   color: #ffb4b4 !important;
+}
+
+.app[data-theme="dark"] .score-pill.adaptive {
+  color: #b9dbef;
+  background: #183247;
 }
 
 .app[data-theme="dark"] .workspace-subtitle,

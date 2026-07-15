@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type Dispatch, type SetStateAction } from 
 import type { NavigateFunction } from "react-router-dom";
 import type { QuestionFilters } from "../domain/filters";
 import type { AnswerMap } from "../domain/scoring";
-import { loadProgress, saveProgress, type ProgressState } from "../storage/progress";
+import { loadProgress, saveProgress, type PersistedStudySession, type ProgressState } from "../storage/progress";
 import { THEME_STORAGE_KEY, type ExamState, type Language, type ReviewState, type Theme } from "../app/content";
 
 export function useTrainerProgress() {
@@ -56,6 +56,7 @@ export function useWorkspacePersistence({
   studyAnswers,
   studyRevealed,
   activeExam,
+  activeStudySession,
   review,
 }: {
   setProgress: Dispatch<SetStateAction<ProgressState>>;
@@ -67,6 +68,7 @@ export function useWorkspacePersistence({
   studyAnswers: AnswerMap;
   studyRevealed: boolean;
   activeExam: ExamState | null;
+  activeStudySession: PersistedStudySession | null;
   review: ReviewState | null;
 }) {
   useEffect(() => {
@@ -89,7 +91,8 @@ export function useWorkspacePersistence({
         revealed: studyRevealed,
       },
       activeExam,
+      activeStudySession,
       review: { sessionId: review?.sessionId ?? null },
     }));
-  }, [activeExam, filters, language, pathname, review?.sessionId, setProgress, studyAnswers, studyQuestionId, studyRevealed, theme]);
+  }, [activeExam, activeStudySession, filters, language, pathname, review?.sessionId, setProgress, studyAnswers, studyQuestionId, studyRevealed, theme]);
 }

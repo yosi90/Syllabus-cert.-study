@@ -95,16 +95,18 @@ Este documento es la fuente de verdad del estado del proyecto. `ROADMAP_CTFL_V4_
 
 ## Hito 5 — Cola adaptativa
 
-- [ ] Implementar el cálculo de prioridad por pregunta.
-- [ ] Priorizar errores recientes, marcadas, baja precisión, antigüedad y no vistas.
-- [ ] Limitar inicialmente un capítulo al 40 % de la sesión.
-- [ ] Generar sesiones reproducibles de 10 o 20 preguntas sin duplicados.
-- [ ] Persistir preguntas, posición, respuestas y semilla de la sesión.
-- [ ] Permitir abandonar y continuar posteriormente.
-- [ ] Mostrar resumen y recomendación al terminar.
-- [ ] Registrar la sesión adaptativa en el historial.
-- [ ] Añadir pruebas del ranking, equilibrio y casos con pocos candidatos.
-- [ ] Cerrar el hito completando y recuperando sesiones de ambos tamaños.
+- [x] Implementar el cálculo de prioridad por pregunta.
+- [x] Priorizar errores recientes, marcadas, baja precisión, antigüedad y no vistas.
+- [x] Limitar inicialmente un capítulo al 40 % de la sesión.
+- [x] Generar sesiones reproducibles de 10 o 20 preguntas sin duplicados.
+- [x] Persistir preguntas, posición, respuestas y semilla de la sesión.
+- [x] Permitir abandonar y continuar posteriormente.
+- [x] Mostrar resumen y recomendación al terminar.
+- [x] Registrar la sesión adaptativa en el historial.
+- [x] Añadir pruebas del ranking, equilibrio y casos con pocos candidatos.
+- [x] Cerrar el hito completando y recuperando sesiones de ambos tamaños.
+
+**Cerrado el 15/07/2026.** Validación: ranking reproducible con prioridad por errores recientes, marcadas, baja precisión, antigüedad y preguntas no vistas; equilibrio inicial del 40 % por capítulo y casos con pocos candidatos cubiertos por unitarias; sesiones de 10 y 20 preguntas persistidas, abandonadas, recuperadas, finalizadas y reabiertas desde el historial mediante Playwright. Banco de 160 preguntas, 22 pruebas unitarias, compilación y 51 pruebas E2E superadas, con 11 omisiones intencionadas por proyecto.
 
 ## Hito 6 — Fidelidad de opciones y simulacros
 

@@ -26,7 +26,7 @@ test("quick study actions open bounded practice sets", async ({ page }) => {
   await page.getByRole("button", { name: "Quick set · 10" }).click();
 
   await expect(page).toHaveURL(/#\/practice$/);
-  await expect(page.getByRole("heading", { name: "Single questions" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Adaptive session · 10" })).toBeVisible();
   await expect(page.getByText("1/10", { exact: true })).toBeVisible();
 });
 

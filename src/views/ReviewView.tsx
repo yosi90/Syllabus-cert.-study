@@ -2,12 +2,14 @@ import { ChevronLeft } from "lucide-react";
 import { questions } from "../data/bank";
 import { findQuestionsByIds } from "../domain/exams";
 import { isCorrectAnswer } from "../domain/scoring";
+import { recommendAdaptiveChapter } from "../domain/adaptive";
 import type { StoredSession } from "../storage/progress";
 import type { Copy, Language, ReviewState } from "../app/content";
 import {
   classNames,
   displayAnswerLabels,
   getSessionType,
+  localizedChapterName,
   localizedQuestion,
   questionLabel,
 } from "../app/presentation";
@@ -45,6 +47,7 @@ export function ReviewView({
             {sessions.map((session) => {
               const compatible = findQuestionsByIds(questions, session.questionIds).length === session.questionIds.length;
               const type = getSessionType(session);
+              const adaptive = type === "adaptive";
               const typeLabel = type === "official" ? copy.officialExam : type === "random" ? copy.randomExam : copy.adaptiveSession;
               return (
                 <article className={classNames("session-row", !compatible && "incompatible")} key={session.id}>
@@ -57,8 +60,8 @@ export function ReviewView({
                     {!compatible && <span className="session-warning">{copy.incompatibleSession}</span>}
                   </div>
                   <div className="session-result">
-                    <div className={classNames("score-pill", session.score.passed ? "passed" : "failed")}>
-                      {session.score.score}/{session.score.total} · {session.score.passed ? copy.passed : copy.failed}
+                    <div className={classNames("score-pill", adaptive ? "adaptive" : session.score.passed ? "passed" : "failed")}>
+                      {session.score.score}/{session.score.total} · {adaptive ? copy.completedSession : session.score.passed ? copy.passed : copy.failed}
                     </div>
                     <button className="secondary compact" type="button" disabled={!compatible} onClick={() => onOpenReview(session)}>
                       {copy.openReview}
@@ -73,6 +76,12 @@ export function ReviewView({
     );
   }
 
+  const adaptive = review.sessionType === "adaptive";
+  const recommendedChapter = adaptive ? recommendAdaptiveChapter(review.questions, review.answers) : null;
+  const recommendation = recommendedChapter
+    ? copy.recommendationText.replace("{chapter}", `${recommendedChapter} · ${localizedChapterName(recommendedChapter, language)}`)
+    : null;
+
   return (
     <main className="workspace">
       <header className="workspace-header">
@@ -82,7 +91,7 @@ export function ReviewView({
         </div>
         <div className="header-metrics">
           <Metric label={copy.points} value={`${review.score.score}/${review.score.total}`} />
-          <Metric label={copy.result} value={review.score.passed ? copy.passed : copy.failed} />
+          <Metric label={copy.result} value={adaptive ? copy.completedSession : review.score.passed ? copy.passed : copy.failed} />
           <Metric label={copy.percent} value={`${review.score.percent}%`} />
         </div>
         <button className="secondary" type="button" onClick={onBackToHistory}>
@@ -91,13 +100,14 @@ export function ReviewView({
         </button>
       </header>
 
-      <section className={classNames("result-banner", review.score.passed ? "passed" : "failed")}>
-        <strong>{review.score.passed ? copy.passed : copy.notPassed}</strong>
+      <section className={classNames("result-banner", adaptive ? "adaptive" : review.score.passed ? "passed" : "failed")}>
+        <strong>{adaptive ? copy.completedSession : review.score.passed ? copy.passed : copy.notPassed}</strong>
         <span>
           {language === "es"
             ? `${review.score.correct} correctas, ${review.score.incorrect} incorrectas y ${review.score.blank} en blanco.`
             : `${review.score.correct} correct, ${review.score.incorrect} incorrect and ${review.score.blank} blank.`}
         </span>
+        {recommendation && <span><strong>{copy.recommendation}:</strong> {recommendation}</span>}
       </section>
 
       <section className="review-list">
@@ -127,4 +137,3 @@ export function ReviewView({
     </main>
   );
 }
-

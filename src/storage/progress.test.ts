@@ -139,6 +139,27 @@ describe("progress storage", () => {
     expect(importProgress(exportProgress(progress)).review.sessionId).toBe("model-A-2026");
   });
 
+  it("persists and imports an active adaptive study session", () => {
+    const storage = memoryStorage();
+    const progress = createEmptyProgress();
+    progress.activeStudySession = {
+      id: "adaptive-seed",
+      title: "Adaptive session · 10",
+      size: 10,
+      seed: "seed",
+      questionIds: ["A-01", "B-02"],
+      currentIndex: 1,
+      answers: { "A-01": ["a"] },
+      revealed: false,
+      checkedQuestionIds: ["A-01"],
+      startedAt: "2026-07-15T00:00:00.000Z",
+    };
+
+    saveProgress(progress, storage);
+    expect(loadProgress(storage).activeStudySession).toEqual(progress.activeStudySession);
+    expect(importProgress(exportProgress(progress)).activeStudySession?.seed).toBe("seed");
+  });
+
   it("rejects incompatible progress exports", () => {
     expect(() =>
       importProgress(

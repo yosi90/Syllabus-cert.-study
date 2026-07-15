@@ -12,6 +12,7 @@ export const THEME_STORAGE_KEY = "istqb-ctfl-v4-theme";
 
 export type ReviewState = {
   sessionId: string;
+  sessionType: "official" | "random" | "adaptive";
   title: string;
   questions: Question[];
   answers: AnswerMap;
@@ -38,12 +39,18 @@ export const uiCopy = {
     noWeakAreas: "Complete some questions to identify areas to reinforce.",
     weakDescription: "Based on your recorded accuracy and coverage, not on a pass prediction.",
     quickStudy: "Start a study set",
-    quickStudyDescription: "Ordered practice sets without adaptive ranking. Adaptive sessions arrive in the next milestone.",
+    quickStudyDescription: "Adaptive sets prioritize recent errors, flags, low accuracy, older attempts and unseen questions.",
     quick10: "Quick set · 10",
     complete20: "Full set · 20",
     resumeTitle: "Continue where you left off",
     continueStudy: "Continue practice",
     continueExam: "Continue active exam",
+    adaptivePractice: "Adaptive practice",
+    leaveSession: "Leave and continue later",
+    finishSession: "Finish session",
+    completedSession: "Session completed",
+    recommendation: "Recommended review",
+    recommendationText: "Reinforce {chapter}; it concentrated the most missed or unanswered questions in this session.",
     modesLabel: "Modes",
     openMenu: "Open menu",
     closeMenu: "Close menu",
@@ -163,12 +170,18 @@ export const uiCopy = {
     noWeakAreas: "Completa algunas preguntas para identificar áreas a reforzar.",
     weakDescription: "Basado en tu precisión y cobertura registradas, no en una predicción de aprobado.",
     quickStudy: "Empezar un bloque de estudio",
-    quickStudyDescription: "Bloques de práctica ordenados sin ranking adaptativo. Las sesiones adaptativas llegan en el siguiente hito.",
+    quickStudyDescription: "Las sesiones adaptativas priorizan errores recientes, marcadas, baja precisión, intentos antiguos y preguntas no vistas.",
     quick10: "Bloque rápido · 10",
     complete20: "Bloque completo · 20",
     resumeTitle: "Continúa donde lo dejaste",
     continueStudy: "Continuar práctica",
     continueExam: "Continuar simulacro activo",
+    adaptivePractice: "Práctica adaptativa",
+    leaveSession: "Salir y continuar después",
+    finishSession: "Finalizar sesión",
+    completedSession: "Sesión completada",
+    recommendation: "Repaso recomendado",
+    recommendationText: "Refuerza {chapter}; concentró más preguntas falladas o sin responder en esta sesión.",
     modesLabel: "Modos",
     openMenu: "Abrir menú",
     closeMenu: "Cerrar menú",
@@ -356,4 +369,3 @@ export const tutorialContent: Record<Language, TutorialContent> = {
     ],
   },
 };
-

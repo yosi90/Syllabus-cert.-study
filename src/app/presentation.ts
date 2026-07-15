@@ -158,11 +158,11 @@ export function restoreReview(session: StoredSession | undefined): ReviewState |
   if (sessionQuestions.length !== session.questionIds.length) return null;
   return {
     sessionId: session.id,
+    sessionType: getSessionType(session),
     title: session.title,
     questions: sessionQuestions,
     answers: session.answers,
     score: scoreQuestions(sessionQuestions, session.answers, examRules),
   };
 }
-
 
