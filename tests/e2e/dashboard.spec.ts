@@ -5,12 +5,16 @@ test.beforeEach(async ({ page }) => {
   await prepareApp(page);
 });
 
-test("home shows a neutral dashboard without progress", async ({ page }) => {
+test("home shows a neutral dashboard without progress", async ({ page }, testInfo) => {
   await page.goto("/");
 
   await expect(page.getByRole("heading", { name: "Dashboard" })).toBeVisible();
   await expect(page.getByText("0/160", { exact: true })).toBeVisible();
+  const isMobile = testInfo.project.name === "mobile-chromium";
   await expect(page.getByText("No attempts yet", { exact: true })).toHaveCount(2);
+  const resumeHeading = page.getByRole("heading", { name: "Continue where you left off" });
+  if (isMobile) await expect(resumeHeading).toBeHidden();
+  else await expect(resumeHeading).toBeVisible();
   await expect(page.getByRole("heading", { name: "Progress by chapter" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Progress by K-Level" })).toBeVisible();
   await expect(page.getByText("Complete some questions to identify areas to reinforce.")).toBeVisible();
@@ -27,6 +31,30 @@ test("mobile home keeps its summary and study actions compact", async ({ page },
 
   await expect(page.locator(".quick-study-eyebrow")).toBeHidden();
   await expect(page.locator(".quick-study-description")).toBeHidden();
+  await expect(page.locator(".dashboard-resume-card")).toBeHidden();
+
+  const headerMetrics = await page.locator(".header-metrics .metric").evaluateAll((elements) =>
+    elements.map((element) => ({
+      width: element.getBoundingClientRect().width,
+      textAlign: getComputedStyle(element).textAlign,
+    })),
+  );
+  expect(headerMetrics.every(({ width }) => width <= 52)).toBe(true);
+  expect(headerMetrics.every(({ textAlign }) => textAlign === "center")).toBe(true);
+
+  const snapshotTitle = await page.locator(".dashboard-snapshot-title").evaluate((element) => {
+    const label = element.querySelector(".eyebrow")!;
+    const value = element.querySelector("h3")!;
+    const labelRect = label.getBoundingClientRect();
+    const valueRect = value.getBoundingClientRect();
+    return {
+      labelFontSize: getComputedStyle(label).fontSize,
+      valueFontSize: getComputedStyle(value).fontSize,
+      centerDifference: Math.abs((labelRect.top + labelRect.height / 2) - (valueRect.top + valueRect.height / 2)),
+    };
+  });
+  expect(snapshotTitle.valueFontSize).toBe(snapshotTitle.labelFontSize);
+  expect(snapshotTitle.centerDifference).toBeLessThan(2);
 
   const quickButton = page.getByRole("button", { name: "Quick · 10" });
   const fullButton = page.getByRole("button", { name: "Full · 20" });

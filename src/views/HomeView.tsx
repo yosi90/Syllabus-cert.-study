@@ -63,7 +63,7 @@ export function HomeView({
 
       <section className="dashboard-section" aria-labelledby="snapshot-title">
         <div className="dashboard-section-heading">
-          <div>
+          <div className="dashboard-snapshot-title">
             <span className="eyebrow">{copy.currentSnapshot}</span>
             <h3 id="snapshot-title">{dashboard.attempted}/{dashboard.total}</h3>
           </div>
@@ -76,7 +76,7 @@ export function HomeView({
         </div>
       </section>
 
-      <section className="dashboard-action-grid">
+      <section className={`dashboard-action-grid${canContinuePractice || hasActiveExam ? "" : " no-resume"}`}>
         <article className="dashboard-section quick-study-card">
           <span className="eyebrow quick-study-eyebrow">{copy.quickStudy}</span>
           <h3>{copy.quickStudy}</h3>
@@ -87,7 +87,7 @@ export function HomeView({
           </div>
         </article>
 
-        <article className="dashboard-section">
+        <article className="dashboard-section dashboard-resume-card">
           <span className="eyebrow">{copy.resumeTitle}</span>
           <h3>{copy.resumeTitle}</h3>
           <div className="dashboard-buttons vertical">
