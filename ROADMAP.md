@@ -65,16 +65,18 @@ Este documento es la fuente de verdad del estado del proyecto. `ROADMAP_CTFL_V4_
 
 ## Hito 3.5 — Arquitectura y mantenibilidad
 
-- [ ] Definir límites de módulos y una estructura de carpetas estable.
-- [ ] Extraer tipos, constantes, traducciones y contenido del tutorial.
-- [ ] Extraer utilidades puras de presentación y reconstrucción de revisiones.
-- [ ] Separar componentes compartidos de navegación, filtros, preguntas y diálogos.
-- [ ] Separar las vistas de Práctica, Simulacro y Revisión por ruta.
-- [ ] Encapsular la sincronización de preferencias y progreso en hooks especializados.
-- [ ] Reducir `App.tsx` a composición de rutas y orquestación de alto nivel.
-- [ ] Evitar dependencias circulares y mantener contratos tipados entre módulos.
-- [ ] Documentar la arquitectura y las reglas para añadir nuevas funcionalidades.
-- [ ] Cerrar el hito ejecutando datos, unitarias, compilación y E2E sin regresiones.
+- [x] Definir límites de módulos y una estructura de carpetas estable.
+- [x] Extraer tipos, constantes, traducciones y contenido del tutorial.
+- [x] Extraer utilidades puras de presentación y reconstrucción de revisiones.
+- [x] Separar componentes compartidos de navegación, filtros, preguntas y diálogos.
+- [x] Separar las vistas de Práctica, Simulacro y Revisión por ruta.
+- [x] Encapsular la sincronización de preferencias y progreso en hooks especializados.
+- [x] Reducir `App.tsx` a composición de rutas y orquestación de alto nivel.
+- [x] Evitar dependencias circulares y mantener contratos tipados entre módulos.
+- [x] Documentar la arquitectura y las reglas para añadir nuevas funcionalidades.
+- [x] Cerrar el hito ejecutando datos, unitarias, compilación y E2E sin regresiones.
+
+**Cerrado el 15/07/2026.** Validación: `App.tsx` reducido de 2.165 a 506 líneas; contenido, utilidades, componentes, vistas y efectos de persistencia separados mediante contratos TypeScript y dependencias unidireccionales; banco de 160 preguntas, 15 pruebas unitarias, compilación y 35 recorridos E2E superados sin cambios visuales.
 
 ## Hito 4 — Panel de estudio
 

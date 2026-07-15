@@ -1,0 +1,318 @@
+import type { KLevel, Question, SourceModel } from "../data/types";
+import type { AnswerMap, SessionScore } from "../domain/scoring";
+import type { PersistedExam } from "../storage/progress";
+
+export type ExamState = PersistedExam;
+
+export type TimerMode = "off" | "standard" | "extended";
+export type Language = "en" | "es";
+export type Theme = "light" | "dark";
+export const SPANISH_TRANSLATION_NOTICE_KEY = "istqb-ctfl-v4-spanish-translation-notice-seen";
+export const THEME_STORAGE_KEY = "istqb-ctfl-v4-theme";
+
+export type ReviewState = {
+  sessionId: string;
+  title: string;
+  questions: Question[];
+  answers: AnswerMap;
+  score: SessionScore;
+};
+
+export const models: SourceModel[] = ["A", "B", "C", "D"];
+export const kLevels: KLevel[] = ["K1", "K2", "K3"];
+export const uiCopy = {
+  en: {
+    trainer: "Trainer",
+    modesLabel: "Modes",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    darkMode: "Dark mode",
+    practice: "Practice",
+    exam: "Exam",
+    review: "Review",
+    localProgress: "Local progress",
+    viewed: "Viewed",
+    correct: "Correct",
+    wrong: "Wrong",
+    flagged: "Flagged",
+    filters: "Filters",
+    searchPlaceholder: "Search text, LO or topic",
+    clearFilters: "Clear filters",
+    model: "Model",
+    chapter: "Chapter",
+    reference: "Reference",
+    all: "All",
+    status: "Status",
+    unseen: "Unseen",
+    lastCorrect: "Last correct",
+    lastIncorrect: "Last incorrect",
+    export: "Export",
+    import: "Import",
+    tutorial: "Tutorial",
+    delete: "Delete",
+    noQuestions: "No questions match these filters",
+    changeFilters: "Change the filters to restore the bank.",
+    practiceTitle: "Single questions",
+    filtered: "Filtered",
+    current: "Current",
+    questionList: "Question list",
+    previous: "Previous",
+    check: "Check",
+    random: "Random",
+    next: "Next",
+    multiple: "Multiple selection",
+    single: "Single selection",
+    selectOne: "Select ONE option.",
+    selectTwo: "Select TWO options.",
+    removeFlag: "Remove from flagged",
+    addFlag: "Flag for review",
+    removeFlagAria: "Remove question from flagged",
+    addFlagAria: "Flag question for review",
+    expandImage: "Expand image",
+    closeImage: "Close image",
+    theory: "View theory",
+    objective: "Objective",
+    section: "Section",
+    pdfPage: "PDF page",
+    unavailable: "Unavailable",
+    syllabusNote:
+      "Open that page in the matching syllabus PDF. The official rationale may also rely on concepts from other syllabus sections.",
+    examTitle: "40-question exam",
+    passedMetric: "Pass",
+    time: "Time",
+    noLimit: "No limit",
+    timer: "Timer",
+    noTime: "No time",
+    modelTitle: "Model",
+    modelSubtitle: "40 official questions in their original order.",
+    randomSubtitle: "40 unique questions using the CTFL chapter distribution.",
+    activeExam: "Active exam",
+    answered: "Answered",
+    question: "Question",
+    timeUp: "Time is up.",
+    timeUpText: "You can finish the exam to grade it or cancel without saving.",
+    noCorrection: "No correction until finished",
+    finish: "Finish",
+    cancel: "Cancel",
+    recentHistory: "Recent history",
+    backToHistory: "Back to history",
+    openReview: "Open review",
+    officialExam: "Official model",
+    randomExam: "Random exam",
+    adaptiveSession: "Adaptive session",
+    incompatibleSession: "This review is unavailable because some questions no longer exist in this version.",
+    noSessions: "No finished exams yet",
+    completeExam: "Complete an exam to see its review here.",
+    points: "Points",
+    result: "Result",
+    percent: "Percent",
+    passed: "Passed",
+    failed: "Failed",
+    notPassed: "Not passed",
+    blank: "Blank",
+    yourAnswer: "Your answer",
+    correctAnswer: "Correct",
+    unanswered: "Unanswered",
+    translationNoticeTitle: "Spanish translation notice",
+    translationNoticeText:
+      "This site was originally built in English. The Spanish translation may contain inconsistencies or errors, so use the official English wording when precision matters.",
+    translationNoticeAction: "I understand",
+    cancelExamTitle: "Cancel exam?",
+    cancelExamText: "Current answers will not be saved.",
+    resetTitle: "Delete local progress?",
+    resetText: "This will delete all progress stored by this site in this browser.",
+    confirmCancelExam: "Cancel exam",
+    confirmReset: "Delete progress",
+    keepWorking: "Go back",
+  },
+  es: {
+    trainer: "Entrenador",
+    modesLabel: "Modos",
+    openMenu: "Abrir menú",
+    closeMenu: "Cerrar menú",
+    darkMode: "Modo oscuro",
+    practice: "Práctica",
+    exam: "Simulacro",
+    review: "Revisión",
+    localProgress: "Progreso local",
+    viewed: "Vistas",
+    correct: "Correctas",
+    wrong: "Falladas",
+    flagged: "Marcadas",
+    filters: "Filtros",
+    searchPlaceholder: "Buscar texto, LO o tema",
+    clearFilters: "Limpiar filtros",
+    model: "Modelo",
+    chapter: "Capítulo",
+    reference: "Referencia",
+    all: "Todas",
+    status: "Estado",
+    unseen: "Sin responder",
+    lastCorrect: "Última correcta",
+    lastIncorrect: "Última incorrecta",
+    export: "Exportar",
+    import: "Importar",
+    tutorial: "Tutorial",
+    delete: "Borrar",
+    noQuestions: "No hay preguntas con esos filtros",
+    changeFilters: "Cambia los filtros para recuperar el banco.",
+    practiceTitle: "Preguntas sueltas",
+    filtered: "Filtradas",
+    current: "Actual",
+    questionList: "Listado de preguntas",
+    previous: "Anterior",
+    check: "Comprobar",
+    random: "Aleatoria",
+    next: "Siguiente",
+    multiple: "Selección múltiple",
+    single: "Selección única",
+    selectOne: "Selecciona UNA opción.",
+    selectTwo: "Selecciona DOS opciones.",
+    removeFlag: "Quitar de marcadas",
+    addFlag: "Marcar para repasar",
+    removeFlagAria: "Quitar pregunta de marcadas",
+    addFlagAria: "Marcar pregunta para repasar",
+    expandImage: "Ampliar imagen",
+    closeImage: "Cerrar imagen",
+    theory: "Ver teoría",
+    objective: "Objetivo",
+    section: "Sección",
+    pdfPage: "Página del PDF",
+    unavailable: "No disponible",
+    syllabusNote:
+      "Consulta esa página en el PDF del syllabus correspondiente. El rationale oficial puede apoyarse también en conceptos de otras secciones del syllabus.",
+    examTitle: "Examen de 40 preguntas",
+    passedMetric: "Aprobado",
+    time: "Tiempo",
+    noLimit: "Sin límite",
+    timer: "Temporizador",
+    noTime: "Sin tiempo",
+    modelTitle: "Modelo",
+    modelSubtitle: "40 preguntas oficiales en orden original.",
+    randomSubtitle: "40 preguntas sin duplicados con distribución por capítulo.",
+    activeExam: "Simulacro activo",
+    answered: "Respondidas",
+    question: "Pregunta",
+    timeUp: "Tiempo agotado.",
+    timeUpText: "Puedes finalizar el simulacro para corregirlo o cancelarlo sin guardar.",
+    noCorrection: "Sin corrección hasta finalizar",
+    finish: "Finalizar",
+    cancel: "Cancelar",
+    recentHistory: "Historial reciente",
+    backToHistory: "Volver al historial",
+    openReview: "Abrir revisión",
+    officialExam: "Modelo oficial",
+    randomExam: "Simulacro aleatorio",
+    adaptiveSession: "Sesión adaptativa",
+    incompatibleSession: "Esta revisión no está disponible porque algunas preguntas ya no existen en esta versión.",
+    noSessions: "Aún no hay simulacros terminados",
+    completeExam: "Completa un simulacro para ver la revisión aquí.",
+    points: "Puntos",
+    result: "Resultado",
+    percent: "Porcentaje",
+    passed: "Aprobado",
+    failed: "No apto",
+    notPassed: "No aprobado",
+    blank: "Blanco",
+    yourAnswer: "Tu respuesta",
+    correctAnswer: "Correcta",
+    unanswered: "Sin responder",
+    translationNoticeTitle: "Aviso sobre la traducción",
+    translationNoticeText:
+      "Esta web se construyó originalmente en inglés. La traducción al español puede contener inconsistencias o errores, así que consulta el texto oficial en inglés cuando necesites máxima precisión.",
+    translationNoticeAction: "Entendido",
+    cancelExamTitle: "¿Cancelar el simulacro?",
+    cancelExamText: "Las respuestas actuales no se guardarán.",
+    resetTitle: "¿Borrar el progreso local?",
+    resetText: "Se borrará todo el progreso guardado por esta web en este navegador.",
+    confirmCancelExam: "Cancelar simulacro",
+    confirmReset: "Borrar progreso",
+    keepWorking: "Volver",
+  },
+} as const;
+
+export type Copy = (typeof uiCopy)[Language];
+export type TutorialStep = {
+  title: string;
+  target: string;
+  placement: "center" | "bottom" | "right";
+  body: string;
+  points: string[];
+};
+
+export type TutorialContent = {
+  label: string;
+  skip: string;
+  back: string;
+  next: string;
+  complete: string;
+  stepLabel: (current: number, total: number) => string;
+  steps: TutorialStep[];
+};
+
+export const tutorialContent: Record<Language, TutorialContent> = {
+  en: {
+    label: "Quick tutorial",
+    skip: "Skip tutorial",
+    back: "Back",
+    next: "Next",
+    complete: "Start studying",
+    stepLabel: (current, total) => `Step ${current} of ${total}`,
+    steps: [
+      {
+        title: "Welcome",
+        target: "layout",
+        placement: "center",
+        body: "Study ISTQB CTFL v4.0 with 160 official sample questions and progress stored only in this browser.",
+        points: ["Use the side menu for filters and progress.", "Switch between Practice, Exam and Review at any time."],
+      },
+      {
+        title: "Practice with feedback",
+        target: "practice",
+        placement: "bottom",
+        body: "Answer one question at a time, check it immediately and read the official rationale.",
+        points: ["Filter by model, chapter, K-Level or learning objective.", "Flag difficult questions for focused review."],
+      },
+      {
+        title: "Official exam practice",
+        target: "modes",
+        placement: "right",
+        body: "Run models A–D or a 40-question random exam using the official CTFL distribution.",
+        points: ["Choose 60, 75 or unlimited minutes.", "Review your score and explanations after finishing."],
+      },
+    ],
+  },
+  es: {
+    label: "Tutorial rápido",
+    skip: "Omitir tutorial",
+    back: "Anterior",
+    next: "Siguiente",
+    complete: "Empezar a estudiar",
+    stepLabel: (current, total) => `Paso ${current} de ${total}`,
+    steps: [
+      {
+        title: "Bienvenida",
+        target: "layout",
+        placement: "center",
+        body: "Estudia ISTQB CTFL v4.0 con 160 preguntas oficiales y progreso guardado solo en este navegador.",
+        points: ["Usa el menú lateral para filtros y progreso.", "Cambia entre Práctica, Simulacro y Revisión cuando quieras."],
+      },
+      {
+        title: "Práctica con corrección",
+        target: "practice",
+        placement: "bottom",
+        body: "Responde pregunta a pregunta, comprueba al instante y consulta la justificación oficial.",
+        points: ["Filtra por modelo, capítulo, nivel K u objetivo.", "Marca las preguntas difíciles para repasarlas."],
+      },
+      {
+        title: "Simulacros oficiales",
+        target: "modes",
+        placement: "right",
+        body: "Realiza los modelos A–D o un simulacro aleatorio de 40 preguntas con la distribución oficial.",
+        points: ["Elige 60, 75 minutos o sin límite.", "Revisa la puntuación y las explicaciones al terminar."],
+      },
+    ],
+  },
+};
+
+

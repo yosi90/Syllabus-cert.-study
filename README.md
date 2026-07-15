@@ -17,4 +17,4 @@ Entrenador local construido con React, TypeScript y Vite a partir de los modelos
 - `npm run test:e2e:update`: regenera deliberadamente las referencias visuales de escritorio.
 - `npm run validate`: ejecuta validación de datos, unitarias, compilación y pruebas E2E.
 
-Las referencias visuales solo deben actualizarse después de revisar que el cambio de interfaz es intencionado. El estado y el orden de los próximos hitos se mantienen en [ROADMAP.md](./ROADMAP.md).
+Las referencias visuales solo deben actualizarse después de revisar que el cambio de interfaz es intencionado. El estado y el orden de los próximos hitos se mantienen en [ROADMAP.md](./ROADMAP.md). Los límites de módulos y las reglas para ampliar la aplicación están en [ARCHITECTURE.md](./ARCHITECTURE.md).
