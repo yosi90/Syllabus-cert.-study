@@ -1297,7 +1297,7 @@
     "reference": "FL-4.2.3",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "You are designing test cases based on the following decision table. R1 R2 R3 R4 R5 R6 R7 C1: Age 0-18 19-65 19-65 >65 0-18 19-65 >65 C2: Experience - 0-4 >4 - - - - C3: Registered? NO NO NO NO YES YES YES Category A A B B B D C So far you have designed the following test cases: • TC1: 19-year-old, unregistered man with no experience; expected result: category A • TC2: 65-year-old, unregistered woman with 5 years of experience; expected result: category B • TC3: 66-year-old, registered man with no experience; expected result: category C • TC4: 65-year-old, registered woman with 4 years of experience; expected result: category D Which of the following test cases, when added to the existing set of test cases, will increase the decision table coverage?",
+    "prompt": "You are designing test cases based on the decision table shown. So far you have designed the following test cases: • TC1: 19-year-old, unregistered man with no experience; expected result: category A. • TC2: 65-year-old, unregistered woman with 5 years of experience; expected result: category B. • TC3: 66-year-old, registered man with no experience; expected result: category C. • TC4: 65-year-old, registered woman with 4 years of experience; expected result: category D. Which of the following test cases, when added to the existing set, will increase the decision table coverage?",
     "options": [
       {
         "key": "a",
@@ -1333,7 +1333,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Estás diseñando casos de prueba con base en la siguiente tabla de decisiones. R1 R2 R3 R4 R5 R6 R7 C1: Edad 0-18 19-65 19-65 >65 0-18 19-65 >65 C2: Experiencia - 0-4 >4 - - - - C3: ¿Registrado? NO NO NO NO SI SI SI Categoría A A B B B D C Hasta el momento se han diseñado los siguientes casos de prueba: • TC1: Hombre de 19 años, no registrado y sin experiencia; resultado esperado: categoría A • TC2: mujer de 65 años, no registrada y con 5 años de experiencia; resultado esperado: categoría B • TC3: 66 años, hombre registrado sin experiencia; resultado esperado: categoría C • TC4: mujer registrada de 65 años con 4 años de experiencia; Resultado esperado: categoría D ¿Cuál de los siguientes casos de prueba, cuando se agrega al conjunto existente de casos de prueba, aumentará la cobertura de la tabla de decisión?",
+        "prompt": "Estás diseñando casos de prueba basados en la tabla de decisiones mostrada. Hasta el momento has diseñado estos casos: • TC1: hombre de 19 años, no registrado y sin experiencia; resultado esperado: categoría A. • TC2: mujer de 65 años, no registrada y con 5 años de experiencia; resultado esperado: categoría B. • TC3: hombre de 66 años, registrado y sin experiencia; resultado esperado: categoría C. • TC4: mujer de 65 años, registrada y con 4 años de experiencia; resultado esperado: categoría D. ¿Cuál de los siguientes casos, al añadirlo al conjunto existente, aumentará la cobertura de la tabla de decisiones?",
         "options": [
           {
             "key": "a",
@@ -1365,7 +1365,7 @@
     "reference": "FL-4.2.4",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "You are applying state transition testing to the hotel room reservation system modeled by the following state transition table, with 4 states and 5 different events: Events State Available NotAvailable ChangeRoom Cancel Pay S1: Requesting S2 S3 S2: Confirmed S1 S4 S4 S3: Waiting list S2 S4 S4: End Assuming all test cases start in the ‘Requesting’ state, which of the following test cases, represented as sequences of events, achieves the highest valid transitions coverage?",
+    "prompt": "You are applying state transition testing to the hotel room reservation system modeled by the table shown, with four states and five different events. Assuming all test cases start in the ‘Requesting’ state, which of the following test cases, represented as sequences of events, achieves the highest valid transitions coverage?",
     "options": [
       {
         "key": "a",
@@ -1401,7 +1401,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Está aplicando pruebas de transición de estados al sistema de reserva de habitaciones de hotel modelado mediante la siguiente tabla de transición de estados, con 4 estados y 5 eventos diferentes: Eventos Estado Disponible No disponible Cambio de habitación Cancelar Pagar S1: Solicitando S2 S3 S2: Confirmado S1 S4 S4 S3: Lista de espera S2 S4 S4: Fin Suponiendo que todos los casos de prueba comienzan en el estado \"Solicitando\", ¿cuál de los siguientes casos de prueba, representados como secuencias de eventos, logra el mayor ¿Cobertura de transiciones válida?",
+        "prompt": "Estás aplicando pruebas de transición de estados al sistema de reserva de habitaciones de hotel modelado por la tabla mostrada, con cuatro estados y cinco eventos diferentes. Suponiendo que todos los casos de prueba comienzan en el estado «Solicitando», ¿cuál de los siguientes casos, representados como secuencias de eventos, logra la mayor cobertura de transiciones válidas?",
         "options": [
           {
             "key": "a",
@@ -1937,7 +1937,7 @@
     "reference": "FL-5.1.5",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "The table shows the traceability matrix from test cases to requirements. “X” means that a given test case covers the corresponding requirement. Req1 Req2 Req3 Req4 Req5 Req6 Req7 TC1 X X X X TC2 X X X TC3 X X TC4 X You want to prioritize the test cases following the additional coverage prioritization technique. You execute all four test cases. Which test case should be executed as the LAST one?",
+    "prompt": "The table shows the traceability matrix from test cases to requirements. “X” means that a given test case covers the corresponding requirement. You want to prioritize the test cases following the additional coverage prioritization technique and execute all four test cases. Which test case should be executed LAST?",
     "options": [
       {
         "key": "a",
@@ -1973,7 +1973,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "La tabla muestra la matriz de trazabilidad desde casos de prueba hasta requisitos. “X” significa que un determinado caso de prueba cubre el requisito correspondiente. Req1 Req2 Req3 Req4 Req5 Req6 Req7 TC1 X X X X TC2 X X X TC3 X X TC4 X Se desea priorizar los casos de prueba siguiendo la técnica de priorización de cobertura adicional. Ejecutas los cuatro casos de prueba. ¿Qué caso de prueba debe ejecutarse como el ÚLTIMO?",
+        "prompt": "La tabla muestra la matriz de trazabilidad de los casos de prueba con los requisitos. Una «X» indica que un caso cubre el requisito correspondiente. Quieres priorizar los cuatro casos mediante la técnica de priorización por cobertura adicional. ¿Qué caso de prueba debe ejecutarse en ÚLTIMO lugar?",
         "options": [
           {
             "key": "a",

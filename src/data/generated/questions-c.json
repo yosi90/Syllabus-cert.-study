@@ -1304,7 +1304,7 @@
     "reference": "FL-4.2.3",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "You are working on a project to develop a system to analyze driving test results. You have been asked to design test cases based on the following decision table. R1 R2 R3 C1: First attempt at the exam? - - F C2: Theoretical exam passed? T F - C3: Practical exam passed? T - F Issue a driving license? X Request additional driving lessons? X Request to take the exam again? X What test data will show that there are contradictory rules in the decision table?",
+    "prompt": "You are working on a project to develop a system to analyze driving test results. You have been asked to design test cases based on the decision table shown. What test data will show that there are contradictory rules in the decision table?",
     "options": [
       {
         "key": "a",
@@ -1340,7 +1340,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Está trabajando en un proyecto para desarrollar un sistema para analizar los resultados de los exámenes de conducción. Se le ha pedido que diseñe casos de prueba basándose en la siguiente tabla de decisiones. R1 R2 R3 C1: ¿Primer intento en el examen? - - F C2: ¿Examen teórico aprobado? V F - C3: ¿Examen práctico aprobado? T - F ¿Expedir un permiso de conducir? X ¿Solicitar lecciones de conducción adicionales? X ¿Solicitud para realizar el examen nuevamente? X ¿Qué datos de prueba mostrarán que existen reglas contradictorias en la tabla de decisiones?",
+        "prompt": "Estás trabajando en un proyecto para desarrollar un sistema que analice los resultados de los exámenes de conducción. Te han pedido que diseñes casos de prueba basados en la tabla de decisiones mostrada. ¿Qué datos de prueba demostrarán que existen reglas contradictorias en la tabla?",
         "options": [
           {
             "key": "a",

@@ -809,7 +809,7 @@
     "reference": "FL-2.2.3",
     "kLevel": "K2",
     "rawKLevel": "K2",
-    "prompt": "You are testing a user story with three acceptance criteria: AC1, AC2 and AC3. AC1 is covered by test case TC1, AC2 by TC2, and AC3 by TC3. The test execution history had three test runs on three consecutive versions of the software as follows: Execution 1 Execution 2 Execution 3 TC1 (1) Failed (4) Passed (7) Passed TC2 (2) Passed (5) Failed (8) Passed TC3 (3) Failed (6) Failed (9) Passed Tests are repeated once you are informed that all defects found in the test run are corrected and a new version of the software is available. Which of the above tests are executed as regression tests?",
+    "prompt": "You are testing a user story with three acceptance criteria: AC1, AC2 and AC3. AC1 is covered by test case TC1, AC2 by TC2, and AC3 by TC3. The test execution history had three test runs on three consecutive versions of the software as shown in the table. Tests are repeated once you are informed that all defects found in the test run are corrected and a new version of the software is available. Which of the above tests are executed as regression tests?",
     "options": [
       {
         "key": "a",
@@ -845,7 +845,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Estás probando una historia de usuario con tres criterios de aceptación: AC1, AC2 y AC3. AC1 está cubierto por el caso de prueba TC1, AC2 por TC2 y AC3 por TC3. El historial de ejecución de prueba tuvo tres ejecuciones de prueba en tres versiones consecutivas del software de la siguiente manera: Ejecución 1 Ejecución 2 Ejecución 3 TC1 (1) Falló (4) Pasó (7) Pasó TC2 (2) Pasó (5) Falló (8) Pasó TC3 (3) Falló (6) Falló (9) Pasó Las pruebas se repiten una vez que se le informa que todos los defectos encontrados en la ejecución de la prueba se corrigieron y se obtuvo una nueva versión del software. El software está disponible. ¿Cuáles de las pruebas anteriores se ejecutan como pruebas de regresión?",
+        "prompt": "Estás probando una historia de usuario con tres criterios de aceptación: AC1, AC2 y AC3. AC1 está cubierto por el caso de prueba TC1, AC2 por TC2 y AC3 por TC3. El historial de ejecución de prueba tuvo tres ejecuciones de prueba en tres versiones consecutivas del software, como se muestra en la tabla. Las pruebas se repiten una vez que se le informa que todos los defectos encontrados en la ejecución de la prueba se corrigieron y hay disponible una nueva versión del software. ¿Cuáles de las pruebas anteriores se ejecutan como pruebas de regresión?",
         "options": [
           {
             "key": "a",
@@ -1243,7 +1243,7 @@
     "reference": "FL-4.2.2",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "You are testing a system that calculates the final course grade for a given student. The final grade is assigned based on the final result, according to the following rules: • 0 – 50 points: failed • 51 – 60 points: fair • 61 – 70 points: satisfactory • 71 – 80 points: good • 81 – 90 points: very good • 91 – 100 points: excellent You have prepared the following set of test cases: Final result Final grade TC1 91 excellent TC2 50 failed TC3 81 very good TC4 60 fair TC5 70 satisfactory TC6 80 good What is the 2-value boundary value analysis (BVA) coverage for the final result that is achieved with the existing test cases?",
+    "prompt": "You are testing a system that calculates the final course grade for a given student. The final grade is assigned based on the final result, according to the following rules: • 0–50 points: failed • 51–60 points: fair • 61–70 points: satisfactory • 71–80 points: good • 81–90 points: very good • 91–100 points: excellent. You have prepared the set of test cases shown in the table. What is the 2-value boundary value analysis (BVA) coverage for the final result that is achieved with the existing test cases?",
     "options": [
       {
         "key": "a",
@@ -1279,7 +1279,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Estás probando un sistema que calcula la calificación final del curso para un estudiante determinado. La calificación final se asigna en función del resultado final, de acuerdo con las siguientes reglas: • 0 – 50 puntos: reprobado • 51 – 60 puntos: regular • 61 – 70 puntos: satisfactorio • 71 – 80 puntos: bueno • 81 – 90 puntos: muy bueno • 91 – 100 puntos: excelente Se ha preparado el siguiente conjunto de casos de prueba: Resultado final Calificación final TC1 91 excelente TC2 50 reprobado TC3 81 muy bueno TC4 60 regular TC5 70 satisfactorio TC6 80 bueno ¿Cuál es la cobertura del análisis de valores límite (BVA) de 2 valores para el resultado final que se logra con los casos de prueba existentes?",
+        "prompt": "Estás probando un sistema que calcula la calificación final del curso para un estudiante determinado. La calificación final se asigna en función del resultado final, de acuerdo con las siguientes reglas: • 0–50 puntos: suspenso • 51–60 puntos: suficiente • 61–70 puntos: satisfactorio • 71–80 puntos: notable • 81–90 puntos: muy notable • 91–100 puntos: excelente. Has preparado el conjunto de casos de prueba que se muestra en la tabla. ¿Cuál es la cobertura del análisis de valores límite (BVA) de 2 valores para el resultado final que se logra con los casos de prueba existentes?",
         "options": [
           {
             "key": "a",
@@ -1311,7 +1311,7 @@
     "reference": "FL-4.2.3",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "Your favorite bicycle daily rental store has just introduced a new Customer Relationship Management system and asked you, one of their most loyal members, to test it. The implemented features are as follows: • Anyone can rent a bicycle, but members receive a 20% discount • However, if the return deadline is missed, the discount is no longer available • After 15 rentals, members get a gift: a T-Shirt Decision table describing the implemented features looks as follows: Conditions R1 R2 R3 R4 R5 R6 R7 R8 Being a member T T T T F F F F Missed deadline T F T F T F F T 15th rental F F T T F F T T Actions 20% discount X X Gift T-Shirt X X X Based ONLY on the feature description of the Customer Relationship Management system, which of the above rules describes an impossible situation?",
+    "prompt": "Your favorite bicycle daily rental store has just introduced a new Customer Relationship Management system and asked you, one of their most loyal members, to test it. The implemented features are as follows: • Anyone can rent a bicycle, but members receive a 20% discount. • However, if the return deadline is missed, the discount is no longer available. • After 15 rentals, members get a gift: a T-Shirt. The decision table shown describes the implemented features. Based ONLY on the feature description of the Customer Relationship Management system, which of the above rules describes an impossible situation?",
     "options": [
       {
         "key": "a",
@@ -1347,7 +1347,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Tu tienda favorita de alquiler diario de bicicletas acaba de presentar un nuevo sistema de gestión de relaciones con el cliente y te ha pedido a ti, uno de sus miembros más leales, que lo pruebes. Las características implementadas son las siguientes: • Cualquiera puede alquilar una bicicleta, pero los miembros reciben un descuento del 20 % • Sin embargo, si no se cumple el plazo de devolución, el descuento ya no está disponible • Después de 15 alquileres, los miembros reciben un regalo: una camiseta La tabla de decisiones que describe las características implementadas es la siguiente: Condiciones R1 R2 R3 R4 R5 R6 R7 R8 Ser miembro T T T T F F F F Fecha límite incumplida T F T F T F F T 15º alquiler F F T T F F T T Acciones 20% de descuento X X Camiseta de regalo X X X Basado ÚNICAMENTE en la descripción de la característica del sistema de Gestión de Relaciones con el Cliente, ¿cuál de las reglas anteriores describe una situación imposible?",
+        "prompt": "Tu tienda favorita de alquiler diario de bicicletas acaba de presentar un nuevo sistema de gestión de relaciones con el cliente y te ha pedido a ti, uno de sus miembros más leales, que lo pruebes. Las características implementadas son las siguientes: • Cualquiera puede alquilar una bicicleta, pero los miembros reciben un descuento del 20 %. • Sin embargo, si se incumple el plazo de devolución, el descuento deja de estar disponible. • Después de 15 alquileres, los miembros reciben una camiseta de regalo. La tabla de decisiones mostrada describe las características implementadas. Basándote ÚNICAMENTE en la descripción de las características del sistema, ¿cuál de las reglas anteriores describe una situación imposible?",
         "options": [
           {
             "key": "a",
@@ -2005,7 +2005,7 @@
     "reference": "FL-5.1.5",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "You are testing a mobile application that allows users to find a nearby restaurant based on the type of food they want to eat. Consider the following list of test cases, priorities (i.e., a smaller number means a higher priority), and dependencies: Test case number Test condition covered Priority Logical dependency TC 001 Select type of food 3 none TC 002 Select restaurant 2 TC 001 TC 003 Get direction 1 TC 002 TC 004 Call restaurant 2 TC 002 TC 005 Make reservation 3 TC 002 Which of the following test cases should be executed as the third one?",
+    "prompt": "You are testing a mobile application that allows users to find a nearby restaurant based on the type of food they want to eat. Consider the list of test cases, priorities (i.e., a smaller number means a higher priority), and dependencies shown in the table. Which of the following test cases should be executed as the third one?",
     "options": [
       {
         "key": "a",
@@ -2041,7 +2041,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Estás probando una aplicación móvil que permite a los usuarios encontrar un restaurante cercano según el tipo de comida que quieren comer. Considere la siguiente lista de casos de prueba, prioridades (es decir, un número menor significa una prioridad más alta) y dependencias: caso de prueba número condición de prueba cubierta Prioridad Dependencia lógica TC 001 Seleccionar tipo de comida 3 ninguna TC 002 Seleccionar restaurante 2 TC 001 TC 003 Obtener dirección 1 TC 002 TC 004 Llamar al restaurante 2 TC 002 TC 005 Hacer reservación 3 TC 002 ¿Cuál de los siguientes casos de prueba debe ejecutarse como el tercero?",
+        "prompt": "Estás probando una aplicación móvil que permite a los usuarios encontrar un restaurante cercano según el tipo de comida que quieren comer. Considera la lista de casos de prueba, prioridades (un número menor indica una prioridad mayor) y dependencias que se muestra en la tabla. ¿Cuál de los siguientes casos de prueba debe ejecutarse en tercer lugar?",
         "options": [
           {
             "key": "a",

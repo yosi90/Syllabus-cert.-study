@@ -109,8 +109,8 @@ export function cleanExplanationText(text: string) {
   return text
     .replace(/^(?:is\s+)?not\s+correct[.:;,-]?\s*/i, "")
     .replace(/^(?:is\s+)?correct[.:;,-]?\s*/i, "")
-    .replace(/^no\s+es\s+correct[oa]s?[.:;,-]?\s*/i, "")
-    .replace(/^es\s+correct[oa]s?[.:;,-]?\s*/i, "")
+    .replace(/^no\s+(?:es|son)\s+correct[oa]s?[.:;,-]?\s*/i, "")
+    .replace(/^(?:es|son)\s+correct[oa]s?[.:;,-]?\s*/i, "")
     .trim();
 }
 

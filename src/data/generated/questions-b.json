@@ -1288,7 +1288,7 @@
     "reference": "FL-4.2.3",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "The following decision table contains the rules for determining the risk of atherosclerosis. Rule 1 Rule 2 Rule 3 Rule 4 Rule 5 Conditions Cholesterol (mg/dl) ≤124 ≤ 124 125 – 200 125 – 200 ≥ 201 Blood pressure (mm Hg) ≤ 140 > 140 ≤ 140 > 140 – Action Risk level very low low medium high very high You designed the test cases with the following input data: TC1: Cholesterol = 125 mg/dl Blood pressure = 141 mm Hg TC2: Cholesterol = 200 mg/dl Blood pressure = 201 mm Hg TC3: Cholesterol = 124 mg/dl Blood pressure = 201 mm Hg TC4: Cholesterol = 109 mg/dl Blood pressure = 200 mm Hg TC5: Cholesterol = 201 mg/dl Blood pressure = 140 mm Hg What is the decision table coverage achieved by these test cases?",
+    "prompt": "The following decision table contains the rules for determining the risk of atherosclerosis. You designed the test cases with the following input data: TC1: Cholesterol = 125 mg/dl; blood pressure = 141 mm Hg. TC2: Cholesterol = 200 mg/dl; blood pressure = 201 mm Hg. TC3: Cholesterol = 124 mg/dl; blood pressure = 201 mm Hg. TC4: Cholesterol = 109 mg/dl; blood pressure = 200 mm Hg. TC5: Cholesterol = 201 mg/dl; blood pressure = 140 mm Hg. What is the decision table coverage achieved by these test cases?",
     "options": [
       {
         "key": "a",
@@ -1324,7 +1324,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "La siguiente tabla de decisiones contiene las reglas para determinar el riesgo de aterosclerosis. Regla 1 Regla 2 Regla 3 Regla 4 Regla 5 Condiciones Colesterol (mg/dl) ≤124 ≤ 124 125 – 200 125 – 200 ≥ 201 Presión arterial (mm Hg) ≤ 140 > 140 ≤ 140 > 140 – Acción nivel de riesgo muy bajo bajo medio alto muy alto Usted diseñó los casos de prueba con los siguientes datos de entrada: TC1: Colesterol = 125 mg/dl Presión arterial = 141 mm Hg TC2: Colesterol = 200 mg/dl Presión arterial = 201 mm Hg TC3: Colesterol = 124 mg/dl Presión arterial = 201 mm Hg TC4: Colesterol = 109 mg/dl Presión arterial = 200 mm Hg TC5: Colesterol = 201 mg/dl Presión arterial = 140 mm Hg ¿Cuál es la cobertura de la tabla de decisión alcanzada por estos casos de prueba?",
+        "prompt": "La siguiente tabla de decisiones contiene las reglas para determinar el riesgo de aterosclerosis. Has diseñado los casos de prueba con los siguientes datos de entrada: TC1: colesterol = 125 mg/dl; presión arterial = 141 mm Hg. TC2: colesterol = 200 mg/dl; presión arterial = 201 mm Hg. TC3: colesterol = 124 mg/dl; presión arterial = 201 mm Hg. TC4: colesterol = 109 mg/dl; presión arterial = 200 mm Hg. TC5: colesterol = 201 mg/dl; presión arterial = 140 mm Hg. ¿Cuál es la cobertura de la tabla de decisión alcanzada por estos casos de prueba?",
         "options": [
           {
             "key": "a",
@@ -1860,7 +1860,7 @@
     "reference": "FL-5.1.4",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "You want to estimate the test effort for the new project using estimation based on ratios. You calculate the test-to-development effort ratio using averaged data for both development effort and test effort from four historical projects similar to the new one. The table shows this historical data. Project Development effort ($) Test effort ($) P1 800,000 40,000 P2 1,200,000 130,000 P3 600,000 70,000 P4 1,000,000 120,000 The estimated development effort for the new project is $800,000. What is your estimate of the test effort in this project?",
+    "prompt": "You want to estimate the test effort for the new project using estimation based on ratios. You calculate the test-to-development effort ratio using averaged development and test effort data from four historical projects similar to the new one, as shown in the table. The estimated development effort for the new project is $800,000. What is your estimate of the test effort in this project?",
     "options": [
       {
         "key": "a",
@@ -1896,7 +1896,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Quiere estimar el esfuerzo de prueba para el nuevo proyecto utilizando una estimación basada en proporciones. La relación entre el esfuerzo de prueba y el de desarrollo se calcula utilizando datos promediados tanto para el esfuerzo de desarrollo como para el esfuerzo de prueba de cuatro proyectos históricos similares al nuevo. La tabla muestra estos datos históricos. Esfuerzo de desarrollo del proyecto ($) Esfuerzo de prueba ($) P1 800 000 40 000 P2 1 200 000 130 000 P3 600 000 70 000 P4 1 000 000 120 000 El esfuerzo de desarrollo estimado para el nuevo proyecto es de $800 000. ¿Cuál es su estimación del esfuerzo de prueba en este proyecto?",
+        "prompt": "Quieres estimar el esfuerzo de prueba del nuevo proyecto mediante una estimación basada en proporciones. Calculas la relación entre el esfuerzo de prueba y el de desarrollo utilizando los promedios de ambos esfuerzos en cuatro proyectos históricos similares, como se muestra en la tabla. El esfuerzo de desarrollo estimado para el nuevo proyecto es de 800 000 $. ¿Cuál es tu estimación del esfuerzo de prueba en este proyecto?",
         "options": [
           {
             "key": "a",
@@ -1928,7 +1928,7 @@
     "reference": "FL-5.1.5",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "You are testing a web application that allows users to SEARCH for products, VIEW product details, ADD products to a shopping cart, and place an ORDER. You have prepared the following seven test cases, all of which you want to execute. The tests should be executed in the best order, based on test priority. Test Priority (1 = higher priority) TC1 SEARCH for product A 4 TC2 SEARCH for product B 4 TC3 VIEW product A details 3 TC4 VIEW product B details 2 TC5 ADD product A to a shopping cart 3 TC6 ADD product B to a shopping cart 1 TC7 place an ORDER 5 You also identified the following logical dependencies between test cases: • SEARCH functionality must be tested before VIEW functionality can be tested. • VIEW functionality must be tested before ADD functionality. • ADD functionality must be tested before ORDER functionality. Which test case should be executed as the fourth one?",
+    "prompt": "You are testing a web application that allows users to SEARCH for products, VIEW product details, ADD products to a shopping cart, and place an ORDER. You have prepared the seven test cases and priorities shown in the table, all of which you want to execute. You also identified the following logical dependencies: • SEARCH must be tested before VIEW. • VIEW must be tested before ADD. • ADD must be tested before ORDER. Which test case should be executed as the fourth one?",
     "options": [
       {
         "key": "a",
@@ -1964,7 +1964,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Está probando una aplicación web que permite a los usuarios BUSCAR productos, VER detalles del producto, AGREGAR productos a un carrito de compras y realizar un PEDIDO. Ha preparado los siguientes siete casos de prueba, y todos desea ejecutarlos. Las pruebas deben ejecutarse en el mejor orden, según la prioridad de la prueba. Prioridad de prueba (1 = mayor prioridad) TC1 BÚSQUEDA del producto A 4 TC2 BÚSQUEDA del producto B 4 TC3 VER detalles del producto A 3 TC4 VER detalles del producto B 2 TC5 AGREGAR producto A a un carrito de compras 3 TC6 AGREGAR producto B a un carrito de compras 1 TC7 realizar un PEDIDO 5 También identificó las siguientes dependencias lógicas entre casos de prueba: • La funcionalidad de BÚSQUEDA debe probarse antes de poder probar la funcionalidad de VER. • La funcionalidad VER debe probarse antes de AGREGAR la funcionalidad. • La funcionalidad AGREGAR debe probarse antes de la funcionalidad ORDENAR. ¿Qué caso de prueba debería ejecutarse como el cuarto?",
+        "prompt": "Estás probando una aplicación web que permite BUSCAR productos, VER sus detalles, AÑADIRLOS al carrito y realizar un PEDIDO. Has preparado los siete casos de prueba y las prioridades que se muestran en la tabla, y quieres ejecutarlos todos. También has identificado estas dependencias lógicas: • BUSCAR debe probarse antes que VER. • VER debe probarse antes que AÑADIR. • AÑADIR debe probarse antes que PEDIDO. ¿Qué caso de prueba debe ejecutarse en cuarto lugar?",
         "options": [
           {
             "key": "a",

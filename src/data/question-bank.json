@@ -2064,7 +2064,7 @@
       "reference": "FL-2.2.3",
       "kLevel": "K2",
       "rawKLevel": "K2",
-      "prompt": "You are testing a user story with three acceptance criteria: AC1, AC2 and AC3. AC1 is covered by test case TC1, AC2 by TC2, and AC3 by TC3. The test execution history had three test runs on three consecutive versions of the software as follows: Execution 1 Execution 2 Execution 3 TC1 (1) Failed (4) Passed (7) Passed TC2 (2) Passed (5) Failed (8) Passed TC3 (3) Failed (6) Failed (9) Passed Tests are repeated once you are informed that all defects found in the test run are corrected and a new version of the software is available. Which of the above tests are executed as regression tests?",
+      "prompt": "You are testing a user story with three acceptance criteria: AC1, AC2 and AC3. AC1 is covered by test case TC1, AC2 by TC2, and AC3 by TC3. The test execution history had three test runs on three consecutive versions of the software as shown in the table. Tests are repeated once you are informed that all defects found in the test run are corrected and a new version of the software is available. Which of the above tests are executed as regression tests?",
       "options": [
         {
           "key": "a",
@@ -2100,7 +2100,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Estás probando una historia de usuario con tres criterios de aceptación: AC1, AC2 y AC3. AC1 está cubierto por el caso de prueba TC1, AC2 por TC2 y AC3 por TC3. El historial de ejecución de prueba tuvo tres ejecuciones de prueba en tres versiones consecutivas del software de la siguiente manera: Ejecución 1 Ejecución 2 Ejecución 3 TC1 (1) Falló (4) Pasó (7) Pasó TC2 (2) Pasó (5) Falló (8) Pasó TC3 (3) Falló (6) Falló (9) Pasó Las pruebas se repiten una vez que se le informa que todos los defectos encontrados en la ejecución de la prueba se corrigieron y se obtuvo una nueva versión del software. El software está disponible. ¿Cuáles de las pruebas anteriores se ejecutan como pruebas de regresión?",
+          "prompt": "Estás probando una historia de usuario con tres criterios de aceptación: AC1, AC2 y AC3. AC1 está cubierto por el caso de prueba TC1, AC2 por TC2 y AC3 por TC3. El historial de ejecución de prueba tuvo tres ejecuciones de prueba en tres versiones consecutivas del software, como se muestra en la tabla. Las pruebas se repiten una vez que se le informa que todos los defectos encontrados en la ejecución de la prueba se corrigieron y hay disponible una nueva versión del software. ¿Cuáles de las pruebas anteriores se ejecutan como pruebas de regresión?",
           "options": [
             {
               "key": "a",
@@ -2498,7 +2498,7 @@
       "reference": "FL-4.2.2",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "You are testing a system that calculates the final course grade for a given student. The final grade is assigned based on the final result, according to the following rules: • 0 – 50 points: failed • 51 – 60 points: fair • 61 – 70 points: satisfactory • 71 – 80 points: good • 81 – 90 points: very good • 91 – 100 points: excellent You have prepared the following set of test cases: Final result Final grade TC1 91 excellent TC2 50 failed TC3 81 very good TC4 60 fair TC5 70 satisfactory TC6 80 good What is the 2-value boundary value analysis (BVA) coverage for the final result that is achieved with the existing test cases?",
+      "prompt": "You are testing a system that calculates the final course grade for a given student. The final grade is assigned based on the final result, according to the following rules: • 0–50 points: failed • 51–60 points: fair • 61–70 points: satisfactory • 71–80 points: good • 81–90 points: very good • 91–100 points: excellent. You have prepared the set of test cases shown in the table. What is the 2-value boundary value analysis (BVA) coverage for the final result that is achieved with the existing test cases?",
       "options": [
         {
           "key": "a",
@@ -2534,7 +2534,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Estás probando un sistema que calcula la calificación final del curso para un estudiante determinado. La calificación final se asigna en función del resultado final, de acuerdo con las siguientes reglas: • 0 – 50 puntos: reprobado • 51 – 60 puntos: regular • 61 – 70 puntos: satisfactorio • 71 – 80 puntos: bueno • 81 – 90 puntos: muy bueno • 91 – 100 puntos: excelente Se ha preparado el siguiente conjunto de casos de prueba: Resultado final Calificación final TC1 91 excelente TC2 50 reprobado TC3 81 muy bueno TC4 60 regular TC5 70 satisfactorio TC6 80 bueno ¿Cuál es la cobertura del análisis de valores límite (BVA) de 2 valores para el resultado final que se logra con los casos de prueba existentes?",
+          "prompt": "Estás probando un sistema que calcula la calificación final del curso para un estudiante determinado. La calificación final se asigna en función del resultado final, de acuerdo con las siguientes reglas: • 0–50 puntos: suspenso • 51–60 puntos: suficiente • 61–70 puntos: satisfactorio • 71–80 puntos: notable • 81–90 puntos: muy notable • 91–100 puntos: excelente. Has preparado el conjunto de casos de prueba que se muestra en la tabla. ¿Cuál es la cobertura del análisis de valores límite (BVA) de 2 valores para el resultado final que se logra con los casos de prueba existentes?",
           "options": [
             {
               "key": "a",
@@ -2566,7 +2566,7 @@
       "reference": "FL-4.2.3",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "Your favorite bicycle daily rental store has just introduced a new Customer Relationship Management system and asked you, one of their most loyal members, to test it. The implemented features are as follows: • Anyone can rent a bicycle, but members receive a 20% discount • However, if the return deadline is missed, the discount is no longer available • After 15 rentals, members get a gift: a T-Shirt Decision table describing the implemented features looks as follows: Conditions R1 R2 R3 R4 R5 R6 R7 R8 Being a member T T T T F F F F Missed deadline T F T F T F F T 15th rental F F T T F F T T Actions 20% discount X X Gift T-Shirt X X X Based ONLY on the feature description of the Customer Relationship Management system, which of the above rules describes an impossible situation?",
+      "prompt": "Your favorite bicycle daily rental store has just introduced a new Customer Relationship Management system and asked you, one of their most loyal members, to test it. The implemented features are as follows: • Anyone can rent a bicycle, but members receive a 20% discount. • However, if the return deadline is missed, the discount is no longer available. • After 15 rentals, members get a gift: a T-Shirt. The decision table shown describes the implemented features. Based ONLY on the feature description of the Customer Relationship Management system, which of the above rules describes an impossible situation?",
       "options": [
         {
           "key": "a",
@@ -2602,7 +2602,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Tu tienda favorita de alquiler diario de bicicletas acaba de presentar un nuevo sistema de gestión de relaciones con el cliente y te ha pedido a ti, uno de sus miembros más leales, que lo pruebes. Las características implementadas son las siguientes: • Cualquiera puede alquilar una bicicleta, pero los miembros reciben un descuento del 20 % • Sin embargo, si no se cumple el plazo de devolución, el descuento ya no está disponible • Después de 15 alquileres, los miembros reciben un regalo: una camiseta La tabla de decisiones que describe las características implementadas es la siguiente: Condiciones R1 R2 R3 R4 R5 R6 R7 R8 Ser miembro T T T T F F F F Fecha límite incumplida T F T F T F F T 15º alquiler F F T T F F T T Acciones 20% de descuento X X Camiseta de regalo X X X Basado ÚNICAMENTE en la descripción de la característica del sistema de Gestión de Relaciones con el Cliente, ¿cuál de las reglas anteriores describe una situación imposible?",
+          "prompt": "Tu tienda favorita de alquiler diario de bicicletas acaba de presentar un nuevo sistema de gestión de relaciones con el cliente y te ha pedido a ti, uno de sus miembros más leales, que lo pruebes. Las características implementadas son las siguientes: • Cualquiera puede alquilar una bicicleta, pero los miembros reciben un descuento del 20 %. • Sin embargo, si se incumple el plazo de devolución, el descuento deja de estar disponible. • Después de 15 alquileres, los miembros reciben una camiseta de regalo. La tabla de decisiones mostrada describe las características implementadas. Basándote ÚNICAMENTE en la descripción de las características del sistema, ¿cuál de las reglas anteriores describe una situación imposible?",
           "options": [
             {
               "key": "a",
@@ -3260,7 +3260,7 @@
       "reference": "FL-5.1.5",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "You are testing a mobile application that allows users to find a nearby restaurant based on the type of food they want to eat. Consider the following list of test cases, priorities (i.e., a smaller number means a higher priority), and dependencies: Test case number Test condition covered Priority Logical dependency TC 001 Select type of food 3 none TC 002 Select restaurant 2 TC 001 TC 003 Get direction 1 TC 002 TC 004 Call restaurant 2 TC 002 TC 005 Make reservation 3 TC 002 Which of the following test cases should be executed as the third one?",
+      "prompt": "You are testing a mobile application that allows users to find a nearby restaurant based on the type of food they want to eat. Consider the list of test cases, priorities (i.e., a smaller number means a higher priority), and dependencies shown in the table. Which of the following test cases should be executed as the third one?",
       "options": [
         {
           "key": "a",
@@ -3296,7 +3296,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Estás probando una aplicación móvil que permite a los usuarios encontrar un restaurante cercano según el tipo de comida que quieren comer. Considere la siguiente lista de casos de prueba, prioridades (es decir, un número menor significa una prioridad más alta) y dependencias: caso de prueba número condición de prueba cubierta Prioridad Dependencia lógica TC 001 Seleccionar tipo de comida 3 ninguna TC 002 Seleccionar restaurante 2 TC 001 TC 003 Obtener dirección 1 TC 002 TC 004 Llamar al restaurante 2 TC 002 TC 005 Hacer reservación 3 TC 002 ¿Cuál de los siguientes casos de prueba debe ejecutarse como el tercero?",
+          "prompt": "Estás probando una aplicación móvil que permite a los usuarios encontrar un restaurante cercano según el tipo de comida que quieren comer. Considera la lista de casos de prueba, prioridades (un número menor indica una prioridad mayor) y dependencias que se muestra en la tabla. ¿Cuál de los siguientes casos de prueba debe ejecutarse en tercer lugar?",
           "options": [
             {
               "key": "a",
@@ -5036,7 +5036,7 @@
       "reference": "FL-4.2.3",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "The following decision table contains the rules for determining the risk of atherosclerosis. Rule 1 Rule 2 Rule 3 Rule 4 Rule 5 Conditions Cholesterol (mg/dl) ≤124 ≤ 124 125 – 200 125 – 200 ≥ 201 Blood pressure (mm Hg) ≤ 140 > 140 ≤ 140 > 140 – Action Risk level very low low medium high very high You designed the test cases with the following input data: TC1: Cholesterol = 125 mg/dl Blood pressure = 141 mm Hg TC2: Cholesterol = 200 mg/dl Blood pressure = 201 mm Hg TC3: Cholesterol = 124 mg/dl Blood pressure = 201 mm Hg TC4: Cholesterol = 109 mg/dl Blood pressure = 200 mm Hg TC5: Cholesterol = 201 mg/dl Blood pressure = 140 mm Hg What is the decision table coverage achieved by these test cases?",
+      "prompt": "The following decision table contains the rules for determining the risk of atherosclerosis. You designed the test cases with the following input data: TC1: Cholesterol = 125 mg/dl; blood pressure = 141 mm Hg. TC2: Cholesterol = 200 mg/dl; blood pressure = 201 mm Hg. TC3: Cholesterol = 124 mg/dl; blood pressure = 201 mm Hg. TC4: Cholesterol = 109 mg/dl; blood pressure = 200 mm Hg. TC5: Cholesterol = 201 mg/dl; blood pressure = 140 mm Hg. What is the decision table coverage achieved by these test cases?",
       "options": [
         {
           "key": "a",
@@ -5072,7 +5072,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "La siguiente tabla de decisiones contiene las reglas para determinar el riesgo de aterosclerosis. Regla 1 Regla 2 Regla 3 Regla 4 Regla 5 Condiciones Colesterol (mg/dl) ≤124 ≤ 124 125 – 200 125 – 200 ≥ 201 Presión arterial (mm Hg) ≤ 140 > 140 ≤ 140 > 140 – Acción nivel de riesgo muy bajo bajo medio alto muy alto Usted diseñó los casos de prueba con los siguientes datos de entrada: TC1: Colesterol = 125 mg/dl Presión arterial = 141 mm Hg TC2: Colesterol = 200 mg/dl Presión arterial = 201 mm Hg TC3: Colesterol = 124 mg/dl Presión arterial = 201 mm Hg TC4: Colesterol = 109 mg/dl Presión arterial = 200 mm Hg TC5: Colesterol = 201 mg/dl Presión arterial = 140 mm Hg ¿Cuál es la cobertura de la tabla de decisión alcanzada por estos casos de prueba?",
+          "prompt": "La siguiente tabla de decisiones contiene las reglas para determinar el riesgo de aterosclerosis. Has diseñado los casos de prueba con los siguientes datos de entrada: TC1: colesterol = 125 mg/dl; presión arterial = 141 mm Hg. TC2: colesterol = 200 mg/dl; presión arterial = 201 mm Hg. TC3: colesterol = 124 mg/dl; presión arterial = 201 mm Hg. TC4: colesterol = 109 mg/dl; presión arterial = 200 mm Hg. TC5: colesterol = 201 mg/dl; presión arterial = 140 mm Hg. ¿Cuál es la cobertura de la tabla de decisión alcanzada por estos casos de prueba?",
           "options": [
             {
               "key": "a",
@@ -5608,7 +5608,7 @@
       "reference": "FL-5.1.4",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "You want to estimate the test effort for the new project using estimation based on ratios. You calculate the test-to-development effort ratio using averaged data for both development effort and test effort from four historical projects similar to the new one. The table shows this historical data. Project Development effort ($) Test effort ($) P1 800,000 40,000 P2 1,200,000 130,000 P3 600,000 70,000 P4 1,000,000 120,000 The estimated development effort for the new project is $800,000. What is your estimate of the test effort in this project?",
+      "prompt": "You want to estimate the test effort for the new project using estimation based on ratios. You calculate the test-to-development effort ratio using averaged development and test effort data from four historical projects similar to the new one, as shown in the table. The estimated development effort for the new project is $800,000. What is your estimate of the test effort in this project?",
       "options": [
         {
           "key": "a",
@@ -5644,7 +5644,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Quiere estimar el esfuerzo de prueba para el nuevo proyecto utilizando una estimación basada en proporciones. La relación entre el esfuerzo de prueba y el de desarrollo se calcula utilizando datos promediados tanto para el esfuerzo de desarrollo como para el esfuerzo de prueba de cuatro proyectos históricos similares al nuevo. La tabla muestra estos datos históricos. Esfuerzo de desarrollo del proyecto ($) Esfuerzo de prueba ($) P1 800 000 40 000 P2 1 200 000 130 000 P3 600 000 70 000 P4 1 000 000 120 000 El esfuerzo de desarrollo estimado para el nuevo proyecto es de $800 000. ¿Cuál es su estimación del esfuerzo de prueba en este proyecto?",
+          "prompt": "Quieres estimar el esfuerzo de prueba del nuevo proyecto mediante una estimación basada en proporciones. Calculas la relación entre el esfuerzo de prueba y el de desarrollo utilizando los promedios de ambos esfuerzos en cuatro proyectos históricos similares, como se muestra en la tabla. El esfuerzo de desarrollo estimado para el nuevo proyecto es de 800 000 $. ¿Cuál es tu estimación del esfuerzo de prueba en este proyecto?",
           "options": [
             {
               "key": "a",
@@ -5676,7 +5676,7 @@
       "reference": "FL-5.1.5",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "You are testing a web application that allows users to SEARCH for products, VIEW product details, ADD products to a shopping cart, and place an ORDER. You have prepared the following seven test cases, all of which you want to execute. The tests should be executed in the best order, based on test priority. Test Priority (1 = higher priority) TC1 SEARCH for product A 4 TC2 SEARCH for product B 4 TC3 VIEW product A details 3 TC4 VIEW product B details 2 TC5 ADD product A to a shopping cart 3 TC6 ADD product B to a shopping cart 1 TC7 place an ORDER 5 You also identified the following logical dependencies between test cases: • SEARCH functionality must be tested before VIEW functionality can be tested. • VIEW functionality must be tested before ADD functionality. • ADD functionality must be tested before ORDER functionality. Which test case should be executed as the fourth one?",
+      "prompt": "You are testing a web application that allows users to SEARCH for products, VIEW product details, ADD products to a shopping cart, and place an ORDER. You have prepared the seven test cases and priorities shown in the table, all of which you want to execute. You also identified the following logical dependencies: • SEARCH must be tested before VIEW. • VIEW must be tested before ADD. • ADD must be tested before ORDER. Which test case should be executed as the fourth one?",
       "options": [
         {
           "key": "a",
@@ -5712,7 +5712,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Está probando una aplicación web que permite a los usuarios BUSCAR productos, VER detalles del producto, AGREGAR productos a un carrito de compras y realizar un PEDIDO. Ha preparado los siguientes siete casos de prueba, y todos desea ejecutarlos. Las pruebas deben ejecutarse en el mejor orden, según la prioridad de la prueba. Prioridad de prueba (1 = mayor prioridad) TC1 BÚSQUEDA del producto A 4 TC2 BÚSQUEDA del producto B 4 TC3 VER detalles del producto A 3 TC4 VER detalles del producto B 2 TC5 AGREGAR producto A a un carrito de compras 3 TC6 AGREGAR producto B a un carrito de compras 1 TC7 realizar un PEDIDO 5 También identificó las siguientes dependencias lógicas entre casos de prueba: • La funcionalidad de BÚSQUEDA debe probarse antes de poder probar la funcionalidad de VER. • La funcionalidad VER debe probarse antes de AGREGAR la funcionalidad. • La funcionalidad AGREGAR debe probarse antes de la funcionalidad ORDENAR. ¿Qué caso de prueba debería ejecutarse como el cuarto?",
+          "prompt": "Estás probando una aplicación web que permite BUSCAR productos, VER sus detalles, AÑADIRLOS al carrito y realizar un PEDIDO. Has preparado los siete casos de prueba y las prioridades que se muestran en la tabla, y quieres ejecutarlos todos. También has identificado estas dependencias lógicas: • BUSCAR debe probarse antes que VER. • VER debe probarse antes que AÑADIR. • AÑADIR debe probarse antes que PEDIDO. ¿Qué caso de prueba debe ejecutarse en cuarto lugar?",
           "options": [
             {
               "key": "a",
@@ -7536,7 +7536,7 @@
       "reference": "FL-4.2.3",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "You are working on a project to develop a system to analyze driving test results. You have been asked to design test cases based on the following decision table. R1 R2 R3 C1: First attempt at the exam? - - F C2: Theoretical exam passed? T F - C3: Practical exam passed? T - F Issue a driving license? X Request additional driving lessons? X Request to take the exam again? X What test data will show that there are contradictory rules in the decision table?",
+      "prompt": "You are working on a project to develop a system to analyze driving test results. You have been asked to design test cases based on the decision table shown. What test data will show that there are contradictory rules in the decision table?",
       "options": [
         {
           "key": "a",
@@ -7572,7 +7572,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Está trabajando en un proyecto para desarrollar un sistema para analizar los resultados de los exámenes de conducción. Se le ha pedido que diseñe casos de prueba basándose en la siguiente tabla de decisiones. R1 R2 R3 C1: ¿Primer intento en el examen? - - F C2: ¿Examen teórico aprobado? V F - C3: ¿Examen práctico aprobado? T - F ¿Expedir un permiso de conducir? X ¿Solicitar lecciones de conducción adicionales? X ¿Solicitud para realizar el examen nuevamente? X ¿Qué datos de prueba mostrarán que existen reglas contradictorias en la tabla de decisiones?",
+          "prompt": "Estás trabajando en un proyecto para desarrollar un sistema que analice los resultados de los exámenes de conducción. Te han pedido que diseñes casos de prueba basados en la tabla de decisiones mostrada. ¿Qué datos de prueba demostrarán que existen reglas contradictorias en la tabla?",
           "options": [
             {
               "key": "a",
@@ -10046,7 +10046,7 @@
       "reference": "FL-4.2.3",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "You are designing test cases based on the following decision table. R1 R2 R3 R4 R5 R6 R7 C1: Age 0-18 19-65 19-65 >65 0-18 19-65 >65 C2: Experience - 0-4 >4 - - - - C3: Registered? NO NO NO NO YES YES YES Category A A B B B D C So far you have designed the following test cases: • TC1: 19-year-old, unregistered man with no experience; expected result: category A • TC2: 65-year-old, unregistered woman with 5 years of experience; expected result: category B • TC3: 66-year-old, registered man with no experience; expected result: category C • TC4: 65-year-old, registered woman with 4 years of experience; expected result: category D Which of the following test cases, when added to the existing set of test cases, will increase the decision table coverage?",
+      "prompt": "You are designing test cases based on the decision table shown. So far you have designed the following test cases: • TC1: 19-year-old, unregistered man with no experience; expected result: category A. • TC2: 65-year-old, unregistered woman with 5 years of experience; expected result: category B. • TC3: 66-year-old, registered man with no experience; expected result: category C. • TC4: 65-year-old, registered woman with 4 years of experience; expected result: category D. Which of the following test cases, when added to the existing set, will increase the decision table coverage?",
       "options": [
         {
           "key": "a",
@@ -10082,7 +10082,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Estás diseñando casos de prueba con base en la siguiente tabla de decisiones. R1 R2 R3 R4 R5 R6 R7 C1: Edad 0-18 19-65 19-65 >65 0-18 19-65 >65 C2: Experiencia - 0-4 >4 - - - - C3: ¿Registrado? NO NO NO NO SI SI SI Categoría A A B B B D C Hasta el momento se han diseñado los siguientes casos de prueba: • TC1: Hombre de 19 años, no registrado y sin experiencia; resultado esperado: categoría A • TC2: mujer de 65 años, no registrada y con 5 años de experiencia; resultado esperado: categoría B • TC3: 66 años, hombre registrado sin experiencia; resultado esperado: categoría C • TC4: mujer registrada de 65 años con 4 años de experiencia; Resultado esperado: categoría D ¿Cuál de los siguientes casos de prueba, cuando se agrega al conjunto existente de casos de prueba, aumentará la cobertura de la tabla de decisión?",
+          "prompt": "Estás diseñando casos de prueba basados en la tabla de decisiones mostrada. Hasta el momento has diseñado estos casos: • TC1: hombre de 19 años, no registrado y sin experiencia; resultado esperado: categoría A. • TC2: mujer de 65 años, no registrada y con 5 años de experiencia; resultado esperado: categoría B. • TC3: hombre de 66 años, registrado y sin experiencia; resultado esperado: categoría C. • TC4: mujer de 65 años, registrada y con 4 años de experiencia; resultado esperado: categoría D. ¿Cuál de los siguientes casos, al añadirlo al conjunto existente, aumentará la cobertura de la tabla de decisiones?",
           "options": [
             {
               "key": "a",
@@ -10114,7 +10114,7 @@
       "reference": "FL-4.2.4",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "You are applying state transition testing to the hotel room reservation system modeled by the following state transition table, with 4 states and 5 different events: Events State Available NotAvailable ChangeRoom Cancel Pay S1: Requesting S2 S3 S2: Confirmed S1 S4 S4 S3: Waiting list S2 S4 S4: End Assuming all test cases start in the ‘Requesting’ state, which of the following test cases, represented as sequences of events, achieves the highest valid transitions coverage?",
+      "prompt": "You are applying state transition testing to the hotel room reservation system modeled by the table shown, with four states and five different events. Assuming all test cases start in the ‘Requesting’ state, which of the following test cases, represented as sequences of events, achieves the highest valid transitions coverage?",
       "options": [
         {
           "key": "a",
@@ -10150,7 +10150,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Está aplicando pruebas de transición de estados al sistema de reserva de habitaciones de hotel modelado mediante la siguiente tabla de transición de estados, con 4 estados y 5 eventos diferentes: Eventos Estado Disponible No disponible Cambio de habitación Cancelar Pagar S1: Solicitando S2 S3 S2: Confirmado S1 S4 S4 S3: Lista de espera S2 S4 S4: Fin Suponiendo que todos los casos de prueba comienzan en el estado \"Solicitando\", ¿cuál de los siguientes casos de prueba, representados como secuencias de eventos, logra el mayor ¿Cobertura de transiciones válida?",
+          "prompt": "Estás aplicando pruebas de transición de estados al sistema de reserva de habitaciones de hotel modelado por la tabla mostrada, con cuatro estados y cinco eventos diferentes. Suponiendo que todos los casos de prueba comienzan en el estado «Solicitando», ¿cuál de los siguientes casos, representados como secuencias de eventos, logra la mayor cobertura de transiciones válidas?",
           "options": [
             {
               "key": "a",
@@ -10686,7 +10686,7 @@
       "reference": "FL-5.1.5",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "The table shows the traceability matrix from test cases to requirements. “X” means that a given test case covers the corresponding requirement. Req1 Req2 Req3 Req4 Req5 Req6 Req7 TC1 X X X X TC2 X X X TC3 X X TC4 X You want to prioritize the test cases following the additional coverage prioritization technique. You execute all four test cases. Which test case should be executed as the LAST one?",
+      "prompt": "The table shows the traceability matrix from test cases to requirements. “X” means that a given test case covers the corresponding requirement. You want to prioritize the test cases following the additional coverage prioritization technique and execute all four test cases. Which test case should be executed LAST?",
       "options": [
         {
           "key": "a",
@@ -10722,7 +10722,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "La tabla muestra la matriz de trazabilidad desde casos de prueba hasta requisitos. “X” significa que un determinado caso de prueba cubre el requisito correspondiente. Req1 Req2 Req3 Req4 Req5 Req6 Req7 TC1 X X X X TC2 X X X TC3 X X TC4 X Se desea priorizar los casos de prueba siguiendo la técnica de priorización de cobertura adicional. Ejecutas los cuatro casos de prueba. ¿Qué caso de prueba debe ejecutarse como el ÚLTIMO?",
+          "prompt": "La tabla muestra la matriz de trazabilidad de los casos de prueba con los requisitos. Una «X» indica que un caso cubre el requisito correspondiente. Quieres priorizar los cuatro casos mediante la técnica de priorización por cobertura adicional. ¿Qué caso de prueba debe ejecutarse en ÚLTIMO lugar?",
           "options": [
             {
               "key": "a",
