@@ -1,4 +1,4 @@
-import { BookOpen, Bookmark, CircleAlert, Eye, Play, Timer } from "lucide-react";
+import { BookOpen, BookText, BookUp, BookUp2, Bookmark, CircleAlert, Eye, Play, Timer } from "lucide-react";
 import type { StudyDashboard } from "../domain/dashboard";
 import type { Copy, Language } from "../app/content";
 import { localizedChapterName } from "../app/presentation";
@@ -79,22 +79,27 @@ export function HomeView({
       <section className={`dashboard-action-grid${canContinuePractice || hasActiveExam ? "" : " no-resume"}`}>
         <article className="dashboard-section quick-study-card">
           <span className="eyebrow quick-study-eyebrow">{copy.quickStudy}</span>
-          <h3>{copy.quickStudy}</h3>
           <p className="quick-study-description">{copy.quickStudyDescription}</p>
           <div className="dashboard-buttons">
             <button className="primary" type="button" onClick={() => onStartStudy(10)}><Play aria-hidden="true" />{copy.quick10}</button>
             <button className="secondary" type="button" onClick={() => onStartStudy(20)}><BookOpen aria-hidden="true" />{copy.complete20}</button>
+            {canContinuePractice && <button className="secondary" type="button" onClick={onContinuePractice}><BookUp2 aria-hidden="true" />{copy.continueStudy}</button>}
+            {hasActiveExam && <button className="primary" type="button" onClick={onContinueExam}><Timer aria-hidden="true" />{copy.continueExam}</button>}
+            {!canContinuePractice && !hasActiveExam && <span className="dashboard-note">{copy.noAccuracy}</span>}
           </div>
         </article>
 
         <article className="dashboard-section dashboard-resume-card">
-          <span className="eyebrow">{copy.resumeTitle}</span>
-          <h3>{copy.resumeTitle}</h3>
-          <div className="dashboard-buttons vertical">
-            {canContinuePractice && <button className="secondary" type="button" onClick={onContinuePractice}><BookOpen aria-hidden="true" />{copy.continueStudy}</button>}
-            {hasActiveExam && <button className="primary" type="button" onClick={onContinueExam}><Timer aria-hidden="true" />{copy.continueExam}</button>}
-            {!canContinuePractice && !hasActiveExam && <span className="dashboard-note">{copy.noAccuracy}</span>}
-          </div>
+          <span className="eyebrow quick-study-eyebrow">{copy.weakAreas}</span>
+          <p>{dashboard.weakChapterIds.length ? copy.weakDescription : copy.noWeakAreas}</p>
+          {dashboard.weakChapterIds.length > 0 && (
+            <div className="weak-area-list">
+              {dashboard.weakChapterIds.map((chapterId) => {
+                const item = dashboard.byChapter.find((entry) => entry.id === chapterId)!;
+                return <span key={chapterId}>{chapterId} · {localizedChapterName(chapterId, language)} · {copy.accuracy} {item.accuracy}%</span>;
+              })}
+            </div>
+          )}
         </article>
       </section>
 
@@ -113,19 +118,6 @@ export function HomeView({
             {dashboard.byKLevel.map((item) => <BreakdownRow key={item.id} label={item.id} coverage={item.coverage} accuracy={item.accuracy} copy={copy} />)}
           </div>
         </article>
-      </section>
-
-      <section className="dashboard-section" aria-labelledby="weak-title">
-        <h3 id="weak-title">{copy.weakAreas}</h3>
-        <p>{dashboard.weakChapterIds.length ? copy.weakDescription : copy.noWeakAreas}</p>
-        {dashboard.weakChapterIds.length > 0 && (
-          <div className="weak-area-list">
-            {dashboard.weakChapterIds.map((chapterId) => {
-              const item = dashboard.byChapter.find((entry) => entry.id === chapterId)!;
-              return <span key={chapterId}>{chapterId} · {localizedChapterName(chapterId, language)} · {copy.accuracy} {item.accuracy}%</span>;
-            })}
-          </div>
-        )}
       </section>
     </main>
   );
