@@ -51,12 +51,25 @@ describe("localized explanation and formula presentation", () => {
   it("removes every answer-status prefix used by the question bank", () => {
     for (const question of questions) {
       for (const language of ["en", "es"] as const) {
-        const parsed = parseExplanation(localizedQuestion(question, language).explanation);
+        const parsed = parseExplanation(localizedQuestion(question, language).explanation, question.options.map((option) => option.key));
         for (const option of parsed.options) {
           expect(cleanExplanationText(option.text), `${question.id} (${language}) option ${option.key}`)
             .not.toMatch(/^(?:is\s+)?(?:not\s+)?correct|^(?:no\s+)?(?:es|son)\s+correct/i);
         }
       }
+    }
+  });
+
+  it("uses one detailed explanation per option when B-23 contains a repeated answer summary", () => {
+    const question = questions.find((item) => item.id === "B-23")!;
+    for (const language of ["en", "es"] as const) {
+      const parsed = parseExplanation(
+        localizedQuestion(question, language).explanation,
+        question.options.map((option) => option.key),
+      );
+
+      expect(parsed.options.map((option) => option.key)).toEqual(["a", "b", "c", "d"]);
+      expect(parsed.options.every((option) => option.text.length > 40)).toBe(true);
     }
   });
 
@@ -104,6 +117,22 @@ describe("question prompt formatting", () => {
         expect.stringMatching(/categor(?:y|ía) C\.$/),
         expect.stringMatching(/categor(?:y|ía) D\.$/),
       ]);
+    }
+  });
+
+  it("renders the five B-22 test cases as one real list", () => {
+    const question = questions.find((item) => item.id === "B-22")!;
+    for (const language of ["en", "es"] as const) {
+      const blocks = promptBlocks(localizedQuestion(question, language).prompt);
+      const lists = blocks.filter((block) => block.type === "list");
+
+      expect(lists).toHaveLength(1);
+      expect(lists[0].items.map((item) => item.marker)).toEqual(["TC1:", "TC2:", "TC3:", "TC4:", "TC5:"]);
+      expect(blocks.findIndex((block) => block.type === "list")).toBeGreaterThan(0);
+      expect(blocks.at(-1)).toEqual(expect.objectContaining({
+        type: "text",
+        text: expect.stringMatching(/^(?:What|¿Cuál)/),
+      }));
     }
   });
 

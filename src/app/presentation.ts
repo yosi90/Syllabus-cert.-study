@@ -21,7 +21,7 @@ export function progressLabel(progress: ProgressState, question: Question, copy:
   return item.lastCorrect ? copy.lastCorrect : copy.lastIncorrect;
 }
 
-export function parseExplanation(explanation: string) {
+export function parseExplanation(explanation: string, optionKeys?: string[]) {
   const matches = Array.from(explanation.matchAll(/(?:^|\s)([a-e])\)\s+/g));
   if (!matches.length) {
     return {
@@ -30,11 +30,22 @@ export function parseExplanation(explanation: string) {
     };
   }
 
-  const first = matches[0];
+  let selectedMatches = matches;
+  let trailingMatch = undefined as (typeof matches)[number] | undefined;
+  if (optionKeys?.length) {
+    const sequenceStart = matches.findIndex((_, start) => optionKeys.every((key, offset) => matches[start + offset]?.[1] === key));
+    if (sequenceStart >= 0) {
+      selectedMatches = matches.slice(sequenceStart, sequenceStart + optionKeys.length);
+      trailingMatch = matches[sequenceStart + optionKeys.length];
+    }
+  }
+
+  const first = selectedMatches[0];
   const intro = explanation.slice(0, first.index).trim();
-  const options = matches.map((match, index) => {
+  const options = selectedMatches.map((match, index) => {
     const start = (match.index ?? 0) + match[0].length;
-    const end = index + 1 < matches.length ? matches[index + 1].index ?? explanation.length : explanation.length;
+    const nextMatch = selectedMatches[index + 1] ?? trailingMatch;
+    const end = nextMatch?.index ?? explanation.length;
     return {
       key: match[1],
       text: explanation.slice(start, end).trim(),
@@ -77,6 +88,10 @@ export function localizedQuestion(question: Question, language: Language) {
 export function formatPromptText(prompt: string) {
   let formatted = prompt.replace(/\s+•\s+/g, "\n• ");
 
+  if (/\bTC1:\s/.test(formatted) && /\bTC5:\s/.test(formatted)) {
+    formatted = formatted.replace(/\s+(?=TC[1-9]:\s)/g, "\n");
+  }
+
   const listMarkerSets = [
     ["1", "2"],
     ["i", "ii"],
@@ -99,6 +114,7 @@ export function formatPromptText(prompt: string) {
   }
 
   return formatted
+    .replace(/\s+(?=(?:The generic review process|El proceso de revisión genérico)\b)/g, "\n\n")
     .replace(/\s+(?=And the following\b|Y las siguientes\b)/g, "\n\n")
     .replace(/\s+(?=Variable:)/g, "\n\n")
     .replace(/\s+(?=(?:Which|What|How|Tools from|Given that|Based on|In all test cases)(?:\s|$))/g, "\n\n")
@@ -113,6 +129,7 @@ export type PromptBlock =
 
 function listMarkerFamily(marker: string) {
   if (marker === "•") return "bullet";
+  if (/^TC[1-9]:$/.test(marker)) return "test-case";
   if (/^[1-9]\.$/.test(marker)) return "number";
   if (/^[A-Z]\.$/.test(marker)) return "letter";
   return "roman";
@@ -121,7 +138,7 @@ function listMarkerFamily(marker: string) {
 export function promptBlocks(prompt: string): PromptBlock[] {
   const lines = formatPromptText(prompt).split(/\n+/).map((line) => line.trim()).filter(Boolean);
   const blocks: PromptBlock[] = [];
-  const listItemPattern = /^(•|[1-9]\.|[A-Z]\.|(?:i|ii|iii|iv|v)\.)\s+(.+)$/;
+  const listItemPattern = /^(•|TC[1-9]:|[1-9]\.|[A-Z]\.|(?:i|ii|iii|iv|v)\.)\s+(.+)$/;
 
   for (const line of lines) {
     const match = line.match(listItemPattern);

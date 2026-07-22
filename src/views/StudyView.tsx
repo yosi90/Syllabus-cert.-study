@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckCircle2, ChevronLeft, ChevronRight, CircleAlert, Clock3, LogOut, Shuffle, XCircle } from "lucide-react";
 import type { Question } from "../data/types";
 import { isCorrectAnswer } from "../domain/scoring";
@@ -52,6 +52,10 @@ export function StudyView({
   activeTimeMs: number;
 }) {
   const [incompleteWarningQuestionId, setIncompleteWarningQuestionId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (currentQuestion) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [currentQuestion?.id]);
 
   if (!currentQuestion) {
     return (

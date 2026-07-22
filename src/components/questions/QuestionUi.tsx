@@ -23,6 +23,7 @@ import {
   localizedObjective,
   localizedQuestion,
   parseExplanation,
+  promptBlocks,
   progressLabel,
   questionLabel,
   selectorLabel,
@@ -30,6 +31,25 @@ import {
 import { buildExplanationSpeech, buildQuestionSpeech } from "../../app/speech";
 import { QuestionPromptContent, SpeechButton } from "./QuestionContent";
 import { TechnicalText } from "../common/TechnicalText";
+
+function ExplanationIntro({ text, language }: { text: string; language: Language }) {
+  return (
+    <div className="explanation-intro">
+      {promptBlocks(text).map((block, index) => block.type === "text" ? (
+        <p className="explanation-intro-text" key={index}><TechnicalText text={block.text} language={language} /></p>
+      ) : (
+        <div className="explanation-intro-list" role="list" key={index}>
+          {block.items.map((item, itemIndex) => (
+            <div className="explanation-intro-list-item" role="listitem" key={itemIndex}>
+              <span className="explanation-intro-list-marker" aria-hidden="true">{item.marker}</span>
+              <span><TechnicalText text={item.text} language={language} /></span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export function QuestionCard({
   question,
@@ -201,7 +221,7 @@ export function ExplanationPanel({
   optionSeed?: string;
 }) {
   const localized = localizedQuestion(question, language);
-  const parsed = parseExplanation(localized.explanation);
+  const parsed = parseExplanation(localized.explanation, question.options.map((option) => option.key));
   const displayOptions = useMemo(
     () => getDisplayOptions(question, language, optionMode, optionSeed),
     [question, language, optionMode, optionSeed],
@@ -230,7 +250,7 @@ export function ExplanationPanel({
         <TheoryButton objective={objective} onOpen={() => setIsTheoryOpen(true)} language={language} copy={copy} />
         <SpeechButton text={buildExplanationSpeech(question, selected, language, copy, optionMode, optionSeed)} language={language} copy={copy} kind="explanation" />
       </div>
-      {parsed.intro && <p className="explanation-intro"><TechnicalText text={parsed.intro} language={language} /></p>}
+      {parsed.intro && <ExplanationIntro text={parsed.intro} language={language} />}
       <div className="explanation-options">
         {[...parsed.options].sort((left, right) => {
           return (displayOrderByOriginalKey.get(left.key) ?? 0) - (displayOrderByOriginalKey.get(right.key) ?? 0);

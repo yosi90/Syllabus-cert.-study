@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckCircle2, ChevronLeft, ChevronRight, Play, Shuffle, Timer, X } from "lucide-react";
 import { questions } from "../data/bank";
 import type { Question, SourceModel } from "../data/types";
@@ -40,6 +40,11 @@ export function ExamView({
   copy: Copy;
 }) {
   const [incompleteQuestionId, setIncompleteQuestionId] = useState<string | null>(null);
+  const activeQuestionId = activeExam?.blueprint.questionIds[activeExam.currentIndex];
+
+  useEffect(() => {
+    if (activeQuestionId) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [activeQuestionId]);
 
   if (!activeExam) {
     return (

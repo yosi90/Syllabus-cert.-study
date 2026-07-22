@@ -1,5 +1,6 @@
 import { useRef, type ChangeEvent, type ReactNode } from "react";
 import {
+  Check,
   CircleHelp,
   Download,
   FileUp,
@@ -103,6 +104,7 @@ export function FiltersPanel({
               checked={filters.models.includes(model)}
               onChange={() => setFilters({ ...filters, models: toggleValue(filters.models, model) })}
             />
+            <span className="check-indicator" aria-hidden="true"><Check /></span>
             {model}
           </label>
         ))}
@@ -116,6 +118,7 @@ export function FiltersPanel({
               checked={filters.chapters.includes(chapter.id)}
               onChange={() => setFilters({ ...filters, chapters: toggleValue(filters.chapters, chapter.id) })}
             />
+            <span className="check-indicator" aria-hidden="true"><Check /></span>
             {chapter.id}
           </label>
         ))}
@@ -129,6 +132,7 @@ export function FiltersPanel({
               checked={filters.kLevels.includes(level)}
               onChange={() => setFilters({ ...filters, kLevels: toggleValue(filters.kLevels, level) })}
             />
+            <span className="check-indicator" aria-hidden="true"><Check /></span>
             {level}
           </label>
         ))}

@@ -118,6 +118,69 @@ test("D-22 keeps its four test cases in one intact list card", async ({ page }, 
   await expect(page.locator(".question-prompt-list-item").last()).toContainText("category D.");
 });
 
+test("B-22 displays its five input test cases as one list", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Prompt rendering only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "B-22";
+      progress.preferences.language = "es";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+      window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
+    }
+  });
+  await page.goto("/#/practice");
+
+  await expect(page.locator(".question-prompt-list")).toHaveCount(1);
+  await expect(page.locator(".question-prompt-list-item")).toHaveCount(5);
+  await expect(page.locator(".question-prompt-list-marker")).toHaveText(["TC1:", "TC2:", "TC3:", "TC4:", "TC5:"]);
+});
+
+test("D-17 expands both lists in its explanation", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Explanation rendering only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "D-17";
+      progress.preferences.language = "es";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+      window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
+    }
+  });
+  await page.goto("/#/practice");
+  await page.getByText("4 – 5 – 3 – 1 – 2", { exact: true }).click();
+  await page.getByRole("button", { name: "Comprobar" }).click();
+
+  const lists = page.locator(".explanation-intro-list");
+  await expect(lists).toHaveCount(2);
+  await expect(page.locator(".explanation-intro-list-item")).toHaveCount(10);
+  await expect(lists.first()).toContainText("comunicación y análisis");
+  await expect(lists.last()).toContainText("Corrección y presentación de informes");
+});
+
+test("B-23 renders each detailed option explanation once", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Explanation rendering only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "B-23";
+      progress.preferences.language = "es";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+      window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
+    }
+  });
+  await page.goto("/#/practice");
+  await page.getByText("Agregar, agregar, agregar, quitar, quitar", { exact: true }).click();
+  await page.getByRole("button", { name: "Comprobar" }).click();
+
+  await expect(page.locator(".explanation-option")).toHaveCount(4);
+  await expect(page.locator(".explanation-option p")).toHaveCount(4);
+  await expect(page.locator(".explanation-option p").filter({ hasText: "se puede escribir" })).toHaveCount(3);
+});
+
 test("A-32 renders both three-point estimates as inline mathematical formulas in the explanation", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Formula rendering only needs one browser pass.");
   await page.addInitScript(() => {

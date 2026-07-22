@@ -18,7 +18,7 @@ function optionSpeech(
   optionSeed?: string,
 ) {
   const explanations = new Map(
-    parseExplanation(localizedQuestion(question, language).explanation).options
+    parseExplanation(localizedQuestion(question, language).explanation, question.options.map((option) => option.key)).options
       .map((item) => [item.key, cleanExplanationText(item.text)]),
   );
 

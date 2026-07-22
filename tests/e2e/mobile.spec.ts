@@ -71,6 +71,34 @@ test("filters and secondary actions remain in the mobile side menu", async ({ pa
   await expect(page.locator(".menu-backdrop")).toHaveCount(0);
 });
 
+test("changing to the next question returns the document scroll to the top", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile-chromium", "A short mobile viewport guarantees a scrollable question page.");
+  await page.setViewportSize({ width: 390, height: 600 });
+  await page.goto("/#/practice");
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+
+  await page.getByRole("button", { name: "Next" }).click();
+
+  await expect(page.getByText("2/160", { exact: true })).toBeVisible();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+});
+
+test("menu filter groups use square checkbox indicators inside one group card", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile-chromium", "The filter menu visual only needs one mobile browser pass.");
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open menu" }).click();
+
+  const modelA = page.locator(".filter-group").filter({ hasText: "Model" }).getByLabel("A", { exact: true });
+  await modelA.check();
+
+  await expect(modelA).toBeChecked();
+  const indicator = modelA.locator("xpath=..").locator(".check-indicator");
+  await expect(indicator).toBeVisible();
+  expect(await indicator.evaluate((element) => getComputedStyle(element).borderRadius)).toBe("4px");
+  expect(await page.locator(".filter-group").filter({ hasText: "Model" }).evaluate((element) => getComputedStyle(element).borderStyle)).toBe("solid");
+});
+
 for (const width of [320, 390, 768]) {
   test(`the layout has no horizontal overflow at ${width}px`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-chromium", "Each width only needs one Chromium pass.");
