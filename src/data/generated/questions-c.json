@@ -659,7 +659,7 @@
         "options": [
           {
             "key": "a",
-            "text": "Cuando los desarrolladores lo acuerdan, las actividades manuales en el lado izquierdo del proceso de prueba se automatizan para respaldar el principio de \"las pruebas tempranas ahorran tiempo y dinero\"."
+            "text": "Cuando los desarrolladores lo acuerdan, las actividades manuales en el lado izquierdo del proceso de prueba se automatizan para dar soporte al principio de \"las pruebas tempranas ahorran tiempo y dinero\"."
           },
           {
             "key": "b",
@@ -675,7 +675,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Las prácticas involucradas en el desplazamiento a la izquierda tienen como objetivo implementar más actividades de prueba en las primeras fases del ciclo de vida de desarrollo de software (SDLC), retratando el SDLC como moviéndose de izquierda a derecha. No existe el lado izquierdo del proceso de prueba b) Es correcto. El desplazamiento hacia la izquierda enfatiza la importancia de comenzar las pruebas antes en el SDLC. La implementación de pruebas de desplazamiento a la izquierda requiere capacitación adicional y un mayor esfuerzo y costos durante las primeras fases del SDLC; sin embargo, los ahorros generales deberían ser mayores. c) No es correcto. Aunque las pruebas de componentes automatizadas y las pruebas de integración de componentes para pruebas de regresión generalmente son valiosas, la creación de estas pruebas normalmente es responsabilidad de los desarrolladores, y si se sigue un enfoque de integración continua/entrega continua (CI/CD), entonces estas pruebas se habrán enviado con el código. En algunas situaciones, el tester puede automatizar pruebas para pruebas de regresión y, a veces, incluso para pruebas de componentes y pruebas de integración de componentes; sin embargo, esto no es parte del cambio a la izquierda que mueve las pruebas más temprano en el SDLC. d) No es correcto. Capacitar a los testers para que realicen tareas tempranamente en el SDLC respaldaría un enfoque de giro a la izquierda al enfatizar la importancia de comenzar las pruebas antes en el SDLC. Sin embargo, automatizar más actividades de prueba que se realizarán más adelante en el SDLC no es parte del desplazamiento hacia la izquierda"
+        "explanation": "a) No es correcto. Las prácticas involucradas en el desplazamiento a la izquierda tienen como objetivo implementar más actividades de prueba en las primeras fases del ciclo de vida de desarrollo de software (SDLC), retratando el SDLC como moviéndose de izquierda a derecha. No existe el lado izquierdo del proceso de prueba b) Es correcto. El desplazamiento hacia la izquierda enfatiza la importancia de comenzar las pruebas antes en el SDLC. La implementación de pruebas de desplazamiento a la izquierda requiere capacitación adicional y un mayor esfuerzo y costos durante las primeras fases del SDLC; sin embargo, los ahorros generales deberían ser mayores. c) No es correcto. Aunque las pruebas de componentes automatizadas y las pruebas de integración de componentes para pruebas de regresión generalmente son valiosas, la creación de estas pruebas normalmente es responsabilidad de los desarrolladores, y si se sigue un enfoque de integración continua/entrega continua (CI/CD), entonces estas pruebas se habrán enviado con el código. En algunas situaciones, el tester puede automatizar pruebas para pruebas de regresión y, a veces, incluso para pruebas de componentes y pruebas de integración de componentes; sin embargo, esto no es parte del cambio a la izquierda que mueve las pruebas más temprano en el SDLC. d) No es correcto. Capacitar a los testers para que realicen tareas tempranamente en el SDLC daría soporte a un enfoque de giro a la izquierda al enfatizar la importancia de comenzar las pruebas antes en el SDLC. Sin embargo, automatizar más actividades de prueba que se realizarán más adelante en el SDLC no es parte del desplazamiento hacia la izquierda"
       }
     }
   },
@@ -1021,7 +1021,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "Dados los siguientes tipos de revisión: 1. Revisión técnica 2. Revisión informal 3. Inspección 4. Tutorial Y las siguientes descripciones: A. Incluye objetivos como obtener consenso, generar nuevas ideas y motivar a los autores para mejorar B. Incluye objetivos como educar a los revisores, obtener consenso, generar nuevas ideas y detectar defectos potenciales C. El objetivo principal es detectar defectos potenciales y requiere la recopilación de métricas para respaldar la mejora del proceso D. El objetivo principal es detectar defectos potenciales y no genera resultados documentados formales. ¿De los siguientes MEJOR coincide con los tipos de reseñas y las descripciones?",
+        "prompt": "Dados los siguientes tipos de revisión: 1. Revisión técnica 2. Revisión informal 3. Inspección 4. Tutorial Y las siguientes descripciones: A. Incluye objetivos como obtener consenso, generar nuevas ideas y motivar a los autores para mejorar B. Incluye objetivos como educar a los revisores, obtener consenso, generar nuevas ideas y detectar defectos potenciales C. El objetivo principal es detectar defectos potenciales y requiere la recopilación de métricas para dar soporte a la mejora del proceso D. El objetivo principal es detectar defectos potenciales y no genera resultados documentados formales. ¿Cuál de las siguientes opciones coincide MEJOR con los tipos de revisión y las descripciones?",
         "options": [
           {
             "key": "a",
@@ -1041,7 +1041,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "Considerando cada uno de los tipos de revisión enumerados: 1. Revisión técnica: este tipo de revisión la realizan revisores técnicamente calificados y está dirigida por un moderador. Los objetivos son lograr consenso y tomar decisiones sobre problemas técnicos y al mismo tiempo evaluar la calidad y generar confianza en el producto de trabajo, generar nuevas ideas, motivar y capacitar a los autores para mejorar y detectar anomalías. 2. Revisión informal - El objetivo principal es detectar anomalías. El proceso no está definido y no requiere resultados documentados formales. 3. Inspección: este es el tipo de revisión más formal y sigue el proceso de revisión genérico completo. El objetivo principal es encontrar la mayor cantidad de anomalías, y otros objetivos incluyen evaluar la calidad y generar confianza en el producto de trabajo, motivar y permitir a los autores mejorar y recopilar métricas que puedan usarse para mejorar el ciclo de vida de desarrollo de software (SDLC), incluido el proceso de inspección. El autor no puede actuar como líder de revisión o escribano. 4. Tutorial: dirigido por el autor, este tipo de revisión cumple varios objetivos, como evaluar la calidad y generar confianza en el producto de trabajo, educar a los revisores, obtener consenso, generar nuevas ideas, motivar y permitir a los autores mejorar y detectar anomalías. Los revisores pueden realizar una revisión individual antes del recorrido, pero esto no es obligatorio A. Incluye objetivos como lograr consenso, generar nuevas ideas y motivar a los autores para mejorar B. Incluye objetivos como educar a los revisores, lograr consenso, generar nuevas ideas y detectar anomalías C. El objetivo principal es detectar anomalías y requiere la recopilación de métricas para respaldar la mejora del proceso D. El objetivo principal es detectar anomalías y no genera ningún resultado formal documentado. Por lo tanto: a) No es correcto b) Es correcto. c) No es correcto d) No es correcto"
+        "explanation": "Considerando cada uno de los tipos de revisión enumerados: 1. Revisión técnica: este tipo de revisión la realizan revisores técnicamente calificados y está dirigida por un moderador. Los objetivos son lograr consenso y tomar decisiones sobre problemas técnicos y al mismo tiempo evaluar la calidad y generar confianza en el producto de trabajo, generar nuevas ideas, motivar y capacitar a los autores para mejorar y detectar anomalías. 2. Revisión informal - El objetivo principal es detectar anomalías. El proceso no está definido y no requiere resultados documentados formales. 3. Inspección: este es el tipo de revisión más formal y sigue el proceso de revisión genérico completo. El objetivo principal es encontrar la mayor cantidad de anomalías, y otros objetivos incluyen evaluar la calidad y generar confianza en el producto de trabajo, motivar y permitir a los autores mejorar y recopilar métricas que puedan usarse para mejorar el ciclo de vida de desarrollo de software (SDLC), incluido el proceso de inspección. El autor no puede actuar como líder de revisión o escribano. 4. Tutorial: dirigido por el autor, este tipo de revisión cumple varios objetivos, como evaluar la calidad y generar confianza en el producto de trabajo, educar a los revisores, obtener consenso, generar nuevas ideas, motivar y permitir a los autores mejorar y detectar anomalías. Los revisores pueden realizar una revisión individual antes del recorrido, pero esto no es obligatorio A. Incluye objetivos como lograr consenso, generar nuevas ideas y motivar a los autores para mejorar B. Incluye objetivos como educar a los revisores, lograr consenso, generar nuevas ideas y detectar anomalías C. El objetivo principal es detectar anomalías y requiere la recopilación de métricas para dar soporte a la mejora del proceso D. El objetivo principal es detectar anomalías y no genera ningún resultado formal documentado. Por lo tanto: a) No es correcto b) Es correcto. c) No es correcto d) No es correcto"
       }
     }
   },
@@ -1236,7 +1236,7 @@
     "reference": "FL-4.2.2",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "A developer was asked to implement the following business rule: INPUT: value (integer number) IF (value ≤ 100 OR value ≥ 200) THEN write “value incorrect” ELSE write “value OK” You design the test cases using 2-value boundary value analysis. Which of the following sets of test inputs achieves the greatest coverage?",
+    "prompt": "A developer was asked to implement the following business rule. You design the test cases using 2-value boundary value analysis. Which of the following sets of test inputs achieves the greatest coverage?",
     "options": [
       {
         "key": "a",
@@ -1272,7 +1272,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Se le pidió a un desarrollador que implementara la siguiente regla de negocios: ENTRADA: valor (número entero) SI (valor ≤ 100 O valor ≥ 200) ENTONCES escriba “valor incorrecto” DE LO CONTRARIO escriba “valor OK” Usted diseña los casos de prueba usando análisis de valores límite de 2 valores. ¿Cuál de los siguientes conjuntos de entradas de prueba logra la mayor cobertura?",
+        "prompt": "Se pidió a un desarrollador que implementara la siguiente regla de negocio. Usted diseña los casos de prueba mediante un análisis de valores límite de 2 valores. ¿Cuál de los siguientes conjuntos de entradas de prueba logra la mayor cobertura?",
         "options": [
           {
             "key": "a",
@@ -1598,7 +1598,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "Considere la siguiente lista: • No se aceptan entradas correctas • Se aceptan entradas incorrectas • Formato de salida incorrecto • División por cero ¿Qué técnica de prueba es MÁS PROBABLEMENTE utilizada por el tester que utiliza esta lista al realizar las pruebas?",
+        "prompt": "Considere la siguiente lista: • No se aceptan entradas correctas • Se aceptan entradas incorrectas • Formato de salida incorrecto • División por cero ¿Qué técnica de test es MÁS PROBABLE que utilice el tester que usa esta lista al realizar las pruebas?",
         "options": [
           {
             "key": "a",
@@ -1610,7 +1610,7 @@
           },
           {
             "key": "c",
-            "text": "Pruebas basadas en listas de comprobación"
+            "text": "Pruebas basadas en checklists"
           },
           {
             "key": "d",
@@ -1618,7 +1618,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Las pruebas exploratorias utilizan cartas de prueba, no una lista de posibles defectos/fallas. Aunque las pruebas exploratorias pueden incorporar el uso de otras técnicas de prueba, en este caso un ataque de fallo es la opción más probable b) Es correcta. Esta es una lista de posibles fallos. Los ataques a fallas son un enfoque metódico para la implementación de predicción de errores y requieren que el tester cree o adquiera una lista de posibles errores, defectos y fallas, y que diseñe pruebas que identifiquen defectos asociados con los errores, expongan los defectos o causen las fallas. c) No es correcto. El tester utiliza una lista de verificación de elementos para respaldar sus pruebas. Tanto la predicción de errores como las pruebas basadas en listas de comprobación utilizan dichas listas, sin embargo, la lista aquí es de posibles fallas, no de condiciones de prueba, por lo que la técnica de prueba MÁS PROBABLE es el ataque de fallas, que se enfoca en errores, defectos y fallas d) No es correcto. BVA se basa en un análisis de valores límite de particiones de equivalencia. La lista anterior no menciona las particiones de equivalencia ni sus límites"
+        "explanation": "a) No es correcto. Las pruebas exploratorias utilizan cartas de prueba, no una lista de posibles defectos o fallos. Aunque las pruebas exploratorias pueden incorporar otras técnicas de prueba, en este caso fault attack es la opción más probable. b) Es correcta. Esta es una lista de posibles fallos. Los fault attacks son un enfoque metódico para implementar la predicción de errores y requieren que el tester cree o adquiera una lista de posibles errores, defectos y fallos, y que diseñe tests que identifiquen defectos asociados con los errores, expongan los defectos o provoquen los fallos. c) No es correcto. El tester utiliza un checklist de elementos para dar soporte a sus tests. Tanto la predicción de errores como las pruebas basadas en checklists utilizan estas listas; sin embargo, la lista aquí es de posibles fallos, no de condiciones de prueba, por lo que la técnica de prueba MÁS PROBABLE es fault attack, que se centra en errores, defectos y fallos. d) No es correcto. BVA se basa en un análisis de los valores límite de las particiones de equivalencia. La lista anterior no menciona las particiones de equivalencia ni sus límites."
       }
     }
   },
@@ -1659,27 +1659,27 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "¿Cuál de las siguientes opciones describe MEJOR cómo el uso de pruebas basadas en listas de comprobación puede dar como resultado una mayor cobertura?",
+        "prompt": "¿Cuál de las siguientes opciones describe MEJOR cómo el uso de pruebas basadas en checklists puede dar como resultado una mayor cobertura?",
         "options": [
           {
             "key": "a",
-            "text": "Los elementos de la lista de verificación se pueden definir con un nivel de detalle suficientemente bajo, de modo que el tester pueda implementar y ejecutar casos de prueba detallados basados ​​en estos elementos."
+            "text": "Los elementos del checklist se pueden definir con un nivel de detalle suficientemente bajo, de modo que el tester pueda implementar y ejecutar casos de prueba detallados basados ​​en estos elementos."
           },
           {
             "key": "b",
-            "text": "Las listas de verificación se pueden automatizar, de modo que cada vez que una ejecución de prueba automatizada cubra los elementos de la lista de verificación, se obtendrá una cobertura adicional."
+            "text": "Los checklists se pueden automatizar, de modo que cada vez que una ejecución de prueba automatizada cubra sus elementos, se obtendrá una cobertura adicional."
           },
           {
             "key": "c",
-            "text": "Cada elemento de la lista de verificación debe probarse por separado e independientemente, de modo que los elementos cubran diferentes áreas del software."
+            "text": "Cada elemento del checklist debe probarse por separado e independientemente, de modo que los elementos cubran diferentes áreas del software."
           },
           {
             "key": "d",
-            "text": "Dos testers que diseñan y ejecutan pruebas basadas en los mismos elementos de la lista de verificación de alto nivel generalmente realizarán las pruebas de maneras ligeramente diferentes."
+            "text": "Dos testers que diseñan y ejecutan tests basados en los mismos elementos de un checklist de alto nivel generalmente realizarán los tests de maneras ligeramente diferentes."
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Si bien es cierto que el tester puede implementar y ejecutar casos de prueba detallados basados ​​en la lista de verificación, no explica cómo esto resultaría en una mayor cobertura b) No es correcto. Los elementos de la lista de verificación no deben automatizarse. Pero incluso si lo son, los scripts de prueba automatizados siempre ejecutan las pruebas de la misma manera, lo que generalmente no resulta en una mayor cobertura. c) No es correcto. Es cierto que cada elemento de la lista de verificación debe probarse por separado e independientemente. Pero esto afecta la orden de ejecución de prueba y no afecta la cobertura lograda, por lo que no resulta en una mayor cobertura d) Es correcto. Si las listas de verificación son de alto nivel, es probable que se produzca cierta variabilidad en las pruebas reales, lo que dará lugar a una cobertura potencialmente mayor pero a una menor repetibilidad. Si dos testers siguen una lista de verificación de elementos de alto nivel, cada uno de ellos puede usar diferentes datos de prueba, pasos de prueba, etc. De esta manera, un tester probablemente cubrirá algunas áreas no cubiertas por el otro tester y esto dará como resultado una mayor cobertura"
+        "explanation": "a) No es correcto. Si bien es cierto que el tester puede implementar y ejecutar casos de prueba detallados basados en el checklist, no explica cómo esto resultaría en una mayor cobertura b) No es correcto. Los elementos del checklist no deben automatizarse. Pero incluso si lo son, los scripts de prueba automatizados siempre ejecutan los tests de la misma manera, lo que generalmente no resulta en una mayor cobertura. c) No es correcto. Es cierto que cada elemento del checklist debe probarse por separado e independientemente. Pero esto afecta al orden de ejecución de los tests y no a la cobertura lograda, por lo que no resulta en una mayor cobertura d) Es correcto. Si los checklists son de alto nivel, es probable que se produzca cierta variabilidad en las pruebas reales, lo que dará lugar a una cobertura potencialmente mayor pero a una menor repetibilidad. Si dos testers siguen un checklist de elementos de alto nivel, cada uno puede usar diferentes datos de prueba, pasos de prueba, etc. De esta manera, un tester probablemente cubrirá algunas áreas no cubiertas por el otro y esto dará como resultado una mayor cobertura"
       }
     }
   },
@@ -1752,7 +1752,7 @@
     "reference": "FL-4.5.3",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "You are using acceptance test-driven development and designing test cases based on the following user story: As a Regular or Special user, I want to be able to use my electronic floor card, to access specific floors. Acceptance Criteria: AC1: Regular users have access to floors 1 to 3 AC2: Floor 4 is only accessible to Special users AC3: Special users have all the access rights of Regular users Which test case is the MOST reasonable one to test AC3?",
+    "prompt": "You are using acceptance test-driven development and designing test cases based on the following user story. Which test case is the MOST reasonable one to test AC3?",
     "options": [
       {
         "key": "a",
@@ -1788,7 +1788,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Está utilizando un desarrollo basado en pruebas de aceptación y diseñando casos de prueba basados ​​en la siguiente historia de usuario: Como usuario Regular o Especial, quiero poder usar mi tarjeta de piso electrónica para acceder a pisos específicos. Criterios de aceptación: AC1: Los usuarios regulares tienen acceso a los pisos 1 al 3 AC2: El piso 4 solo es accesible para usuarios especiales AC3: Los usuarios especiales tienen todos los derechos de acceso de los usuarios regulares ¿Cuál caso de prueba es el MÁS razonable para probar AC3?",
+        "prompt": "Está utilizando desarrollo guiado por pruebas de aceptación y diseñando casos de prueba a partir de la siguiente historia de usuario. ¿Qué caso de prueba es el MÁS razonable para comprobar el criterio AC3?",
         "options": [
           {
             "key": "a",
@@ -1865,7 +1865,7 @@
           },
           {
             "key": "d",
-            "text": "Explicar por qué las pruebas de integración de sistemas quedarán excluidas del testing, aunque la estrategia de prueba exige este nivel de prueba."
+            "text": "Explicar por qué las pruebas de integración de sistemas quedarán excluidas del alcance de las pruebas, aunque la estrategia de prueba exige este nivel."
           }
         ],
         "selector": "Selecciona UNA opción.",
@@ -2354,7 +2354,7 @@
     "reference": "FL-5.5.1",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "Consider the following defect report for a web-based shopping application: Application: WebShop v0.99 Defect: Login button not working Steps to Reproduce: Launch the website Click on the login button Expected result: The user should be redirected to the login page. Actual result: The login button does not respond when clicked. Severity: High Priority: Urgent What is the MOST important information that is missing from this defect report?",
+    "prompt": "Consider the following defect report for a web-based shopping application. What is the MOST important information that is missing from this defect report?",
     "options": [
       {
         "key": "a",
@@ -2390,7 +2390,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Considere el siguiente informe de defectos para una aplicación de compras basada en web: Aplicación: WebShop v0.99 Defecto: El botón de inicio de sesión no funciona Pasos para reproducir: Inicie el sitio web Haga clic en el botón de inicio de sesión Resultado esperado: El usuario debe ser redirigido a la página de inicio de sesión. Resultado real: el botón de inicio de sesión no responde cuando se hace clic. Gravedad: Alta Prioridad: Urgente ¿Cuál es la información MÁS importante que falta en este informe de defectos?",
+        "prompt": "Considere el siguiente informe de defecto de una aplicación web de compras. ¿Cuál es la información MÁS importante que falta en este informe de defecto?",
         "options": [
           {
             "key": "a",

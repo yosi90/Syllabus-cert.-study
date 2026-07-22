@@ -6,7 +6,7 @@ import type { Question, SourceModel } from "./data/types";
 import { createModelExam, createRandomExam, findQuestionsByIds, type ExamBlueprint } from "./domain/exams";
 import { emptyFilters, filterQuestions, summarizeProgress, type QuestionFilters } from "./domain/filters";
 import { summarizeStudyDashboard } from "./domain/dashboard";
-import { createAdaptiveQuestionIds } from "./domain/adaptive";
+import { createAdaptiveQuestionIds, createReinforcementQuestionIds } from "./domain/adaptive";
 import { isCorrectAnswer, scoreQuestions, toggleAnswer, type AnswerMap } from "./domain/scoring";
 import {
   addSession,
@@ -60,6 +60,7 @@ import {
   useWorkspacePersistence,
 } from "./hooks/useTrainerPersistence";
 import { useModalAccessibility } from "./hooks/useModalAccessibility";
+import { useActiveQuestionTimer } from "./hooks/useActiveQuestionTimer";
 
 function AppShell() {
   const navigate = useNavigate();
@@ -126,6 +127,26 @@ function AppShell() {
     ? Math.min(activeStudySession.currentIndex, Math.max(studyQuestions.length - 1, 0))
     : storedStudyIndex >= 0 ? storedStudyIndex : 0;
   const currentStudyQuestion = studyQuestions[studyIndex];
+  const currentStudyRevealed = activeStudySession
+    ? activeStudySession.revealed || activeStudySession.checkedQuestionIds.includes(currentStudyQuestion?.id ?? "")
+    : studyRevealed;
+  const { elapsedMs: activeQuestionTimeMs, finishAttempt: finishQuestionTimer } = useActiveQuestionTimer(
+    currentStudyQuestion?.id ?? null,
+    location.pathname === "/practice" && Boolean(currentStudyQuestion) && !currentStudyRevealed,
+  );
+  const currentExamQuestion = activeExam
+    ? questions.find((question) => question.id === activeExam.blueprint.questionIds[activeExam.currentIndex])
+    : undefined;
+  const currentExamSelection = currentExamQuestion ? activeExam?.answers[currentExamQuestion.id] ?? [] : [];
+  const currentExamTimed = currentExamQuestion ? activeExam?.questionActiveMs?.[currentExamQuestion.id] !== undefined : false;
+  const { elapsedMs: activeExamQuestionTimeMs, finishAttempt: finishExamQuestionTimer } = useActiveQuestionTimer(
+    currentExamQuestion?.id ?? null,
+    location.pathname === "/exam"
+      && Boolean(currentExamQuestion)
+      && !currentExamTimed
+      && currentExamSelection.length < (currentExamQuestion?.correctAnswers.length ?? 1)
+      && (!activeExam?.endsAt || activeExam.endsAt > Date.now()),
+  );
 
   useEffect(() => {
     if (activeStudySession) return;
@@ -165,7 +186,8 @@ function AppShell() {
     if (activeStudySession?.checkedQuestionIds.includes(question.id)) return;
     const selected = activeStudySession?.answers[question.id] ?? studyAnswers[question.id] ?? [];
     const correct = isCorrectAnswer(question, selected);
-    updateProgress(recordQuestionAttempt(progress, question.id, selected, correct));
+    const activeMs = finishQuestionTimer(question.id);
+    updateProgress(recordQuestionAttempt(progress, question.id, selected, correct, new Date().toISOString(), activeMs));
     if (activeStudySession) {
       setActiveStudySession((current) => current ? {
         ...current,
@@ -221,6 +243,7 @@ function AppShell() {
       timerMode: examTimerMode,
       endsAt: duration ? Date.now() + duration * 60 * 1000 : null,
       optionMode: "original",
+      questionActiveMs: {},
     });
     setReview(null);
     navigate("/exam");
@@ -231,15 +254,17 @@ function AppShell() {
   }
 
   function updateExamAnswer(question: Question, optionKey: string) {
-    setActiveExam((current) => {
-      if (!current) return current;
-      return {
-        ...current,
-        answers: {
-          ...current.answers,
-          [question.id]: toggleAnswer(question, current.answers[question.id], optionKey),
-        },
-      };
+    if (!activeExam) return;
+    const nextAnswers = toggleAnswer(question, activeExam.answers[question.id], optionKey);
+    const alreadyTimed = activeExam.questionActiveMs?.[question.id] !== undefined;
+    const completedSelection = nextAnswers.length >= question.correctAnswers.length;
+    const activeMs = !alreadyTimed && completedSelection ? finishExamQuestionTimer(question.id) : undefined;
+    setActiveExam({
+      ...activeExam,
+      answers: { ...activeExam.answers, [question.id]: nextAnswers },
+      questionActiveMs: activeMs === undefined
+        ? activeExam.questionActiveMs ?? {}
+        : { ...activeExam.questionActiveMs, [question.id]: activeMs },
     });
   }
 
@@ -260,7 +285,14 @@ function AppShell() {
     let nextProgress = progress;
 
     for (const result of score.results) {
-      nextProgress = recordQuestionAttempt(nextProgress, result.questionId, result.selectedAnswers, result.isCorrect);
+      nextProgress = recordQuestionAttempt(
+        nextProgress,
+        result.questionId,
+        result.selectedAnswers,
+        result.isCorrect,
+        new Date().toISOString(),
+        activeExam.questionActiveMs?.[result.questionId],
+      );
     }
 
     const { results: _results, ...scoreSummary } = score;
@@ -367,12 +399,16 @@ function AppShell() {
     navigate("/review");
   }
 
-  function startStudyBatch(size: 10 | 20) {
+  function startStudyBatch(size: 10 | 20, mode: "adaptive" | "reinforcement" = "adaptive") {
     const seed = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const questionIds = createAdaptiveQuestionIds(questions, progress, size, seed);
+    const questionIds = mode === "reinforcement"
+      ? createReinforcementQuestionIds(questions, progress, size, seed)
+      : createAdaptiveQuestionIds(questions, progress, size, seed);
     setActiveStudySession({
       id: `adaptive-${seed}`,
-      title: language === "es" ? `Sesión adaptativa · ${size}` : `Adaptive session · ${size}`,
+      title: mode === "reinforcement"
+        ? language === "es" ? `Refuerzo · ${size}` : `Reinforcement · ${size}`
+        : language === "es" ? `Sesión adaptativa · ${size}` : `Adaptive session · ${size}`,
       size,
       seed,
       optionMode: "shuffled",
@@ -383,6 +419,7 @@ function AppShell() {
       revealed: false,
       checkedQuestionIds: [],
       startedAt: new Date().toISOString(),
+      studyMode: mode,
     });
     navigate("/practice");
   }
@@ -535,9 +572,7 @@ function AppShell() {
               currentQuestion={currentStudyQuestion}
               currentIndex={studyIndex}
               selected={currentStudyQuestion ? activeStudySession?.answers[currentStudyQuestion.id] ?? studyAnswers[currentStudyQuestion.id] ?? [] : []}
-              revealed={activeStudySession
-                ? activeStudySession.revealed || activeStudySession.checkedQuestionIds.includes(currentStudyQuestion?.id ?? "")
-                : studyRevealed}
+              revealed={currentStudyRevealed}
               progress={progress}
               onToggle={handleStudyToggle}
               onCheck={handleStudyCheck}
@@ -563,6 +598,7 @@ function AppShell() {
               adaptiveSession={activeStudySession}
               onFinishSession={finishStudySession}
               onLeaveSession={() => navigate("/")}
+              activeTimeMs={activeQuestionTimeMs}
             />
           }
         />
@@ -574,6 +610,7 @@ function AppShell() {
               timerMode={examTimerMode}
               onTimerModeChange={setExamTimerMode}
               now={now}
+              questionActiveTimeMs={activeExamQuestionTimeMs}
               onStartModel={(model) => startExam(createModelExam(questions, model))}
               onStartRandom={() =>
                 startExam(createRandomExam(questions, questionBank.metadata.chapterDistribution, String(Date.now())))

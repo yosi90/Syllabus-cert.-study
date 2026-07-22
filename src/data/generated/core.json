@@ -366,7 +366,7 @@
       "syllabusPage": 18,
       "translations": {
         "es": {
-          "text": "Diferenciar el testware que respalda las actividades de prueba",
+          "text": "Diferenciar el testware que da soporte a las actividades de prueba",
           "sectionTitle": "Actividades de la Prueba, Testware y Roles de la Prueba",
           "syllabusPage": 5
         }
@@ -910,7 +910,7 @@
       "syllabusPage": 43,
       "translations": {
         "es": {
-          "text": "Explicar las pruebas basadas en listas de comprobación",
+          "text": "Explicar las pruebas basadas en checklists",
           "sectionTitle": "Técnicas Basadas en la Experiencia",
           "syllabusPage": 32
         }

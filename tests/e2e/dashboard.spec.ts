@@ -12,12 +12,13 @@ test("home shows a neutral dashboard without progress", async ({ page }, testInf
   await expect(page.getByText("0/160", { exact: true })).toBeVisible();
   const isMobile = testInfo.project.name === "mobile-chromium";
   await expect(page.getByText("No attempts yet", { exact: true })).toHaveCount(2);
-  const resumeHeading = page.getByRole("heading", { name: "Continue where you left off" });
-  if (isMobile) await expect(resumeHeading).toBeHidden();
-  else await expect(resumeHeading).toBeVisible();
+  const resumeCard = page.locator(".dashboard-resume-card");
+  if (isMobile) await expect(resumeCard).toBeHidden();
+  else await expect(resumeCard).toBeVisible();
   await expect(page.getByRole("heading", { name: "Progress by chapter" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Progress by K-Level" })).toBeVisible();
-  await expect(page.getByText("Complete some questions to identify areas to reinforce.")).toBeVisible();
+  if (isMobile) await expect(page.getByText("Complete some questions to identify areas to reinforce.")).toBeHidden();
+  else await expect(page.getByText("Complete some questions to identify areas to reinforce.")).toBeVisible();
   const dimensions = await page.evaluate(() => ({
     clientWidth: document.documentElement.clientWidth,
     scrollWidth: document.documentElement.scrollWidth,
@@ -25,11 +26,31 @@ test("home shows a neutral dashboard without progress", async ({ page }, testInf
   expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
 });
 
+test("chapter and K-Level progress separates correct and incorrect answers", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "One browser pass covers shared progress rendering.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (!progress) return;
+    progress.questionProgress = {
+      "A-01": { attempts: 1, correct: 1, lastCorrect: true, flagged: false, lastAnswers: ["c"], updatedAt: "2026-07-22" },
+      "A-02": { attempts: 1, correct: 0, lastCorrect: false, flagged: false, lastAnswers: ["a"], updatedAt: "2026-07-22" },
+    };
+    window.localStorage.setItem(key, JSON.stringify(progress));
+  });
+  await page.goto("/");
+
+  const chapterProgress = page.getByRole("progressbar", { name: /FL-1.*Correct 1, Wrong 1/ });
+  await expect(chapterProgress).toBeVisible();
+  await expect(chapterProgress.locator(".is-correct")).toHaveCount(1);
+  await expect(chapterProgress.locator(".is-incorrect")).toHaveCount(1);
+});
+
 test("mobile home keeps its summary and study actions compact", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile-chromium", "This behavior is specific to the mobile layout.");
   await page.goto("/");
 
-  await expect(page.locator(".quick-study-eyebrow")).toBeHidden();
+  await expect(page.locator(".quick-study-card .quick-study-eyebrow")).toBeHidden();
   await expect(page.locator(".quick-study-description")).toBeHidden();
   await expect(page.locator(".dashboard-resume-card")).toBeHidden();
 
@@ -86,7 +107,7 @@ for (const width of [320, 390, 768]) {
     await page.setViewportSize({ width, height: 844 });
     await page.goto("/");
 
-    await expect(page.locator(".quick-study-eyebrow")).toBeHidden();
+    await expect(page.locator(".quick-study-card .quick-study-eyebrow")).toBeHidden();
     await expect(page.locator(".quick-study-description")).toBeHidden();
     const dimensions = await page.evaluate(() => ({
       clientWidth: document.documentElement.clientWidth,

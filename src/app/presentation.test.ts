@@ -3,9 +3,12 @@ import { questions } from "../data/bank";
 import {
   cleanExplanationText,
   displayAnswerLabels,
+  formatPromptText,
   getDisplayOptions,
   localizedQuestion,
   parseExplanation,
+  parallelPromptListLayout,
+  promptBlocks,
   questionSpeechText,
 } from "./presentation";
 
@@ -64,9 +67,68 @@ describe("localized explanation and formula presentation", () => {
   });
 });
 
+describe("question prompt formatting", () => {
+  it.each(["B-34", "B-39", "C-15", "C-17", "C-20", "C-26", "D-20"])(
+    "places every list item in %s on its own line",
+    (id) => {
+      const question = questions.find((item) => item.id === id)!;
+      for (const language of ["en", "es"] as const) {
+        const formatted = formatPromptText(localizedQuestion(question, language).prompt);
+        expect(formatted, `${id} (${language})`).toMatch(/\n(?:•|1\.|i\.|A\.) /);
+      }
+    },
+  );
+
+  it("separates both D-20 lists from their surrounding text", () => {
+    const question = questions.find((item) => item.id === "D-20")!;
+    const blocks = promptBlocks(localizedQuestion(question, "es").prompt);
+
+    expect(blocks.map((block) => block.type)).toEqual(["text", "list", "text", "list", "text"]);
+    expect(blocks.filter((block) => block.type === "list").map((block) => block.items.length)).toEqual([4, 2]);
+    expect(blocks.at(-1)).toEqual(expect.objectContaining({
+      type: "text",
+      text: expect.stringMatching(/^¿Cuáles/),
+    }));
+  });
+
+  it.each(["B-34", "B-39", "C-17"])("renders the two lists in %s as separate cards", (id) => {
+    const question = questions.find((item) => item.id === id)!;
+    for (const language of ["en", "es"] as const) {
+      expect(promptBlocks(localizedQuestion(question, language).prompt).filter((block) => block.type === "list"))
+        .toHaveLength(2);
+    }
+  });
+
+  it("keeps all four B-39 tool categories inside the second card", () => {
+    const question = questions.find((item) => item.id === "B-39")!;
+    for (const language of ["en", "es"] as const) {
+      const lists = promptBlocks(localizedQuestion(question, language).prompt)
+        .filter((block) => block.type === "list");
+      expect(lists.map((list) => list.items.length)).toEqual([4, 4]);
+      expect(lists[1].items.at(-1)).toEqual(expect.objectContaining({
+        marker: "D.",
+        text: expect.stringMatching(/Collaboration tools|Herramientas de colaboración/),
+      }));
+    }
+  });
+
+  it("keeps the D-20 introduction and final question outside the two-column list area", () => {
+    const question = questions.find((item) => item.id === "D-20")!;
+    const layout = parallelPromptListLayout(promptBlocks(localizedQuestion(question, "es").prompt));
+
+    expect(layout?.prefix).toEqual([expect.objectContaining({
+      type: "text",
+      text: expect.stringMatching(/^El sistema.*current year\)\.$/),
+    })]);
+    expect(layout?.firstColumn[0]).toEqual(expect.objectContaining({ text: expect.stringMatching(/^Sea D/) }));
+    expect(layout?.secondColumn[0]).toEqual(expect.objectContaining({ text: expect.stringMatching(/^Su conjunto/) }));
+    expect(layout?.suffix).toEqual([expect.objectContaining({ text: expect.stringMatching(/^¿Cuáles/) })]);
+  });
+});
+
 describe("visual question presentation", () => {
   it("does not repeat flattened table cells inside table-based prompts", () => {
-    const tableQuestionIds = ["A-14", "A-21", "A-22", "A-33", "B-22", "B-31", "B-32", "C-22", "D-22", "D-23", "D-32"];
+    const tableQuestionIds = ["A-14", "A-21", "A-22", "A-33", "B-22", "B-31", "B-32", "B-38", "C-21", "C-22", "C-29", "C-38", "D-22", "D-23", "D-29", "D-32", "D-38"];
     const flattenedTablePattern = /Rule 1 Rule 2|Regla 1 Regla 2|R1 R2 R3|Req1 Req2|TC1 91|TC 001 Select|TC 001 Seleccionar|Project Development effort|Esfuerzo de desarrollo del proyecto/;
 
     for (const id of tableQuestionIds) {
@@ -75,5 +137,18 @@ describe("visual question presentation", () => {
       expect(question.prompt, `${id} (en)`).not.toMatch(flattenedTablePattern);
       expect(question.translations?.es?.prompt, `${id} (es)`).not.toMatch(flattenedTablePattern);
     }
+  });
+
+  it.each([
+    ["B-38", /Execution of TC1|Ejecución de TC1/],
+    ["C-21", /INPUT: value|ENTRADA: valor/],
+    ["C-29", /AC1:/],
+    ["C-38", /Application: WebShop|Aplicación: WebShop/],
+    ["D-29", /Acceptance criteria:\s*1|Criterios de aceptación:\s*1/],
+    ["D-38", /Defect ID: 001|ID de defecto: 001/],
+  ])("does not duplicate the image contents in %s", (id, duplicatedContent) => {
+    const question = questions.find((item) => item.id === id)!;
+    expect(question.prompt).not.toMatch(duplicatedContent);
+    expect(question.translations?.es?.prompt).not.toMatch(duplicatedContent);
   });
 });

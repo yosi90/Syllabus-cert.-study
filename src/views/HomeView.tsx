@@ -1,4 +1,4 @@
-import { BookOpen, BookText, BookUp, BookUp2, Bookmark, CircleAlert, Eye, Play, Timer } from "lucide-react";
+import { BookOpen, BookText, BookUp, BookUp2, Bookmark, CircleAlert, Eye, Play, RefreshCcw, Timer } from "lucide-react";
 import type { StudyDashboard } from "../domain/dashboard";
 import type { Copy, Language } from "../app/content";
 import { localizedChapterName } from "../app/presentation";
@@ -8,20 +8,52 @@ function BreakdownRow({
   label,
   coverage,
   accuracy,
+  total,
+  correctAnswered,
+  incorrectAnswered,
   copy,
 }: {
   label: string;
   coverage: number;
   accuracy: number | null;
+  total: number;
+  correctAnswered: number;
+  incorrectAnswered: number;
   copy: Copy;
 }) {
+  const unseen = total - correctAnswered - incorrectAnswered;
+  const correctWidth = total ? (correctAnswered / total) * 100 : 0;
+  const incorrectWidth = total ? (incorrectAnswered / total) * 100 : 0;
+  const progressLabel = `${label}: ${copy.correct} ${correctAnswered}, ${copy.wrong} ${incorrectAnswered}, ${copy.unseen} ${unseen}`;
   return (
     <div className="dashboard-breakdown-row">
       <div className="dashboard-breakdown-copy">
         <strong>{label}</strong>
         <span>{copy.coverage} {coverage}% · {copy.accuracy} {accuracy === null ? "—" : `${accuracy}%`}</span>
       </div>
-      <progress max={100} value={coverage} aria-label={`${label}: ${copy.coverage} ${coverage}%`} />
+      <div
+        className="dashboard-segmented-progress"
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={total}
+        aria-valuenow={correctAnswered + incorrectAnswered}
+        aria-valuetext={progressLabel}
+        aria-label={progressLabel}
+        title={progressLabel}
+      >
+        {correctAnswered > 0 && <span className="is-correct" style={{ width: `${correctWidth}%` }} />}
+        {incorrectAnswered > 0 && <span className="is-incorrect" style={{ width: `${incorrectWidth}%` }} />}
+      </div>
+    </div>
+  );
+}
+
+function ProgressLegend({ copy }: { copy: Copy }) {
+  return (
+    <div className="dashboard-progress-legend" aria-label={`${copy.correct}, ${copy.wrong}, ${copy.unseen}`}>
+      <span><i className="is-correct" aria-hidden="true" />{copy.correct}</span>
+      <span><i className="is-incorrect" aria-hidden="true" />{copy.wrong}</span>
+      <span><i className="is-unseen" aria-hidden="true" />{copy.unseen}</span>
     </div>
   );
 }
@@ -42,7 +74,7 @@ export function HomeView({
   copy: Copy;
   canContinuePractice: boolean;
   hasActiveExam: boolean;
-  onStartStudy: (size: 10 | 20) => void;
+  onStartStudy: (size: 10 | 20, mode?: "adaptive" | "reinforcement") => void;
   onContinuePractice: () => void;
   onContinueExam: () => void;
   onLanguageChange: (language: Language) => void;
@@ -61,7 +93,7 @@ export function HomeView({
         </div>
       </header>
 
-      <section className="dashboard-section" aria-labelledby="snapshot-title">
+      <section className="dashboard-section dashboard-snapshot" aria-labelledby="snapshot-title">
         <div className="dashboard-section-heading">
           <div className="dashboard-snapshot-title">
             <span className="eyebrow">{copy.currentSnapshot}</span>
@@ -83,6 +115,8 @@ export function HomeView({
           <div className="dashboard-buttons">
             <button className="primary" type="button" onClick={() => onStartStudy(10)}><Play aria-hidden="true" />{copy.quick10}</button>
             <button className="secondary" type="button" onClick={() => onStartStudy(20)}><BookOpen aria-hidden="true" />{copy.complete20}</button>
+            <button className="secondary reinforcement" type="button" onClick={() => onStartStudy(10, "reinforcement")}><RefreshCcw aria-hidden="true" />{copy.reinforcementQuick10}</button>
+            <button className="secondary reinforcement" type="button" onClick={() => onStartStudy(20, "reinforcement")}><RefreshCcw aria-hidden="true" />{copy.reinforcementComplete20}</button>
             {canContinuePractice && <button className="secondary" type="button" onClick={onContinuePractice}><BookUp2 aria-hidden="true" />{copy.continueStudy}</button>}
             {hasActiveExam && <button className="primary" type="button" onClick={onContinueExam}><Timer aria-hidden="true" />{copy.continueExam}</button>}
             {!canContinuePractice && !hasActiveExam && <span className="dashboard-note">{copy.noAccuracy}</span>}
@@ -105,17 +139,17 @@ export function HomeView({
 
       <section className="dashboard-columns">
         <article className="dashboard-section">
-          <h3>{copy.progressByChapter}</h3>
+          <div className="dashboard-breakdown-heading"><h3>{copy.progressByChapter}</h3><ProgressLegend copy={copy} /></div>
           <div className="dashboard-breakdown-list">
             {dashboard.byChapter.map((item) => (
-              <BreakdownRow key={item.id} label={`${item.id} · ${localizedChapterName(item.id, language)}`} coverage={item.coverage} accuracy={item.accuracy} copy={copy} />
+              <BreakdownRow key={item.id} label={`${item.id} · ${localizedChapterName(item.id, language)}`} coverage={item.coverage} accuracy={item.accuracy} total={item.total} correctAnswered={item.correctAnswered} incorrectAnswered={item.incorrectAnswered} copy={copy} />
             ))}
           </div>
         </article>
         <article className="dashboard-section">
-          <h3>{copy.progressByLevel}</h3>
+          <div className="dashboard-breakdown-heading"><h3>{copy.progressByLevel}</h3><ProgressLegend copy={copy} /></div>
           <div className="dashboard-breakdown-list">
-            {dashboard.byKLevel.map((item) => <BreakdownRow key={item.id} label={item.id} coverage={item.coverage} accuracy={item.accuracy} copy={copy} />)}
+            {dashboard.byKLevel.map((item) => <BreakdownRow key={item.id} label={item.id} coverage={item.coverage} accuracy={item.accuracy} total={item.total} correctAnswered={item.correctAnswered} incorrectAnswered={item.incorrectAnswered} copy={copy} />)}
           </div>
         </article>
       </section>

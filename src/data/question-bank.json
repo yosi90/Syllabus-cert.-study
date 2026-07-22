@@ -366,7 +366,7 @@
       "syllabusPage": 18,
       "translations": {
         "es": {
-          "text": "Diferenciar el testware que respalda las actividades de prueba",
+          "text": "Diferenciar el testware que da soporte a las actividades de prueba",
           "sectionTitle": "Actividades de la Prueba, Testware y Roles de la Prueba",
           "syllabusPage": 5
         }
@@ -910,7 +910,7 @@
       "syllabusPage": 43,
       "translations": {
         "es": {
-          "text": "Explicar las pruebas basadas en listas de comprobación",
+          "text": "Explicar las pruebas basadas en checklists",
           "sectionTitle": "Técnicas Basadas en la Experiencia",
           "syllabusPage": 32
         }
@@ -2873,7 +2873,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) Es correcto. El concepto básico detrás de la predicción de errores es que el tester intenta adivinar qué errores pudo haber cometido el desarrollador y qué defectos puede haber en el objeto de prueba basándose en experiencias pasadas (y a veces listas de verificación). b) No es correcto. Aunque un tester que fue desarrollador puede utilizar su experiencia personal para ayudarle a la hora de realizar predicción de errores, la técnica de prueba no se basa en conocimientos previos de desarrollo c) No es correcta. La predicción de errores no es una técnica de usabilidad para adivinar cómo los usuarios pueden fallar al interactuar con el objeto de prueba. d) No es correcta. Duplicar la tarea de desarrollo tiene varios defectos que la hacen poco práctica, como que el tester tiene habilidades equivalentes a las del desarrollador y el tiempo necesario para realizar el desarrollo. No es predicción de errores"
+          "explanation": "a) Es correcto. El concepto básico detrás de la predicción de errores es que el tester intenta adivinar qué errores pudo haber cometido el desarrollador y qué defectos puede haber en el objeto de prueba basándose en experiencias pasadas (y, a veces, checklists). b) No es correcto. Aunque un tester que fue desarrollador puede utilizar su experiencia personal para ayudarle a la hora de realizar predicción de errores, la técnica de prueba no se basa en conocimientos previos de desarrollo c) No es correcta. La predicción de errores no es una técnica de usabilidad para adivinar cómo los usuarios pueden fallar al interactuar con el objeto de prueba. d) No es correcta. Duplicar la tarea de desarrollo tiene varios defectos que la hacen poco práctica, como que el tester tiene habilidades equivalentes a las del desarrollador y el tiempo necesario para realizar el desarrollo. No es predicción de errores"
         }
       }
     },
@@ -2918,7 +2918,7 @@
           "options": [
             {
               "key": "a",
-              "text": "Pruebas basadas en listas de comprobación"
+              "text": "Pruebas basadas en checklists"
             },
             {
               "key": "b",
@@ -2934,7 +2934,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Este es un producto nuevo. Probablemente aún no tenga una lista de verificación y es posible que no se conozcan las condiciones de prueba debido a que faltan requisitos b) No es correcto. Este es un producto nuevo. Probablemente no tenga suficiente información para hacer conjeturas de error correctas c) Es correcto. Las pruebas exploratorias son más útil cuando hay pocas especificaciones conocidas y/o hay un cronograma apremiante para Las pruebas d) No son correcto. Las pruebas de ramas llevan mucho tiempo y su gerencia está preguntando sobre algunos resultados de las pruebas ahora. Además, pruebas de ramas no implica conocimiento del dominio."
+          "explanation": "a) No es correcto. Este es un producto nuevo. Probablemente aún no tenga un checklist y es posible que no se conozcan las condiciones de prueba debido a que faltan requisitos b) No es correcto. Este es un producto nuevo. Probablemente no tenga suficiente información para hacer conjeturas de error correctas c) Es correcto. Las pruebas exploratorias son más útil cuando hay pocas especificaciones conocidas y/o hay un cronograma apremiante para Las pruebas d) No son correcto. Las pruebas de ramas llevan mucho tiempo y su gerencia está preguntando sobre algunos resultados de las pruebas ahora. Además, pruebas de ramas no implica conocimiento del dominio."
         }
       }
     },
@@ -3849,23 +3849,23 @@
           "options": [
             {
               "key": "a",
-              "text": "El control de calidad se realiza como parte de las pruebas."
+          "text": "El aseguramiento de la calidad se realiza como parte de las pruebas."
             },
-            {
-              "key": "b",
-              "text": "Las pruebas se realizan como parte del control de calidad."
+          {
+            "key": "b",
+            "text": "Las pruebas se realizan como parte del control de calidad."
             },
             {
               "key": "c",
               "text": "Pruebas es otro término para el control de calidad"
             },
-            {
-              "key": "d",
-              "text": "Las pruebas se realizan como parte del control de calidad."
+          {
+            "key": "d",
+            "text": "Las pruebas se realizan como parte del aseguramiento de la calidad."
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. El control de calidad se concentra en la mejora e implementación de procesos, utilizando un enfoque preventivo para evitar errores y defectos, mientras que Las pruebas son una forma de control de calidad que se utilizan para detectar defectos b) Es correcto. El control de calidad tiene como objetivo lograr niveles apropiados de calidad centrándose en identificar y corregir los defectos del producto. Las pruebas son una parte importante del control de calidad y ayudan a descubrir estos defectos. c) No es correcto. Aunque las pruebas son una parte importante del control de calidad y ayudan a descubrir defectos, otras técnicas (que no son pruebas) utilizadas en el control de calidad incluyen métodos formales como la verificación del modelo y la prueba de corrección, así como la simulación y la creación de prototipos. d) No es correcto. El control de calidad se concentra en la mejora e implementación de procesos, utilizando un enfoque preventivo para evitar errores y defectos, mientras que Las pruebas son una forma de control de calidad que se utilizan para detectar defectos."
+      "explanation": "a) No es correcto. El aseguramiento de la calidad se concentra en la mejora e implementación de procesos y utiliza un enfoque preventivo para evitar errores y defectos, mientras que las pruebas son una forma de control de calidad utilizada para detectar defectos. b) Es correcto. El control de calidad tiene como objetivo lograr niveles apropiados de calidad centrándose en identificar y corregir los defectos del producto. Las pruebas son una parte importante del control de calidad y ayudan a descubrir estos defectos. c) No es correcto. Aunque las pruebas son una parte importante del control de calidad y ayudan a descubrir defectos, otras técnicas (que no son pruebas) utilizadas en el control de calidad incluyen métodos formales como la verificación de modelos y la demostración de corrección, así como la simulación y la creación de prototipos. d) No es correcto. El aseguramiento de la calidad se concentra en la mejora e implementación de procesos y utiliza un enfoque preventivo para evitar errores y defectos, mientras que las pruebas son una forma de control de calidad utilizada para detectar defectos."
         }
       }
     },
@@ -4658,7 +4658,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. La falta de usabilidad proporcionada a través de la interfaz de usuario se puede detectar mediante una revisión utilizando una lista de verificación adecuada, pero la falta de usabilidad también se puede identificar haciendo que varios usuarios típicos prueben dinámicamente la interfaz de usuario y proporcionen comentarios sobre su usabilidad b) Es correcta. Una revisión de código puede detectar código al que no se puede acceder por ninguna ruta; sin embargo, las pruebas dinámicas solo pueden ejercitar código accesible y no pueden determinar que no se puede alcanzar el código sin ejecutar todas las combinaciones posibles de entradas y estados de entrada, lo cual no es práctico para código real. c) No es correcto. Los tiempos de respuesta deficientes para la mayoría de los usuarios esperados son difíciles de determinar sin ejecutar el código (es decir, mediante pruebas estáticas), por lo que en esta situación pruebas dinámicas podrían encontrar un defecto, pero es poco probable que pruebas estáticas lo encuentren d) No es correcto. Una revisión del código por parte de alguien que conozca las características requeridas podría detectar que las características requeridas no se habían implementado en el código, y también se podrían usar pruebas dinámicas para determinar que estas características requeridas no se habían implementado"
+          "explanation": "a) No es correcto. La falta de usabilidad proporcionada a través de la interfaz de usuario se puede detectar mediante una revisión utilizando un checklist adecuado, pero la falta de usabilidad también se puede identificar haciendo que varios usuarios típicos prueben dinámicamente la interfaz de usuario y proporcionen comentarios sobre su usabilidad b) Es correcta. Una revisión de código puede detectar código al que no se puede acceder por ninguna ruta; sin embargo, las pruebas dinámicas solo pueden ejercitar código accesible y no pueden determinar que no se puede alcanzar el código sin ejecutar todas las combinaciones posibles de entradas y estados de entrada, lo cual no es práctico para código real. c) No es correcto. Los tiempos de respuesta deficientes para la mayoría de los usuarios esperados son difíciles de determinar sin ejecutar el código (es decir, mediante pruebas estáticas), por lo que en esta situación pruebas dinámicas podrían encontrar un defecto, pero es poco probable que pruebas estáticas lo encuentren d) No es correcto. Una revisión del código por parte de alguien que conozca las características requeridas podría detectar que las características requeridas no se habían implementado en el código, y también se podrían usar pruebas dinámicas para determinar que estas características requeridas no se habían implementado"
         }
       }
     },
@@ -4780,7 +4780,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "Considerando cada una de las descripciones de tareas enumeradas: 1. Se seleccionan las características de calidad a evaluar y los criterios de salida - (Planificación (C): definir el alcance de la revisión, propósito, producto de trabajo a revisar, características de calidad a evaluar, áreas de enfoque, criterios de salida, información de respaldo como estándares, esfuerzo y plazos). 2. Todos tienen acceso al producto de trabajo - (Inicio de revisión (B): garantizar que todos los participantes tengan acceso al producto de trabajo y a los recursos necesarios, y aclarar sus roles y responsabilidades). 3. Se identifican anomalías en el producto de trabajo - (Revisión individual (A): evaluación de la calidad del producto de trabajo, identificación y registro de anomalías, recomendaciones y preguntas utilizando técnicas de revisión como revisión basada en listas de verificación y revisión basada en escenarios). 4. Se analizan y discuten anomalías - (Comunicación y análisis (D): análisis y discusión de cada anomalía, determinando su estado, propiedad y acciones requeridas, y tomando decisiones de revisión, normalmente en (Esto podría incluir determinar la necesidad de una revisión de seguimiento). Por lo tanto: a) No es correcto b) No es correcto c) No es correcto d) Es correcto. La coincidencia correcta es: 1C, 2B, 3A, 4D"
+          "explanation": "Considerando cada una de las descripciones de tareas enumeradas: 1. Se seleccionan las características de calidad a evaluar y los criterios de salida - (Planificación (C): definir el alcance de la revisión, propósito, producto de trabajo a revisar, características de calidad a evaluar, áreas de enfoque, criterios de salida, información complementaria como estándares, esfuerzo y plazos). 2. Todos tienen acceso al producto de trabajo - (Inicio de revisión (B): garantizar que todos los participantes tengan acceso al producto de trabajo y a los recursos necesarios, y aclarar sus roles y responsabilidades). 3. Se identifican anomalías en el producto de trabajo - (Revisión individual (A): evaluación de la calidad del producto de trabajo, identificación y registro de anomalías, recomendaciones y preguntas utilizando técnicas de revisión como revisión basada en checklists y revisión basada en escenarios). 4. Se analizan y discuten anomalías - (Comunicación y análisis (D): análisis y discusión de cada anomalía, determinando su estado, propiedad y acciones requeridas, y tomando decisiones de revisión, normalmente en (Esto podría incluir determinar la necesidad de una revisión de seguimiento). Por lo tanto: a) No es correcto b) No es correcto c) No es correcto d) Es correcto. La coincidencia correcta es: 1C, 2B, 3A, 4D"
         }
       }
     },
@@ -4821,7 +4821,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Se le dan los siguientes roles en las revisiones: 1. Escribano 2. Líder de la revisión 3. Facilitador 4. Gerente Y las siguientes responsabilidades en las revisiones: A. Garantiza el desarrollo eficaz de las reuniones de revisión y el establecimiento de un entorno de revisión seguro B. Registra la información de la revisión, como decisiones y nuevas anomalías encontradas durante la reunión de revisión C. Decide qué se va a revisar y proporciona recursos, como personal y tiempo para la revisión D. Asume la responsabilidad general de la revisión, como organizar cuándo y dónde se llevará a cabo la revisión ¿Cuál de los siguientes? ¿MEJOR coincide con las funciones y responsabilidades?",
+          "prompt": "Se le dan los siguientes roles en las revisiones: 1. Escribano 2. Líder de la revisión 3. Facilitador 4. Gerente Y las siguientes responsabilidades en las revisiones: A. Garantiza el desarrollo eficaz de las reuniones de revisión y el establecimiento de un entorno de revisión seguro B. Registra la información de la revisión, como decisiones y nuevas anomalías encontradas durante la reunión de revisión C. Decide qué se va a revisar y proporciona recursos, como personal y tiempo para la revisión D. Asume la responsabilidad general de la revisión, como organizar cuándo y dónde se llevará a cabo la revisión ¿Cuál de las siguientes opciones coincide MEJOR con los roles y las responsabilidades?",
           "options": [
             {
               "key": "a",
@@ -5393,7 +5393,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "¿Cuál de los siguientes encaja MEJOR como elemento de la lista de verificación utilizada en pruebas basadas en listas de comprobación?",
+          "prompt": "¿Cuál de los siguientes encaja MEJOR como elemento del checklist utilizado en pruebas basadas en checklists?",
           "options": [
             {
               "key": "a",
@@ -5413,7 +5413,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Las listas de verificación deben contener condiciones de prueba a verificar. Este es un ejemplo de error, no una condición de prueba; incluso si el tester pudo deducir algunas condiciones potenciales de prueba a partir de los ejemplos de errores, esta descripción del error es demasiado general b) No es correcta. Las listas de verificación no deben contener elementos que sean más adecuados como criterios de salida. Este es un ejemplo de criterio de salida c) No es correcto. Las listas de verificación no deben contener elementos demasiado generales. Este es un ítem muy general, que prácticamente describe un objetivo de prueba d) Es correcto. Este es un ejemplo de una condición de prueba que puede ser verificada por un humano."
+          "explanation": "a) No es correcto. Los checklists deben contener condiciones de prueba que verificar. Este es un ejemplo de error, no una condición de prueba; incluso si el tester pudo deducir algunas condiciones potenciales de prueba a partir de los ejemplos de errores, esta descripción del error es demasiado general b) No es correcta. Los checklists no deben contener elementos que sean más adecuados como criterios de salida. Este es un ejemplo de criterio de salida c) No es correcto. Los checklists no deben contener elementos demasiado generales. Este es un ítem muy general, que prácticamente describe un objetivo de prueba d) Es correcto. Este es un ejemplo de una condición de prueba que puede ser verificada por un humano."
         }
       }
     },
@@ -5474,7 +5474,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. El formato orientado a reglas incluye formatos como listas de verificación con viñetas o formas tabuladas de asignaciones de entrada y salida, que muestran explícitamente las reglas a seguir. Dado/Cuándo/Entonces es un formato orientado a escenarios porque describe un escenario a verificar b) Es correcto. Este es un formato Dado/Cuándo/Entonces, que está orientado a escenarios. c) No es correcto. No existe un formato de criterios de aceptación \"orientado al producto\" d) No es correcto. No existe un formato de criterios de aceptación \"orientado al proceso\""
+          "explanation": "a) No es correcto. El formato orientado a reglas incluye formatos como checklists con viñetas o formas tabuladas de asignaciones de entrada y salida, que muestran explícitamente las reglas a seguir. Dado/Cuándo/Entonces es un formato orientado a escenarios porque describe un escenario a verificar b) Es correcto. Este es un formato Dado/Cuándo/Entonces, que está orientado a escenarios. c) No es correcto. No existe un formato de criterios de aceptación \"orientado al producto\" d) No es correcto. No existe un formato de criterios de aceptación \"orientado al proceso\""
         }
       }
     },
@@ -5834,7 +5834,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Dados los siguientes riesgos: 1. La implementación ineficaz del bucle provoca respuestas largas del sistema 2. Los consumidores cambian sus preferencias 3. Inundación de la sala de servidores 4. Los pacientes mayores de cierta edad reciben informes inexactos Y las siguientes actividades de mitigación: A. Aceptación de riesgos B. Pruebas de eficiencia del rendimiento C. Uso del análisis de valores límite como técnica de prueba D. Transferencia de riesgos ¿Cuál de las siguientes opciones MEJOR coincide con los riesgos con las actividades de mitigación?",
+          "prompt": "Dados los siguientes riesgos: 1. La implementación ineficaz del bucle provoca respuestas largas del sistema 2. Los consumidores cambian sus preferencias 3. Inundación de la sala de servidores 4. Los pacientes mayores de cierta edad reciben informes inexactos Y las siguientes actividades de mitigación: A. Aceptación de riesgos B. Pruebas de eficiencia del rendimiento C. Uso del análisis de valores límite como técnica de prueba D. Transferencia de riesgos ¿Cuál de las siguientes opciones coincide MEJOR con los riesgos y las actividades de mitigación?",
           "options": [
             {
               "key": "a",
@@ -6017,7 +6017,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "¿Cuál de las siguientes opciones describe MEJOR un ejemplo de cómo la gestión de la configuración (CM) respalda las pruebas?",
+          "prompt": "¿Cuál de las siguientes opciones describe MEJOR un ejemplo de cómo la gestión de la configuración (CM) da soporte a las pruebas?",
           "options": [
             {
               "key": "a",
@@ -6049,7 +6049,7 @@
       "reference": "FL-5.5.1",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "You are testing a sort function that gets a set of numbers as input and returns the same set of numbers sorted in ascending order. The log from the test execution looks as follows. Environment configuration: sort function build 2.002.2182, test case set: TCS-3, # of TCs: 5 Test run ID: 736 Start 12:43:21.003 12:43:21.003 Execution of TC1. Input: 3. Output: 3. Result: passed 12:43:21.003 Execution of TC2. Input: 3 11 6 5. Output: 3 5 6 11. Result: passed 12:43:21.004 Execution of TC3. Input: 8 7 3 7 1. Output: 1 3 7 8. Result: failed 12:43:21.005 Execution of TC4. Input: -2 -2 -2 -3 -3. Output: -3 -2. Result: failed 12:43:21.005 Execution of TC5. Input: 0 -2 0 3 4 4. Output: -2 0 3 4. Result: failed End 12:43:21.005 Total time of test cycle: 0:00:00.002 Which of the following provides the BEST description of the failure that can be used in a defect report?",
+  "prompt": "You are testing a sort function that gets a set of numbers as input and returns the same set of numbers sorted in ascending order. The log from the test execution looks as follows. Which of the following provides the BEST description of the failure that can be used in a defect report?",
       "options": [
         {
           "key": "a",
@@ -6085,7 +6085,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Está probando una función de clasificación que obtiene un conjunto de números como entrada y devuelve el mismo conjunto de números ordenados en orden ascendente. El registro de la ejecución de prueba tiene el siguiente aspecto. Configuración del entorno: función de clasificación compilación 2.002.2182, conjunto de caso de prueba: TCS-3, número de TC: 5 ID de ejecución de prueba: 736 Inicio 12:43:21.003 12:43:21.003 Ejecución de TC1. Entrada: 3. Salida: 3. Resultado: aprobado 12:43:21.003 Ejecución de TC2. Entrada: 3 11 6 5. Salida: 3 5 6 11. Resultado: aprobado 12:43:21.004 Ejecución de TC3. Entrada: 8 7 3 7 1. Salida: 1 3 7 8. Resultado: fallido 12:43:21.005 Ejecución de TC4. Entrada: -2 -2 -2 -3 -3. Salida: -3 -2. Resultado: falló 12:43:21.005 Ejecución de TC5. Entrada: 0 -2 0 3 4 4. Salida: -2 0 3 4. Resultado: fallido Fin 12:43:21.005 Tiempo total del ciclo de prueba: 0:00:00.002 ¿Cuál de las siguientes proporciona la MEJOR descripción de la falla que se puede utilizar en un informe de defectos?",
+      "prompt": "Está probando una función de ordenación que recibe un conjunto de números como entrada y devuelve el mismo conjunto ordenado de forma ascendente. El registro de la ejecución de prueba se muestra a continuación. ¿Cuál de las siguientes opciones ofrece la MEJOR descripción del fallo que puede incluirse en un informe de defecto?",
           "options": [
             {
               "key": "a",
@@ -6146,7 +6146,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Dadas las siguientes descripciones: 1. Apoyar el seguimiento del flujo de trabajo 2. Facilitar la comunicación 3. Máquinas virtuales 4. Respaldar revisiones Y las siguientes categorías de herramientas de prueba: A. herramientas de pruebas estáticas B. Herramientas que respaldan la escalabilidad y la estandarización de la implementación C. Herramientas DevOps D. Herramientas de colaboración ¿Cuál de las siguientes coincide MEJOR con las descripciones y categorías?",
+          "prompt": "Dadas las siguientes descripciones: 1. Dar soporte al seguimiento del flujo de trabajo 2. Facilitar la comunicación 3. Máquinas virtuales 4. Dar soporte a revisiones Y las siguientes categorías de herramientas de prueba: A. Herramientas de pruebas estáticas B. Herramientas que ofrecen soporte para la escalabilidad y la estandarización de la implementación C. Herramientas DevOps D. Herramientas de colaboración ¿Cuál de las siguientes coincide MEJOR con las descripciones y categorías?",
           "options": [
             {
               "key": "a",
@@ -6166,7 +6166,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "Teniendo en cuenta cada una de las categorías de herramientas enumeradas y sus descripciones: A. Herramientas de pruebas estáticas: apoyan al tester en la realización de revisiones y análisis estáticos (4) B. Herramientas que respaldan la escalabilidad y la estandarización de la implementación: por ejemplo, máquinas virtuales, herramientas de contenedorización (3) C. Herramientas DevOps: respaldan el proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de construcción automatizados, la integración/entrega continua (CI/CD) (1) D. Herramientas de colaboración: facilitan la comunicación (2) Por lo tanto: a) No es correcto b) No es correcto c) Es correcto. La coincidencia correcta es: 1C, 2D, 3B, 4A d) No es correcta"
+          "explanation": "Teniendo en cuenta cada una de las categorías de herramientas enumeradas y sus descripciones: A. Herramientas de pruebas estáticas: dan soporte al tester en la realización de revisiones y análisis estáticos (4) B. Herramientas que ofrecen soporte para la escalabilidad y la estandarización de la implementación: por ejemplo, máquinas virtuales, herramientas de contenedorización (3) C. Herramientas DevOps: dan soporte al proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de construcción automatizados y la integración/entrega continua (CI/CD) (1) D. Herramientas de colaboración: facilitan la comunicación (2) Por lo tanto: a) No es correcto b) No es correcto c) Es correcto. La coincidencia correcta es: 1C, 2D, 3B, 4A d) No es correcta"
         }
       }
     },
@@ -6891,7 +6891,7 @@
           "options": [
             {
               "key": "a",
-              "text": "Cuando los desarrolladores lo acuerdan, las actividades manuales en el lado izquierdo del proceso de prueba se automatizan para respaldar el principio de \"las pruebas tempranas ahorran tiempo y dinero\"."
+              "text": "Cuando los desarrolladores lo acuerdan, las actividades manuales en el lado izquierdo del proceso de prueba se automatizan para dar soporte al principio de \"las pruebas tempranas ahorran tiempo y dinero\"."
             },
             {
               "key": "b",
@@ -6907,7 +6907,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Las prácticas involucradas en el desplazamiento a la izquierda tienen como objetivo implementar más actividades de prueba en las primeras fases del ciclo de vida de desarrollo de software (SDLC), retratando el SDLC como moviéndose de izquierda a derecha. No existe el lado izquierdo del proceso de prueba b) Es correcto. El desplazamiento hacia la izquierda enfatiza la importancia de comenzar las pruebas antes en el SDLC. La implementación de pruebas de desplazamiento a la izquierda requiere capacitación adicional y un mayor esfuerzo y costos durante las primeras fases del SDLC; sin embargo, los ahorros generales deberían ser mayores. c) No es correcto. Aunque las pruebas de componentes automatizadas y las pruebas de integración de componentes para pruebas de regresión generalmente son valiosas, la creación de estas pruebas normalmente es responsabilidad de los desarrolladores, y si se sigue un enfoque de integración continua/entrega continua (CI/CD), entonces estas pruebas se habrán enviado con el código. En algunas situaciones, el tester puede automatizar pruebas para pruebas de regresión y, a veces, incluso para pruebas de componentes y pruebas de integración de componentes; sin embargo, esto no es parte del cambio a la izquierda que mueve las pruebas más temprano en el SDLC. d) No es correcto. Capacitar a los testers para que realicen tareas tempranamente en el SDLC respaldaría un enfoque de giro a la izquierda al enfatizar la importancia de comenzar las pruebas antes en el SDLC. Sin embargo, automatizar más actividades de prueba que se realizarán más adelante en el SDLC no es parte del desplazamiento hacia la izquierda"
+          "explanation": "a) No es correcto. Las prácticas involucradas en el desplazamiento a la izquierda tienen como objetivo implementar más actividades de prueba en las primeras fases del ciclo de vida de desarrollo de software (SDLC), retratando el SDLC como moviéndose de izquierda a derecha. No existe el lado izquierdo del proceso de prueba b) Es correcto. El desplazamiento hacia la izquierda enfatiza la importancia de comenzar las pruebas antes en el SDLC. La implementación de pruebas de desplazamiento a la izquierda requiere capacitación adicional y un mayor esfuerzo y costos durante las primeras fases del SDLC; sin embargo, los ahorros generales deberían ser mayores. c) No es correcto. Aunque las pruebas de componentes automatizadas y las pruebas de integración de componentes para pruebas de regresión generalmente son valiosas, la creación de estas pruebas normalmente es responsabilidad de los desarrolladores, y si se sigue un enfoque de integración continua/entrega continua (CI/CD), entonces estas pruebas se habrán enviado con el código. En algunas situaciones, el tester puede automatizar pruebas para pruebas de regresión y, a veces, incluso para pruebas de componentes y pruebas de integración de componentes; sin embargo, esto no es parte del cambio a la izquierda que mueve las pruebas más temprano en el SDLC. d) No es correcto. Capacitar a los testers para que realicen tareas tempranamente en el SDLC daría soporte a un enfoque de giro a la izquierda al enfatizar la importancia de comenzar las pruebas antes en el SDLC. Sin embargo, automatizar más actividades de prueba que se realizarán más adelante en el SDLC no es parte del desplazamiento hacia la izquierda"
         }
       }
     },
@@ -7253,7 +7253,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Dados los siguientes tipos de revisión: 1. Revisión técnica 2. Revisión informal 3. Inspección 4. Tutorial Y las siguientes descripciones: A. Incluye objetivos como obtener consenso, generar nuevas ideas y motivar a los autores para mejorar B. Incluye objetivos como educar a los revisores, obtener consenso, generar nuevas ideas y detectar defectos potenciales C. El objetivo principal es detectar defectos potenciales y requiere la recopilación de métricas para respaldar la mejora del proceso D. El objetivo principal es detectar defectos potenciales y no genera resultados documentados formales. ¿De los siguientes MEJOR coincide con los tipos de reseñas y las descripciones?",
+          "prompt": "Dados los siguientes tipos de revisión: 1. Revisión técnica 2. Revisión informal 3. Inspección 4. Tutorial Y las siguientes descripciones: A. Incluye objetivos como obtener consenso, generar nuevas ideas y motivar a los autores para mejorar B. Incluye objetivos como educar a los revisores, obtener consenso, generar nuevas ideas y detectar defectos potenciales C. El objetivo principal es detectar defectos potenciales y requiere la recopilación de métricas para dar soporte a la mejora del proceso D. El objetivo principal es detectar defectos potenciales y no genera resultados documentados formales. ¿Cuál de las siguientes opciones coincide MEJOR con los tipos de revisión y las descripciones?",
           "options": [
             {
               "key": "a",
@@ -7273,7 +7273,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "Considerando cada uno de los tipos de revisión enumerados: 1. Revisión técnica: este tipo de revisión la realizan revisores técnicamente calificados y está dirigida por un moderador. Los objetivos son lograr consenso y tomar decisiones sobre problemas técnicos y al mismo tiempo evaluar la calidad y generar confianza en el producto de trabajo, generar nuevas ideas, motivar y capacitar a los autores para mejorar y detectar anomalías. 2. Revisión informal - El objetivo principal es detectar anomalías. El proceso no está definido y no requiere resultados documentados formales. 3. Inspección: este es el tipo de revisión más formal y sigue el proceso de revisión genérico completo. El objetivo principal es encontrar la mayor cantidad de anomalías, y otros objetivos incluyen evaluar la calidad y generar confianza en el producto de trabajo, motivar y permitir a los autores mejorar y recopilar métricas que puedan usarse para mejorar el ciclo de vida de desarrollo de software (SDLC), incluido el proceso de inspección. El autor no puede actuar como líder de revisión o escribano. 4. Tutorial: dirigido por el autor, este tipo de revisión cumple varios objetivos, como evaluar la calidad y generar confianza en el producto de trabajo, educar a los revisores, obtener consenso, generar nuevas ideas, motivar y permitir a los autores mejorar y detectar anomalías. Los revisores pueden realizar una revisión individual antes del recorrido, pero esto no es obligatorio A. Incluye objetivos como lograr consenso, generar nuevas ideas y motivar a los autores para mejorar B. Incluye objetivos como educar a los revisores, lograr consenso, generar nuevas ideas y detectar anomalías C. El objetivo principal es detectar anomalías y requiere la recopilación de métricas para respaldar la mejora del proceso D. El objetivo principal es detectar anomalías y no genera ningún resultado formal documentado. Por lo tanto: a) No es correcto b) Es correcto. c) No es correcto d) No es correcto"
+          "explanation": "Considerando cada uno de los tipos de revisión enumerados: 1. Revisión técnica: este tipo de revisión la realizan revisores técnicamente calificados y está dirigida por un moderador. Los objetivos son lograr consenso y tomar decisiones sobre problemas técnicos y al mismo tiempo evaluar la calidad y generar confianza en el producto de trabajo, generar nuevas ideas, motivar y capacitar a los autores para mejorar y detectar anomalías. 2. Revisión informal - El objetivo principal es detectar anomalías. El proceso no está definido y no requiere resultados documentados formales. 3. Inspección: este es el tipo de revisión más formal y sigue el proceso de revisión genérico completo. El objetivo principal es encontrar la mayor cantidad de anomalías, y otros objetivos incluyen evaluar la calidad y generar confianza en el producto de trabajo, motivar y permitir a los autores mejorar y recopilar métricas que puedan usarse para mejorar el ciclo de vida de desarrollo de software (SDLC), incluido el proceso de inspección. El autor no puede actuar como líder de revisión o escribano. 4. Tutorial: dirigido por el autor, este tipo de revisión cumple varios objetivos, como evaluar la calidad y generar confianza en el producto de trabajo, educar a los revisores, obtener consenso, generar nuevas ideas, motivar y permitir a los autores mejorar y detectar anomalías. Los revisores pueden realizar una revisión individual antes del recorrido, pero esto no es obligatorio A. Incluye objetivos como lograr consenso, generar nuevas ideas y motivar a los autores para mejorar B. Incluye objetivos como educar a los revisores, lograr consenso, generar nuevas ideas y detectar anomalías C. El objetivo principal es detectar anomalías y requiere la recopilación de métricas para dar soporte a la mejora del proceso D. El objetivo principal es detectar anomalías y no genera ningún resultado formal documentado. Por lo tanto: a) No es correcto b) Es correcto. c) No es correcto d) No es correcto"
         }
       }
     },
@@ -7468,7 +7468,7 @@
       "reference": "FL-4.2.2",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "A developer was asked to implement the following business rule: INPUT: value (integer number) IF (value ≤ 100 OR value ≥ 200) THEN write “value incorrect” ELSE write “value OK” You design the test cases using 2-value boundary value analysis. Which of the following sets of test inputs achieves the greatest coverage?",
+      "prompt": "A developer was asked to implement the following business rule. You design the test cases using 2-value boundary value analysis. Which of the following sets of test inputs achieves the greatest coverage?",
       "options": [
         {
           "key": "a",
@@ -7504,7 +7504,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Se le pidió a un desarrollador que implementara la siguiente regla de negocios: ENTRADA: valor (número entero) SI (valor ≤ 100 O valor ≥ 200) ENTONCES escriba “valor incorrecto” DE LO CONTRARIO escriba “valor OK” Usted diseña los casos de prueba usando análisis de valores límite de 2 valores. ¿Cuál de los siguientes conjuntos de entradas de prueba logra la mayor cobertura?",
+          "prompt": "Se pidió a un desarrollador que implementara la siguiente regla de negocio. Usted diseña los casos de prueba mediante un análisis de valores límite de 2 valores. ¿Cuál de los siguientes conjuntos de entradas de prueba logra la mayor cobertura?",
           "options": [
             {
               "key": "a",
@@ -7830,7 +7830,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Considere la siguiente lista: • No se aceptan entradas correctas • Se aceptan entradas incorrectas • Formato de salida incorrecto • División por cero ¿Qué técnica de prueba es MÁS PROBABLEMENTE utilizada por el tester que utiliza esta lista al realizar las pruebas?",
+          "prompt": "Considere la siguiente lista: • No se aceptan entradas correctas • Se aceptan entradas incorrectas • Formato de salida incorrecto • División por cero ¿Qué técnica de test es MÁS PROBABLE que utilice el tester que usa esta lista al realizar las pruebas?",
           "options": [
             {
               "key": "a",
@@ -7842,7 +7842,7 @@
             },
             {
               "key": "c",
-              "text": "Pruebas basadas en listas de comprobación"
+              "text": "Pruebas basadas en checklists"
             },
             {
               "key": "d",
@@ -7850,7 +7850,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Las pruebas exploratorias utilizan cartas de prueba, no una lista de posibles defectos/fallas. Aunque las pruebas exploratorias pueden incorporar el uso de otras técnicas de prueba, en este caso un ataque de fallo es la opción más probable b) Es correcta. Esta es una lista de posibles fallos. Los ataques a fallas son un enfoque metódico para la implementación de predicción de errores y requieren que el tester cree o adquiera una lista de posibles errores, defectos y fallas, y que diseñe pruebas que identifiquen defectos asociados con los errores, expongan los defectos o causen las fallas. c) No es correcto. El tester utiliza una lista de verificación de elementos para respaldar sus pruebas. Tanto la predicción de errores como las pruebas basadas en listas de comprobación utilizan dichas listas, sin embargo, la lista aquí es de posibles fallas, no de condiciones de prueba, por lo que la técnica de prueba MÁS PROBABLE es el ataque de fallas, que se enfoca en errores, defectos y fallas d) No es correcto. BVA se basa en un análisis de valores límite de particiones de equivalencia. La lista anterior no menciona las particiones de equivalencia ni sus límites"
+          "explanation": "a) No es correcto. Las pruebas exploratorias utilizan cartas de prueba, no una lista de posibles defectos o fallos. Aunque las pruebas exploratorias pueden incorporar otras técnicas de prueba, en este caso fault attack es la opción más probable. b) Es correcta. Esta es una lista de posibles fallos. Los fault attacks son un enfoque metódico para implementar la predicción de errores y requieren que el tester cree o adquiera una lista de posibles errores, defectos y fallos, y que diseñe tests que identifiquen defectos asociados con los errores, expongan los defectos o provoquen los fallos. c) No es correcto. El tester utiliza un checklist de elementos para dar soporte a sus tests. Tanto la predicción de errores como las pruebas basadas en checklists utilizan estas listas; sin embargo, la lista aquí es de posibles fallos, no de condiciones de prueba, por lo que la técnica de prueba MÁS PROBABLE es fault attack, que se centra en errores, defectos y fallos. d) No es correcto. BVA se basa en un análisis de los valores límite de las particiones de equivalencia. La lista anterior no menciona las particiones de equivalencia ni sus límites."
         }
       }
     },
@@ -7891,27 +7891,27 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "¿Cuál de las siguientes opciones describe MEJOR cómo el uso de pruebas basadas en listas de comprobación puede dar como resultado una mayor cobertura?",
+          "prompt": "¿Cuál de las siguientes opciones describe MEJOR cómo el uso de pruebas basadas en checklists puede dar como resultado una mayor cobertura?",
           "options": [
             {
               "key": "a",
-              "text": "Los elementos de la lista de verificación se pueden definir con un nivel de detalle suficientemente bajo, de modo que el tester pueda implementar y ejecutar casos de prueba detallados basados ​​en estos elementos."
+              "text": "Los elementos del checklist se pueden definir con un nivel de detalle suficientemente bajo, de modo que el tester pueda implementar y ejecutar casos de prueba detallados basados ​​en estos elementos."
             },
             {
               "key": "b",
-              "text": "Las listas de verificación se pueden automatizar, de modo que cada vez que una ejecución de prueba automatizada cubra los elementos de la lista de verificación, se obtendrá una cobertura adicional."
+              "text": "Los checklists se pueden automatizar, de modo que cada vez que una ejecución de prueba automatizada cubra sus elementos, se obtendrá una cobertura adicional."
             },
             {
               "key": "c",
-              "text": "Cada elemento de la lista de verificación debe probarse por separado e independientemente, de modo que los elementos cubran diferentes áreas del software."
+              "text": "Cada elemento del checklist debe probarse por separado e independientemente, de modo que los elementos cubran diferentes áreas del software."
             },
             {
               "key": "d",
-              "text": "Dos testers que diseñan y ejecutan pruebas basadas en los mismos elementos de la lista de verificación de alto nivel generalmente realizarán las pruebas de maneras ligeramente diferentes."
+              "text": "Dos testers que diseñan y ejecutan tests basados en los mismos elementos de un checklist de alto nivel generalmente realizarán los tests de maneras ligeramente diferentes."
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Si bien es cierto que el tester puede implementar y ejecutar casos de prueba detallados basados ​​en la lista de verificación, no explica cómo esto resultaría en una mayor cobertura b) No es correcto. Los elementos de la lista de verificación no deben automatizarse. Pero incluso si lo son, los scripts de prueba automatizados siempre ejecutan las pruebas de la misma manera, lo que generalmente no resulta en una mayor cobertura. c) No es correcto. Es cierto que cada elemento de la lista de verificación debe probarse por separado e independientemente. Pero esto afecta la orden de ejecución de prueba y no afecta la cobertura lograda, por lo que no resulta en una mayor cobertura d) Es correcto. Si las listas de verificación son de alto nivel, es probable que se produzca cierta variabilidad en las pruebas reales, lo que dará lugar a una cobertura potencialmente mayor pero a una menor repetibilidad. Si dos testers siguen una lista de verificación de elementos de alto nivel, cada uno de ellos puede usar diferentes datos de prueba, pasos de prueba, etc. De esta manera, un tester probablemente cubrirá algunas áreas no cubiertas por el otro tester y esto dará como resultado una mayor cobertura"
+          "explanation": "a) No es correcto. Si bien es cierto que el tester puede implementar y ejecutar casos de prueba detallados basados en el checklist, no explica cómo esto resultaría en una mayor cobertura b) No es correcto. Los elementos del checklist no deben automatizarse. Pero incluso si lo son, los scripts de prueba automatizados siempre ejecutan los tests de la misma manera, lo que generalmente no resulta en una mayor cobertura. c) No es correcto. Es cierto que cada elemento del checklist debe probarse por separado e independientemente. Pero esto afecta al orden de ejecución de los tests y no a la cobertura lograda, por lo que no resulta en una mayor cobertura d) Es correcto. Si los checklists son de alto nivel, es probable que se produzca cierta variabilidad en las pruebas reales, lo que dará lugar a una cobertura potencialmente mayor pero a una menor repetibilidad. Si dos testers siguen un checklist de elementos de alto nivel, cada uno puede usar diferentes datos de prueba, pasos de prueba, etc. De esta manera, un tester probablemente cubrirá algunas áreas no cubiertas por el otro y esto dará como resultado una mayor cobertura"
         }
       }
     },
@@ -7984,7 +7984,7 @@
       "reference": "FL-4.5.3",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "You are using acceptance test-driven development and designing test cases based on the following user story: As a Regular or Special user, I want to be able to use my electronic floor card, to access specific floors. Acceptance Criteria: AC1: Regular users have access to floors 1 to 3 AC2: Floor 4 is only accessible to Special users AC3: Special users have all the access rights of Regular users Which test case is the MOST reasonable one to test AC3?",
+      "prompt": "You are using acceptance test-driven development and designing test cases based on the following user story. Which test case is the MOST reasonable one to test AC3?",
       "options": [
         {
           "key": "a",
@@ -8020,7 +8020,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Está utilizando un desarrollo basado en pruebas de aceptación y diseñando casos de prueba basados ​​en la siguiente historia de usuario: Como usuario Regular o Especial, quiero poder usar mi tarjeta de piso electrónica para acceder a pisos específicos. Criterios de aceptación: AC1: Los usuarios regulares tienen acceso a los pisos 1 al 3 AC2: El piso 4 solo es accesible para usuarios especiales AC3: Los usuarios especiales tienen todos los derechos de acceso de los usuarios regulares ¿Cuál caso de prueba es el MÁS razonable para probar AC3?",
+          "prompt": "Está utilizando desarrollo guiado por pruebas de aceptación y diseñando casos de prueba a partir de la siguiente historia de usuario. ¿Qué caso de prueba es el MÁS razonable para comprobar el criterio AC3?",
           "options": [
             {
               "key": "a",
@@ -8097,7 +8097,7 @@
             },
             {
               "key": "d",
-              "text": "Explicar por qué las pruebas de integración de sistemas quedarán excluidas del testing, aunque la estrategia de prueba exige este nivel de prueba."
+              "text": "Explicar por qué las pruebas de integración de sistemas quedarán excluidas del alcance de las pruebas, aunque la estrategia de prueba exige este nivel."
             }
           ],
           "selector": "Selecciona UNA opción.",
@@ -8566,7 +8566,7 @@
       "reference": "FL-5.5.1",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "Consider the following defect report for a web-based shopping application: Application: WebShop v0.99 Defect: Login button not working Steps to Reproduce: Launch the website Click on the login button Expected result: The user should be redirected to the login page. Actual result: The login button does not respond when clicked. Severity: High Priority: Urgent What is the MOST important information that is missing from this defect report?",
+      "prompt": "Consider the following defect report for a web-based shopping application. What is the MOST important information that is missing from this defect report?",
       "options": [
         {
           "key": "a",
@@ -8602,7 +8602,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Considere el siguiente informe de defectos para una aplicación de compras basada en web: Aplicación: WebShop v0.99 Defecto: El botón de inicio de sesión no funciona Pasos para reproducir: Inicie el sitio web Haga clic en el botón de inicio de sesión Resultado esperado: El usuario debe ser redirigido a la página de inicio de sesión. Resultado real: el botón de inicio de sesión no responde cuando se hace clic. Gravedad: Alta Prioridad: Urgente ¿Cuál es la información MÁS importante que falta en este informe de defectos?",
+          "prompt": "Considere el siguiente informe de defecto de una aplicación web de compras. ¿Cuál es la información MÁS importante que falta en este informe de defecto?",
           "options": [
             {
               "key": "a",
@@ -8968,7 +8968,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Dadas las siguientes tareas de prueba: 1. Derivar casos de prueba a partir de condiciones de prueba 2. Identificar material de prueba reutilizable 3. Organizar casos de prueba en procedimientos de prueba 4. Evaluar la base de prueba y el objeto de prueba Y las siguientes actividades de prueba: A. análisis de prueba B. diseño de prueba C. implementación de prueba D. finalización de la prueba ¿Cuál de las siguientes MEJOR coincide con las tareas con las actividades?",
+          "prompt": "Dadas las siguientes tareas de prueba: 1. Derivar casos de prueba a partir de condiciones de prueba 2. Identificar material de prueba reutilizable 3. Organizar casos de prueba en procedimientos de prueba 4. Evaluar la base de prueba y el objeto de prueba Y las siguientes actividades de prueba: A. Análisis de prueba B. Diseño de prueba C. Implementación de prueba D. Finalización de la prueba ¿Cuál de las siguientes opciones coincide MEJOR con las tareas y las actividades?",
           "options": [
             {
               "key": "a",
@@ -9949,27 +9949,27 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "El sistema para la venta de entradas de cine calcula el tipo de descuento basándose en el año de nacimiento del cliente (BY) y en el año actual (CY) de la siguiente manera: Sea D la diferencia entre CY y BY, es decir, D = CY – BY • Si D < 0 entonces imprima el mensaje de error “el año de nacimiento no puede ser mayor que el año actual” • Si 0 ≤ D < 18 entonces aplique el descuento para estudiantes • Si 18 ≤ D < 65 entonces no aplique ningún descuento • Si D ≥ 65 luego aplique el descuento para pensionados Su conjunto de pruebas ya contiene dos casos de prueba: • BY = 1990, CY = 2020, resultado esperado: sin descuento • BY = 2030, CY = 2029, resultado esperado: imprima el mensaje de error ¿Cuál de los siguientes conjuntos de datos de prueba se debe agregar para lograr una cobertura de división de equivalencia válida completa para el tipo de descuento?",
+          "prompt": "El sistema de venta de entradas de cine calcula el tipo de descuento a partir del año de nacimiento del cliente (BY, del inglés birth year) y del año actual (CY, del inglés current year). Sea D la diferencia entre CY y BY, es decir, D = CY – BY: • Si D < 0, muestra el mensaje de error «el año de nacimiento no puede ser posterior al año actual». • Si 0 ≤ D < 18, aplica el descuento de estudiante. • Si 18 ≤ D < 65, no aplica ningún descuento. • Si D ≥ 65, aplica el descuento de pensionista. Su conjunto de pruebas ya contiene dos casos: • BY = 1990, CY = 2020; resultado esperado: sin descuento. • BY = 2030, CY = 2029; resultado esperado: mostrar el mensaje de error. ¿Cuáles de los siguientes conjuntos de datos deben añadirse para lograr la cobertura completa de las particiones de equivalencia válidas del tipo de descuento?",
           "options": [
             {
               "key": "a",
-              "text": "PARA = 2001, CY = 2065"
+              "text": "BY = 2001, CY = 2065"
             },
             {
               "key": "b",
-              "text": "POR = 1900, CY = 1965"
+              "text": "BY = 1900, CY = 1965"
             },
             {
               "key": "c",
-              "text": "POR = 1965, CY = 1900"
+              "text": "BY = 1965, CY = 1900"
             },
             {
               "key": "d",
-              "text": "PARA = 2011, CY = 2029"
+              "text": "BY = 2011, CY = 2029"
             },
             {
               "key": "e",
-              "text": "POR = 2000, CY = 2000"
+              "text": "BY = 2000, CY = 2000"
             }
           ],
           "selector": "Selecciona DOS opciones.",
@@ -10487,7 +10487,7 @@
       "reference": "FL-4.5.3",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "You have just started designing test cases for the following user story. As a customer, I want to be able to filter search results by price range, so that I can find products within my budget more easily. Acceptance criteria: 1. The filter should work for all versions of the application from version 3.0 upwards 2. The filter should allow the customer to set a price range with a minimum and a maximum price 3. The search results should update dynamically as the customer adjusts the price range filter In all test cases the precondition is as follows: there are only two products available, products A and B. Product A costs $100 and product B costs $110. Which of the following is the BEST example of a test case for this user story?",
+      "prompt": "You have just started designing test cases for the following user story. In all test cases the precondition is as follows: there are only two products available, products A and B. Product A costs $100 and product B costs $110. Which of the following is the BEST example of a test case for this user story?",
       "options": [
         {
           "key": "a",
@@ -10523,7 +10523,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Acabas de comenzar a diseñar casos de prueba para la siguiente historia de usuario. Como cliente, quiero poder filtrar los resultados de búsqueda por rango de precios, para poder encontrar productos dentro de mi presupuesto más fácilmente. Criterios de aceptación: 1. El filtro debe funcionar para todas las versiones de la aplicación desde la versión 3.0 en adelante 2. El filtro debe permitir al cliente establecer un rango de precios con un precio mínimo y máximo 3. Los resultados de la búsqueda deben actualizarse dinámicamente a medida que el cliente ajusta el filtro de rango de precios En todos los casos de prueba la condición previa es la siguiente: solo hay dos productos disponibles, los productos A y B. El producto A cuesta $100 y el producto B cuesta $110. ¿Cuál de los siguientes es el MEJOR ejemplo de un caso de prueba para esta historia de usuario?",
+          "prompt": "Acaba de empezar a diseñar casos de prueba para la siguiente historia de usuario. En todos los casos de prueba se aplica esta precondición: solo hay dos productos disponibles, A y B. El producto A cuesta 100 $ y el producto B, 110 $. ¿Cuál de los siguientes es el MEJOR ejemplo de un caso de prueba para esta historia de usuario?",
           "options": [
             {
               "key": "a",
@@ -10803,7 +10803,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Los cuadrantes de prueba no tienen nada que ver con describir las relaciones entre niveles de prueba b) No es correcto. La prueba de cuadrantes no puede ayudar a evaluar ningún tipo de cobertura c) Es correcta. Los cuadrantes de prueba permiten a los gerentes y otras partes interesadas comprender las relaciones entre los tipos de prueba, las actividades que respaldan (apoyo al equipo o crítica de producto) y el punto de vista en el que se centran (negocio o tecnología) d) No es correcto. Probar cuadrantes no es un modelo psicológico"
+          "explanation": "a) No es correcto. Los cuadrantes de prueba no tienen nada que ver con describir las relaciones entre niveles de prueba b) No es correcto. La prueba de cuadrantes no puede ayudar a evaluar ningún tipo de cobertura c) Es correcta. Los cuadrantes de prueba permiten a los gerentes y otras partes interesadas comprender las relaciones entre los tipos de prueba, las actividades a las que dan soporte (apoyo al equipo o crítica de producto) y el punto de vista en el que se centran (negocio o tecnología) d) No es correcto. Probar cuadrantes no es un modelo psicológico"
         }
       }
     },
@@ -11068,7 +11068,7 @@
       "reference": "FL-5.5.1",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "Consider the following defect report for a Book Lending System. Defect ID: 001 | Title: Unable to Return a Book | Severity: High | Priority: | Environment: Windows 10, Google Chrome Description: When attempting to return a book using the Book Return feature, the system does not register the return and the book remains checked out to the user. Steps to Reproduce: Login to the Book Lending System as a user who has checked out a book. Click on the \"Book Return\" button for the book that has been checked out. System does not register the return and the book remains checked out. Expected Result: The book should be returned and no longer appear as checked out to the user. Actual Result: The book remains checked out to the user and is not registered as returned in the system. Attachments: [empty list] Which of the following is MOST likely to help the developer reproduce the failure quickly?",
+      "prompt": "Consider the following defect report for a Book Lending System. Which of the following is MOST likely to help the developer reproduce the failure quickly?",
       "options": [
         {
           "key": "a",
@@ -11104,7 +11104,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Considere el siguiente informe de defectos para un sistema de préstamo de libros. ID de defecto: 001 | Título: No se puede devolver un libro | Gravedad: Alta | Prioridad: | Entorno: Windows 10, Google Chrome Descripción: Al intentar devolver un libro utilizando la función Devolución de libro, el sistema no registra la devolución y el libro permanece prestado para el usuario. Pasos para reproducir: Inicie sesión en el sistema de préstamo de libros como usuario que ha prestado un libro. Haga clic en el botón \"Devolver libro\" del libro que se ha prestado. El sistema no registra la devolución y el libro queda prestado. Resultado esperado: el libro debe devolverse y ya no aparecerá como prestado para el usuario. Resultado real: el libro permanece prestado para el usuario y no se registra como devuelto en el sistema. Archivos adjuntos: [lista vacía] ¿Cuál de las siguientes opciones es MÁS probable que ayude al desarrollador a reproducir el error rápidamente?",
+          "prompt": "Considere el siguiente informe de defecto de un sistema de préstamo de libros. ¿Cuál de las siguientes opciones tiene MÁS probabilidades de ayudar al desarrollador a reproducir el fallo rápidamente?",
           "options": [
             {
               "key": "a",
@@ -11185,7 +11185,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "Considerando cada una de las categorías de herramientas enumeradas: i. Herramientas de colaboración: facilitan la comunicación. La comunicación no incluye la facilitación de la ejecución de prueba ii. Herramientas DevOps: respaldan el proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de compilación automatizados y CI/CD. Tanto el proceso de entrega como el CI/CD incluyen la facilitación de la ejecución de pruebas, como pruebas de componentes para CI iii. Herramientas de gestión: aumente la eficiencia del proceso de prueba facilitando la gestión del SDLC, requisitos, pruebas, defectos y configuración. La gestión de estos elementos no incluye la facilitación de la ejecución de prueba iv. Herramientas de pruebas no funcionales: permiten al tester realizar pruebas no funcionales que son difíciles o imposibles de realizar manualmente. Las pruebas no funcionales pueden incluir tanto pruebas estáticas como pruebas dinámicas, incluida la ejecución de prueba v. herramientas de diseño e implementación de pruebas: facilitan la generación de casos de prueba, datos de prueba y procedimientos de prueba. La generación de este testware no incluye la facilitación de la ejecución de prueba Por lo tanto: a) No es correcto b) Es correcto. Tanto las herramientas DevOps (ii) como las herramientas de pruebas no funcionales (iv) facilitan la ejecución de la prueba c) No es correcto d) No es correcto"
+          "explanation": "Considerando cada una de las categorías de herramientas enumeradas: i. Herramientas de colaboración: facilitan la comunicación. La comunicación no incluye la facilitación de la ejecución de prueba ii. Herramientas DevOps: dan soporte al proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de compilación automatizados y CI/CD. Tanto el proceso de entrega como el CI/CD incluyen la facilitación de la ejecución de pruebas, como pruebas de componentes para CI iii. Herramientas de gestión: aumente la eficiencia del proceso de prueba facilitando la gestión del SDLC, requisitos, pruebas, defectos y configuración. La gestión de estos elementos no incluye la facilitación de la ejecución de prueba iv. Herramientas de pruebas no funcionales: permiten al tester realizar pruebas no funcionales que son difíciles o imposibles de realizar manualmente. Las pruebas no funcionales pueden incluir tanto pruebas estáticas como pruebas dinámicas, incluida la ejecución de prueba v. herramientas de diseño e implementación de pruebas: facilitan la generación de casos de prueba, datos de prueba y procedimientos de prueba. La generación de este testware no incluye la facilitación de la ejecución de prueba Por lo tanto: a) No es correcto b) Es correcto. Tanto las herramientas DevOps (ii) como las herramientas de pruebas no funcionales (iv) facilitan la ejecución de la prueba c) No es correcto d) No es correcto"
         }
       }
     },

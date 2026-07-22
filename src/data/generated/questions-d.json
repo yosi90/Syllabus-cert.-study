@@ -219,7 +219,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "Dadas las siguientes tareas de prueba: 1. Derivar casos de prueba a partir de condiciones de prueba 2. Identificar material de prueba reutilizable 3. Organizar casos de prueba en procedimientos de prueba 4. Evaluar la base de prueba y el objeto de prueba Y las siguientes actividades de prueba: A. análisis de prueba B. diseño de prueba C. implementación de prueba D. finalización de la prueba ¿Cuál de las siguientes MEJOR coincide con las tareas con las actividades?",
+        "prompt": "Dadas las siguientes tareas de prueba: 1. Derivar casos de prueba a partir de condiciones de prueba 2. Identificar material de prueba reutilizable 3. Organizar casos de prueba en procedimientos de prueba 4. Evaluar la base de prueba y el objeto de prueba Y las siguientes actividades de prueba: A. Análisis de prueba B. Diseño de prueba C. Implementación de prueba D. Finalización de la prueba ¿Cuál de las siguientes opciones coincide MEJOR con las tareas y las actividades?",
         "options": [
           {
             "key": "a",
@@ -1200,27 +1200,27 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "El sistema para la venta de entradas de cine calcula el tipo de descuento basándose en el año de nacimiento del cliente (BY) y en el año actual (CY) de la siguiente manera: Sea D la diferencia entre CY y BY, es decir, D = CY – BY • Si D < 0 entonces imprima el mensaje de error “el año de nacimiento no puede ser mayor que el año actual” • Si 0 ≤ D < 18 entonces aplique el descuento para estudiantes • Si 18 ≤ D < 65 entonces no aplique ningún descuento • Si D ≥ 65 luego aplique el descuento para pensionados Su conjunto de pruebas ya contiene dos casos de prueba: • BY = 1990, CY = 2020, resultado esperado: sin descuento • BY = 2030, CY = 2029, resultado esperado: imprima el mensaje de error ¿Cuál de los siguientes conjuntos de datos de prueba se debe agregar para lograr una cobertura de división de equivalencia válida completa para el tipo de descuento?",
+        "prompt": "El sistema de venta de entradas de cine calcula el tipo de descuento a partir del año de nacimiento del cliente (BY, del inglés birth year) y del año actual (CY, del inglés current year). Sea D la diferencia entre CY y BY, es decir, D = CY – BY: • Si D < 0, muestra el mensaje de error «el año de nacimiento no puede ser posterior al año actual». • Si 0 ≤ D < 18, aplica el descuento de estudiante. • Si 18 ≤ D < 65, no aplica ningún descuento. • Si D ≥ 65, aplica el descuento de pensionista. Su conjunto de pruebas ya contiene dos casos: • BY = 1990, CY = 2020; resultado esperado: sin descuento. • BY = 2030, CY = 2029; resultado esperado: mostrar el mensaje de error. ¿Cuáles de los siguientes conjuntos de datos deben añadirse para lograr la cobertura completa de las particiones de equivalencia válidas del tipo de descuento?",
         "options": [
           {
             "key": "a",
-            "text": "PARA = 2001, CY = 2065"
+            "text": "BY = 2001, CY = 2065"
           },
           {
             "key": "b",
-            "text": "POR = 1900, CY = 1965"
+            "text": "BY = 1900, CY = 1965"
           },
           {
             "key": "c",
-            "text": "POR = 1965, CY = 1900"
+            "text": "BY = 1965, CY = 1900"
           },
           {
             "key": "d",
-            "text": "PARA = 2011, CY = 2029"
+            "text": "BY = 2011, CY = 2029"
           },
           {
             "key": "e",
-            "text": "POR = 2000, CY = 2000"
+            "text": "BY = 2000, CY = 2000"
           }
         ],
         "selector": "Selecciona DOS opciones.",
@@ -1738,7 +1738,7 @@
     "reference": "FL-4.5.3",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "You have just started designing test cases for the following user story. As a customer, I want to be able to filter search results by price range, so that I can find products within my budget more easily. Acceptance criteria: 1. The filter should work for all versions of the application from version 3.0 upwards 2. The filter should allow the customer to set a price range with a minimum and a maximum price 3. The search results should update dynamically as the customer adjusts the price range filter In all test cases the precondition is as follows: there are only two products available, products A and B. Product A costs $100 and product B costs $110. Which of the following is the BEST example of a test case for this user story?",
+    "prompt": "You have just started designing test cases for the following user story. In all test cases the precondition is as follows: there are only two products available, products A and B. Product A costs $100 and product B costs $110. Which of the following is the BEST example of a test case for this user story?",
     "options": [
       {
         "key": "a",
@@ -1774,7 +1774,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Acabas de comenzar a diseñar casos de prueba para la siguiente historia de usuario. Como cliente, quiero poder filtrar los resultados de búsqueda por rango de precios, para poder encontrar productos dentro de mi presupuesto más fácilmente. Criterios de aceptación: 1. El filtro debe funcionar para todas las versiones de la aplicación desde la versión 3.0 en adelante 2. El filtro debe permitir al cliente establecer un rango de precios con un precio mínimo y máximo 3. Los resultados de la búsqueda deben actualizarse dinámicamente a medida que el cliente ajusta el filtro de rango de precios En todos los casos de prueba la condición previa es la siguiente: solo hay dos productos disponibles, los productos A y B. El producto A cuesta $100 y el producto B cuesta $110. ¿Cuál de los siguientes es el MEJOR ejemplo de un caso de prueba para esta historia de usuario?",
+        "prompt": "Acaba de empezar a diseñar casos de prueba para la siguiente historia de usuario. En todos los casos de prueba se aplica esta precondición: solo hay dos productos disponibles, A y B. El producto A cuesta 100 $ y el producto B, 110 $. ¿Cuál de los siguientes es el MEJOR ejemplo de un caso de prueba para esta historia de usuario?",
         "options": [
           {
             "key": "a",
@@ -2054,7 +2054,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Los cuadrantes de prueba no tienen nada que ver con describir las relaciones entre niveles de prueba b) No es correcto. La prueba de cuadrantes no puede ayudar a evaluar ningún tipo de cobertura c) Es correcta. Los cuadrantes de prueba permiten a los gerentes y otras partes interesadas comprender las relaciones entre los tipos de prueba, las actividades que respaldan (apoyo al equipo o crítica de producto) y el punto de vista en el que se centran (negocio o tecnología) d) No es correcto. Probar cuadrantes no es un modelo psicológico"
+        "explanation": "a) No es correcto. Los cuadrantes de prueba no tienen nada que ver con describir las relaciones entre niveles de prueba b) No es correcto. La prueba de cuadrantes no puede ayudar a evaluar ningún tipo de cobertura c) Es correcta. Los cuadrantes de prueba permiten a los gerentes y otras partes interesadas comprender las relaciones entre los tipos de prueba, las actividades a las que dan soporte (apoyo al equipo o crítica de producto) y el punto de vista en el que se centran (negocio o tecnología) d) No es correcto. Probar cuadrantes no es un modelo psicológico"
       }
     }
   },
@@ -2319,7 +2319,7 @@
     "reference": "FL-5.5.1",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "Consider the following defect report for a Book Lending System. Defect ID: 001 | Title: Unable to Return a Book | Severity: High | Priority: | Environment: Windows 10, Google Chrome Description: When attempting to return a book using the Book Return feature, the system does not register the return and the book remains checked out to the user. Steps to Reproduce: Login to the Book Lending System as a user who has checked out a book. Click on the \"Book Return\" button for the book that has been checked out. System does not register the return and the book remains checked out. Expected Result: The book should be returned and no longer appear as checked out to the user. Actual Result: The book remains checked out to the user and is not registered as returned in the system. Attachments: [empty list] Which of the following is MOST likely to help the developer reproduce the failure quickly?",
+    "prompt": "Consider the following defect report for a Book Lending System. Which of the following is MOST likely to help the developer reproduce the failure quickly?",
     "options": [
       {
         "key": "a",
@@ -2355,7 +2355,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Considere el siguiente informe de defectos para un sistema de préstamo de libros. ID de defecto: 001 | Título: No se puede devolver un libro | Gravedad: Alta | Prioridad: | Entorno: Windows 10, Google Chrome Descripción: Al intentar devolver un libro utilizando la función Devolución de libro, el sistema no registra la devolución y el libro permanece prestado para el usuario. Pasos para reproducir: Inicie sesión en el sistema de préstamo de libros como usuario que ha prestado un libro. Haga clic en el botón \"Devolver libro\" del libro que se ha prestado. El sistema no registra la devolución y el libro queda prestado. Resultado esperado: el libro debe devolverse y ya no aparecerá como prestado para el usuario. Resultado real: el libro permanece prestado para el usuario y no se registra como devuelto en el sistema. Archivos adjuntos: [lista vacía] ¿Cuál de las siguientes opciones es MÁS probable que ayude al desarrollador a reproducir el error rápidamente?",
+        "prompt": "Considere el siguiente informe de defecto de un sistema de préstamo de libros. ¿Cuál de las siguientes opciones tiene MÁS probabilidades de ayudar al desarrollador a reproducir el fallo rápidamente?",
         "options": [
           {
             "key": "a",
@@ -2436,7 +2436,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "Considerando cada una de las categorías de herramientas enumeradas: i. Herramientas de colaboración: facilitan la comunicación. La comunicación no incluye la facilitación de la ejecución de prueba ii. Herramientas DevOps: respaldan el proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de compilación automatizados y CI/CD. Tanto el proceso de entrega como el CI/CD incluyen la facilitación de la ejecución de pruebas, como pruebas de componentes para CI iii. Herramientas de gestión: aumente la eficiencia del proceso de prueba facilitando la gestión del SDLC, requisitos, pruebas, defectos y configuración. La gestión de estos elementos no incluye la facilitación de la ejecución de prueba iv. Herramientas de pruebas no funcionales: permiten al tester realizar pruebas no funcionales que son difíciles o imposibles de realizar manualmente. Las pruebas no funcionales pueden incluir tanto pruebas estáticas como pruebas dinámicas, incluida la ejecución de prueba v. herramientas de diseño e implementación de pruebas: facilitan la generación de casos de prueba, datos de prueba y procedimientos de prueba. La generación de este testware no incluye la facilitación de la ejecución de prueba Por lo tanto: a) No es correcto b) Es correcto. Tanto las herramientas DevOps (ii) como las herramientas de pruebas no funcionales (iv) facilitan la ejecución de la prueba c) No es correcto d) No es correcto"
+        "explanation": "Considerando cada una de las categorías de herramientas enumeradas: i. Herramientas de colaboración: facilitan la comunicación. La comunicación no incluye la facilitación de la ejecución de prueba ii. Herramientas DevOps: dan soporte al proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de compilación automatizados y CI/CD. Tanto el proceso de entrega como el CI/CD incluyen la facilitación de la ejecución de pruebas, como pruebas de componentes para CI iii. Herramientas de gestión: aumente la eficiencia del proceso de prueba facilitando la gestión del SDLC, requisitos, pruebas, defectos y configuración. La gestión de estos elementos no incluye la facilitación de la ejecución de prueba iv. Herramientas de pruebas no funcionales: permiten al tester realizar pruebas no funcionales que son difíciles o imposibles de realizar manualmente. Las pruebas no funcionales pueden incluir tanto pruebas estáticas como pruebas dinámicas, incluida la ejecución de prueba v. herramientas de diseño e implementación de pruebas: facilitan la generación de casos de prueba, datos de prueba y procedimientos de prueba. La generación de este testware no incluye la facilitación de la ejecución de prueba Por lo tanto: a) No es correcto b) Es correcto. Tanto las herramientas DevOps (ii) como las herramientas de pruebas no funcionales (iv) facilitan la ejecución de la prueba c) No es correcto d) No es correcto"
       }
     }
   },

@@ -5,6 +5,8 @@ export type ProgressBreakdown = {
   id: string;
   total: number;
   attempted: number;
+  correctAnswered: number;
+  incorrectAnswered: number;
   coverage: number;
   attempts: number;
   correctAttempts: number;
@@ -14,6 +16,8 @@ export type ProgressBreakdown = {
 export type StudyDashboard = {
   total: number;
   attempted: number;
+  correctAnswered: number;
+  incorrectAnswered: number;
   coverage: number;
   attempts: number;
   correctAttempts: number;
@@ -37,12 +41,15 @@ function breakdown(
 ): ProgressBreakdown {
   const items = groupQuestions.map((question) => progress.questionProgress[question.id]);
   const attempted = items.filter((item) => Boolean(item?.attempts)).length;
+  const correctAnswered = items.filter((item) => Boolean(item?.attempts) && item?.lastCorrect).length;
   const attempts = items.reduce((sum, item) => sum + (item?.attempts ?? 0), 0);
   const correctAttempts = items.reduce((sum, item) => sum + (item?.correct ?? 0), 0);
   return {
     id,
     total: groupQuestions.length,
     attempted,
+    correctAnswered,
+    incorrectAnswered: attempted - correctAnswered,
     coverage: percent(attempted, groupQuestions.length),
     attempts,
     correctAttempts,
@@ -81,6 +88,8 @@ export function summarizeStudyDashboard(
   return {
     total: all.total,
     attempted: all.attempted,
+    correctAnswered: all.correctAnswered,
+    incorrectAnswered: all.incorrectAnswered,
     coverage: all.coverage,
     attempts: all.attempts,
     correctAttempts: all.correctAttempts,

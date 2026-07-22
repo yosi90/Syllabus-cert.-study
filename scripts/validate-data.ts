@@ -155,6 +155,7 @@ for (const question of bank.questions) {
   const sourceTexts = [question.prompt, question.explanation, ...question.options.map((option) => option.text)];
   const spanishTexts = [spanish?.prompt ?? "", spanish?.explanation ?? "", ...(spanish?.options ?? []).map((option) => option.text)];
   assert(!spanishTexts.some((text) => /\b(?:prob|prov)ad(?:or|ora|ores|oras)\b/i.test(text)), `${question.id}: Spanish text translates tester instead of preserving the anglicism`);
+  assert(!spanishTexts.some((text) => /\bMEJOR\s+coincid(?:e|en)\b/i.test(text)), `${question.id}: Spanish text places MEJOR before coincide/coinciden`);
   assert(!sourceTexts.some((text) => pdfArtifactPattern.test(text)), `${question.id}: source text contains a PDF header or footer`);
   assert(!spanishTexts.some((text) => spanishArtifactPattern.test(text)), `${question.id}: Spanish text contains an extraction or translation artifact`);
   for (const brokenWord of knownBrokenSourceWords) {

@@ -73,6 +73,8 @@ GLOSSARY = [
     (r"\btest objective\b", "objetivo de prueba"),
     (r"\btest planning\b", "planificacion de prueba"),
     (r"\btestware\b", "testware"),
+    (r"\bchecklists\b", "checklists"),
+    (r"\bchecklist\b", "checklist"),
     (r"\bdefect report\b", "informe de defecto"),
     (r"\bdefect reports\b", "informes de defecto"),
     (r"\broot cause\b", "causa raiz"),

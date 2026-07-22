@@ -36,7 +36,7 @@ GLOSSARY = {
     "equivalence partition": "partición de equivalencia",
     "decision table testing": "pruebas de tabla de decisiones",
     "state transition testing": "pruebas de transición de estados",
-    "checklist-based testing": "pruebas basadas en listas de comprobación",
+    "checklist-based testing": "pruebas basadas en checklists",
     "exploratory testing": "pruebas exploratorias",
     "error guessing": "predicción de errores",
     "statement coverage": "cobertura de sentencias",
@@ -114,6 +114,8 @@ GLOSSARY = {
     "work product": "producto de trabajo",
     "testers": "testers",
     "tester": "tester",
+    "checklists": "checklists",
+    "checklist": "checklist",
     "branches": "ramas",
     "branch": "rama",
 }
@@ -148,6 +150,10 @@ def polish_translation(question_id: str, field: str, text: str) -> str:
     text = re.sub(r"\bActions\b", "Acciones", text)
     text = re.sub(r"\b(?:evaluadores|provadores|probadores)\b", "testers", text, flags=re.IGNORECASE)
     text = re.sub(r"\b(?:evaluador|provador|probador)\b", "tester", text, flags=re.IGNORECASE)
+    text = re.sub(r"\brespaldaría\b", "daría soporte a", text, flags=re.IGNORECASE)
+    text = re.sub(r"\brespaldan\b", "dan soporte a", text, flags=re.IGNORECASE)
+    text = re.sub(r"\brespalda\b", "da soporte a", text, flags=re.IGNORECASE)
+    text = re.sub(r"\brespaldar\b", "dar soporte a", text, flags=re.IGNORECASE)
     text = re.sub(r"\bdiseño de prueba y herramientas de implementación\b", "herramientas de diseño e implementación de pruebas", text, flags=re.IGNORECASE)
     text = re.sub(r"\bherramientas de diseño de prueba e implementación de prueba\b", "herramientas de diseño e implementación de pruebas", text, flags=re.IGNORECASE)
 

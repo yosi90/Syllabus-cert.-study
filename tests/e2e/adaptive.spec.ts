@@ -5,6 +5,72 @@ test.beforeEach(async ({ page }) => {
   await prepareApp(page);
 });
 
+test("reinforcement actions prioritize weak questions and persist active answer time", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "One Chromium pass covers shared timing behavior.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (!progress) return;
+    progress.questionProgress = {
+      "A-01": {
+        attempts: 1,
+        correct: 0,
+        lastCorrect: false,
+        flagged: false,
+        lastAnswers: ["a"],
+        updatedAt: "2026-07-22T00:00:00.000Z",
+      },
+    };
+    window.localStorage.setItem(key, JSON.stringify(progress));
+  });
+  await page.goto("/");
+
+  await expect(page.getByRole("button", { name: "Reinforcement · 10" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Full reinforcement · 20" })).toBeVisible();
+  await page.getByRole("button", { name: "Reinforcement · 10" }).click();
+
+  await expect(page.getByRole("heading", { name: "Reinforcement · 10" })).toBeVisible();
+  await expect(page.locator(".question-meta").getByText("A-01", { exact: true })).toBeVisible();
+  const timer = page.locator(".header-metrics .question-timer");
+  await expect(timer).toBeVisible();
+  await expect.poll(async () => timer.innerText()).toMatch(/00:0[1-9]/);
+
+  await page.locator('.option-row input[type="radio"], .option-row input[type="checkbox"]').first().check();
+  await page.getByRole("button", { name: "Check" }).click();
+  const stoppedTime = await timer.getAttribute("aria-label");
+  await page.waitForTimeout(1_100);
+  await expect(timer).toHaveAttribute("aria-label", stoppedTime!);
+  await expect.poll(async () => page.evaluate(() => {
+    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null");
+    return progress?.questionProgress?.["A-01"]?.totalActiveMs ?? 0;
+  })).toBeGreaterThan(900);
+});
+
+test("exam questions also stop and persist their individual timer on first answer", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "One Chromium pass covers shared timing behavior.");
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/#/exam");
+  await page.getByRole("button", { name: /Model A/ }).click();
+  const dimensions = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    content: document.documentElement.scrollWidth,
+  }));
+  expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport);
+
+  const timer = page.locator(".header-metrics .question-timer");
+  await expect.poll(async () => timer.getAttribute("aria-label")).toMatch(/00:0[1-9]/);
+  await page.locator('.option-row input[type="radio"]').first().check();
+  const stoppedTime = await timer.getAttribute("aria-label");
+  await page.waitForTimeout(1_100);
+  await expect(timer).toHaveAttribute("aria-label", stoppedTime!);
+
+  await page.getByRole("button", { name: "Finish" }).click();
+  await expect.poll(async () => page.evaluate(() => {
+    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null");
+    return progress?.questionProgress?.["A-01"]?.timedAttempts ?? 0;
+  })).toBe(1);
+});
+
 test("a ten-question adaptive session survives leaving and reloading", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Quick · 10" }).click();

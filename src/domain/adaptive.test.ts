@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { Question } from "../data/types";
 import { createEmptyProgress } from "../storage/progress";
-import { adaptivePriority, createAdaptiveQuestionIds, recommendAdaptiveChapter } from "./adaptive";
+import { adaptivePriority, createAdaptiveQuestionIds, createReinforcementQuestionIds, recommendAdaptiveChapter, reinforcementPriority } from "./adaptive";
 
 function question(id: string, chapter = "FL-1"): Question {
   return {
@@ -81,6 +81,28 @@ describe("adaptive queue", () => {
     const ids = createAdaptiveQuestionIds(questions, createEmptyProgress(), 10, "few", 0);
     expect(ids).toHaveLength(7);
     expect(new Set(ids).size).toBe(7);
+  });
+
+  it("reinforcement prioritizes misses over unseen questions and uses time after mastery", () => {
+    const progress = createEmptyProgress();
+    progress.questionProgress = {
+      missed: { attempts: 2, correct: 0, lastCorrect: false, flagged: false, lastAnswers: ["b"], updatedAt: "2026-07-15", totalActiveMs: 20_000, lastActiveMs: 10_000, timedAttempts: 2 },
+      slow: { attempts: 1, correct: 1, lastCorrect: true, flagged: false, lastAnswers: ["a"], updatedAt: "2026-07-15", totalActiveMs: 120_000, lastActiveMs: 120_000, timedAttempts: 1 },
+      fast: { attempts: 1, correct: 1, lastCorrect: true, flagged: false, lastAnswers: ["a"], updatedAt: "2026-07-15", totalActiveMs: 8_000, lastActiveMs: 8_000, timedAttempts: 1 },
+    };
+    const now = Date.parse("2026-07-15T12:00:00.000Z");
+
+    expect(reinforcementPriority(question("missed"), progress, now)).toBeGreaterThan(reinforcementPriority(question("unseen"), progress, now));
+    expect(reinforcementPriority(question("slow"), progress, now)).toBeGreaterThan(reinforcementPriority(question("fast"), progress, now));
+
+    const ids = createReinforcementQuestionIds(
+      [question("unseen"), question("fast"), question("slow"), question("missed")],
+      progress,
+      10,
+      "reinforcement",
+      now,
+    );
+    expect(ids.slice(0, 3)).toEqual(["missed", "slow", "fast"]);
   });
 
   it("recommends the chapter with the most missed answers", () => {

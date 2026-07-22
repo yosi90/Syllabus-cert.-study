@@ -33,7 +33,7 @@ const questions = [question("Q-1", "FL-1", "K1"), question("Q-2", "FL-1", "K2"),
 describe("study dashboard", () => {
   it("returns neutral metrics when no progress exists", () => {
     const summary = summarizeStudyDashboard(questions, chapters, createEmptyProgress());
-    expect(summary).toMatchObject({ attempted: 0, coverage: 0, accuracy: null, unseen: 3, pendingErrors: 0 });
+    expect(summary).toMatchObject({ attempted: 0, correctAnswered: 0, incorrectAnswered: 0, coverage: 0, accuracy: null, unseen: 3, pendingErrors: 0 });
     expect(summary.weakChapterIds).toEqual([]);
   });
 
@@ -45,8 +45,8 @@ describe("study dashboard", () => {
     };
     const summary = summarizeStudyDashboard(questions, chapters, progress);
 
-    expect(summary).toMatchObject({ attempted: 2, coverage: 67, attempts: 3, correctAttempts: 2, accuracy: 67, unseen: 1, pendingErrors: 1, flagged: 1 });
-    expect(summary.byChapter.find((item) => item.id === "FL-1")).toMatchObject({ coverage: 50, accuracy: 50 });
+    expect(summary).toMatchObject({ attempted: 2, correctAnswered: 1, incorrectAnswered: 1, coverage: 67, attempts: 3, correctAttempts: 2, accuracy: 67, unseen: 1, pendingErrors: 1, flagged: 1 });
+    expect(summary.byChapter.find((item) => item.id === "FL-1")).toMatchObject({ correctAnswered: 0, incorrectAnswered: 1, coverage: 50, accuracy: 50 });
     expect(summary.weakChapterIds[0]).toBe("FL-1");
   });
 });

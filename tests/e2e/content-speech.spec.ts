@@ -47,7 +47,7 @@ test("speech reads the question, then the wrong and correct explanations, and ca
   await installSpeechMock(page);
   await page.goto("/#/practice");
 
-  await page.getByRole("button", { name: "Read question and options" }).click();
+  await page.getByRole("button", { name: "Read prompt" }).click();
   let state = await page.evaluate(() => (window as typeof window & { __speechState: { spoken: Array<{ text: string; lang: string }>; cancellations: number } }).__speechState);
   expect(state.spoken.at(-1)?.lang).toBe("en-GB");
   expect(state.spoken.at(-1)?.text).toContain("Which of the following statements describe a valid test objective?");
@@ -55,14 +55,14 @@ test("speech reads the question, then the wrong and correct explanations, and ca
 
   await page.getByText("To prove that there are no unfixed defects in the system under test", { exact: true }).click();
   await page.getByRole("button", { name: "Check" }).click();
-  await page.getByRole("button", { name: "Read answer explanation" }).click();
+  await page.getByRole("button", { name: "Read explanation" }).click();
   state = await page.evaluate(() => (window as typeof window & { __speechState: { spoken: Array<{ text: string; lang: string }>; cancellations: number } }).__speechState);
   expect(state.cancellations).toBeGreaterThan(0);
   expect(state.spoken.at(-1)?.text).toMatch(/^Incorrect\. Your answer\./);
   expect(state.spoken.at(-1)?.text.indexOf("Your answer")).toBeLessThan(state.spoken.at(-1)?.text.indexOf("Correct"));
 
   await page.getByRole("button", { name: "Stop reading" }).click();
-  await expect(page.getByRole("button", { name: "Read answer explanation" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Read explanation" })).toBeVisible();
 });
 
 test("speech controls are hidden when the browser API is unavailable", async ({ page }, testInfo) => {
@@ -72,7 +72,7 @@ test("speech controls are hidden when the browser API is unavailable", async ({ 
     Object.defineProperty(window, "SpeechSynthesisUtterance", { configurable: true, value: undefined });
   });
   await page.goto("/#/practice");
-  await expect(page.getByRole("button", { name: "Read question and options" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Read prompt" })).toHaveCount(0);
 });
 
 test("C-31 renders a real fraction with an accessible localized description", async ({ page }, testInfo) => {
@@ -90,4 +90,20 @@ test("C-31 renders a real fraction with an accessible localized description", as
   await expect(page.getByRole("img", { name: /all divided by four/i })).toBeVisible();
   await expect(page.locator(".math-expression .frac-line")).toBeVisible();
   await expect(page.locator(".prompt")).not.toContainText("A(n−2) 4");
+});
+
+test("Spanish technical terms expose translations without selecting an answer", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "One browser pass covers shared term interactions.");
+  await page.addInitScript(() => {
+    window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
+  });
+  await page.goto("/#/practice");
+  await page.getByRole("button", { name: "Español" }).click();
+
+  const term = page.locator(".option-row .technical-term").first();
+  await expect(term).toBeVisible();
+  await term.click();
+
+  await expect(term.locator(".technical-term-tooltip")).toBeVisible();
+  await expect(page.locator('input[type="radio"]:checked')).toHaveCount(0);
 });

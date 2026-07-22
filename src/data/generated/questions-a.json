@@ -1618,7 +1618,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) Es correcto. El concepto básico detrás de la predicción de errores es que el tester intenta adivinar qué errores pudo haber cometido el desarrollador y qué defectos puede haber en el objeto de prueba basándose en experiencias pasadas (y a veces listas de verificación). b) No es correcto. Aunque un tester que fue desarrollador puede utilizar su experiencia personal para ayudarle a la hora de realizar predicción de errores, la técnica de prueba no se basa en conocimientos previos de desarrollo c) No es correcta. La predicción de errores no es una técnica de usabilidad para adivinar cómo los usuarios pueden fallar al interactuar con el objeto de prueba. d) No es correcta. Duplicar la tarea de desarrollo tiene varios defectos que la hacen poco práctica, como que el tester tiene habilidades equivalentes a las del desarrollador y el tiempo necesario para realizar el desarrollo. No es predicción de errores"
+        "explanation": "a) Es correcto. El concepto básico detrás de la predicción de errores es que el tester intenta adivinar qué errores pudo haber cometido el desarrollador y qué defectos puede haber en el objeto de prueba basándose en experiencias pasadas (y, a veces, checklists). b) No es correcto. Aunque un tester que fue desarrollador puede utilizar su experiencia personal para ayudarle a la hora de realizar predicción de errores, la técnica de prueba no se basa en conocimientos previos de desarrollo c) No es correcta. La predicción de errores no es una técnica de usabilidad para adivinar cómo los usuarios pueden fallar al interactuar con el objeto de prueba. d) No es correcta. Duplicar la tarea de desarrollo tiene varios defectos que la hacen poco práctica, como que el tester tiene habilidades equivalentes a las del desarrollador y el tiempo necesario para realizar el desarrollo. No es predicción de errores"
       }
     }
   },
@@ -1663,7 +1663,7 @@
         "options": [
           {
             "key": "a",
-            "text": "Pruebas basadas en listas de comprobación"
+            "text": "Pruebas basadas en checklists"
           },
           {
             "key": "b",
@@ -1679,7 +1679,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Este es un producto nuevo. Probablemente aún no tenga una lista de verificación y es posible que no se conozcan las condiciones de prueba debido a que faltan requisitos b) No es correcto. Este es un producto nuevo. Probablemente no tenga suficiente información para hacer conjeturas de error correctas c) Es correcto. Las pruebas exploratorias son más útil cuando hay pocas especificaciones conocidas y/o hay un cronograma apremiante para Las pruebas d) No son correcto. Las pruebas de ramas llevan mucho tiempo y su gerencia está preguntando sobre algunos resultados de las pruebas ahora. Además, pruebas de ramas no implica conocimiento del dominio."
+        "explanation": "a) No es correcto. Este es un producto nuevo. Probablemente aún no tenga un checklist y es posible que no se conozcan las condiciones de prueba debido a que faltan requisitos b) No es correcto. Este es un producto nuevo. Probablemente no tenga suficiente información para hacer conjeturas de error correctas c) Es correcto. Las pruebas exploratorias son más útil cuando hay pocas especificaciones conocidas y/o hay un cronograma apremiante para Las pruebas d) No son correcto. Las pruebas de ramas llevan mucho tiempo y su gerencia está preguntando sobre algunos resultados de las pruebas ahora. Además, pruebas de ramas no implica conocimiento del dominio."
       }
     }
   },

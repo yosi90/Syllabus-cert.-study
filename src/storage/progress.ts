@@ -12,6 +12,9 @@ export type QuestionProgress = {
   flagged: boolean;
   lastAnswers: string[];
   updatedAt: string;
+  totalActiveMs?: number;
+  lastActiveMs?: number;
+  timedAttempts?: number;
 };
 
 export type StoredSession = {
@@ -48,6 +51,7 @@ export type PersistedExam = {
   timerMode: "off" | "standard" | "extended";
   endsAt: number | null;
   optionMode: "original";
+  questionActiveMs?: Record<string, number>;
 };
 
 export type PersistedStudySession = {
@@ -63,6 +67,7 @@ export type PersistedStudySession = {
   revealed: boolean;
   checkedQuestionIds: string[];
   startedAt: string;
+  studyMode?: "adaptive" | "reinforcement";
 };
 
 export type ProgressState = {
@@ -187,7 +192,14 @@ function normalizeProgress(value: ProgressState): ProgressState {
   return {
     version: 2,
     certification: "ctfl-v4",
-    questionProgress: value.questionProgress ?? {},
+    questionProgress: Object.fromEntries(
+      Object.entries(value.questionProgress ?? {}).map(([questionId, item]) => [questionId, {
+        ...item,
+        totalActiveMs: Number.isFinite(item.totalActiveMs) ? Math.max(0, item.totalActiveMs ?? 0) : 0,
+        lastActiveMs: Number.isFinite(item.lastActiveMs) ? Math.max(0, item.lastActiveMs ?? 0) : 0,
+        timedAttempts: Number.isFinite(item.timedAttempts) ? Math.max(0, item.timedAttempts ?? 0) : 0,
+      }]),
+    ),
     sessions: Array.isArray(value.sessions)
       ? value.sessions.map((session) => {
           if (!isObject(session)) return session as StoredSession;
@@ -216,7 +228,13 @@ function normalizeProgress(value: ProgressState): ProgressState {
       revealed: Boolean(study.revealed),
     },
     activeExam: isObject(value.activeExam)
-      ? { ...(value.activeExam as PersistedExam), optionMode: "original" }
+      ? {
+          ...(value.activeExam as PersistedExam),
+          optionMode: "original",
+          ...(isObject(value.activeExam.questionActiveMs)
+            ? { questionActiveMs: Object.fromEntries(Object.entries(value.activeExam.questionActiveMs).filter((entry): entry is [string, number] => typeof entry[1] === "number" && Number.isFinite(entry[1]))) }
+            : {}),
+        }
       : null,
     activeStudySession: isObject(value.activeStudySession)
       ? {
@@ -290,8 +308,12 @@ export function recordQuestionAttempt(
   selectedAnswers: string[],
   isCorrect: boolean,
   now = new Date().toISOString(),
+  activeMs?: number,
 ): ProgressState {
   const previous = progress.questionProgress[questionId];
+  const measuredActiveMs = typeof activeMs === "number" && Number.isFinite(activeMs)
+    ? Math.max(0, Math.round(activeMs))
+    : null;
   return {
     ...progress,
     questionProgress: {
@@ -303,6 +325,9 @@ export function recordQuestionAttempt(
         flagged: previous?.flagged ?? false,
         lastAnswers: selectedAnswers,
         updatedAt: now,
+        totalActiveMs: (previous?.totalActiveMs ?? 0) + (measuredActiveMs ?? 0),
+        lastActiveMs: measuredActiveMs ?? previous?.lastActiveMs ?? 0,
+        timedAttempts: (previous?.timedAttempts ?? 0) + (measuredActiveMs === null ? 0 : 1),
       },
     },
   };
@@ -321,6 +346,9 @@ export function toggleFlag(progress: ProgressState, questionId: string, now = ne
         flagged: !(previous?.flagged ?? false),
         lastAnswers: previous?.lastAnswers ?? [],
         updatedAt: now,
+        totalActiveMs: previous?.totalActiveMs ?? 0,
+        lastActiveMs: previous?.lastActiveMs ?? 0,
+        timedAttempts: previous?.timedAttempts ?? 0,
       },
     },
   };

@@ -74,6 +74,88 @@ export function localizedQuestion(question: Question, language: Language) {
   };
 }
 
+export function formatPromptText(prompt: string) {
+  let formatted = prompt.replace(/\s+•\s+/g, "\n• ");
+
+  const listMarkerSets = [
+    ["1", "2"],
+    ["i", "ii"],
+    ["A", "B"],
+  ];
+
+  for (const [first, second] of listMarkerSets) {
+    const firstPattern = new RegExp(`(?:^|\\s)${first}\\.\\s`);
+    const secondPattern = new RegExp(`(?:^|\\s)${second}\\.\\s`);
+    if (firstPattern.test(formatted) && secondPattern.test(formatted)) {
+      const markerPattern = first === "1"
+        ? /\s+(?=[1-9]\.\s)/g
+        : first === "i"
+          ? /\s+(?=(?:i|ii|iii|iv|v)\.\s)/g
+          : /\s+(?=[A-Z]\.\s)/g;
+      formatted = formatted.replace(markerPattern, "\n");
+    }
+  }
+
+  return formatted
+    .replace(/\s+(?=And the following\b|Y las siguientes\b)/g, "\n\n")
+    .replace(/\s+(?=Variable:)/g, "\n\n")
+    .replace(/\s+(?=(?:Which|What|How|Tools from|Given that|Based on|In all test cases)(?:\s|$))/g, "\n\n")
+    .replace(/\s+(?=(?:¿Cuál|¿Cuáles|¿Qué|¿Cómo|¿De|¿Herramientas de|Dado que|Basándose en|Basándote|En todos los casos)(?:\s|$))/g, "\n\n")
+    .replace(/\.\s+(?=(?:Your|You|Each|The decision table)\b)/g, ".\n\n")
+    .replace(/\.\s+(?=(?:Su|Usted|Cada|La tabla de decisiones?)\b)/g, ".\n\n");
+}
+
+export type PromptBlock =
+  | { type: "text"; text: string }
+  | { type: "list"; items: Array<{ marker: string; text: string }> };
+
+export function promptBlocks(prompt: string): PromptBlock[] {
+  const lines = formatPromptText(prompt).split(/\n+/).map((line) => line.trim()).filter(Boolean);
+  const blocks: PromptBlock[] = [];
+  const listItemPattern = /^(•|[1-9]\.|[A-Z]\.|(?:i|ii|iii|iv|v)\.)\s+(.+)$/;
+
+  for (const line of lines) {
+    const match = line.match(listItemPattern);
+    if (!match) {
+      blocks.push({ type: "text", text: line });
+      continue;
+    }
+
+    const previous = blocks.at(-1);
+    const item = { marker: match[1], text: match[2] };
+    if (previous?.type === "list") previous.items.push(item);
+    else blocks.push({ type: "list", items: [item] });
+  }
+
+  return blocks;
+}
+
+export function parallelPromptListLayout(blocks: PromptBlock[]) {
+  const listIndices = blocks.flatMap((block, index) => block.type === "list" ? [index] : []);
+  if (listIndices.length !== 2) return null;
+
+  const [firstListIndex, secondListIndex] = listIndices;
+  const beforeFirstList = blocks.slice(0, firstListIndex);
+  let prefix = beforeFirstList.slice(0, -1);
+  let firstHeading = beforeFirstList.slice(-1);
+
+  if (beforeFirstList.length === 1 && beforeFirstList[0].type === "text") {
+    const text = beforeFirstList[0].text;
+    const finalSentenceStart = text.lastIndexOf(". ");
+    if (finalSentenceStart > 0 && text.endsWith(":")) {
+      prefix = [{ type: "text", text: text.slice(0, finalSentenceStart + 1) }];
+      firstHeading = [{ type: "text", text: text.slice(finalSentenceStart + 2) }];
+    }
+  }
+
+  return {
+    prefix,
+    firstColumn: [...firstHeading, blocks[firstListIndex]],
+    secondColumn: blocks.slice(firstListIndex + 1, secondListIndex + 1),
+    suffix: blocks.slice(secondListIndex + 1),
+  };
+}
+
 export function hasActiveFilters(filters: QuestionFilters) {
   return (
     filters.query.trim().length > 0 ||

@@ -12,6 +12,7 @@ export function ExamView({
   timerMode,
   onTimerModeChange,
   now,
+  questionActiveTimeMs,
   onStartModel,
   onStartRandom,
   onToggle,
@@ -26,6 +27,7 @@ export function ExamView({
   timerMode: TimerMode;
   onTimerModeChange: (mode: TimerMode) => void;
   now: number;
+  questionActiveTimeMs: number;
   onStartModel: (model: SourceModel) => void;
   onStartRandom: () => void;
   onToggle: (question: Question, optionKey: string) => void;
@@ -110,6 +112,8 @@ export function ExamView({
   const remainingMs = activeExam.endsAt ? activeExam.endsAt - now : null;
   const timeIsUp = remainingMs !== null && remainingMs <= 0;
   const timeLabel = remainingMs === null ? copy.noLimit : formatRemainingTime(Math.max(remainingMs, 0));
+  const questionSeconds = Math.floor(questionActiveTimeMs / 1_000);
+  const questionTimeLabel = `${Math.floor(questionSeconds / 60).toString().padStart(2, "0")}:${(questionSeconds % 60).toString().padStart(2, "0")}`;
 
   return (
     <main className="workspace">
@@ -121,6 +125,9 @@ export function ExamView({
         <div className="header-metrics">
           <Metric label={copy.answered} value={`${answered}/40`} />
           <Metric label={copy.question} value={`${activeExam.currentIndex + 1}/40`} />
+          <div className="question-timer" role="timer" aria-label={`${copy.questionTime}: ${questionTimeLabel}`}>
+            <Metric label={copy.questionTime} value={questionTimeLabel} />
+          </div>
           <Metric label={copy.time} value={timeIsUp ? copy.timeUp.replace(".", "") : timeLabel} />
         </div>
       </header>

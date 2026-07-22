@@ -32,7 +32,33 @@ export function adaptivePriority(
   const flagged = item.flagged ? 55 : 0;
   const lowAccuracy = (1 - accuracy) * 50;
   const age = Math.min(ageDays, 90) * 0.4;
-  return recentError + flagged + lowAccuracy + age;
+  const averageSeconds = item.timedAttempts
+    ? (item.totalActiveMs ?? 0) / item.timedAttempts / 1_000
+    : 0;
+  const slowAnswer = Math.min(averageSeconds, 180) * 0.08;
+  return recentError + flagged + lowAccuracy + age + slowAnswer;
+}
+
+export function reinforcementPriority(
+  question: Question,
+  progress: ProgressState,
+  now = Date.now(),
+) {
+  const item = progress.questionProgress[question.id];
+  if (!item?.attempts) return 0;
+
+  const accuracy = item.correct / item.attempts;
+  const ageDays = Math.max(0, (now - new Date(item.updatedAt).getTime()) / 86_400_000);
+  const averageSeconds = item.timedAttempts
+    ? (item.totalActiveMs ?? 0) / item.timedAttempts / 1_000
+    : 0;
+
+  return (item.correct === 0 ? 1_000 : 0)
+    + (item.lastCorrect ? 0 : 400)
+    + (item.flagged ? 200 : 0)
+    + (1 - accuracy) * 150
+    + Math.min(averageSeconds, 300)
+    + Math.min(ageDays, 90) * 0.4;
 }
 
 export function rankAdaptiveQuestions(
@@ -84,6 +110,41 @@ export function createAdaptiveQuestionIds(
   appendCandidates(unseen, false);
   appendCandidates(seen, true);
   appendCandidates(seen, false);
+
+  return selected.map((candidate) => candidate.question.id);
+}
+
+export function createReinforcementQuestionIds(
+  questions: Question[],
+  progress: ProgressState,
+  size: 10 | 20,
+  seed: string,
+  now = Date.now(),
+) {
+  const ranked = questions
+    .map((question) => ({
+      question,
+      priority: reinforcementPriority(question, progress, now),
+      tieBreaker: hashSeed(`${seed}:${question.id}`),
+    }))
+    .sort((left, right) => right.priority - left.priority || left.tieBreaker - right.tieBreaker);
+  const target = Math.min(size, ranked.length);
+  const chapterLimit = Math.max(1, Math.floor(size * 0.5));
+  const selected: AdaptiveCandidate[] = [];
+  const selectedIds = new Set<string>();
+  const chapterCounts = new Map<string, number>();
+
+  for (const enforceChapterLimit of [true, false]) {
+    for (const candidate of ranked) {
+      if (selected.length >= target) break;
+      if (selectedIds.has(candidate.question.id)) continue;
+      const chapterCount = chapterCounts.get(candidate.question.chapter) ?? 0;
+      if (enforceChapterLimit && chapterCount >= chapterLimit) continue;
+      selected.push(candidate);
+      selectedIds.add(candidate.question.id);
+      chapterCounts.set(candidate.question.chapter, chapterCount + 1);
+    }
+  }
 
   return selected.map((candidate) => candidate.question.id);
 }

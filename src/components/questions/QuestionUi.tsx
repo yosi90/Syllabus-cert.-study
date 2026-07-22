@@ -29,6 +29,7 @@ import {
 } from "../../app/presentation";
 import { buildExplanationSpeech, buildQuestionSpeech } from "../../app/speech";
 import { QuestionPromptContent, SpeechButton } from "./QuestionContent";
+import { TechnicalText } from "../common/TechnicalText";
 
 export function QuestionCard({
   question,
@@ -119,7 +120,7 @@ export function QuestionCard({
                 onChange={() => onToggle(option.key)}
               />
               <span className="option-key">{option.displayKey}</span>
-              <span>{option.text}</span>
+              <span><TechnicalText text={option.text} language={language} /></span>
             </label>
           );
         })}
@@ -217,7 +218,7 @@ export function ExplanationPanel({
           <TheoryButton objective={objective} onOpen={() => setIsTheoryOpen(true)} language={language} copy={copy} />
           <SpeechButton text={buildExplanationSpeech(question, selected, language, copy, optionMode, optionSeed)} language={language} copy={copy} kind="explanation" />
         </div>
-        <p className="explanation-text">{localized.explanation}</p>
+        <p className="explanation-text"><TechnicalText text={localized.explanation} language={language} /></p>
         {isTheoryOpen && objective && <TheoryModal objective={objective} onClose={() => setIsTheoryOpen(false)} language={language} copy={copy} />}
       </div>
     );
@@ -229,7 +230,7 @@ export function ExplanationPanel({
         <TheoryButton objective={objective} onOpen={() => setIsTheoryOpen(true)} language={language} copy={copy} />
         <SpeechButton text={buildExplanationSpeech(question, selected, language, copy, optionMode, optionSeed)} language={language} copy={copy} kind="explanation" />
       </div>
-      {parsed.intro && <p className="explanation-intro">{parsed.intro}</p>}
+      {parsed.intro && <p className="explanation-intro"><TechnicalText text={parsed.intro} language={language} /></p>}
       <div className="explanation-options">
         {[...parsed.options].sort((left, right) => {
           return (displayOrderByOriginalKey.get(left.key) ?? 0) - (displayOrderByOriginalKey.get(right.key) ?? 0);
@@ -253,7 +254,7 @@ export function ExplanationPanel({
                 </span>
                 {isSelected && <span className="reason-pill selected">{copy.yourAnswer}</span>}
               </div>
-              <p>{cleanExplanationText(item.text)}</p>
+              <p><TechnicalText text={cleanExplanationText(item.text)} language={language} /></p>
             </div>
           );
         })}
@@ -326,13 +327,13 @@ export function TheoryModal({
         <dl className="theory-details">
           <div>
             <dt>{copy.objective}</dt>
-            <dd>{localized.text}</dd>
+            <dd><TechnicalText text={localized.text} language={language} /></dd>
           </div>
           <div>
             <dt>{copy.section}</dt>
             <dd>
               {objective.section}
-              {localized.sectionTitle ? ` - ${localized.sectionTitle}` : ""}
+              {localized.sectionTitle ? <><span> - </span><TechnicalText text={localized.sectionTitle} language={language} /></> : null}
             </dd>
           </div>
           <div>

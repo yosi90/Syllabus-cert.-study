@@ -31,6 +31,25 @@ describe("progress storage", () => {
     expect(loadProgress(storage).questionProgress["A-01"].lastCorrect).toBe(true);
   });
 
+  it("accumulates active answer time without inventing timing for legacy attempts", () => {
+    const first = recordQuestionAttempt(createEmptyProgress(), "A-01", ["a"], true, "2026-06-25T00:00:00.000Z", 12_400);
+    const second = recordQuestionAttempt(first, "A-01", ["b"], false, "2026-06-25T00:01:00.000Z", 7_600);
+    expect(second.questionProgress["A-01"]).toMatchObject({
+      attempts: 2,
+      totalActiveMs: 20_000,
+      lastActiveMs: 7_600,
+      timedAttempts: 2,
+    });
+
+    const restoredLegacy = importProgress(JSON.stringify({
+      ...createEmptyProgress(),
+      questionProgress: {
+        "B-01": { attempts: 1, correct: 1, lastCorrect: true, flagged: false, lastAnswers: ["a"], updatedAt: "2026-01-01" },
+      },
+    }));
+    expect(restoredLegacy.questionProgress["B-01"]).toMatchObject({ totalActiveMs: 0, lastActiveMs: 0, timedAttempts: 0 });
+  });
+
   it("toggles flags without losing attempts", () => {
     const progress = recordQuestionAttempt(createEmptyProgress(), "A-01", ["a"], false);
     const flagged = toggleFlag(progress, "A-01");

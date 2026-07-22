@@ -1,4 +1,4 @@
-import { CheckCircle2, ChevronLeft, ChevronRight, LogOut, Shuffle, XCircle } from "lucide-react";
+import { CheckCircle2, ChevronLeft, ChevronRight, Clock3, LogOut, Shuffle, XCircle } from "lucide-react";
 import type { Question } from "../data/types";
 import { isCorrectAnswer } from "../domain/scoring";
 import type { PersistedStudySession, ProgressState } from "../storage/progress";
@@ -27,6 +27,7 @@ export function StudyView({
   adaptiveSession,
   onFinishSession,
   onLeaveSession,
+  activeTimeMs,
 }: {
   filteredQuestions: Question[];
   currentQuestion: Question | undefined;
@@ -47,6 +48,7 @@ export function StudyView({
   adaptiveSession: PersistedStudySession | null;
   onFinishSession: () => void;
   onLeaveSession: () => void;
+  activeTimeMs: number;
 }) {
   if (!currentQuestion) {
     return (
@@ -57,6 +59,8 @@ export function StudyView({
   }
 
   const isCorrect = revealed && isCorrectAnswer(currentQuestion, selected);
+  const elapsedSeconds = Math.floor(activeTimeMs / 1_000);
+  const elapsedLabel = `${Math.floor(elapsedSeconds / 60).toString().padStart(2, "0")}:${(elapsedSeconds % 60).toString().padStart(2, "0")}`;
 
   return (
     <main className={classNames("workspace", highlighted && "tutorial-highlight")}>
@@ -68,6 +72,10 @@ export function StudyView({
         <div className="header-metrics">
           <Metric label={copy.filtered} value={filteredQuestions.length} />
           <Metric label={copy.current} value={`${currentIndex + 1}/${filteredQuestions.length}`} />
+          <div className="question-timer" role="timer" aria-label={`${copy.questionTime}: ${elapsedLabel}`}>
+            <Clock3 aria-hidden="true" />
+            <Metric label={copy.questionTime} value={elapsedLabel} />
+          </div>
           <FlagLanguageToggle language={language} onChange={onLanguageChange} label={copy.languageLabel} />
         </div>
       </header>
