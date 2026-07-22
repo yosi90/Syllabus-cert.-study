@@ -169,6 +169,7 @@ describe("progress storage", () => {
       timerMode: "standard",
       endsAt: 1_800_000,
       optionMode: "original",
+      timerSessionId: "exam-session-test",
     };
 
     saveProgress(progress, storage);

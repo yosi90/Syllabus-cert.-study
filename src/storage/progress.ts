@@ -53,6 +53,7 @@ export type PersistedExam = {
   endsAt: number | null;
   optionMode: "original";
   questionActiveMs?: Record<string, number>;
+  timerSessionId?: string;
 };
 
 export type PersistedStudySession = {
@@ -243,6 +244,9 @@ function normalizeProgress(value: ProgressState): ProgressState {
       ? {
           ...(value.activeExam as PersistedExam),
           optionMode: "original",
+          timerSessionId: typeof value.activeExam.timerSessionId === "string"
+            ? value.activeExam.timerSessionId
+            : `${String((value.activeExam as PersistedExam).blueprint?.id ?? "legacy-exam")}:${String(value.activeExam.endsAt ?? "untimed")}`,
           ...(isObject(value.activeExam.questionActiveMs)
             ? { questionActiveMs: Object.fromEntries(Object.entries(value.activeExam.questionActiveMs).filter((entry): entry is [string, number] => typeof entry[1] === "number" && Number.isFinite(entry[1]))) }
             : {}),

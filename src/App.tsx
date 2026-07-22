@@ -131,6 +131,7 @@ function AppShell() {
     ? activeStudySession.revealed || activeStudySession.checkedQuestionIds.includes(currentStudyQuestion?.id ?? "")
     : studyRevealed;
   const { elapsedMs: activeQuestionTimeMs, finishAttempt: finishQuestionTimer } = useActiveQuestionTimer(
+    activeStudySession ? `study:${activeStudySession.id}` : "practice",
     currentStudyQuestion?.id ?? null,
     location.pathname === "/practice" && Boolean(currentStudyQuestion) && !currentStudyRevealed,
   );
@@ -140,6 +141,7 @@ function AppShell() {
   const currentExamSelection = currentExamQuestion ? activeExam?.answers[currentExamQuestion.id] ?? [] : [];
   const currentExamTimed = currentExamQuestion ? activeExam?.questionActiveMs?.[currentExamQuestion.id] !== undefined : false;
   const { elapsedMs: activeExamQuestionTimeMs, finishAttempt: finishExamQuestionTimer } = useActiveQuestionTimer(
+    `exam:${activeExam?.timerSessionId ?? activeExam?.blueprint.id ?? "none"}`,
     currentExamQuestion?.id ?? null,
     location.pathname === "/exam"
       && Boolean(currentExamQuestion)
@@ -245,6 +247,7 @@ function AppShell() {
       endsAt: duration ? Date.now() + duration * 60 * 1000 : null,
       optionMode: "original",
       questionActiveMs: {},
+      timerSessionId: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
     });
     setReview(null);
     navigate("/exam");

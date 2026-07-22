@@ -109,6 +109,13 @@ export type PromptBlock =
   | { type: "text"; text: string }
   | { type: "list"; items: Array<{ marker: string; text: string }> };
 
+function listMarkerFamily(marker: string) {
+  if (marker === "•") return "bullet";
+  if (/^[1-9]\.$/.test(marker)) return "number";
+  if (/^[A-Z]\.$/.test(marker)) return "letter";
+  return "roman";
+}
+
 export function promptBlocks(prompt: string): PromptBlock[] {
   const lines = formatPromptText(prompt).split(/\n+/).map((line) => line.trim()).filter(Boolean);
   const blocks: PromptBlock[] = [];
@@ -123,7 +130,8 @@ export function promptBlocks(prompt: string): PromptBlock[] {
 
     const previous = blocks.at(-1);
     const item = { marker: match[1], text: match[2] };
-    if (previous?.type === "list") previous.items.push(item);
+    const previousMarker = previous?.type === "list" ? previous.items.at(-1)?.marker : undefined;
+    if (previous?.type === "list" && previousMarker && listMarkerFamily(previousMarker) === listMarkerFamily(item.marker)) previous.items.push(item);
     else blocks.push({ type: "list", items: [item] });
   }
 

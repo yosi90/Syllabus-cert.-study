@@ -91,12 +91,22 @@ describe("question prompt formatting", () => {
     }));
   });
 
-  it.each(["B-34", "B-39", "C-17"])("renders the two lists in %s as separate cards", (id) => {
+  it.each(["A-34", "B-34", "B-39", "C-17"])("renders the two lists in %s as separate cards", (id) => {
     const question = questions.find((item) => item.id === id)!;
     for (const language of ["en", "es"] as const) {
       expect(promptBlocks(localizedQuestion(question, language).prompt).filter((block) => block.type === "list"))
         .toHaveLength(2);
     }
+  });
+
+  it("separates A-34 when its marker family changes without an intermediate heading", () => {
+    const question = questions.find((item) => item.id === "A-34")!;
+    for (const language of ["en", "es"] as const) {
+      const lists = promptBlocks(localizedQuestion(question, language).prompt).filter((block) => block.type === "list");
+      expect(lists.map((list) => list.items.length)).toEqual([4, 4]);
+    }
+    expect(parallelPromptListLayout(promptBlocks(localizedQuestion(question, "es").prompt))?.suffix)
+      .toEqual([expect.objectContaining({ text: "¿Cómo se asignan las siguientes categorías de pruebas a los cuadrantes de pruebas ágiles?" })]);
   });
 
   it("keeps all four B-39 tool categories inside the second card", () => {

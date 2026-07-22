@@ -87,6 +87,25 @@ test("question timing pauses while the browser window is unfocused", async ({ pa
   await expect.poll(async () => timer.getAttribute("aria-label")).not.toBe(pausedTime);
 });
 
+test("question timing survives a page reload without counting unloaded time", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "One Chromium pass covers session timing persistence.");
+  await page.goto("/#/practice");
+  const timer = page.locator(".header-metrics .question-timer");
+  await expect.poll(async () => timer.getAttribute("aria-label")).toMatch(/00:0[1-9]/);
+  const timerSeconds = async () => {
+    const label = await timer.getAttribute("aria-label") ?? "00:00";
+    const match = label.match(/(\d+):(\d+)$/);
+    return match ? Number(match[1]) * 60 + Number(match[2]) : 0;
+  };
+  const beforeReload = await timerSeconds();
+
+  await page.reload();
+  await expect.poll(timerSeconds).toBeGreaterThanOrEqual(beforeReload);
+  const restored = await timerSeconds();
+  expect(restored).toBeLessThanOrEqual(beforeReload + 1);
+  await expect.poll(timerSeconds).toBeGreaterThan(restored);
+});
+
 test("a ten-question adaptive session survives leaving and reloading", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Quick · 10" }).click();
