@@ -92,7 +92,9 @@ export function formatPromptText(prompt: string) {
         : first === "i"
           ? /\s+(?=(?:i|ii|iii|iv|v)\.\s)/g
           : /\s+(?=[A-Z]\.\s)/g;
-      formatted = formatted.replace(markerPattern, "\n");
+      formatted = first === "A"
+        ? formatted.split("\n").map((line) => line.startsWith("• ") ? line : line.replace(markerPattern, "\n")).join("\n")
+        : formatted.replace(markerPattern, "\n");
     }
   }
 

@@ -625,15 +625,25 @@ button:disabled {
 }
 
 .math-expression {
-  display: block;
-  width: fit-content;
+  display: inline-flex;
+  align-items: center;
   max-width: 100%;
-  margin: 14px 0;
-  padding: 10px 14px;
+  margin: 0 0.28em;
+  padding: 0.14em 0.5em 0.18em;
   overflow-x: auto;
   border: 1px solid #d8e1ea;
-  border-radius: 8px;
+  border-radius: 6px;
   background: #f7fafc;
+  box-shadow: inset 0 -1px 0 rgb(71 96 122 / 8%);
+  font-family: "KaTeX_Main", "Times New Roman", serif;
+  font-size: 1.06em;
+  font-weight: 400;
+  line-height: 1.15;
+  vertical-align: -0.18em;
+  white-space: nowrap;
+}
+
+.math-expression .katex {
   font-size: 1.08em;
 }
 

@@ -1,3 +1,4 @@
+import katex from "katex";
 import { useId, useState } from "react";
 import type { Language } from "../../app/content";
 import { technicalTextSegments } from "../../app/technicalTerms";
@@ -35,10 +36,38 @@ function TechnicalTerm({ text, translation }: { text: string; translation: strin
 }
 
 export function TechnicalText({ text, language }: { text: string; language: Language }) {
-  if (language !== "es") return <>{text}</>;
-  return <>{technicalTextSegments(text).map((segment, index) => segment.type === "text" ? (
-    <span key={index}>{segment.text}</span>
-  ) : (
-    <TechnicalTerm text={segment.text} translation={segment.translation} key={segment.key} />
-  ))}</>;
+  const formulaPattern = /(\bE\s*=\s*\([^.!?;\n]+?\)\s*\/\s*6(?:\s*=\s*\d+(?:[.,]\d+)?)?)/gi;
+  const exactFormulaPattern = /^\bE\s*=\s*\([^.!?;\n]+?\)\s*\/\s*6(?:\s*=\s*\d+(?:[.,]\d+)?)?$/i;
+  const segments = text.split(formulaPattern).filter(Boolean);
+
+  return <>{segments.map((segment, segmentIndex) => {
+    if (exactFormulaPattern.test(segment)) {
+      const latex = segment
+        .split(/\s*=\s*/)
+        .map((part) => {
+          const fraction = part.match(/^\((.*)\)\s*\/\s*(\d+)$/);
+          const expression = fraction ? fraction[1] : part;
+          const formatted = expression
+            .replace(/más probable|most likely|optimista|optimistic|pesimista|pessimistic/gi, (word) => `\\text{${word}}`)
+            .replace(/\*/g, "\\times ");
+          return fraction ? `\\frac{${formatted}}{${fraction[2]}}` : formatted;
+        })
+        .join("=");
+      return (
+        <span
+          className="math-expression"
+          role="img"
+          aria-label={segment}
+          key={segmentIndex}
+          dangerouslySetInnerHTML={{ __html: katex.renderToString(latex, { throwOnError: false, output: "html" }) }}
+        />
+      );
+    }
+    if (language !== "es") return <span key={segmentIndex}>{segment}</span>;
+    return <span key={segmentIndex}>{technicalTextSegments(segment).map((technicalSegment, index) => technicalSegment.type === "text" ? (
+      <span key={index}>{technicalSegment.text}</span>
+    ) : (
+      <TechnicalTerm text={technicalSegment.text} translation={technicalSegment.translation} key={technicalSegment.key} />
+    ))}</span>;
+  })}</>;
 }

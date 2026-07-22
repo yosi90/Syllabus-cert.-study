@@ -17,8 +17,8 @@ describe("technical term localization", () => {
       .toEqual([{ type: "text", text: "La palabra terror no es el término." }]);
     expect(technicalTextSegments("El tester diseñó dos tests a partir del checklist durante las pruebas."))
       .toEqual([{ type: "text", text: "El tester diseñó dos tests a partir del checklist durante las pruebas." }]);
-    expect(technicalTextSegments("El caso de prueba usa datos de prueba y condiciones de prueba de la base de prueba durante la ejecución de pruebas, con automatización de pruebas, para medir la cobertura del objeto de prueba."))
-      .toEqual([{ type: "text", text: "El caso de prueba usa datos de prueba y condiciones de prueba de la base de prueba durante la ejecución de pruebas, con automatización de pruebas, para medir la cobertura del objeto de prueba." }]);
+    expect(technicalTextSegments("El caso de prueba usa datos de prueba y condiciones de prueba de la base de prueba durante la ejecución de pruebas estáticas, con automatización de pruebas, en un entorno de prueba y dentro de un conjunto de pruebas, para medir la cobertura del objeto de prueba."))
+      .toEqual([{ type: "text", text: "El caso de prueba usa datos de prueba y condiciones de prueba de la base de prueba durante la ejecución de pruebas estáticas, con automatización de pruebas, en un entorno de prueba y dentro de un conjunto de pruebas, para medir la cobertura del objeto de prueba." }]);
   });
 
   it("still recognizes fault attack without treating ordinary testing as a term", () => {

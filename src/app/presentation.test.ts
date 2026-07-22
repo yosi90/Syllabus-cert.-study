@@ -91,6 +91,22 @@ describe("question prompt formatting", () => {
     }));
   });
 
+  it("keeps the four D-22 test cases together without treating result categories as list markers", () => {
+    const question = questions.find((item) => item.id === "D-22")!;
+    for (const language of ["en", "es"] as const) {
+      const blocks = promptBlocks(localizedQuestion(question, language).prompt);
+      const lists = blocks.filter((block) => block.type === "list");
+      expect(lists).toHaveLength(1);
+      expect(lists[0].items).toHaveLength(4);
+      expect(lists[0].items.map((item) => item.text)).toEqual([
+        expect.stringMatching(/categor(?:y|ía) A\.$/),
+        expect.stringMatching(/categor(?:y|ía) B\.$/),
+        expect.stringMatching(/categor(?:y|ía) C\.$/),
+        expect.stringMatching(/categor(?:y|ía) D\.$/),
+      ]);
+    }
+  });
+
   it.each(["A-34", "B-34", "B-39", "C-17"])("renders the two lists in %s as separate cards", (id) => {
     const question = questions.find((item) => item.id === id)!;
     for (const language of ["en", "es"] as const) {

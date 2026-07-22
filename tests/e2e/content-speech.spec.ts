@@ -90,12 +90,67 @@ test("C-31 renders a real fraction with an accessible localized description", as
   await expect(page.getByRole("img", { name: /all divided by four/i })).toBeVisible();
   await expect(page.locator(".math-expression .frac-line")).toBeVisible();
   await expect(page.locator(".prompt")).not.toContainText("A(n−2) 4");
+  const formulaStyle = await page.locator(".math-expression").evaluate((element) => ({
+    display: getComputedStyle(element).display,
+    fontFamily: getComputedStyle(element).fontFamily,
+    whiteSpace: getComputedStyle(element).whiteSpace,
+  }));
+  expect(formulaStyle.display).toBe("inline-flex");
+  expect(formulaStyle.fontFamily).toContain("KaTeX_Main");
+  expect(formulaStyle.whiteSpace).toBe("nowrap");
+});
+
+test("D-22 keeps its four test cases in one intact list card", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Prompt rendering only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "D-22";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+    }
+  });
+  await page.goto("/#/practice");
+
+  await expect(page.locator(".question-prompt-list")).toHaveCount(1);
+  await expect(page.locator(".question-prompt-list-item")).toHaveCount(4);
+  await expect(page.locator(".question-prompt-list-item").first()).toContainText("category A.");
+  await expect(page.locator(".question-prompt-list-item").last()).toContainText("category D.");
+});
+
+test("A-32 renders both three-point estimates as inline mathematical formulas in the explanation", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Formula rendering only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "A-32";
+      progress.preferences.language = "es";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+    }
+  });
+  await page.goto("/#/practice");
+  await page.locator('.option-row input[type="radio"]').first().check();
+  await page.getByRole("button", { name: "Comprobar" }).click();
+
+  const formulas = page.locator(".explanation-intro .math-expression");
+  await expect(formulas).toHaveCount(2);
+  await expect(formulas.first()).toHaveAttribute("aria-label", /optimista.*más probable.*pesimista/i);
+  await expect(formulas.last()).toHaveAttribute("aria-label", /2.*4\*11.*14.*10/);
+  await expect(page.locator(".explanation-intro .math-expression .frac-line")).toHaveCount(2);
+  await expect(page.locator(".explanation-intro")).toContainText("Así:");
 });
 
 test("Spanish technical terms expose translations without selecting an answer", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "One browser pass covers shared term interactions.");
   await page.addInitScript(() => {
     window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "C-26";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+    }
   });
   await page.goto("/#/practice");
   await page.getByRole("button", { name: "Español" }).click();
