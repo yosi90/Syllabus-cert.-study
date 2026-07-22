@@ -1324,8 +1324,10 @@ button:disabled {
   background: #fbfcfd;
 }
 
-.time-warning {
+.time-warning,
+.selection-warning {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 12px;
@@ -1334,6 +1336,12 @@ button:disabled {
   border-radius: 8px;
   color: #6d4a0f;
   background: #fff7e6;
+}
+
+.selection-warning svg {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 auto;
 }
 
 .result-banner {
@@ -2843,7 +2851,8 @@ button:disabled {
   background: #3a2024;
 }
 
-.app[data-theme="dark"] .time-warning {
+.app[data-theme="dark"] .time-warning,
+.app[data-theme="dark"] .selection-warning {
   border-color: #9b762f;
   color: #e8c77c;
   background: #332813;

@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import type { Question } from "../data/types";
+import { questions as bankQuestions } from "../data/bank";
 import { createEmptyProgress } from "../storage/progress";
-import { adaptivePriority, createAdaptiveQuestionIds, createReinforcementQuestionIds, recommendAdaptiveChapter, reinforcementPriority } from "./adaptive";
+import { adaptivePriority, createAdaptiveQuestionIds, createReinforcementQuestionIds, recommendAdaptiveChapter, reinforcementPriority, studyDistributionTargets } from "./adaptive";
 
 function question(id: string, chapter = "FL-1"): Question {
   return {
@@ -81,6 +82,27 @@ describe("adaptive queue", () => {
     const ids = createAdaptiveQuestionIds(questions, createEmptyProgress(), 10, "few", 0);
     expect(ids).toHaveLength(7);
     expect(new Set(ids).size).toBe(7);
+  });
+
+  it("applies proportional chapter and K-Level distributions to every study mode", () => {
+    const progress = createEmptyProgress();
+    for (const size of [10, 20] as const) {
+      const targets = studyDistributionTargets(size);
+      for (const [mode, ids] of [
+        ["adaptive", createAdaptiveQuestionIds(bankQuestions, progress, size, `${size}-adaptive`, 0)],
+        ["reinforcement", createReinforcementQuestionIds(bankQuestions, progress, size, `${size}-reinforcement`, 0)],
+      ] as const) {
+        const selected = bankQuestions.filter((item) => ids.includes(item.id));
+        expect(ids, mode).toHaveLength(size);
+        expect(new Set(ids).size, mode).toBe(size);
+        for (const [chapter, amount] of Object.entries(targets.chapters)) {
+          expect(selected.filter((item) => item.chapter === chapter), `${mode} ${size} ${chapter}`).toHaveLength(amount);
+        }
+        for (const [kLevel, amount] of Object.entries(targets.kLevels)) {
+          expect(selected.filter((item) => item.kLevel === kLevel), `${mode} ${size} ${kLevel}`).toHaveLength(amount);
+        }
+      }
+    }
   });
 
   it("reinforcement prioritizes misses over unseen questions and uses time after mastery", () => {

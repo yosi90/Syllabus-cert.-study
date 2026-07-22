@@ -58,3 +58,42 @@ test("an exam keeps the selected letter in its question, correction and review",
   await page.reload();
   await expect(page.locator(".review-item").first().locator(".answer-lines")).toContainText("Your answer: A");
 });
+
+test("practice blocks checking an incomplete multiple selection", async ({ page }) => {
+  await page.goto("/#/practice");
+  const questionList = page.locator(".question-list");
+  await questionList.locator("summary").click();
+  await questionList.getByRole("button", { name: "A-06", exact: true }).click();
+
+  const answers = page.locator('.option-row input[type="checkbox"]');
+  await answers.first().check();
+  await page.getByRole("button", { name: "Check" }).click();
+
+  await expect(page.getByRole("alert")).toContainText("requires 2 answers");
+  await expect(page.locator(".feedback")).toHaveCount(0);
+
+  await answers.nth(1).check();
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  await page.getByRole("button", { name: "Check" }).click();
+  await expect(page.locator(".feedback")).toBeVisible();
+});
+
+test("exam warns before leaving an incomplete multiple selection", async ({ page }) => {
+  await page.goto("/#/exam");
+  await page.getByRole("button", { name: /Model A/ }).click();
+  const questionList = page.locator(".question-list");
+  await questionList.locator("summary").click();
+  await questionList.getByRole("button", { name: "6", exact: true }).click();
+
+  await page.locator('.option-row input[type="checkbox"]').first().check();
+  await page.getByRole("button", { name: "Next" }).click();
+
+  const dialog = page.getByRole("alertdialog", { name: "Incomplete multiple selection" });
+  await expect(dialog).toBeVisible();
+  await dialog.getByRole("button", { name: "Review answer" }).click();
+  await expect(page.locator(".rail-button.active")).toHaveText("6");
+
+  await page.getByRole("button", { name: "Next" }).click();
+  await page.getByRole("alertdialog").getByRole("button", { name: "Continue anyway" }).click();
+  await expect(page.locator(".rail-button.active")).toHaveText("7");
+});

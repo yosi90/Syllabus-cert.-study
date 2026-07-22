@@ -1,4 +1,4 @@
-import type { Question, SourceModel } from "../data/types";
+import type { KLevel, Question, SourceModel } from "../data/types";
 
 export type ExamBlueprint = {
   id: string;
@@ -7,6 +7,15 @@ export type ExamBlueprint = {
 };
 
 export type ChapterDistribution = Record<string, number>;
+
+export const officialChapterKDistribution: Record<string, Partial<Record<KLevel, number>>> = {
+  "FL-1": { K1: 2, K2: 6 },
+  "FL-2": { K1: 2, K2: 4 },
+  "FL-3": { K1: 2, K2: 2 },
+  "FL-4": { K2: 6, K3: 5 },
+  "FL-5": { K1: 1, K2: 5, K3: 3 },
+  "FL-6": { K1: 1, K2: 1 },
+};
 
 function hashSeed(seed: string): number {
   let hash = 1779033703 ^ seed.length;
@@ -59,13 +68,32 @@ export function createRandomExam(
   const used = new Set<string>();
 
   for (const [chapter, amount] of Object.entries(distribution)) {
-    const candidates = shuffleQuestions(
-      questions.filter((question) => question.chapter === chapter),
-      `${seed}-${chapter}`,
-    );
-    for (const question of candidates.slice(0, amount)) {
-      selected.push(question);
-      used.add(question.id);
+    const levelDistribution = officialChapterKDistribution[chapter];
+    let selectedInChapter = 0;
+
+    if (levelDistribution) {
+      for (const [kLevel, levelAmount] of Object.entries(levelDistribution) as [KLevel, number][]) {
+        const candidates = shuffleQuestions(
+          questions.filter((question) => question.chapter === chapter && question.kLevel === kLevel),
+          `${seed}-${chapter}-${kLevel}`,
+        );
+        for (const question of candidates.slice(0, levelAmount)) {
+          selected.push(question);
+          used.add(question.id);
+          selectedInChapter += 1;
+        }
+      }
+    }
+
+    if (selectedInChapter < amount) {
+      const remainingInChapter = shuffleQuestions(
+        questions.filter((question) => question.chapter === chapter && !used.has(question.id)),
+        `${seed}-${chapter}-fill`,
+      );
+      for (const question of remainingInChapter.slice(0, amount - selectedInChapter)) {
+        selected.push(question);
+        used.add(question.id);
+      }
     }
   }
 

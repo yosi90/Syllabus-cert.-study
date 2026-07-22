@@ -10,6 +10,7 @@ import {
   saveProgress,
   setTutorialCompleted,
   STORAGE_KEY,
+  UNKNOWN_ACTIVE_TIME_MS,
   toggleFlag,
   type StorageLike,
 } from "./progress";
@@ -31,7 +32,7 @@ describe("progress storage", () => {
     expect(loadProgress(storage).questionProgress["A-01"].lastCorrect).toBe(true);
   });
 
-  it("accumulates active answer time without inventing timing for legacy attempts", () => {
+  it("accumulates active answer time and backfills unknown legacy timing", () => {
     const first = recordQuestionAttempt(createEmptyProgress(), "A-01", ["a"], true, "2026-06-25T00:00:00.000Z", 12_400);
     const second = recordQuestionAttempt(first, "A-01", ["b"], false, "2026-06-25T00:01:00.000Z", 7_600);
     expect(second.questionProgress["A-01"]).toMatchObject({
@@ -43,11 +44,41 @@ describe("progress storage", () => {
 
     const restoredLegacy = importProgress(JSON.stringify({
       ...createEmptyProgress(),
+      timingBackfillCompleted: false,
       questionProgress: {
         "B-01": { attempts: 1, correct: 1, lastCorrect: true, flagged: false, lastAnswers: ["a"], updatedAt: "2026-01-01" },
       },
     }));
-    expect(restoredLegacy.questionProgress["B-01"]).toMatchObject({ totalActiveMs: 0, lastActiveMs: 0, timedAttempts: 0 });
+    expect(restoredLegacy.questionProgress["B-01"]).toMatchObject({
+      totalActiveMs: UNKNOWN_ACTIVE_TIME_MS,
+      lastActiveMs: UNKNOWN_ACTIVE_TIME_MS,
+      timedAttempts: 1,
+    });
+
+    const measured = recordQuestionAttempt(restoredLegacy, "B-01", ["a"], true, "2026-07-22T00:00:00.000Z", 12_500);
+    expect(measured.questionProgress["B-01"]).toMatchObject({
+      totalActiveMs: 12_500,
+      lastActiveMs: 12_500,
+      timedAttempts: 1,
+    });
+  });
+
+  it("backfills answered questions at one second or less only once", () => {
+    const imported = importProgress(JSON.stringify({
+      ...createEmptyProgress(),
+      timingBackfillCompleted: false,
+      questionProgress: {
+        fast: { attempts: 1, correct: 1, lastCorrect: true, flagged: false, lastAnswers: ["a"], updatedAt: "2026-01-01", totalActiveMs: 1_000, lastActiveMs: 1_000, timedAttempts: 1 },
+        measured: { attempts: 1, correct: 1, lastCorrect: true, flagged: false, lastAnswers: ["a"], updatedAt: "2026-01-01", totalActiveMs: 1_001, lastActiveMs: 1_001, timedAttempts: 1 },
+        unseen: { attempts: 0, correct: 0, lastCorrect: false, flagged: true, lastAnswers: [], updatedAt: "2026-01-01" },
+      },
+    }));
+
+    expect(imported.timingBackfillCompleted).toBe(true);
+    expect(imported.questionProgress.fast.totalActiveMs).toBe(UNKNOWN_ACTIVE_TIME_MS);
+    expect(imported.questionProgress.measured.totalActiveMs).toBe(1_001);
+    expect(imported.questionProgress.unseen.totalActiveMs).toBe(0);
+    expect(importProgress(exportProgress(imported)).questionProgress.fast.totalActiveMs).toBe(UNKNOWN_ACTIVE_TIME_MS);
   });
 
   it("toggles flags without losing attempts", () => {

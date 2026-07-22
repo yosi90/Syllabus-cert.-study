@@ -185,6 +185,7 @@ function AppShell() {
   function handleStudyCheck(question: Question) {
     if (activeStudySession?.checkedQuestionIds.includes(question.id)) return;
     const selected = activeStudySession?.answers[question.id] ?? studyAnswers[question.id] ?? [];
+    if (question.selectionMode === "multiple" && selected.length < question.correctAnswers.length) return;
     const correct = isCorrectAnswer(question, selected);
     const activeMs = finishQuestionTimer(question.id);
     updateProgress(recordQuestionAttempt(progress, question.id, selected, correct, new Date().toISOString(), activeMs));

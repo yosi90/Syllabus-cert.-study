@@ -4,6 +4,7 @@ import type { OptionMode } from "../domain/options";
 
 export const STORAGE_KEY = "istqb-ctfl-v4-trainer:v2";
 export const LEGACY_STORAGE_KEY = "istqb-ctfl-v4-trainer:v1";
+export const UNKNOWN_ACTIVE_TIME_MS = ((999 * 60) + 59) * 1_000;
 
 export type QuestionProgress = {
   attempts: number;
@@ -73,6 +74,7 @@ export type PersistedStudySession = {
 export type ProgressState = {
   version: 2;
   certification: "ctfl-v4";
+  timingBackfillCompleted: boolean;
   questionProgress: Record<string, QuestionProgress>;
   sessions: StoredSession[];
   preferences: {
@@ -123,6 +125,7 @@ export function createEmptyProgress(): ProgressState {
   return {
     version: 2,
     certification: "ctfl-v4",
+    timingBackfillCompleted: true,
     questionProgress: {},
     sessions: [],
     preferences: {
@@ -189,16 +192,25 @@ function normalizeProgress(value: ProgressState): ProgressState {
   const defaults = createEmptyProgress();
   const preferences = value.preferences ?? defaults.preferences;
   const study = value.study ?? defaults.study;
+  const shouldBackfillTiming = value.timingBackfillCompleted !== true;
   return {
     version: 2,
     certification: "ctfl-v4",
+    timingBackfillCompleted: true,
     questionProgress: Object.fromEntries(
-      Object.entries(value.questionProgress ?? {}).map(([questionId, item]) => [questionId, {
-        ...item,
-        totalActiveMs: Number.isFinite(item.totalActiveMs) ? Math.max(0, item.totalActiveMs ?? 0) : 0,
-        lastActiveMs: Number.isFinite(item.lastActiveMs) ? Math.max(0, item.lastActiveMs ?? 0) : 0,
-        timedAttempts: Number.isFinite(item.timedAttempts) ? Math.max(0, item.timedAttempts ?? 0) : 0,
-      }]),
+      Object.entries(value.questionProgress ?? {}).map(([questionId, item]) => {
+        const totalActiveMs = Number.isFinite(item.totalActiveMs) ? Math.max(0, item.totalActiveMs ?? 0) : 0;
+        const lastActiveMs = Number.isFinite(item.lastActiveMs) ? Math.max(0, item.lastActiveMs ?? 0) : 0;
+        const timedAttempts = Number.isFinite(item.timedAttempts) ? Math.max(0, item.timedAttempts ?? 0) : 0;
+        const averageActiveMs = timedAttempts > 0 ? totalActiveMs / timedAttempts : 0;
+        const needsUnknownTime = shouldBackfillTiming && item.attempts > 0 && averageActiveMs <= 1_000;
+        return [questionId, {
+          ...item,
+          totalActiveMs: needsUnknownTime ? UNKNOWN_ACTIVE_TIME_MS : totalActiveMs,
+          lastActiveMs: needsUnknownTime ? UNKNOWN_ACTIVE_TIME_MS : lastActiveMs,
+          timedAttempts: needsUnknownTime ? 1 : timedAttempts,
+        }];
+      }),
     ),
     sessions: Array.isArray(value.sessions)
       ? value.sessions.map((session) => {
@@ -256,8 +268,9 @@ function normalizeProgress(value: ProgressState): ProgressState {
 
 function migrateLegacyProgress(value: LegacyProgressState): ProgressState {
   const migrated = createEmptyProgress();
-  return {
+  return normalizeProgress({
     ...migrated,
+    timingBackfillCompleted: false,
     questionProgress: value.questionProgress ?? {},
     sessions: value.sessions ?? [],
     preferences: {
@@ -266,7 +279,7 @@ function migrateLegacyProgress(value: LegacyProgressState): ProgressState {
       tutorialCompleted: value.preferences?.tutorialCompleted ?? false,
       tutorialCompletedAt: value.preferences?.tutorialCompletedAt ?? null,
     },
-  };
+  });
 }
 
 function parseProgress(raw: string): ProgressState | null {
@@ -314,6 +327,10 @@ export function recordQuestionAttempt(
   const measuredActiveMs = typeof activeMs === "number" && Number.isFinite(activeMs)
     ? Math.max(0, Math.round(activeMs))
     : null;
+  const hasUnknownActiveTime = previous?.totalActiveMs === UNKNOWN_ACTIVE_TIME_MS
+    && previous.lastActiveMs === UNKNOWN_ACTIVE_TIME_MS
+    && previous.timedAttempts === 1;
+  const replacesUnknownActiveTime = hasUnknownActiveTime && measuredActiveMs !== null;
   return {
     ...progress,
     questionProgress: {
@@ -325,9 +342,13 @@ export function recordQuestionAttempt(
         flagged: previous?.flagged ?? false,
         lastAnswers: selectedAnswers,
         updatedAt: now,
-        totalActiveMs: (previous?.totalActiveMs ?? 0) + (measuredActiveMs ?? 0),
+        totalActiveMs: replacesUnknownActiveTime
+          ? measuredActiveMs
+          : (previous?.totalActiveMs ?? 0) + (measuredActiveMs ?? 0),
         lastActiveMs: measuredActiveMs ?? previous?.lastActiveMs ?? 0,
-        timedAttempts: (previous?.timedAttempts ?? 0) + (measuredActiveMs === null ? 0 : 1),
+        timedAttempts: replacesUnknownActiveTime
+          ? 1
+          : (previous?.timedAttempts ?? 0) + (measuredActiveMs === null ? 0 : 1),
       },
     },
   };

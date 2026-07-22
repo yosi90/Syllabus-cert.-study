@@ -1,4 +1,5 @@
-import { CheckCircle2, ChevronLeft, ChevronRight, Clock3, LogOut, Shuffle, XCircle } from "lucide-react";
+import { useState } from "react";
+import { CheckCircle2, ChevronLeft, ChevronRight, CircleAlert, Clock3, LogOut, Shuffle, XCircle } from "lucide-react";
 import type { Question } from "../data/types";
 import { isCorrectAnswer } from "../domain/scoring";
 import type { PersistedStudySession, ProgressState } from "../storage/progress";
@@ -50,6 +51,8 @@ export function StudyView({
   onLeaveSession: () => void;
   activeTimeMs: number;
 }) {
+  const [incompleteWarningQuestionId, setIncompleteWarningQuestionId] = useState<string | null>(null);
+
   if (!currentQuestion) {
     return (
       <main className="workspace">
@@ -61,6 +64,20 @@ export function StudyView({
   const isCorrect = revealed && isCorrectAnswer(currentQuestion, selected);
   const elapsedSeconds = Math.floor(activeTimeMs / 1_000);
   const elapsedLabel = `${Math.floor(elapsedSeconds / 60).toString().padStart(2, "0")}:${(elapsedSeconds % 60).toString().padStart(2, "0")}`;
+  const requiredAnswers = currentQuestion.correctAnswers.length;
+  const incompleteMultipleSelection = currentQuestion.selectionMode === "multiple"
+    && selected.length > 0
+    && selected.length < requiredAnswers;
+  const showIncompleteWarning = incompleteWarningQuestionId === currentQuestion.id && incompleteMultipleSelection;
+  const checkQuestion = currentQuestion;
+
+  function handleCheck() {
+    if (incompleteMultipleSelection) {
+      setIncompleteWarningQuestionId(checkQuestion.id);
+      return;
+    }
+    onCheck(checkQuestion);
+  }
 
   return (
     <main className={classNames("workspace", highlighted && "tutorial-highlight")}>
@@ -112,6 +129,15 @@ export function StudyView({
         </section>
       )}
 
+      {showIncompleteWarning && (
+        <div className="selection-warning" role="alert">
+          <CircleAlert aria-hidden="true" />
+          <span>{copy.incompleteMultiplePractice
+            .replace("{count}", String(requiredAnswers))
+            .replace("{remaining}", String(requiredAnswers - selected.length))}</span>
+        </div>
+      )}
+
       <div className="action-bar study-actions">
         <button className="secondary" type="button" onClick={() => onMove(-1)} disabled={currentIndex === 0}>
           <ChevronLeft aria-hidden="true" />
@@ -120,7 +146,7 @@ export function StudyView({
         <button
           className="primary"
           type="button"
-          onClick={() => onCheck(currentQuestion)}
+          onClick={handleCheck}
           disabled={selected.length === 0 || revealed}
         >
           <CheckCircle2 aria-hidden="true" />

@@ -6,6 +6,7 @@ export function useActiveQuestionTimer(questionId: string | null, running: boole
   const activeQuestionId = useRef<string | null>(null);
   const elapsedRef = useRef(0);
   const runningRef = useRef(running);
+  const windowFocusedRef = useRef(document.hasFocus());
   const lastTick = useRef(performance.now());
   const [elapsedMs, setElapsedMs] = useState(0);
 
@@ -31,12 +32,22 @@ export function useActiveQuestionTimer(questionId: string | null, running: boole
     const resetTick = () => {
       lastTick.current = performance.now();
     };
+    const handleFocus = () => {
+      windowFocusedRef.current = true;
+      resetTick();
+    };
+    const handleBlur = () => {
+      windowFocusedRef.current = false;
+      resetTick();
+    };
     document.addEventListener("visibilitychange", resetTick);
+    window.addEventListener("focus", handleFocus);
+    window.addEventListener("blur", handleBlur);
     const interval = window.setInterval(() => {
       const now = performance.now();
       const delta = now - lastTick.current;
       lastTick.current = now;
-      if (!runningRef.current || document.visibilityState !== "visible" || !activeQuestionId.current) return;
+      if (!runningRef.current || document.visibilityState !== "visible" || !windowFocusedRef.current || !activeQuestionId.current) return;
       elapsedRef.current += delta;
       elapsedByQuestion.current.set(activeQuestionId.current, elapsedRef.current);
       setElapsedMs(elapsedRef.current);
@@ -44,6 +55,8 @@ export function useActiveQuestionTimer(questionId: string | null, running: boole
 
     return () => {
       document.removeEventListener("visibilitychange", resetTick);
+      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("blur", handleBlur);
       window.clearInterval(interval);
     };
   }, []);

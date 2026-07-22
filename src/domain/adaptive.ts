@@ -2,12 +2,155 @@ import type { AnswerMap } from "./scoring";
 import { isCorrectAnswer } from "./scoring";
 import type { Question } from "../data/types";
 import type { ProgressState } from "../storage/progress";
+import { officialChapterKDistribution } from "./exams";
 
 export type AdaptiveCandidate = {
   question: Question;
   priority: number;
   tieBreaker: number;
 };
+
+const kLevels = ["K1", "K2", "K3"] as const;
+
+function apportion(weights: Record<string, number>, target: number) {
+  const totalWeight = Object.values(weights).reduce((sum, weight) => sum + weight, 0);
+  const entries = Object.entries(weights).map(([id, weight], index) => {
+    const exact = totalWeight ? (weight / totalWeight) * target : 0;
+    return { id, index, exact, amount: Math.floor(exact) };
+  });
+  let remaining = target - entries.reduce((sum, entry) => sum + entry.amount, 0);
+  entries
+    .sort((left, right) => (right.exact % 1) - (left.exact % 1) || left.amount - right.amount || left.index - right.index)
+    .forEach((entry) => {
+      if (remaining <= 0) return;
+      entry.amount += 1;
+      remaining -= 1;
+    });
+  return Object.fromEntries(entries.sort((left, right) => left.index - right.index).map(({ id, amount }) => [id, amount]));
+}
+
+export function studyDistributionTargets(size: number) {
+  const chapterWeights = Object.fromEntries(
+    Object.entries(officialChapterKDistribution).map(([chapter, distribution]) => [
+      chapter,
+      Object.values(distribution).reduce((sum, amount) => sum + (amount ?? 0), 0),
+    ]),
+  );
+  const kWeights = Object.fromEntries(kLevels.map((level) => [
+    level,
+    Object.values(officialChapterKDistribution).reduce((sum, distribution) => sum + (distribution[level] ?? 0), 0),
+  ]));
+  return {
+    chapters: apportion(chapterWeights, size),
+    kLevels: apportion(kWeights, size),
+  };
+}
+
+function selectWithStudyDistribution(ranked: AdaptiveCandidate[], target: number): AdaptiveCandidate[] | null {
+  const distribution = studyDistributionTargets(target);
+  const chapters = Object.entries(distribution.chapters).filter(([, amount]) => amount > 0);
+  const rankedIndex = new Map(ranked.map((candidate, index) => [candidate.question.id, index]));
+  const buckets = new Map<string, AdaptiveCandidate[]>();
+  for (const candidate of ranked) {
+    const key = `${candidate.question.chapter}:${candidate.question.kLevel}`;
+    const bucket = buckets.get(key) ?? [];
+    bucket.push(candidate);
+    buckets.set(key, bucket);
+  }
+
+  type AllocationState = { score: number; allocations: Record<string, Record<string, number>> };
+  let states = new Map<string, AllocationState>([["0,0,0", { score: 0, allocations: {} }]]);
+
+  for (const [chapter, chapterTarget] of chapters) {
+    const options: Array<{ counts: number[]; score: number }> = [];
+    for (let k1 = 0; k1 <= chapterTarget; k1 += 1) {
+      for (let k2 = 0; k2 <= chapterTarget - k1; k2 += 1) {
+        const counts = [k1, k2, chapterTarget - k1 - k2];
+        if (counts.some((count, index) => count > (buckets.get(`${chapter}:${kLevels[index]}`)?.length ?? 0))) continue;
+        const score = counts.reduce((sum, count, index) => sum
+          + (buckets.get(`${chapter}:${kLevels[index]}`) ?? []).slice(0, count).reduce((bucketSum, candidate) => bucketSum + candidate.priority, 0), 0);
+        options.push({ counts, score });
+      }
+    }
+
+    const nextStates = new Map<string, AllocationState>();
+    for (const [key, state] of states) {
+      const used = key.split(",").map(Number);
+      for (const option of options) {
+        const nextUsed = used.map((count, index) => count + option.counts[index]);
+        if (nextUsed.some((count, index) => count > distribution.kLevels[kLevels[index]])) continue;
+        const nextKey = nextUsed.join(",");
+        const nextScore = state.score + option.score;
+        const previous = nextStates.get(nextKey);
+        if (previous && previous.score >= nextScore) continue;
+        nextStates.set(nextKey, {
+          score: nextScore,
+          allocations: {
+            ...state.allocations,
+            [chapter]: Object.fromEntries(kLevels.map((level, index) => [level, option.counts[index]])),
+          },
+        });
+      }
+    }
+    states = nextStates;
+  }
+
+  const finalKey = kLevels.map((level) => distribution.kLevels[level]).join(",");
+  const finalState = states.get(finalKey);
+  if (!finalState) return null;
+
+  return Object.entries(finalState.allocations)
+    .flatMap(([chapter, allocation]) => kLevels.flatMap((level) =>
+      (buckets.get(`${chapter}:${level}`) ?? []).slice(0, allocation[level] ?? 0)))
+    .sort((left, right) => (rankedIndex.get(left.question.id) ?? 0) - (rankedIndex.get(right.question.id) ?? 0));
+}
+
+function selectWithChapterFallback(ranked: AdaptiveCandidate[], target: number, chapterFraction: number) {
+  const chapterLimit = Math.max(1, Math.floor(target * chapterFraction));
+  const selected: AdaptiveCandidate[] = [];
+  const selectedIds = new Set<string>();
+  const chapterCounts = new Map<string, number>();
+
+  for (const enforceChapterLimit of [true, false]) {
+    for (const candidate of ranked) {
+      if (selected.length >= target) break;
+      if (selectedIds.has(candidate.question.id)) continue;
+      const chapterCount = chapterCounts.get(candidate.question.chapter) ?? 0;
+      if (enforceChapterLimit && chapterCount >= chapterLimit) continue;
+      selected.push(candidate);
+      selectedIds.add(candidate.question.id);
+      chapterCounts.set(candidate.question.chapter, chapterCount + 1);
+    }
+  }
+  return selected;
+}
+
+function selectAdaptiveFallback(ranked: AdaptiveCandidate[], progress: ProgressState, target: number) {
+  const chapterLimit = Math.max(1, Math.floor(target * 0.4));
+  const selected: AdaptiveCandidate[] = [];
+  const selectedIds = new Set<string>();
+  const chapterCounts = new Map<string, number>();
+
+  function append(candidates: AdaptiveCandidate[], enforceChapterLimit: boolean) {
+    for (const candidate of candidates) {
+      if (selected.length >= target) break;
+      if (selectedIds.has(candidate.question.id)) continue;
+      const chapterCount = chapterCounts.get(candidate.question.chapter) ?? 0;
+      if (enforceChapterLimit && chapterCount >= chapterLimit) continue;
+      selected.push(candidate);
+      selectedIds.add(candidate.question.id);
+      chapterCounts.set(candidate.question.chapter, chapterCount + 1);
+    }
+  }
+
+  const unseen = ranked.filter((candidate) => !progress.questionProgress[candidate.question.id]?.attempts);
+  const seen = ranked.filter((candidate) => Boolean(progress.questionProgress[candidate.question.id]?.attempts));
+  append(unseen, true);
+  append(unseen, false);
+  append(seen, true);
+  append(seen, false);
+  return selected;
+}
 
 function hashSeed(value: string) {
   let hash = 2166136261;
@@ -85,32 +228,7 @@ export function createAdaptiveQuestionIds(
 ) {
   const ranked = rankAdaptiveQuestions(questions, progress, seed, now);
   const target = Math.min(size, ranked.length);
-  const chapterLimit = Math.max(1, Math.floor(size * 0.4));
-  const selected: AdaptiveCandidate[] = [];
-  const selectedIds = new Set<string>();
-  const chapterCounts = new Map<string, number>();
-
-  function appendCandidates(candidates: AdaptiveCandidate[], enforceChapterLimit: boolean) {
-    for (const candidate of candidates) {
-      if (selected.length >= target) break;
-      if (selectedIds.has(candidate.question.id)) continue;
-      const chapterCount = chapterCounts.get(candidate.question.chapter) ?? 0;
-      if (enforceChapterLimit && chapterCount >= chapterLimit) continue;
-      selected.push(candidate);
-      selectedIds.add(candidate.question.id);
-      chapterCounts.set(candidate.question.chapter, chapterCount + 1);
-    }
-  }
-
-  const unseen = ranked.filter((candidate) => !progress.questionProgress[candidate.question.id]?.attempts);
-  const seen = ranked.filter((candidate) => Boolean(progress.questionProgress[candidate.question.id]?.attempts));
-
-  // Never reuse an answered question while enough unseen material remains.
-  appendCandidates(unseen, true);
-  appendCandidates(unseen, false);
-  appendCandidates(seen, true);
-  appendCandidates(seen, false);
-
+  const selected = selectWithStudyDistribution(ranked, target) ?? selectAdaptiveFallback(ranked, progress, target);
   return selected.map((candidate) => candidate.question.id);
 }
 
@@ -129,23 +247,7 @@ export function createReinforcementQuestionIds(
     }))
     .sort((left, right) => right.priority - left.priority || left.tieBreaker - right.tieBreaker);
   const target = Math.min(size, ranked.length);
-  const chapterLimit = Math.max(1, Math.floor(size * 0.5));
-  const selected: AdaptiveCandidate[] = [];
-  const selectedIds = new Set<string>();
-  const chapterCounts = new Map<string, number>();
-
-  for (const enforceChapterLimit of [true, false]) {
-    for (const candidate of ranked) {
-      if (selected.length >= target) break;
-      if (selectedIds.has(candidate.question.id)) continue;
-      const chapterCount = chapterCounts.get(candidate.question.chapter) ?? 0;
-      if (enforceChapterLimit && chapterCount >= chapterLimit) continue;
-      selected.push(candidate);
-      selectedIds.add(candidate.question.id);
-      chapterCounts.set(candidate.question.chapter, chapterCount + 1);
-    }
-  }
-
+  const selected = selectWithStudyDistribution(ranked, target) ?? selectWithChapterFallback(ranked, target, 0.5);
   return selected.map((candidate) => candidate.question.id);
 }
 

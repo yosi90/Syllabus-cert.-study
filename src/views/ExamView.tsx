@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { CheckCircle2, ChevronLeft, ChevronRight, Play, Shuffle, Timer, X } from "lucide-react";
 import { questions } from "../data/bank";
 import type { Question, SourceModel } from "../data/types";
 import { findQuestionsByIds } from "../domain/exams";
 import { models, type Copy, type ExamState, type Language, type TimerMode } from "../app/content";
 import { formatRemainingTime } from "../app/presentation";
-import { Metric } from "../components/common/CommonUi";
+import { ConfirmDialog, Metric } from "../components/common/CommonUi";
 import { ExamRail, QuestionCard } from "../components/questions/QuestionUi";
 
 export function ExamView({
@@ -38,6 +39,8 @@ export function ExamView({
   language: Language;
   copy: Copy;
 }) {
+  const [incompleteQuestionId, setIncompleteQuestionId] = useState<string | null>(null);
+
   if (!activeExam) {
     return (
       <main className="workspace">
@@ -114,6 +117,18 @@ export function ExamView({
   const timeLabel = remainingMs === null ? copy.noLimit : formatRemainingTime(Math.max(remainingMs, 0));
   const questionSeconds = Math.floor(questionActiveTimeMs / 1_000);
   const questionTimeLabel = `${Math.floor(questionSeconds / 60).toString().padStart(2, "0")}:${(questionSeconds % 60).toString().padStart(2, "0")}`;
+  const currentSelection = activeExam.answers[currentQuestion.id] ?? [];
+  const incompleteMultipleSelection = currentQuestion.selectionMode === "multiple"
+    && currentSelection.length > 0
+    && currentSelection.length < currentQuestion.correctAnswers.length;
+
+  function handleNext() {
+    if (incompleteMultipleSelection) {
+      setIncompleteQuestionId(currentQuestion.id);
+      return;
+    }
+    onMove(1);
+  }
 
   return (
     <main className="workspace">
@@ -169,7 +184,7 @@ export function ExamView({
         <button
           className="secondary"
           type="button"
-          onClick={() => onMove(1)}
+          onClick={handleNext}
           disabled={activeExam.currentIndex >= activeExam.blueprint.questionIds.length - 1}
         >
           {copy.next}
@@ -178,6 +193,20 @@ export function ExamView({
       </div>
 
       <ExamRail questions={examQuestions} activeExam={activeExam} onSelect={onJump} copy={copy} />
+
+      {incompleteQuestionId === currentQuestion.id && (
+        <ConfirmDialog
+          title={copy.incompleteMultipleExamTitle}
+          text={copy.incompleteMultipleExamText.replace("{count}", String(currentQuestion.correctAnswers.length))}
+          confirmLabel={copy.continueAnyway}
+          cancelLabel={copy.reviewAnswer}
+          onConfirm={() => {
+            setIncompleteQuestionId(null);
+            onMove(1);
+          }}
+          onCancel={() => setIncompleteQuestionId(null)}
+        />
+      )}
     </main>
   );
 }

@@ -71,6 +71,22 @@ test("exam questions also stop and persist their individual timer on first answe
   })).toBe(1);
 });
 
+test("question timing pauses while the browser window is unfocused", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "One Chromium pass covers window focus timing.");
+  await page.goto("/#/practice");
+  const timer = page.locator(".header-metrics .question-timer");
+  await expect.poll(async () => timer.getAttribute("aria-label")).toMatch(/00:0[1-9]/);
+
+  await page.evaluate(() => window.dispatchEvent(new Event("blur")));
+  await page.waitForTimeout(350);
+  const pausedTime = await timer.getAttribute("aria-label");
+  await page.waitForTimeout(1_200);
+  await expect(timer).toHaveAttribute("aria-label", pausedTime!);
+
+  await page.evaluate(() => window.dispatchEvent(new Event("focus")));
+  await expect.poll(async () => timer.getAttribute("aria-label")).not.toBe(pausedTime);
+});
+
 test("a ten-question adaptive session survives leaving and reloading", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Quick · 10" }).click();
