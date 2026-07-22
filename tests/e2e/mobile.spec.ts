@@ -24,6 +24,30 @@ test("mobile primary navigation reaches every current mode", async ({ page }, te
   await expect(page).toHaveURL(/#\/$/);
 });
 
+test("mobile primary navigation survives scrolling, route changes and viewport resizing", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile-firefox", "This regression covers Firefox mobile viewport changes.");
+  await page.goto("/#/practice");
+
+  const navigation = page.locator(".mobile-primary-nav");
+  const links = navigation.getByRole("link");
+  const icons = navigation.locator("svg");
+
+  for (const height of [720, 851, 760, 851]) {
+    await page.setViewportSize({ width: 393, height });
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await expect(navigation).toBeVisible();
+    await expect(links).toHaveCount(4);
+    await expect(icons).toHaveCount(4);
+    for (const link of await links.all()) await expect(link).toBeVisible();
+    for (const icon of await icons.all()) await expect(icon).toBeVisible();
+  }
+
+  await navigation.getByRole("link", { name: "Exam" }).click();
+  await expect(page).toHaveURL(/#\/exam$/);
+  await expect(links).toHaveCount(4);
+  for (const link of await links.all()) await expect(link).toBeVisible();
+});
+
 test("filters and secondary actions remain in the mobile side menu", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile-chromium", "This behavior is specific to the mobile layout.");
   await page.goto("/");

@@ -17,6 +17,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  min-height: 100svh;
   font-size: 14px;
 }
 
@@ -45,6 +46,7 @@ button:disabled {
   display: grid;
   grid-template-columns: minmax(244px, 300px) minmax(0, 1fr);
   min-height: 100vh;
+  min-height: 100svh;
 }
 
 .mobile-menu-toggle,
@@ -1585,6 +1587,7 @@ button:disabled {
 }
 
 .dashboard-snapshot {
+  container-type: inline-size;
   padding-block: 14px;
 }
 
@@ -2136,7 +2139,7 @@ button:disabled {
 
   .workspace {
     padding: calc(14px + env(safe-area-inset-top, 0px)) calc(18px + env(safe-area-inset-right, 0px))
-      calc(84px + env(safe-area-inset-bottom, 0px)) calc(18px + env(safe-area-inset-left, 0px));
+      calc(100px + env(safe-area-inset-bottom, 0px)) calc(18px + env(safe-area-inset-left, 0px));
   }
 
   .mobile-primary-nav {
@@ -2151,12 +2154,14 @@ button:disabled {
     padding: 5px;
     border: 1px solid #d3dce6;
     border-radius: 12px;
-    background: rgb(255 255 255 / 96%);
+    background: #ffffff;
     box-shadow: 0 10px 30px rgb(10 18 30 / 20%);
-    backdrop-filter: blur(12px);
+    isolation: isolate;
   }
 
   .mobile-primary-nav a {
+    position: relative;
+    z-index: 1;
     display: grid;
     place-items: center;
     gap: 2px;
@@ -2252,7 +2257,7 @@ button:disabled {
 @media (max-width: 640px) {
   .workspace {
     padding: calc(14px + env(safe-area-inset-top, 0px)) calc(14px + env(safe-area-inset-right, 0px))
-      calc(82px + env(safe-area-inset-bottom, 0px)) calc(14px + env(safe-area-inset-left, 0px));
+      calc(100px + env(safe-area-inset-bottom, 0px)) calc(14px + env(safe-area-inset-left, 0px));
   }
 
   .brand h1 {
@@ -2406,6 +2411,17 @@ button:disabled {
   .dashboard-workspace .dashboard-status-grid span {
     font-size: 10px;
     line-height: 1.2;
+  }
+
+  @container (max-width: 320px) {
+    .dashboard-workspace .dashboard-status-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .dashboard-workspace .dashboard-status-grid article {
+      justify-content: flex-start;
+      padding-inline: 10px;
+    }
   }
 
   .quick-study-card h3 {
@@ -2863,7 +2879,7 @@ button:disabled {
 
 .app[data-theme="dark"] .mobile-primary-nav {
   border-color: #2b3a4e;
-  background: rgb(16 25 39 / 96%);
+  background: #101927;
 }
 
 .app[data-theme="dark"] .mobile-primary-nav a {

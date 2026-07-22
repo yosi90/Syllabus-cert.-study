@@ -26,6 +26,16 @@ export default defineConfig({
         ...devices["Pixel 5"],
       },
     },
+    {
+      name: "mobile-firefox",
+      testMatch: /mobile\.spec\.ts/,
+      use: {
+        ...devices["Desktop Firefox"],
+        viewport: { width: 393, height: 851 },
+        userAgent: "Mozilla/5.0 (Android 14; Mobile; rv:128.0) Gecko/128.0 Firefox/128.0",
+        hasTouch: true,
+      },
+    },
   ],
   webServer: {
     command: "npm run preview -- --port 4173",

@@ -114,6 +114,14 @@ for (const width of [320, 390, 768]) {
       scrollWidth: document.documentElement.scrollWidth,
     }));
     expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
+
+    if (width === 320) {
+      const statusBoxes = await page.locator(".dashboard-status-grid article").evaluateAll((elements) =>
+        elements.map((element) => element.getBoundingClientRect()).map(({ left, top }) => ({ left, top })),
+      );
+      expect(new Set(statusBoxes.map(({ left }) => Math.round(left))).size).toBe(1);
+      expect(new Set(statusBoxes.map(({ top }) => Math.round(top))).size).toBe(3);
+    }
   });
 }
 
