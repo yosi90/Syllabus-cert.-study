@@ -172,3 +172,30 @@ test("practice progress can be continued from home", async ({ page }) => {
   await expect(page).toHaveURL(/#\/practice$/);
   await expect(page.getByRole("heading", { name: "Single questions" })).toBeVisible();
 });
+
+test("the marked counter opens practice with the marked filter active", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Dashboard routing only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (!progress) return;
+    progress.questionProgress["A-03"] = {
+      attempts: 1,
+      correct: 0,
+      lastCorrect: false,
+      flagged: true,
+      flaggedCorrectPrompted: false,
+      lastAnswers: ["a"],
+      updatedAt: "2026-07-25T00:00:00.000Z",
+    };
+    window.localStorage.setItem(key, JSON.stringify(progress));
+  });
+  await page.goto("/");
+
+  await page.getByRole("button", { name: "Open marked questions in practice: 1" }).click();
+
+  await expect(page).toHaveURL(/#\/practice$/);
+  await expect(page.getByRole("group", { name: "Status" }).getByLabel("Flagged")).toBeChecked();
+  await expect(page.getByText("1/1", { exact: true })).toBeVisible();
+  await expect(page.locator(".question-meta").getByText("A-03", { exact: true })).toBeVisible();
+});

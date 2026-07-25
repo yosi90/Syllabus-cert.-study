@@ -11,7 +11,7 @@ import {
   XCircle,
 } from "lucide-react";
 import { chapters } from "../../data/bank";
-import { emptyFilters, type QuestionFilters } from "../../domain/filters";
+import { emptyFilters, type QuestionFilters, type QuestionStatus } from "../../domain/filters";
 import {
   kLevels,
   models,
@@ -64,6 +64,12 @@ export function FiltersPanel({
   }
 
   const filtersActive = hasActiveFilters(filters);
+  const statusOptions: Array<{ value: QuestionStatus; label: string }> = [
+    { value: "unseen", label: copy.unseen },
+    { value: "correct", label: copy.lastCorrect },
+    { value: "incorrect", label: copy.lastIncorrect },
+    { value: "flagged", label: copy.flagged },
+  ];
 
   return (
     <section className={classNames("panel filters", tutorialTarget === "layout" && "tutorial-highlight")}>
@@ -155,19 +161,19 @@ export function FiltersPanel({
         </select>
       </label>
 
-      <label className={classNames("field-label", tutorialTarget === "reference-status" && "tutorial-highlight")}>
-        {copy.status}
-        <select
-          value={filters.status}
-          onChange={(event) => setFilters({ ...filters, status: event.target.value as QuestionFilters["status"] })}
-        >
-          <option value="all">{copy.all}</option>
-          <option value="unseen">{copy.unseen}</option>
-          <option value="correct">{copy.lastCorrect}</option>
-          <option value="incorrect">{copy.lastIncorrect}</option>
-          <option value="flagged">{copy.flagged}</option>
-        </select>
-      </label>
+      <FilterGroup title={copy.status} highlighted={tutorialTarget === "reference-status"}>
+        {statusOptions.map((status) => (
+          <label className="check-pill wide" key={status.value}>
+            <input
+              type="checkbox"
+              checked={filters.status.includes(status.value)}
+              onChange={() => setFilters({ ...filters, status: toggleValue(filters.status, status.value) })}
+            />
+            <span className="check-indicator" aria-hidden="true"><Check /></span>
+            {status.label}
+          </label>
+        ))}
+      </FilterGroup>
 
       <div className={classNames("filter-actions", tutorialTarget === "progress-actions" && "tutorial-highlight")}>
         <button className="secondary" type="button" onClick={onExport} disabled={fileStatus?.kind === "loading"}>

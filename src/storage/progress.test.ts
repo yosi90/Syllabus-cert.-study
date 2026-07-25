@@ -6,6 +6,7 @@ import {
   importProgress,
   LEGACY_STORAGE_KEY,
   loadProgress,
+  markFlaggedCorrectPrompted,
   recordQuestionAttempt,
   saveProgress,
   setTutorialCompleted,
@@ -88,6 +89,22 @@ describe("progress storage", () => {
     expect(flagged.questionProgress["A-01"].flagged).toBe(true);
   });
 
+  it("offers the correct-answer decision once per flagging cycle", () => {
+    const firstFlag = toggleFlag(createEmptyProgress(), "A-01");
+    expect(firstFlag.questionProgress["A-01"].flaggedCorrectPrompted).toBe(false);
+
+    const prompted = markFlaggedCorrectPrompted(firstFlag, "A-01");
+    expect(prompted.questionProgress["A-01"].flaggedCorrectPrompted).toBe(true);
+    expect(markFlaggedCorrectPrompted(prompted, "A-01")).toBe(prompted);
+
+    const unflagged = toggleFlag(prompted, "A-01");
+    const secondFlag = toggleFlag(unflagged, "A-01");
+    expect(secondFlag.questionProgress["A-01"]).toMatchObject({
+      flagged: true,
+      flaggedCorrectPrompted: false,
+    });
+  });
+
   it("exports, imports and clears progress", () => {
     const storage = memoryStorage();
     const progress = toggleFlag(createEmptyProgress(), "A-02");
@@ -157,7 +174,7 @@ describe("progress storage", () => {
       lastMode: "exam",
     };
     progress.study = {
-      filters: { ...progress.study.filters, models: ["B"], status: "incorrect" },
+      filters: { ...progress.study.filters, models: ["B"], status: ["incorrect"] },
       currentQuestionId: "B-08",
       answers: { "B-08": ["b"] },
       revealed: true,
@@ -179,6 +196,14 @@ describe("progress storage", () => {
     expect(restored.study.filters.models).toEqual(["B"]);
     expect(restored.activeExam).toEqual(progress.activeExam);
     expect(importProgress(exportProgress(restored)).activeExam).toEqual(progress.activeExam);
+  });
+
+  it("migrates the former single status select to the checkbox collection", () => {
+    const legacyV2 = createEmptyProgress() as unknown as Record<string, unknown>;
+    const study = legacyV2.study as Record<string, unknown>;
+    study.filters = { ...(study.filters as Record<string, unknown>), status: "flagged" };
+
+    expect(importProgress(JSON.stringify(legacyV2)).study.filters.status).toEqual(["flagged"]);
   });
 
   it("persists the selected historical review", () => {
@@ -207,6 +232,7 @@ describe("progress storage", () => {
       revealed: false,
       checkedQuestionIds: ["A-01"],
       startedAt: "2026-07-15T00:00:00.000Z",
+      paused: false,
     };
 
     saveProgress(progress, storage);

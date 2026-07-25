@@ -190,7 +190,7 @@ export function hasActiveFilters(filters: QuestionFilters) {
     filters.chapters.length > 0 ||
     filters.kLevels.length > 0 ||
     filters.references.length > 0 ||
-    filters.status !== "all"
+    filters.status.length > 0
   );
 }
 

@@ -136,6 +136,23 @@ describe("question prompt formatting", () => {
     }
   });
 
+  it("renders the A-38 defect report as one structured card", () => {
+    const question = questions.find((item) => item.id === "A-38")!;
+    for (const language of ["en", "es"] as const) {
+      const blocks = promptBlocks(localizedQuestion(question, language).prompt);
+      const reports = blocks.filter((block) => block.type === "list");
+
+      expect(reports).toHaveLength(1);
+      expect(reports[0].items).toHaveLength(7);
+      expect(reports[0].items[0].text).toMatch(/^(?:Title|Título):/);
+      expect(reports[0].items.at(-1)?.text).toMatch(/^(?:Priority and reference|Prioridad y referencia):/);
+      expect(blocks.at(-1)).toEqual(expect.objectContaining({
+        type: "text",
+        text: expect.stringMatching(/^(?:What|¿Qué)/),
+      }));
+    }
+  });
+
   it.each(["A-34", "B-34", "B-39", "C-17"])("renders the two lists in %s as separate cards", (id) => {
     const question = questions.find((item) => item.id === id)!;
     for (const language of ["en", "es"] as const) {
@@ -182,6 +199,42 @@ describe("question prompt formatting", () => {
 });
 
 describe("visual question presentation", () => {
+  it("uses función del tester for testing role in A-06 and C-06", () => {
+    const a06 = questions.find((item) => item.id === "A-06")!;
+    const c06 = questions.find((item) => item.id === "C-06")!;
+    const translatedTexts = [
+      localizedQuestion(a06, "es").prompt,
+      localizedQuestion(c06, "es").prompt,
+      ...localizedQuestion(c06, "es").options.map((option) => option.text),
+      localizedQuestion(c06, "es").explanation,
+    ].join(" ");
+
+    expect(localizedQuestion(a06, "es").prompt).toContain("función del tester");
+    expect(localizedQuestion(c06, "es").prompt).toContain("funciones del tester");
+    expect(translatedTexts).not.toMatch(/funciones? de pruebas?|rol de pruebas?/i);
+  });
+
+  it("keeps Manager in English in every Spanish question translation", () => {
+    for (const question of questions) {
+      const translation = question.translations?.es;
+      if (!translation) continue;
+      const pairs = [
+        [question.prompt, translation.prompt ?? ""],
+        [question.explanation, translation.explanation ?? ""],
+        ...question.options.map((option) => [
+          option.text,
+          translation.options?.find((translated) => translated.key === option.key)?.text ?? "",
+        ]),
+      ];
+
+      for (const [english, spanish] of pairs) {
+        if (!/\bmanagers?\b/i.test(english)) continue;
+        expect(spanish, `${question.id}: ${english}`).toMatch(/\bManagers?\b/);
+        expect(spanish, `${question.id}: ${english}`).not.toMatch(/gerent|gestor|\bjefe\b/i);
+      }
+    }
+  });
+
   it("does not repeat flattened table cells inside table-based prompts", () => {
     const tableQuestionIds = ["A-14", "A-21", "A-22", "A-33", "B-22", "B-31", "B-32", "B-38", "C-21", "C-22", "C-29", "C-38", "D-22", "D-23", "D-29", "D-32", "D-38"];
     const flattenedTablePattern = /Rule 1 Rule 2|Regla 1 Regla 2|R1 R2 R3|Req1 Req2|TC1 91|TC 001 Select|TC 001 Seleccionar|Project Development effort|Esfuerzo de desarrollo del proyecto/;

@@ -137,6 +137,34 @@ test("B-22 displays its five input test cases as one list", async ({ page }, tes
   await expect(page.locator(".question-prompt-list-marker")).toHaveText(["TC1:", "TC2:", "TC3:", "TC4:", "TC5:"]);
 });
 
+test("A-38 displays the defect report as a structured card", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Prompt rendering only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "A-38";
+      progress.preferences.language = "es";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+      window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
+    }
+  });
+  await page.goto("/#/practice");
+
+  await expect(page.locator(".question-prompt-list")).toHaveCount(1);
+  await expect(page.locator(".question-prompt-list-item")).toHaveCount(7);
+  await expect(page.locator(".question-prompt-list-label")).toHaveText([
+    "Título:",
+    "Fecha, autor y estado:",
+    "Descripción:",
+    "Intentos de reproducción:",
+    "Evidencia:",
+    "Resultado esperado:",
+    "Prioridad y referencia:",
+  ]);
+  await expect(page.locator(".question-prompt-text").last()).toContainText("¿Qué información crítica FALTA");
+});
+
 test("D-17 expands both lists in its explanation", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Explanation rendering only needs one browser pass.");
   await page.addInitScript(() => {
@@ -202,6 +230,28 @@ test("A-32 renders both three-point estimates as inline mathematical formulas in
   await expect(formulas.last()).toHaveAttribute("aria-label", /2.*4\*11.*14.*10/);
   await expect(page.locator(".explanation-intro .math-expression .frac-line")).toHaveCount(2);
   await expect(page.locator(".explanation-intro")).toContainText("Así:");
+});
+
+test("D-34 renders its risk formulas and monetary calculation with KaTeX fractions", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Formula rendering only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "D-34";
+      progress.preferences.language = "es";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+      window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
+    }
+  });
+  await page.goto("/#/practice");
+  await page.getByText("$2,000", { exact: true }).click();
+  await page.getByRole("button", { name: "Comprobar" }).click();
+
+  const formulas = page.locator(".explanation-intro .math-expression");
+  await expect(formulas).toHaveCount(3);
+  await expect(page.locator(".explanation-intro .math-expression .frac-line")).toHaveCount(3);
+  await expect(formulas.last()).toHaveAttribute("aria-label", /impacto del riesgo.*1.000.*50%.*2.000/i);
 });
 
 test("Spanish technical terms expose translations without selecting an answer", async ({ page }, testInfo) => {

@@ -13,6 +13,7 @@ import {
   clearProgress,
   exportProgress,
   importProgress,
+  markFlaggedCorrectPrompted,
   recordQuestionAttempt,
   setTutorialCompleted,
   toggleFlag,
@@ -89,6 +90,7 @@ function AppShell() {
     restoreReview(progress.sessions.find((session) => session.id === progress.review.sessionId)),
   );
   const [pendingConfirmation, setPendingConfirmation] = useState<"cancel-exam" | "reset-progress" | null>(null);
+  const [flagResolutionQuestionId, setFlagResolutionQuestionId] = useState<string | null>(null);
   const [tutorialStep, setTutorialStep] = useState(0);
   const menuRef = useModalAccessibility<HTMLElement>(isMenuOpen, () => setIsMenuOpen(false));
   useLastRouteRestoration(location.pathname, progress.preferences.lastRoute, navigate);
@@ -114,24 +116,25 @@ function AppShell() {
   }, [activeExam?.endsAt]);
 
   const filteredQuestions = useMemo(() => filterQuestions(questions, filters, progress, language), [filters, progress, language]);
+  const currentStudySession = activeStudySession?.paused ? null : activeStudySession;
   const studyQuestions = useMemo(
-    () => activeStudySession ? findQuestionsByIds(questions, activeStudySession.questionIds) : filteredQuestions,
-    [activeStudySession, filteredQuestions],
+    () => currentStudySession ? findQuestionsByIds(questions, currentStudySession.questionIds) : filteredQuestions,
+    [currentStudySession, filteredQuestions],
   );
   const progressSummary = useMemo(() => summarizeProgress(questions, progress), [progress]);
   const dashboard = useMemo(() => summarizeStudyDashboard(questions, chapters, progress), [progress]);
   const references = useMemo(() => Array.from(new Set(questions.map((question) => question.reference))).sort(), []);
   const tutorialTarget = progress.preferences.tutorialCompleted ? undefined : tutorialSteps[tutorialStep]?.target;
   const storedStudyIndex = studyQuestions.findIndex((question) => question.id === studyQuestionId);
-  const studyIndex = activeStudySession
-    ? Math.min(activeStudySession.currentIndex, Math.max(studyQuestions.length - 1, 0))
+  const studyIndex = currentStudySession
+    ? Math.min(currentStudySession.currentIndex, Math.max(studyQuestions.length - 1, 0))
     : storedStudyIndex >= 0 ? storedStudyIndex : 0;
   const currentStudyQuestion = studyQuestions[studyIndex];
-  const currentStudyRevealed = activeStudySession
-    ? activeStudySession.revealed || activeStudySession.checkedQuestionIds.includes(currentStudyQuestion?.id ?? "")
+  const currentStudyRevealed = currentStudySession
+    ? currentStudySession.revealed || currentStudySession.checkedQuestionIds.includes(currentStudyQuestion?.id ?? "")
     : studyRevealed;
   const { elapsedMs: activeQuestionTimeMs, finishAttempt: finishQuestionTimer } = useActiveQuestionTimer(
-    activeStudySession ? `study:${activeStudySession.id}` : "practice",
+    currentStudySession ? `study:${currentStudySession.id}` : "practice",
     currentStudyQuestion?.id ?? null,
     location.pathname === "/practice" && Boolean(currentStudyQuestion) && !currentStudyRevealed,
   );
@@ -151,7 +154,7 @@ function AppShell() {
   );
 
   useEffect(() => {
-    if (activeStudySession) return;
+    if (currentStudySession) return;
     if (!studyQuestions.length) {
       if (studyQuestionId !== null) setStudyQuestionId(null);
       return;
@@ -160,18 +163,18 @@ function AppShell() {
       setStudyQuestionId(studyQuestions[0].id);
       setStudyRevealed(false);
     }
-  }, [activeStudySession, studyQuestions, storedStudyIndex, studyQuestionId]);
+  }, [currentStudySession, studyQuestions, storedStudyIndex, studyQuestionId]);
 
   function updateProgress(next: ProgressState) {
     setProgress(next);
   }
 
   function handleStudyToggle(question: Question, optionKey: string) {
-    const revealed = activeStudySession
-      ? activeStudySession.revealed || activeStudySession.checkedQuestionIds.includes(question.id)
+    const revealed = currentStudySession
+      ? currentStudySession.revealed || currentStudySession.checkedQuestionIds.includes(question.id)
       : studyRevealed;
     if (revealed) return;
-    if (activeStudySession) {
+    if (currentStudySession) {
       setActiveStudySession((current) => current ? {
         ...current,
         answers: { ...current.answers, [question.id]: toggleAnswer(question, current.answers[question.id], optionKey) },
@@ -185,13 +188,20 @@ function AppShell() {
   }
 
   function handleStudyCheck(question: Question) {
-    if (activeStudySession?.checkedQuestionIds.includes(question.id)) return;
-    const selected = activeStudySession?.answers[question.id] ?? studyAnswers[question.id] ?? [];
+    if (currentStudySession?.checkedQuestionIds.includes(question.id)) return;
+    const selected = currentStudySession?.answers[question.id] ?? studyAnswers[question.id] ?? [];
     if (question.selectionMode === "multiple" && selected.length < question.correctAnswers.length) return;
     const correct = isCorrectAnswer(question, selected);
     const activeMs = finishQuestionTimer(question.id);
-    updateProgress(recordQuestionAttempt(progress, question.id, selected, correct, new Date().toISOString(), activeMs));
-    if (activeStudySession) {
+    const previous = progress.questionProgress[question.id];
+    const shouldOfferFlagResolution = correct && Boolean(previous?.flagged) && !previous?.flaggedCorrectPrompted;
+    let nextProgress = recordQuestionAttempt(progress, question.id, selected, correct, new Date().toISOString(), activeMs);
+    if (shouldOfferFlagResolution) {
+      nextProgress = markFlaggedCorrectPrompted(nextProgress, question.id);
+      setFlagResolutionQuestionId(question.id);
+    }
+    updateProgress(nextProgress);
+    if (currentStudySession) {
       setActiveStudySession((current) => current ? {
         ...current,
         revealed: true,
@@ -204,7 +214,7 @@ function AppShell() {
 
   function handleStudyNext(direction: 1 | -1) {
     const next = Math.min(Math.max(studyIndex + direction, 0), Math.max(studyQuestions.length - 1, 0));
-    if (activeStudySession) {
+    if (currentStudySession) {
       setActiveStudySession((current) => current ? {
         ...current,
         currentIndex: next,
@@ -217,7 +227,7 @@ function AppShell() {
   }
 
   function handleStudyRandom() {
-    if (activeStudySession) return;
+    if (currentStudySession) return;
     if (studyQuestions.length <= 1) return;
     let next = studyIndex;
     while (next === studyIndex) {
@@ -229,6 +239,33 @@ function AppShell() {
 
   function handleFlag(questionId: string) {
     updateProgress(toggleFlag(progress, questionId));
+  }
+
+  function handleOpenFlaggedQuestions() {
+    const firstFlaggedQuestion = questions.find((question) => progress.questionProgress[question.id]?.flagged);
+    if (!firstFlaggedQuestion) return;
+    setActiveStudySession((current) => current ? { ...current, paused: true } : current);
+    setFilters({ ...emptyFilters, status: ["flagged"] });
+    setStudyQuestionId(firstFlaggedQuestion.id);
+    setStudyRevealed(false);
+    navigate("/practice");
+  }
+
+  function handleContinuePractice() {
+    setActiveStudySession((current) => current ? { ...current, paused: false } : current);
+    navigate("/practice");
+  }
+
+  function keepFlaggedQuestion() {
+    setFlagResolutionQuestionId(null);
+  }
+
+  function unflagResolvedQuestion() {
+    if (!flagResolutionQuestionId) return;
+    setProgress((current) => current.questionProgress[flagResolutionQuestionId]?.flagged
+      ? toggleFlag(current, flagResolutionQuestionId)
+      : current);
+    setFlagResolutionQuestionId(null);
   }
 
   function startExam(blueprint: ExamBlueprint) {
@@ -562,8 +599,9 @@ function AppShell() {
               canContinuePractice={Boolean(activeStudySession) || progressSummary.attempted > 0 || Object.keys(studyAnswers).length > 0}
               hasActiveExam={Boolean(activeExam)}
               onStartStudy={startStudyBatch}
-              onContinuePractice={() => navigate("/practice")}
+              onContinuePractice={handleContinuePractice}
               onContinueExam={() => navigate("/exam")}
+              onOpenFlagged={handleOpenFlaggedQuestions}
               onLanguageChange={handleLanguageChange}
             />
           }
@@ -575,7 +613,7 @@ function AppShell() {
               filteredQuestions={studyQuestions}
               currentQuestion={currentStudyQuestion}
               currentIndex={studyIndex}
-              selected={currentStudyQuestion ? activeStudySession?.answers[currentStudyQuestion.id] ?? studyAnswers[currentStudyQuestion.id] ?? [] : []}
+              selected={currentStudyQuestion ? currentStudySession?.answers[currentStudyQuestion.id] ?? studyAnswers[currentStudyQuestion.id] ?? [] : []}
               revealed={currentStudyRevealed}
               progress={progress}
               onToggle={handleStudyToggle}
@@ -583,7 +621,7 @@ function AppShell() {
               onMove={handleStudyNext}
               onRandom={handleStudyRandom}
               onSelectIndex={(index) => {
-                if (activeStudySession) {
+                if (currentStudySession) {
                   setActiveStudySession((current) => current ? {
                     ...current,
                     currentIndex: index,
@@ -599,7 +637,7 @@ function AppShell() {
               language={language}
               onLanguageChange={handleLanguageChange}
               copy={copy}
-              adaptiveSession={activeStudySession}
+              adaptiveSession={currentStudySession}
               onFinishSession={finishStudySession}
               onLeaveSession={() => navigate("/")}
               activeTimeMs={activeQuestionTimeMs}
@@ -664,6 +702,16 @@ function AppShell() {
         />
       )}
       {showSpanishNotice && <TranslationNotice copy={copy} onClose={closeSpanishNotice} />}
+      {flagResolutionQuestionId && (
+        <ConfirmDialog
+          title={copy.flaggedCorrectTitle}
+          text={copy.flaggedCorrectText}
+          confirmLabel={copy.unflagQuestion}
+          cancelLabel={copy.keepFlagged}
+          onConfirm={unflagResolvedQuestion}
+          onCancel={keepFlaggedQuestion}
+        />
+      )}
       {pendingConfirmation && (
         <ConfirmDialog
           title={pendingConfirmation === "cancel-exam" ? copy.cancelExamTitle : copy.resetTitle}

@@ -350,27 +350,27 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "¿Cuál de las siguientes afirmaciones sobre las diferentes funciones de prueba es MÁS probable que sea CORRECTA?",
+        "prompt": "¿Cuál de las siguientes afirmaciones sobre las diferentes funciones del tester es MÁS probable que sea CORRECTA?",
         "options": [
           {
             "key": "a",
-            "text": "En el desarrollo de software ágil, el rol de gestión de pruebas es la responsabilidad principal del equipo, mientras que el rol de pruebas es principalmente responsabilidad de una sola persona externa al equipo."
+            "text": "En el desarrollo de software ágil, la función de gestión de pruebas es responsabilidad principalmente del equipo, mientras que la función del tester es responsabilidad principalmente de una sola persona externa al equipo."
           },
           {
             "key": "b",
-            "text": "El rol de pruebas es el principal responsable del seguimiento de la prueba y el control de la prueba, mientras que el rol de gestión de pruebas es el principal responsable de la planificación de las pruebas y la finalización de la prueba."
+            "text": "La función del tester es responsable principalmente del seguimiento y el control de la prueba, mientras que la función de gestión de pruebas es responsable principalmente de la planificación y la finalización de la prueba."
           },
           {
             "key": "c",
-            "text": "En el desarrollo de software ágil, las actividades de gestión de pruebas que abarcan varios equipos son manejadas por un gestor de pruebas fuera del equipo, mientras que algunas tareas de gestión de pruebas son manejadas por el propio equipo."
+            "text": "En el desarrollo de software ágil, las actividades de gestión de pruebas que abarcan varios equipos son manejadas por un Test Manager fuera del equipo, mientras que algunas tareas de gestión de pruebas son manejadas por el propio equipo."
           },
           {
             "key": "d",
-            "text": "El rol de gestión de pruebas es el principal responsable del análisis de prueba y el diseño de prueba, mientras que el rol de pruebas es el principal responsable de la implementación de prueba y la ejecución de prueba."
+            "text": "La función de gestión de pruebas es responsable principalmente del análisis y el diseño de prueba, mientras que la función del tester es responsable principalmente de la implementación y la ejecución de prueba."
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Aunque es correcto decir que en el desarrollo de software Agile, algunas de las tareas de gestión de pruebas pueden ser manejadas por el propio equipo Agile, la función de prueba no es principalmente responsabilidad de una sola persona externa al equipo. En cambio, es más probable que las pruebas las realicen varios miembros del equipo siguiendo el enfoque de todo el equipo b) No es correcto. El rol de gestión de pruebas involucra principalmente actividades relacionadas con la planificación de pruebas, seguimiento de la prueba y control de la prueba, y finalización de la prueba. Entonces, aunque esta afirmación es parcialmente correcta, es incorrecto decir que la función de prueba es la principal responsable del seguimiento de la prueba y el control de la prueba c) Es correcto. En el desarrollo de software Agile, algunas de las tareas de gestión de pruebas pueden ser manejadas por el propio equipo Agile. Sin embargo, para las actividades de prueba que abarcan varios equipos dentro de una organización, los gerentes de prueba fuera del equipo de desarrollo pueden realizar estas tareas. d) No es correcto. La función de gestión de pruebas involucra principalmente actividades relacionadas con la planificación de pruebas, el seguimiento de la prueba y el control de la prueba, y la finalización de la prueba, mientras que la función de pruebas es principalmente responsable de los aspectos técnicos y de ingeniería de las pruebas, tales como análisis de prueba, diseño de prueba, implementación de prueba y ejecución de prueba. Por lo tanto, el rol de gestión de pruebas normalmente no es responsable del análisis de prueba y el diseño de prueba, aunque es correcto decir que el rol de prueba es principalmente responsable de la implementación de prueba y ejecución de prueba"
+        "explanation": "a) No es correcto. Aunque en el desarrollo de software Agile algunas tareas de gestión de pruebas pueden ser asumidas por el propio equipo Agile, la función del tester no es responsabilidad principalmente de una sola persona externa al equipo. Es más probable que las pruebas las realicen varios miembros siguiendo el enfoque de equipo completo b) No es correcto. La función de gestión de pruebas comprende principalmente actividades relacionadas con la planificación, el seguimiento, el control y la finalización de la prueba. Por tanto, aunque la afirmación es parcialmente correcta, se equivoca al atribuir el seguimiento y el control a la función del tester c) Es correcto. En el desarrollo de software Agile, algunas tareas de gestión de pruebas pueden ser asumidas por el propio equipo Agile. Sin embargo, cuando las actividades de prueba abarcan varios equipos de una organización, los Test Managers externos al equipo de desarrollo pueden encargarse de ellas d) No es correcto. La función de gestión de pruebas comprende principalmente la planificación, el seguimiento, el control y la finalización de la prueba, mientras que la función del tester es responsable principalmente de los aspectos técnicos y de ingeniería de las pruebas, como el análisis, el diseño, la implementación y la ejecución de prueba. Por tanto, la función de gestión de pruebas no suele ser responsable del análisis y el diseño de prueba, aunque sí es correcto afirmar que la función del tester es responsable principalmente de la implementación y la ejecución de prueba"
       }
     }
   },

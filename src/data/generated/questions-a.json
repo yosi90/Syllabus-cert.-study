@@ -158,7 +158,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "Ha sido asignado como tester a un equipo que produce un nuevo sistema de forma incremental. Ha notado que no se han realizado cambios en los casos de prueba de regresión existentes durante varias iteraciones y no se identificaron nuevos defectos de regresión. Tu jefe está contento, pero tú no. ¿Qué principio de prueba explica su escepticismo?",
+        "prompt": "Ha sido asignado como tester a un equipo que produce un nuevo sistema de forma incremental. Ha notado que no se han realizado cambios en los casos de prueba de regresión existentes durante varias iteraciones y no se identificaron nuevos defectos de regresión. Tu Manager está contento, pero tú no. ¿Qué principio de prueba explica su escepticismo?",
         "options": [
           {
             "key": "a",
@@ -346,7 +346,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "¿Cuáles DOS de las siguientes tareas pertenecen PRINCIPALMENTE a una función de prueba?",
+        "prompt": "¿Cuáles DOS de las siguientes tareas pertenecen PRINCIPALMENTE a la función del tester?",
         "options": [
           {
             "key": "a",
@@ -431,7 +431,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "i. Es verdad. Tener conocimiento del dominio es una habilidad importante del tester ii. Es falso. Esta es una tarea del analista de negocios junto con el representante comercial iii. Es verdad. Ser un buen jugador de equipo es una habilidad importante iv. Es falso. Planificar y organizar el trabajo del equipo es tarea del gestor de pruebas o, sobre todo en un proyecto de desarrollo de software Agile, de todo el equipo y no sólo del tester v. Es cierto. El pensamiento crítico es una de las habilidades más importantes de los testers Así: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
+        "explanation": "i. Es verdad. Tener conocimiento del dominio es una habilidad importante del tester ii. Es falso. Esta es una tarea del analista de negocios junto con el representante comercial iii. Es verdad. Ser un buen jugador de equipo es una habilidad importante iv. Es falso. Planificar y organizar el trabajo del equipo es tarea del Test Manager o, sobre todo en un proyecto de desarrollo de software Agile, de todo el equipo y no sólo del tester v. Es cierto. El pensamiento crítico es una de las habilidades más importantes de los testers Así: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
       }
     }
   },
@@ -716,7 +716,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "¿Cuál de los siguientes argumentos utilizaría para convencer a su gerente de organizar retrospectivas al final de cada ciclo de lanzamiento?",
+        "prompt": "¿Cuál de los siguientes argumentos utilizaría para convencer a su Manager de organizar retrospectivas al final de cada ciclo de lanzamiento?",
         "options": [
           {
             "key": "a",
@@ -2317,7 +2317,7 @@
     "reference": "FL-5.5.1",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "You received the following defect report from the developers stating that the anomaly described in this test report is not reproducible. Application hangs up 2022-May-03 – John Doe – Rejected The application hangs up after entering “Test input: $ä” in the Name field on the new user creation screen. Tried to log off, log in with test_admin01 account, same issue. Tried with other test admin accounts, same issue. No error message received; log (see attached) contains fatal error notification. Based on the test case TC-1305, the application should accept the provided input and create the user. Please fix with high priority, this feature is related to REQ-0012, which is a critical new business requirement. What critical information is MISSING from this test report that would have been useful for the developers?",
+    "prompt": "You received the following defect report from the developers stating that the anomaly described in this test report is not reproducible.\n\nDefect report:\n• Title: Application hangs up\n• Date, author and status: 2022-May-03 – John Doe – Rejected\n• Description: The application hangs up after entering “Test input: $ä” in the Name field on the new user creation screen.\n• Reproduction attempts: Tried to log off, log in with test_admin01 account, same issue. Tried with other test admin accounts, same issue.\n• Evidence: No error message received; log (see attached) contains fatal error notification.\n• Expected result: According to test case TC-1305, the application should accept the provided input and create the user.\n• Priority and reference: Please fix with high priority, this feature is related to REQ-0012, which is a critical new business requirement.\n\nWhat critical information is MISSING from this test report that would have been useful for the developers?",
     "options": [
       {
         "key": "a",
@@ -2346,7 +2346,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "Recibió el siguiente informe de defectos de los desarrolladores indicando que la anomalía descrita en este informe de prueba no es reproducible. La aplicación se cuelga 03-mayo-2022 – John Doe – Rechazada La aplicación se cuelga después de ingresar “Entrada de prueba: $ä” en el campo Nombre en la pantalla de creación de nuevo usuario. Intenté cerrar sesión, iniciar sesión con la cuenta test_admin01, el mismo problema. Probé con otras cuentas de administrador de prueba, el mismo problema. No se recibió ningún mensaje de error; log (ver adjunto) contiene una notificación de error fatal. Basado en el caso de prueba TC-1305, la aplicación debe aceptar la entrada proporcionada y crear el usuario. Corrija con alta prioridad, esta característica está relacionada con REQ-0012, que es un nuevo requisito comercial crítico. ¿Qué información crítica FALTA en este informe de prueba que hubiera sido útil para los desarrolladores?",
+        "prompt": "Recibió el siguiente informe de defectos de los desarrolladores, quienes indican que la anomalía descrita no es reproducible.\n\nInforme de defectos:\n• Título: La aplicación se cuelga\n• Fecha, autor y estado: 03-mayo-2022 – John Doe – Rechazada\n• Descripción: La aplicación se cuelga después de introducir “Entrada de prueba: $ä” en el campo Nombre de la pantalla de creación de un nuevo usuario.\n• Intentos de reproducción: Se cerró la sesión y se inició sesión con la cuenta test_admin01; ocurrió el mismo problema. Se probó con otras cuentas de administrador de pruebas; ocurrió el mismo problema.\n• Evidencia: No se recibió ningún mensaje de error; el log (ver adjunto) contiene una notificación de error fatal.\n• Resultado esperado: Según el caso de prueba TC-1305, la aplicación debería aceptar la entrada proporcionada y crear el usuario.\n• Prioridad y referencia: Se solicita corregirlo con prioridad alta. Esta funcionalidad está relacionada con REQ-0012, un nuevo requisito de negocio crítico.\n\n¿Qué información crítica FALTA en este informe de defectos que habría sido útil para los desarrolladores?",
         "options": [
           {
             "key": "a",

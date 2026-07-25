@@ -67,6 +67,7 @@ export function HomeView({
   onStartStudy,
   onContinuePractice,
   onContinueExam,
+  onOpenFlagged,
   onLanguageChange,
 }: {
   dashboard: StudyDashboard;
@@ -77,6 +78,7 @@ export function HomeView({
   onStartStudy: (size: 10 | 20, mode?: "adaptive" | "reinforcement") => void;
   onContinuePractice: () => void;
   onContinueExam: () => void;
+  onOpenFlagged: () => void;
   onLanguageChange: (language: Language) => void;
 }) {
   return (
@@ -103,7 +105,19 @@ export function HomeView({
         </div>
         <div className="dashboard-status-grid">
           <article><CircleAlert aria-hidden="true" /><strong>{dashboard.pendingErrors}</strong><span>{copy.pendingErrors}</span></article>
-          <article><Bookmark aria-hidden="true" /><strong>{dashboard.flagged}</strong><span>{copy.flagged}</span></article>
+          <article className="dashboard-flagged-card">
+            <button
+              type="button"
+              onClick={onOpenFlagged}
+              disabled={dashboard.flagged === 0}
+              aria-label={`${copy.openFlaggedQuestions}: ${dashboard.flagged}`}
+              title={copy.openFlaggedQuestions}
+            >
+              <Bookmark aria-hidden="true" />
+              <strong>{dashboard.flagged}</strong>
+              <span>{copy.flagged}</span>
+            </button>
+          </article>
           <article><Eye aria-hidden="true" /><strong>{dashboard.unseen}</strong><span>{copy.unseen}</span></article>
         </div>
       </section>

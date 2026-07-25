@@ -1077,7 +1077,7 @@
         "options": [
           {
             "key": "a",
-            "text": "Gerente"
+            "text": "Manager"
           },
           {
             "key": "b",
@@ -1093,7 +1093,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. El gerente es responsable de decidir qué es necesario revisar y asignar recursos, como personal y tiempo, para la revisión. b) Es correcta. El moderador (o facilitador) es responsable de garantizar que las reuniones de revisión se desarrollen de manera efectiva, lo que incluye administrar el tiempo, mediar en las discusiones y crear un ambiente seguro donde todos puedan expresar sus opiniones libremente. c) No es correcto. El presidente no es un rol reconocido en las revisiones d) No es correcto. El líder de revisión es responsable de supervisar el proceso de revisión, como seleccionar a los miembros del equipo de revisión, programar reuniones de revisión y garantizar que la revisión se complete con éxito."
+        "explanation": "a) No es correcto. El Manager es responsable de decidir qué es necesario revisar y asignar recursos, como personal y tiempo, para la revisión. b) Es correcta. El moderador (o facilitador) es responsable de garantizar que las reuniones de revisión se desarrollen de manera efectiva, lo que incluye administrar el tiempo, mediar en las discusiones y crear un ambiente seguro donde todos puedan expresar sus opiniones libremente. c) No es correcto. El presidente no es un rol reconocido en las revisiones d) No es correcto. El líder de revisión es responsable de supervisar el proceso de revisión, como seleccionar a los miembros del equipo de revisión, programar reuniones de revisión y garantizar que la revisión se complete con éxito."
       }
     }
   },
@@ -2054,7 +2054,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Los cuadrantes de prueba no tienen nada que ver con describir las relaciones entre niveles de prueba b) No es correcto. La prueba de cuadrantes no puede ayudar a evaluar ningún tipo de cobertura c) Es correcta. Los cuadrantes de prueba permiten a los gerentes y otras partes interesadas comprender las relaciones entre los tipos de prueba, las actividades a las que dan soporte (apoyo al equipo o crítica de producto) y el punto de vista en el que se centran (negocio o tecnología) d) No es correcto. Probar cuadrantes no es un modelo psicológico"
+        "explanation": "a) No es correcto. Los cuadrantes de prueba no tienen nada que ver con describir las relaciones entre niveles de prueba b) No es correcto. La prueba de cuadrantes no puede ayudar a evaluar ningún tipo de cobertura c) Es correcta. Los cuadrantes de prueba permiten a los Managers y otras partes interesadas comprender las relaciones entre los tipos de prueba, las actividades a las que dan soporte (apoyo al equipo o crítica de producto) y el punto de vista en el que se centran (negocio o tecnología) d) No es correcto. Probar cuadrantes no es un modelo psicológico"
       }
     }
   },

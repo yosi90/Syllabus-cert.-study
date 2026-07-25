@@ -29,4 +29,22 @@ describe("technical term localization", () => {
       ["fault attack", "ataque de fallo"],
     ]);
   });
+
+  it("leaves the requested testing activities unmarked", () => {
+    const text = "La planificación de pruebas, la gestión de pruebas, la implementación de pruebas, las pruebas dinámicas, las pruebas exploratorias y la depuración (debugging).";
+    expect(technicalTextSegments(text)).toEqual([{ type: "text", text }]);
+  });
+
+  it("recognizes decision tables, performance efficiency testing and commits", () => {
+    const segments = technicalTextSegments(
+      "Las pruebas de tabla de decisiones y las pruebas de eficiencia del rendimiento se registran en varios commits.",
+    );
+    const terms = segments.filter((segment) => segment.type === "term");
+
+    expect(terms.map((segment) => [segment.text, segment.translation])).toEqual([
+      ["decision table testing", "pruebas de tabla de decisiones"],
+      ["performance efficiency testing", "pruebas de eficiencia del rendimiento"],
+      ["commits", "confirmación de cambios"],
+    ]);
+  });
 });

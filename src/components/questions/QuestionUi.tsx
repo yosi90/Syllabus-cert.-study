@@ -57,6 +57,7 @@ export function QuestionCard({
   revealed,
   progressText,
   flagged,
+  emphasizeFlag = false,
   locked,
   onToggle,
   onFlag,
@@ -70,6 +71,7 @@ export function QuestionCard({
   revealed: boolean;
   progressText: string;
   flagged: boolean;
+  emphasizeFlag?: boolean;
   locked: boolean;
   onToggle: (optionKey: string) => void;
   onFlag?: () => void;
@@ -103,7 +105,12 @@ export function QuestionCard({
           />
           {onFlag && (
             <button
-              className="icon-button"
+              className={classNames(
+                "icon-button",
+                "flag-button",
+                flagged && "is-flagged",
+                flagged && emphasizeFlag && "flag-attention",
+              )}
               type="button"
               onClick={onFlag}
               title={flagged ? copy.removeFlag : copy.addFlag}

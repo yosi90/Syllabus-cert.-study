@@ -15,11 +15,24 @@ function PromptBlocks({ blocks, language }: { blocks: ReturnType<typeof promptBl
       {block.items.map((item, itemIndex) => (
         <span className="question-prompt-list-item" role="listitem" key={itemIndex}>
           <span className="question-prompt-list-marker" aria-hidden="true">{item.marker}</span>
-          <span><TechnicalText text={item.text} language={language} /></span>
+          <PromptListItemText text={item.text} language={language} />
         </span>
       ))}
     </span>
   ))}</>;
+}
+
+function PromptListItemText({ text, language }: { text: string; language: Language }) {
+  const labelledItem = text.match(/^([^:]{1,48}:)\s+(.+)$/);
+  if (!labelledItem) return <span><TechnicalText text={text} language={language} /></span>;
+
+  return (
+    <span>
+      <strong className="question-prompt-list-label"><TechnicalText text={labelledItem[1]} language={language} /></strong>
+      {" "}
+      <TechnicalText text={labelledItem[2]} language={language} />
+    </span>
+  );
 }
 
 export function QuestionPromptContent({ question, language }: { question: Question; language: Language }) {

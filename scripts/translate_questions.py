@@ -58,6 +58,14 @@ OFFSET = int(OFFSET_ARG.split("=", 1)[1]) if OFFSET_ARG else 0
 
 
 GLOSSARY = [
+    (r"\btesting roles\b", "funciones del tester"),
+    (r"\btesting role\b", "función del tester"),
+    (r"\btest managers\b", "Test Managers"),
+    (r"\btest manager\b", "Test Manager"),
+    (r"\bproject managers\b", "Project Managers"),
+    (r"\bproject manager\b", "Project Manager"),
+    (r"\bmanagers\b", "Managers"),
+    (r"\bmanager\b", "Manager"),
     (r"\bsoftware testing\b", "pruebas de software"),
     (r"\btesting\b", "pruebas"),
     (r"\btest basis\b", "base de prueba"),
@@ -98,6 +106,9 @@ GLOSSARY = [
     (r"\bboundary value analysis\b", "analisis de valores limite"),
     (r"\bequivalence partitioning\b", "particion de equivalencia"),
     (r"\bdecision table testing\b", "pruebas de tabla de decision"),
+    (r"\bperformance efficiency testing\b", "pruebas de eficiencia del rendimiento"),
+    (r"\bcommits\b", "commits"),
+    (r"\bcommit\b", "commit"),
     (r"\bstate transition testing\b", "pruebas de transicion de estados"),
     (r"\bstatement coverage\b", "cobertura de sentencias"),
     (r"\bbranch coverage\b", "cobertura de ramas"),

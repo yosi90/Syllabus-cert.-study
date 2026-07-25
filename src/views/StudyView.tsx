@@ -52,10 +52,24 @@ export function StudyView({
   activeTimeMs: number;
 }) {
   const [incompleteWarningQuestionId, setIncompleteWarningQuestionId] = useState<string | null>(null);
+  const [attentionQuestionId, setAttentionQuestionId] = useState<string | null>(null);
+  const flagged = currentQuestion
+    ? progress.questionProgress[currentQuestion.id]?.flagged ?? false
+    : false;
 
   useEffect(() => {
     if (currentQuestion) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [currentQuestion?.id]);
+
+  useEffect(() => {
+    setAttentionQuestionId(currentQuestion && progress.questionProgress[currentQuestion.id]?.flagged
+      ? currentQuestion.id
+      : null);
+  }, [currentQuestion?.id]);
+
+  useEffect(() => {
+    if (!flagged) setAttentionQuestionId(null);
+  }, [flagged]);
 
   if (!currentQuestion) {
     return (
@@ -106,7 +120,8 @@ export function StudyView({
         selected={selected}
         revealed={revealed}
         progressText={progressLabel(progress, currentQuestion, copy)}
-        flagged={progress.questionProgress[currentQuestion.id]?.flagged ?? false}
+        flagged={flagged}
+        emphasizeFlag={flagged && attentionQuestionId === currentQuestion.id}
         locked={revealed}
         onToggle={(optionKey) => onToggle(currentQuestion, optionKey)}
         onFlag={() => onFlag(currentQuestion.id)}

@@ -791,6 +791,11 @@ button:disabled {
   font-weight: 750;
 }
 
+.question-prompt-list-label {
+  color: #1c5968;
+  font-weight: 750;
+}
+
 .question-visual {
   margin: 16px 0 0;
 }
@@ -888,6 +893,27 @@ button:disabled {
 .icon-button svg {
   width: 18px;
   height: 18px;
+}
+
+.flag-button.is-flagged {
+  border-color: #e1b73f;
+  color: #8b6500;
+  background: #fff8d9;
+}
+
+.flag-button.flag-attention {
+  animation: flagged-glow-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes flagged-glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(235 184 35 / 18%), 0 0 8px rgb(235 184 35 / 18%);
+  }
+
+  50% {
+    box-shadow: 0 0 0 5px rgb(235 184 35 / 12%), 0 0 18px rgb(235 184 35 / 52%);
+  }
 }
 
 .icon-button[data-tooltip]::after {
@@ -1746,6 +1772,40 @@ button:disabled {
   background: #eef4f6;
 }
 
+.dashboard-status-grid .dashboard-flagged-card {
+  padding: 0;
+}
+
+.dashboard-flagged-card button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+}
+
+.dashboard-flagged-card button:not(:disabled):hover {
+  border-color: #d7aa2d;
+  background: #fff8d9;
+}
+
+.dashboard-flagged-card button:focus-visible {
+  outline: 3px solid #d7aa2d;
+  outline-offset: 2px;
+}
+
+.dashboard-flagged-card button:disabled {
+  cursor: default;
+}
+
 .dashboard-status-grid svg {
   width: 22px;
   height: 22px;
@@ -2521,6 +2581,13 @@ button:disabled {
     text-align: left;
   }
 
+  .dashboard-workspace .dashboard-flagged-card button {
+    justify-content: center;
+    gap: 5px;
+    padding: 8px 4px;
+    text-align: left;
+  }
+
   .dashboard-workspace .dashboard-status-grid svg {
     width: 17px;
     height: 17px;
@@ -2541,6 +2608,11 @@ button:disabled {
     }
 
     .dashboard-workspace .dashboard-status-grid article {
+      justify-content: flex-start;
+      padding-inline: 10px;
+    }
+
+    .dashboard-workspace .dashboard-flagged-card button {
       justify-content: flex-start;
       padding-inline: 10px;
     }
@@ -2862,6 +2934,12 @@ button:disabled {
   background: #101927;
 }
 
+.app[data-theme="dark"] .flag-button.is-flagged {
+  border-color: #d7aa2d;
+  color: #ffd968;
+  background: #392f12;
+}
+
 .app[data-theme="dark"] .session-type {
   color: #b9dbef !important;
   background: #183247;
@@ -2891,6 +2969,12 @@ button:disabled {
 
 .app[data-theme="dark"] .dashboard-status-grid article {
   background: #101927;
+}
+
+.app[data-theme="dark"] .dashboard-flagged-card button:not(:disabled):hover {
+  border-color: #d7aa2d;
+  color: #fff1b8;
+  background: #392f12;
 }
 
 .app[data-theme="dark"] .dashboard-segmented-progress {
@@ -3006,6 +3090,10 @@ button:disabled {
 
 .app[data-theme="dark"] .question-prompt-list-marker {
   color: #8bc9e8;
+}
+
+.app[data-theme="dark"] .question-prompt-list-label {
+  color: #9bd8e8;
 }
 
 .app[data-theme="dark"] .reason-pill.selected {

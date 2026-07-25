@@ -14,7 +14,7 @@ const progress = {
     lastRoute: "/",
   },
   study: {
-    filters: { query: "", models: [], chapters: [], kLevels: [], references: [], status: "all" },
+    filters: { query: "", models: [], chapters: [], kLevels: [], references: [], status: [] },
     currentQuestionId: "A-01",
     answers: {},
     revealed: false,

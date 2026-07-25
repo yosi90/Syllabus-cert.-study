@@ -1,7 +1,7 @@
 import type { Question, SourceModel, KLevel } from "../data/types";
 import type { ProgressState } from "../storage/progress";
 
-export type QuestionStatus = "all" | "unseen" | "correct" | "incorrect" | "flagged";
+export type QuestionStatus = "unseen" | "correct" | "incorrect" | "flagged";
 
 export type QuestionFilters = {
   query: string;
@@ -9,7 +9,7 @@ export type QuestionFilters = {
   chapters: string[];
   kLevels: KLevel[];
   references: string[];
-  status: QuestionStatus;
+  status: QuestionStatus[];
 };
 
 export const emptyFilters: QuestionFilters = {
@@ -18,7 +18,7 @@ export const emptyFilters: QuestionFilters = {
   chapters: [],
   kLevels: [],
   references: [],
-  status: "all",
+  status: [],
 };
 
 export function filterQuestions(
@@ -36,10 +36,15 @@ export function filterQuestions(
     if (filters.kLevels.length > 0 && !filters.kLevels.includes(question.kLevel)) return false;
     if (filters.references.length > 0 && !filters.references.includes(question.reference)) return false;
 
-    if (filters.status === "unseen" && questionProgress?.attempts) return false;
-    if (filters.status === "correct" && !questionProgress?.lastCorrect) return false;
-    if (filters.status === "incorrect" && (!questionProgress?.attempts || questionProgress.lastCorrect)) return false;
-    if (filters.status === "flagged" && !questionProgress?.flagged) return false;
+    if (filters.status.length > 0) {
+      const matchesStatus = filters.status.some((status) => {
+        if (status === "unseen") return !questionProgress?.attempts;
+        if (status === "correct") return Boolean(questionProgress?.lastCorrect);
+        if (status === "incorrect") return Boolean(questionProgress?.attempts) && !questionProgress?.lastCorrect;
+        return Boolean(questionProgress?.flagged);
+      });
+      if (!matchesStatus) return false;
+    }
 
     if (!query) return true;
     const translated = language === "es" ? question.translations?.es : undefined;

@@ -36,13 +36,19 @@ function TechnicalTerm({ text, translation }: { text: string; translation: strin
 }
 
 export function TechnicalText({ text, language }: { text: string; language: Language }) {
-  const formulaPattern = /(\bE\s*=\s*\([^.!?;\n]+?\)\s*\/\s*6(?:\s*=\s*\d+(?:[.,]\d+)?)?)/gi;
+  const riskFormula =
+    String.raw`(?:Risk level = Risk likelihood \* Risk impact|Risk impact = Risk level / Risk likelihood|Risk impact = \$1,000 / 50% = \$1,000 / 0\.5 = \$2,000|nivel de riesgo = probabilidad del riesgo \* impacto del riesgo|impacto del riesgo = nivel de riesgo / probabilidad del riesgo|impacto del riesgo = \$1\.000 / 50% = \$1\.000 / 0,5 = \$2\.000)`;
+  const formulaPattern = new RegExp(
+    String.raw`(\bE\s*=\s*\([^.!?;\n]+?\)\s*\/\s*6(?:\s*=\s*\d+(?:[.,]\d+)?)?|${riskFormula})`,
+    "gi",
+  );
   const exactFormulaPattern = /^\bE\s*=\s*\([^.!?;\n]+?\)\s*\/\s*6(?:\s*=\s*\d+(?:[.,]\d+)?)?$/i;
+  const exactRiskFormulaPattern = new RegExp(`^${riskFormula}$`, "i");
   const segments = text.split(formulaPattern).filter(Boolean);
 
   return <>{segments.map((segment, segmentIndex) => {
-    if (exactFormulaPattern.test(segment)) {
-      const latex = segment
+    if (exactFormulaPattern.test(segment) || exactRiskFormulaPattern.test(segment)) {
+      const latex = exactFormulaPattern.test(segment) ? segment
         .split(/\s*=\s*/)
         .map((part) => {
           const fraction = part.match(/^\((.*)\)\s*\/\s*(\d+)$/);
@@ -52,7 +58,21 @@ export function TechnicalText({ text, language }: { text: string; language: Lang
             .replace(/\*/g, "\\times ");
           return fraction ? `\\frac{${formatted}}{${fraction[2]}}` : formatted;
         })
-        .join("=");
+        .join("=") : segment
+          .split(/\s*=\s*/)
+          .map((part) => {
+            const formatOperand = (operand: string) => operand
+              .trim()
+              .replace(/Risk level|Risk likelihood|Risk impact|nivel de riesgo|probabilidad del riesgo|impacto del riesgo/gi, (label) => `\\text{${label}}`)
+              .replace(/\$/g, "\\$")
+              .replace(/(?<=\d),(?=\d)/g, "{,}")
+              .replace(/(?<=\d)\.(?=\d{3}\b)/g, "{.}")
+              .replace(/%/g, "\\%");
+            const fraction = part.split(/\s*\/\s*/);
+            if (fraction.length === 2) return `\\frac{${formatOperand(fraction[0])}}{${formatOperand(fraction[1])}}`;
+            return formatOperand(part).replace(/\*/g, "\\times ");
+          })
+          .join("=");
       return (
         <span
           className="math-expression"

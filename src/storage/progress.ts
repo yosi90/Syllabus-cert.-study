@@ -11,6 +11,7 @@ export type QuestionProgress = {
   correct: number;
   lastCorrect: boolean;
   flagged: boolean;
+  flaggedCorrectPrompted?: boolean;
   lastAnswers: string[];
   updatedAt: string;
   totalActiveMs?: number;
@@ -38,7 +39,7 @@ export type StoredFilters = {
   chapters: string[];
   kLevels: KLevel[];
   references: string[];
-  status: "all" | "unseen" | "correct" | "incorrect" | "flagged";
+  status: Array<"unseen" | "correct" | "incorrect" | "flagged">;
 };
 
 export type PersistedExam = {
@@ -70,6 +71,7 @@ export type PersistedStudySession = {
   checkedQuestionIds: string[];
   startedAt: string;
   studyMode?: "adaptive" | "reinforcement";
+  paused?: boolean;
 };
 
 export type ProgressState = {
@@ -119,7 +121,7 @@ const emptyFilters: StoredFilters = {
   chapters: [],
   kLevels: [],
   references: [],
-  status: "all",
+  status: [],
 };
 
 export function createEmptyProgress(): ProgressState {
@@ -176,16 +178,21 @@ function isProgressState(value: unknown): value is ProgressState {
 }
 
 function normalizeFilters(value: Partial<StoredFilters> | undefined): StoredFilters {
-  const validStatuses = ["all", "unseen", "correct", "incorrect", "flagged"] as const;
+  const validStatuses = ["unseen", "correct", "incorrect", "flagged"] as const;
+  const rawStatus: unknown = value?.status;
+  const status = Array.isArray(rawStatus)
+    ? rawStatus.filter((item): item is StoredFilters["status"][number] =>
+        typeof item === "string" && validStatuses.includes(item as StoredFilters["status"][number]))
+    : typeof rawStatus === "string" && validStatuses.includes(rawStatus as StoredFilters["status"][number])
+      ? [rawStatus as StoredFilters["status"][number]]
+      : [];
   return {
     query: typeof value?.query === "string" ? value.query : "",
     models: Array.isArray(value?.models) ? value.models.filter((item): item is SourceModel => ["A", "B", "C", "D"].includes(item)) : [],
     chapters: Array.isArray(value?.chapters) ? value.chapters.filter((item): item is string => typeof item === "string") : [],
     kLevels: Array.isArray(value?.kLevels) ? value.kLevels.filter((item): item is KLevel => ["K1", "K2", "K3"].includes(item)) : [],
     references: Array.isArray(value?.references) ? value.references.filter((item): item is string => typeof item === "string") : [],
-    status: validStatuses.includes(value?.status as (typeof validStatuses)[number])
-      ? (value?.status as StoredFilters["status"])
-      : "all",
+    status: Array.from(new Set(status)),
   };
 }
 
@@ -207,6 +214,7 @@ function normalizeProgress(value: ProgressState): ProgressState {
         const needsUnknownTime = shouldBackfillTiming && item.attempts > 0 && averageActiveMs <= 1_000;
         return [questionId, {
           ...item,
+          flaggedCorrectPrompted: Boolean(item.flaggedCorrectPrompted),
           totalActiveMs: needsUnknownTime ? UNKNOWN_ACTIVE_TIME_MS : totalActiveMs,
           lastActiveMs: needsUnknownTime ? UNKNOWN_ACTIVE_TIME_MS : lastActiveMs,
           timedAttempts: needsUnknownTime ? 1 : timedAttempts,
@@ -262,6 +270,7 @@ function normalizeProgress(value: ProgressState): ProgressState {
           checkedQuestionIds: Array.isArray(value.activeStudySession.checkedQuestionIds)
             ? value.activeStudySession.checkedQuestionIds.filter((id): id is string => typeof id === "string")
             : [],
+          paused: Boolean(value.activeStudySession.paused),
         }
       : null,
     review: {
@@ -344,6 +353,7 @@ export function recordQuestionAttempt(
         correct: (previous?.correct ?? 0) + (isCorrect ? 1 : 0),
         lastCorrect: isCorrect,
         flagged: previous?.flagged ?? false,
+        flaggedCorrectPrompted: previous?.flaggedCorrectPrompted ?? false,
         lastAnswers: selectedAnswers,
         updatedAt: now,
         totalActiveMs: replacesUnknownActiveTime
@@ -360,6 +370,7 @@ export function recordQuestionAttempt(
 
 export function toggleFlag(progress: ProgressState, questionId: string, now = new Date().toISOString()): ProgressState {
   const previous = progress.questionProgress[questionId];
+  const flagged = !(previous?.flagged ?? false);
   return {
     ...progress,
     questionProgress: {
@@ -368,12 +379,28 @@ export function toggleFlag(progress: ProgressState, questionId: string, now = ne
         attempts: previous?.attempts ?? 0,
         correct: previous?.correct ?? 0,
         lastCorrect: previous?.lastCorrect ?? false,
-        flagged: !(previous?.flagged ?? false),
+        flagged,
+        flaggedCorrectPrompted: false,
         lastAnswers: previous?.lastAnswers ?? [],
         updatedAt: now,
         totalActiveMs: previous?.totalActiveMs ?? 0,
         lastActiveMs: previous?.lastActiveMs ?? 0,
         timedAttempts: previous?.timedAttempts ?? 0,
+      },
+    },
+  };
+}
+
+export function markFlaggedCorrectPrompted(progress: ProgressState, questionId: string): ProgressState {
+  const previous = progress.questionProgress[questionId];
+  if (!previous?.flagged || previous.flaggedCorrectPrompted) return progress;
+  return {
+    ...progress,
+    questionProgress: {
+      ...progress.questionProgress,
+      [questionId]: {
+        ...previous,
+        flaggedCorrectPrompted: true,
       },
     },
   };
