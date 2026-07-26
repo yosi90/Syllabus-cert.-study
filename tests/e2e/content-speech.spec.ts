@@ -100,6 +100,26 @@ test("C-31 renders a real fraction with an accessible localized description", as
   expect(formulaStyle.whiteSpace).toBe("nowrap");
 });
 
+test("D-26 renders both compound-interest expressions with mathematical exponents", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Formula rendering only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "D-26";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+    }
+  });
+  await page.goto("/#/practice");
+
+  const formulaOption = page.locator(".option-row").filter({ hasText: "The developer wrote" });
+  const formulas = formulaOption.locator(".math-expression");
+  await expect(formulas).toHaveCount(2);
+  await expect(formulas.first()).toHaveAttribute("aria-label", "FA = A*(1+IR^N)");
+  await expect(formulas.last()).toHaveAttribute("aria-label", "FA = A*(1+IR)^N");
+  await expect(formulaOption.locator(".math-expression .msupsub")).toHaveCount(2);
+});
+
 test("D-22 keeps its four test cases in one intact list card", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Prompt rendering only needs one browser pass.");
   await page.addInitScript(() => {

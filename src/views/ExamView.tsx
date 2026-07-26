@@ -7,6 +7,7 @@ import { models, type Copy, type ExamState, type Language, type TimerMode } from
 import { formatRemainingTime } from "../app/presentation";
 import { ConfirmDialog, Metric } from "../components/common/CommonUi";
 import { ExamRail, QuestionCard } from "../components/questions/QuestionUi";
+import { useQuestionKeyboard } from "../hooks/useQuestionKeyboard";
 
 export function ExamView({
   activeExam,
@@ -45,6 +46,29 @@ export function ExamView({
   useEffect(() => {
     if (activeQuestionId) window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [activeQuestionId]);
+
+  function handleKeyboardMove(direction: 1 | -1) {
+    if (direction === -1) {
+      onMove(-1);
+      return;
+    }
+    if (!activeExam) return;
+    const question = questions.find((item) => item.id === activeQuestionId);
+    const selection = activeQuestionId ? activeExam.answers[activeQuestionId] ?? [] : [];
+    if (question?.selectionMode === "multiple"
+      && selection.length > 0
+      && selection.length < question.correctAnswers.length) {
+      setIncompleteQuestionId(question.id);
+      return;
+    }
+    onMove(1);
+  }
+
+  useQuestionKeyboard({
+    canMovePrevious: Boolean(activeExam && activeExam.currentIndex > 0),
+    canMoveNext: Boolean(activeExam && activeExam.currentIndex < activeExam.blueprint.questionIds.length - 1),
+    onMove: handleKeyboardMove,
+  });
 
   if (!activeExam) {
     return (

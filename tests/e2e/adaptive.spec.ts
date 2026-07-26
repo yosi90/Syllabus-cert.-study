@@ -152,7 +152,17 @@ test("a recovered twenty-question session finishes and enters history", async ({
   await page.reload();
 
   await expect(page.getByText("20/20", { exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Finish session" }).click();
+  const finishButton = page.getByRole("button", { name: "Finish session" });
+  await expect(finishButton).toBeDisabled();
+  const answerInputs = page.locator('.option-row input[type="radio"], .option-row input[type="checkbox"]');
+  if (await answerInputs.first().getAttribute("type") === "checkbox") {
+    for (const input of await answerInputs.all()) await input.check();
+  } else {
+    await answerInputs.first().check();
+  }
+  await page.getByRole("button", { name: "Check" }).click();
+  await expect(finishButton).toBeEnabled();
+  await finishButton.click();
   await expect(page).toHaveURL(/#\/review$/);
   await expect(page.getByRole("heading", { name: "Adaptive session · 20" })).toBeVisible();
   await expect(page.locator(".result-banner").getByText("Session completed", { exact: true })).toBeVisible();

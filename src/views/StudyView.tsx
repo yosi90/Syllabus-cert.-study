@@ -7,6 +7,7 @@ import type { Copy, Language } from "../app/content";
 import { classNames, progressLabel } from "../app/presentation";
 import { EmptyState, FlagLanguageToggle, Metric } from "../components/common/CommonUi";
 import { ExplanationPanel, QuestionCard, QuestionRail } from "../components/questions/QuestionUi";
+import { useQuestionKeyboard } from "../hooks/useQuestionKeyboard";
 
 export function StudyView({
   filteredQuestions,
@@ -71,6 +72,26 @@ export function StudyView({
     if (!flagged) setAttentionQuestionId(null);
   }, [flagged]);
 
+  function handleCheck() {
+    if (!currentQuestion) return;
+    const incompleteSelection = currentQuestion.selectionMode === "multiple"
+      && selected.length > 0
+      && selected.length < currentQuestion.correctAnswers.length;
+    if (incompleteSelection) {
+      setIncompleteWarningQuestionId(currentQuestion.id);
+      return;
+    }
+    onCheck(currentQuestion);
+  }
+
+  useQuestionKeyboard({
+    canCheck: Boolean(currentQuestion && selected.length > 0 && !revealed),
+    onCheck: handleCheck,
+    canMovePrevious: Boolean(currentQuestion && currentIndex > 0),
+    canMoveNext: Boolean(currentQuestion && currentIndex < filteredQuestions.length - 1),
+    onMove,
+  });
+
   if (!currentQuestion) {
     return (
       <main className="workspace">
@@ -87,15 +108,6 @@ export function StudyView({
     && selected.length > 0
     && selected.length < requiredAnswers;
   const showIncompleteWarning = incompleteWarningQuestionId === currentQuestion.id && incompleteMultipleSelection;
-  const checkQuestion = currentQuestion;
-
-  function handleCheck() {
-    if (incompleteMultipleSelection) {
-      setIncompleteWarningQuestionId(checkQuestion.id);
-      return;
-    }
-    onCheck(checkQuestion);
-  }
 
   return (
     <main className={classNames("workspace", highlighted && "tutorial-highlight")}>
@@ -183,7 +195,7 @@ export function StudyView({
           </button>
         )}
         {adaptiveSession && currentIndex >= filteredQuestions.length - 1 ? (
-          <button className="primary" type="button" onClick={onFinishSession}>
+          <button className="primary" type="button" onClick={onFinishSession} disabled={!revealed}>
             <CheckCircle2 aria-hidden="true" />
             {copy.finishSession}
           </button>

@@ -38,16 +38,21 @@ function TechnicalTerm({ text, translation }: { text: string; translation: strin
 export function TechnicalText({ text, language }: { text: string; language: Language }) {
   const riskFormula =
     String.raw`(?:Risk level = Risk likelihood \* Risk impact|Risk impact = Risk level / Risk likelihood|Risk impact = \$1,000 / 50% = \$1,000 / 0\.5 = \$2,000|nivel de riesgo = probabilidad del riesgo \* impacto del riesgo|impacto del riesgo = nivel de riesgo / probabilidad del riesgo|impacto del riesgo = \$1\.000 / 50% = \$1\.000 / 0,5 = \$2\.000)`;
+  const compoundInterestFormula =
+    String.raw`FA\s*=\s*A\s*\*\s*(?:\(1\s*\+\s*IR\^N\)|\(1\s*\+\s*IR\)\^N)`;
   const formulaPattern = new RegExp(
-    String.raw`(\bE\s*=\s*\([^.!?;\n]+?\)\s*\/\s*6(?:\s*=\s*\d+(?:[.,]\d+)?)?|${riskFormula})`,
+    String.raw`(\bE\s*=\s*\([^.!?;\n]+?\)\s*\/\s*6(?:\s*=\s*\d+(?:[.,]\d+)?)?|${riskFormula}|${compoundInterestFormula})`,
     "gi",
   );
   const exactFormulaPattern = /^\bE\s*=\s*\([^.!?;\n]+?\)\s*\/\s*6(?:\s*=\s*\d+(?:[.,]\d+)?)?$/i;
   const exactRiskFormulaPattern = new RegExp(`^${riskFormula}$`, "i");
+  const exactCompoundInterestFormulaPattern = new RegExp(`^${compoundInterestFormula}$`, "i");
   const segments = text.split(formulaPattern).filter(Boolean);
 
   return <>{segments.map((segment, segmentIndex) => {
-    if (exactFormulaPattern.test(segment) || exactRiskFormulaPattern.test(segment)) {
+    if (exactFormulaPattern.test(segment)
+      || exactRiskFormulaPattern.test(segment)
+      || exactCompoundInterestFormulaPattern.test(segment)) {
       const latex = exactFormulaPattern.test(segment) ? segment
         .split(/\s*=\s*/)
         .map((part) => {
@@ -58,7 +63,11 @@ export function TechnicalText({ text, language }: { text: string; language: Lang
             .replace(/\*/g, "\\times ");
           return fraction ? `\\frac{${formatted}}{${fraction[2]}}` : formatted;
         })
-        .join("=") : segment
+        .join("=") : exactCompoundInterestFormulaPattern.test(segment)
+        ? segment.replace(/\s+/g, "").includes("IR^N)")
+          ? "FA=A\\times(1+IR^{N})"
+          : "FA=A\\times(1+IR)^{N}"
+        : segment
           .split(/\s*=\s*/)
           .map((part) => {
             const formatOperand = (operand: string) => operand

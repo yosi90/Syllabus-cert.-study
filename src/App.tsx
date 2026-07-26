@@ -467,6 +467,8 @@ function AppShell() {
 
   function finishStudySession() {
     if (!activeStudySession) return;
+    const lastQuestionId = activeStudySession.questionIds.at(-1);
+    if (!lastQuestionId || !activeStudySession.checkedQuestionIds.includes(lastQuestionId)) return;
     const sessionQuestions = findQuestionsByIds(questions, activeStudySession.questionIds);
     const score = scoreQuestions(sessionQuestions, activeStudySession.answers, {
       ...examRules,
