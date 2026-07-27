@@ -1236,7 +1236,7 @@
     "reference": "FL-4.2.2",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "A developer was asked to implement the following business rule. You design the test cases using 2-value boundary value analysis. Which of the following sets of test inputs achieves the greatest coverage?",
+    "prompt": "A developer was asked to implement the following business rule; you design the test cases using 2-value boundary value analysis. Which of the following sets of test inputs achieves the greatest coverage?",
     "options": [
       {
         "key": "a",
@@ -1272,7 +1272,7 @@
     },
     "translations": {
       "es": {
-        "prompt": "Se pidió a un desarrollador que implementara la siguiente regla de negocio. Usted diseña los casos de prueba mediante un análisis de valores límite de 2 valores. ¿Cuál de los siguientes conjuntos de entradas de prueba logra la mayor cobertura?",
+        "prompt": "Se pidió a un desarrollador que implementara la siguiente regla de negocio; usted diseña los casos de prueba mediante un análisis de valores límite de 2 valores. ¿Cuál de los siguientes conjuntos de entradas de prueba logra la mayor cobertura?",
         "options": [
           {
             "key": "a",

@@ -100,6 +100,71 @@ test("C-31 renders a real fraction with an accessible localized description", as
   expect(formulaStyle.whiteSpace).toBe("nowrap");
 });
 
+test("B-25 renders its branch-coverage formula with the shared math style", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Formula rendering only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "B-25";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+    }
+  });
+  await page.goto("/#/practice");
+
+  const formula = page.getByRole("img", { name: "B Cov equals X divided by Y, times one hundred percent." });
+  await expect(formula).toBeVisible();
+  await expect(formula.locator(".frac-line")).toBeVisible();
+  await expect(formula).toHaveClass(/math-expression/);
+});
+
+test("A-34 places a heading above each of its two lists", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Prompt layout only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "A-34";
+      progress.preferences.language = "es";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+      window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
+    }
+  });
+  await page.goto("/#/practice");
+
+  const columns = page.locator(".question-prompt-list-column");
+  await expect(columns).toHaveCount(2);
+  await expect(columns.first().locator(".question-prompt-text")).toHaveText(
+    "Considere las siguientes categorías de pruebas (1-4):",
+  );
+  await expect(columns.last().locator(".question-prompt-text")).toHaveText(
+    "Y los siguientes cuadrantes de pruebas ágiles (A-D):",
+  );
+  await expect(columns.first().locator(".question-prompt-list-item")).toHaveCount(4);
+  await expect(columns.last().locator(".question-prompt-list-item")).toHaveCount(4);
+});
+
+test("C-21 keeps its introductory sentences in one continuous text block", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Prompt layout only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "C-21";
+      progress.preferences.language = "es";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+      window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
+    }
+  });
+  await page.goto("/#/practice");
+
+  const promptBlocks = page.locator(".prompt .question-prompt-text");
+  await expect(promptBlocks).toHaveCount(2);
+  await expect(promptBlocks.first()).toContainText(
+    "regla de negocio; usted diseña los casos de prueba",
+  );
+});
+
 test("D-26 renders both compound-interest expressions with mathematical exponents", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Formula rendering only needs one browser pass.");
   await page.addInitScript(() => {

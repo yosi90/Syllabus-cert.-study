@@ -115,7 +115,7 @@ export function formatPromptText(prompt: string) {
 
   return formatted
     .replace(/\s+(?=(?:The generic review process|El proceso de revisión genérico)\b)/g, "\n\n")
-    .replace(/\s+(?=And the following\b|Y las siguientes\b)/g, "\n\n")
+    .replace(/\s+(?=And the following\b|Y (?:las|los) siguientes\b)/g, "\n\n")
     .replace(/\s+(?=Variable:)/g, "\n\n")
     .replace(/\s+(?=(?:Which|What|How|Tools from|Given that|Based on|In all test cases)(?:\s|$))/g, "\n\n")
     .replace(/\s+(?=(?:¿Cuál|¿Cuáles|¿Qué|¿Cómo|¿De|¿Herramientas de|Dado que|Basándose en|Basándote|En todos los casos)(?:\s|$))/g, "\n\n")

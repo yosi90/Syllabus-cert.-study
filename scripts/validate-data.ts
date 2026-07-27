@@ -228,6 +228,18 @@ assert(!/\b(?:prob|prov)ad(?:or|ora|ores|oras)\b/i.test(JSON.stringify(bank)), "
 const c31 = bank.questions.find((question) => question.id === "C-31");
 assert(c31?.promptParts?.en.some((part) => part.type === "math" && part.latex.includes("\\frac") && part.latex.endsWith("{4}")), "C-31: missing fraction with denominator 4");
 
+const b25 = bank.questions.find((question) => question.id === "B-25");
+assert(
+  b25?.promptParts?.en.some(
+    (part) => part.type === "math" && part.latex.includes("\\frac{X}{Y}") && part.latex.includes("\\times 100\\%"),
+  ),
+  "B-25: missing styled branch-coverage formula",
+);
+assert(
+  !/\bejercid[ao]s?\b/i.test(JSON.stringify(b25?.translations?.es ?? {})),
+  "B-25: Spanish coverage wording should use 'ejecutado', not the literal calque 'ejercido'",
+);
+
 if (failures.length) {
   console.error(`Data validation failed with ${failures.length} issue(s):`);
   for (const failure of failures) {

@@ -2073,7 +2073,7 @@
     "reference": "FL-5.1.7",
     "kLevel": "K2",
     "rawKLevel": "K2",
-    "prompt": "Consider the following test categories (1-4) and agile testing quadrants (A-D): 1. Usability testing 2. Component testing 3. Functional testing 4. Reliability testing A. Agile testing quadrant Q1: technology facing, supporting the development team B. Agile testing quadrant Q2: business facing, supporting the development team C. Agile testing quadrant Q3: business facing, critique the product D. Agile testing quadrant Q4: technology facing, critique the product How do the following test categories map onto the agile testing quadrants?",
+    "prompt": "Consider the following test categories (1-4): 1. Usability testing 2. Component testing 3. Functional testing 4. Reliability testing And the following agile testing quadrants (A-D): A. Agile testing quadrant Q1: technology facing, supporting the development team B. Agile testing quadrant Q2: business facing, supporting the development team C. Agile testing quadrant Q3: business facing, critique the product D. Agile testing quadrant Q4: technology facing, critique the product How do the following test categories map onto the agile testing quadrants?",
     "options": [
       {
         "key": "a",
@@ -2102,7 +2102,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "Considere las siguientes categorías de pruebas (1-4) y cuadrantes de pruebas ágiles (A-D): 1. Pruebas de usabilidad 2. pruebas de componentes 3. Las pruebas funcionales 4. Pruebas de confiabilidad A. Cuadrante de pruebas ágiles Q1: orientado a la tecnología, apoyando al equipo de desarrollo B. Cuadrante de pruebas ágiles Q2: orientado al negocio, apoyando al equipo de desarrollo C. Cuadrante de pruebas ágiles Q3: orientado al negocio, critica el producto D. Cuadrante de pruebas ágiles Q4: orientado a la tecnología, critica el producto ¿Cómo se asignan las siguientes categorías de pruebas a los cuadrantes de pruebas ágiles?",
+        "prompt": "Considere las siguientes categorías de pruebas (1-4): 1. Pruebas de usabilidad 2. Pruebas de componentes 3. Pruebas funcionales 4. Pruebas de confiabilidad Y los siguientes cuadrantes de pruebas ágiles (A-D): A. Cuadrante de pruebas ágiles Q1: orientado a la tecnología, apoyando al equipo de desarrollo B. Cuadrante de pruebas ágiles Q2: orientado al negocio, apoyando al equipo de desarrollo C. Cuadrante de pruebas ágiles Q3: orientado al negocio, critica el producto D. Cuadrante de pruebas ágiles Q4: orientado a la tecnología, critica el producto ¿Cómo se asignan las siguientes categorías de pruebas a los cuadrantes de pruebas ágiles?",
         "options": [
           {
             "key": "a",

@@ -161,14 +161,35 @@ describe("question prompt formatting", () => {
     }
   });
 
-  it("separates A-34 when its marker family changes without an intermediate heading", () => {
+  it("gives each A-34 list its own heading", () => {
     const question = questions.find((item) => item.id === "A-34")!;
     for (const language of ["en", "es"] as const) {
       const lists = promptBlocks(localizedQuestion(question, language).prompt).filter((block) => block.type === "list");
       expect(lists.map((list) => list.items.length)).toEqual([4, 4]);
+      const layout = parallelPromptListLayout(promptBlocks(localizedQuestion(question, language).prompt));
+      expect(layout?.firstColumn[0]).toEqual(expect.objectContaining({
+        type: "text",
+        text: expect.stringMatching(/test categories|categorías de pruebas/),
+      }));
+      expect(layout?.secondColumn[0]).toEqual(expect.objectContaining({
+        type: "text",
+        text: expect.stringMatching(/testing quadrants|cuadrantes de pruebas/),
+      }));
     }
     expect(parallelPromptListLayout(promptBlocks(localizedQuestion(question, "es").prompt))?.suffix)
       .toEqual([expect.objectContaining({ text: "¿Cómo se asignan las siguientes categorías de pruebas a los cuadrantes de pruebas ágiles?" })]);
+  });
+
+  it("keeps the first two sentences of C-21 in one prompt block", () => {
+    const question = questions.find((item) => item.id === "C-21")!;
+    for (const language of ["en", "es"] as const) {
+      const blocks = promptBlocks(localizedQuestion(question, language).prompt);
+      expect(blocks).toHaveLength(2);
+      expect(blocks[0]).toEqual(expect.objectContaining({
+        type: "text",
+        text: expect.stringMatching(/business rule; you design|regla de negocio; usted diseña/),
+      }));
+    }
   });
 
   it("keeps all four B-39 tool categories inside the second card", () => {

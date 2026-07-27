@@ -1486,6 +1486,38 @@
     "kLevel": "K2",
     "rawKLevel": "K2",
     "prompt": "Let the branch coverage metric be defined as BCov = (X / Y) * 100%. What do X and Y represent in this formula?",
+    "promptParts": {
+      "en": [
+        {
+          "type": "text",
+          "text": "Let the branch coverage metric be defined as"
+        },
+        {
+          "type": "math",
+          "latex": "\\mathrm{BCov}=\\frac{X}{Y}\\times 100\\%",
+          "spoken": "B Cov equals X divided by Y, times one hundred percent."
+        },
+        {
+          "type": "text",
+          "text": "What do X and Y represent in this formula?"
+        }
+      ],
+      "es": [
+        {
+          "type": "text",
+          "text": "Definamos la métrica de cobertura de ramas como"
+        },
+        {
+          "type": "math",
+          "latex": "\\mathrm{BCov}=\\frac{X}{Y}\\times 100\\%",
+          "spoken": "B Cov es igual a X dividido entre Y, por cien por ciento."
+        },
+        {
+          "type": "text",
+          "text": "¿Qué representan X e Y en esta fórmula?"
+        }
+      ]
+    },
     "options": [
       {
         "key": "a",
@@ -1518,23 +1550,23 @@
         "options": [
           {
             "key": "a",
-            "text": "X = número de resultados de decisión ejercidos por los casos de prueba Y = número total de resultados de decisión en el código"
+            "text": "X = número de resultados de decisión ejecutados por los casos de prueba Y = número total de resultados de decisión en el código"
           },
           {
             "key": "b",
-            "text": "X = número de ramas condicionales ejercidas por los casos de prueba Y = número total de ramas en el código"
+            "text": "X = número de ramas condicionales ejecutadas por los casos de prueba Y = número total de ramas en el código"
           },
           {
             "key": "c",
-            "text": "X = número de ramas ejercidas por los casos de prueba Y = número total de ramas en el código"
+            "text": "X = número de ramas ejecutadas por los casos de prueba Y = número total de ramas en el código"
           },
           {
             "key": "d",
-            "text": "X = número de ramas condicionales ejercidas por los casos de prueba Y = número total de resultados de decisión en el código"
+            "text": "X = número de ramas condicionales ejecutadas por los casos de prueba Y = número total de resultados de decisión en el código"
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "Las pruebas de ramas son una técnica de prueba de caja blanca en la que los elementos de cobertura son ramas. Una rama es una transferencia de control entre dos nodos en el gráfico de flujo de control, que muestra las posibles secuencias en las que se ejecutan las sentencias del código fuente en el objeto de prueba. Cada transferencia de control puede ser incondicional (es decir, un código lineal) o condicional (es decir, un resultado de decisión). La cobertura se mide como el número de ramas ejercidas por los casos de prueba dividido por el número total de ramas, y se expresa como porcentaje. Así: a) No es correcta. El resultado de una decisión es una rama condicional. Para pruebas de ramas, X cuenta no sólo ramas condicionales, sino también incondicionales b) No es correcto. la cobertura de ramas cuenta no sólo las ramas condicionales, sino también las incondicionales c) Es correcta. la cobertura de ramas se mide como el número de ramas ejercidas por los casos de prueba dividido por el número total de ramas, y se expresa como porcentaje d) No es correcto. Tanto X como Y cuentan solo las ramas condicionales y no toman en cuenta las ramas incondicionales"
+        "explanation": "Las pruebas de ramas son una técnica de prueba de caja blanca en la que los elementos de cobertura son ramas. Una rama es una transferencia de control entre dos nodos en el gráfico de flujo de control, que muestra las posibles secuencias en las que se ejecutan las sentencias del código fuente en el objeto de prueba. Cada transferencia de control puede ser incondicional (es decir, un código lineal) o condicional (es decir, un resultado de decisión). La cobertura se mide como el número de ramas ejecutadas por los casos de prueba dividido por el número total de ramas, y se expresa como porcentaje. Así: a) No es correcta. El resultado de una decisión es una rama condicional. Para pruebas de ramas, X cuenta no sólo ramas condicionales, sino también incondicionales b) No es correcto. la cobertura de ramas cuenta no sólo las ramas condicionales, sino también las incondicionales c) Es correcta. la cobertura de ramas se mide como el número de ramas ejecutadas por los casos de prueba dividido por el número total de ramas, y se expresa como porcentaje d) No es correcto. Tanto X como Y cuentan solo las ramas condicionales y no toman en cuenta las ramas incondicionales"
       }
     }
   },

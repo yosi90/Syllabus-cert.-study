@@ -3328,7 +3328,7 @@
       "reference": "FL-5.1.7",
       "kLevel": "K2",
       "rawKLevel": "K2",
-      "prompt": "Consider the following test categories (1-4) and agile testing quadrants (A-D): 1. Usability testing 2. Component testing 3. Functional testing 4. Reliability testing A. Agile testing quadrant Q1: technology facing, supporting the development team B. Agile testing quadrant Q2: business facing, supporting the development team C. Agile testing quadrant Q3: business facing, critique the product D. Agile testing quadrant Q4: technology facing, critique the product How do the following test categories map onto the agile testing quadrants?",
+      "prompt": "Consider the following test categories (1-4): 1. Usability testing 2. Component testing 3. Functional testing 4. Reliability testing And the following agile testing quadrants (A-D): A. Agile testing quadrant Q1: technology facing, supporting the development team B. Agile testing quadrant Q2: business facing, supporting the development team C. Agile testing quadrant Q3: business facing, critique the product D. Agile testing quadrant Q4: technology facing, critique the product How do the following test categories map onto the agile testing quadrants?",
       "options": [
         {
           "key": "a",
@@ -3357,7 +3357,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Considere las siguientes categorías de pruebas (1-4) y cuadrantes de pruebas ágiles (A-D): 1. Pruebas de usabilidad 2. pruebas de componentes 3. Las pruebas funcionales 4. Pruebas de confiabilidad A. Cuadrante de pruebas ágiles Q1: orientado a la tecnología, apoyando al equipo de desarrollo B. Cuadrante de pruebas ágiles Q2: orientado al negocio, apoyando al equipo de desarrollo C. Cuadrante de pruebas ágiles Q3: orientado al negocio, critica el producto D. Cuadrante de pruebas ágiles Q4: orientado a la tecnología, critica el producto ¿Cómo se asignan las siguientes categorías de pruebas a los cuadrantes de pruebas ágiles?",
+          "prompt": "Considere las siguientes categorías de pruebas (1-4): 1. Pruebas de usabilidad 2. Pruebas de componentes 3. Pruebas funcionales 4. Pruebas de confiabilidad Y los siguientes cuadrantes de pruebas ágiles (A-D): A. Cuadrante de pruebas ágiles Q1: orientado a la tecnología, apoyando al equipo de desarrollo B. Cuadrante de pruebas ágiles Q2: orientado al negocio, apoyando al equipo de desarrollo C. Cuadrante de pruebas ágiles Q3: orientado al negocio, critica el producto D. Cuadrante de pruebas ágiles Q4: orientado a la tecnología, critica el producto ¿Cómo se asignan las siguientes categorías de pruebas a los cuadrantes de pruebas ágiles?",
           "options": [
             {
               "key": "a",
@@ -5234,6 +5234,38 @@
       "kLevel": "K2",
       "rawKLevel": "K2",
       "prompt": "Let the branch coverage metric be defined as BCov = (X / Y) * 100%. What do X and Y represent in this formula?",
+      "promptParts": {
+        "en": [
+          {
+            "type": "text",
+            "text": "Let the branch coverage metric be defined as"
+          },
+          {
+            "type": "math",
+            "latex": "\\mathrm{BCov}=\\frac{X}{Y}\\times 100\\%",
+            "spoken": "B Cov equals X divided by Y, times one hundred percent."
+          },
+          {
+            "type": "text",
+            "text": "What do X and Y represent in this formula?"
+          }
+        ],
+        "es": [
+          {
+            "type": "text",
+            "text": "Definamos la métrica de cobertura de ramas como"
+          },
+          {
+            "type": "math",
+            "latex": "\\mathrm{BCov}=\\frac{X}{Y}\\times 100\\%",
+            "spoken": "B Cov es igual a X dividido entre Y, por cien por ciento."
+          },
+          {
+            "type": "text",
+            "text": "¿Qué representan X e Y en esta fórmula?"
+          }
+        ]
+      },
       "options": [
         {
           "key": "a",
@@ -5266,23 +5298,23 @@
           "options": [
             {
               "key": "a",
-              "text": "X = número de resultados de decisión ejercidos por los casos de prueba Y = número total de resultados de decisión en el código"
+              "text": "X = número de resultados de decisión ejecutados por los casos de prueba Y = número total de resultados de decisión en el código"
             },
             {
               "key": "b",
-              "text": "X = número de ramas condicionales ejercidas por los casos de prueba Y = número total de ramas en el código"
+              "text": "X = número de ramas condicionales ejecutadas por los casos de prueba Y = número total de ramas en el código"
             },
             {
               "key": "c",
-              "text": "X = número de ramas ejercidas por los casos de prueba Y = número total de ramas en el código"
+              "text": "X = número de ramas ejecutadas por los casos de prueba Y = número total de ramas en el código"
             },
             {
               "key": "d",
-              "text": "X = número de ramas condicionales ejercidas por los casos de prueba Y = número total de resultados de decisión en el código"
+              "text": "X = número de ramas condicionales ejecutadas por los casos de prueba Y = número total de resultados de decisión en el código"
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "Las pruebas de ramas son una técnica de prueba de caja blanca en la que los elementos de cobertura son ramas. Una rama es una transferencia de control entre dos nodos en el gráfico de flujo de control, que muestra las posibles secuencias en las que se ejecutan las sentencias del código fuente en el objeto de prueba. Cada transferencia de control puede ser incondicional (es decir, un código lineal) o condicional (es decir, un resultado de decisión). La cobertura se mide como el número de ramas ejercidas por los casos de prueba dividido por el número total de ramas, y se expresa como porcentaje. Así: a) No es correcta. El resultado de una decisión es una rama condicional. Para pruebas de ramas, X cuenta no sólo ramas condicionales, sino también incondicionales b) No es correcto. la cobertura de ramas cuenta no sólo las ramas condicionales, sino también las incondicionales c) Es correcta. la cobertura de ramas se mide como el número de ramas ejercidas por los casos de prueba dividido por el número total de ramas, y se expresa como porcentaje d) No es correcto. Tanto X como Y cuentan solo las ramas condicionales y no toman en cuenta las ramas incondicionales"
+          "explanation": "Las pruebas de ramas son una técnica de prueba de caja blanca en la que los elementos de cobertura son ramas. Una rama es una transferencia de control entre dos nodos en el gráfico de flujo de control, que muestra las posibles secuencias en las que se ejecutan las sentencias del código fuente en el objeto de prueba. Cada transferencia de control puede ser incondicional (es decir, un código lineal) o condicional (es decir, un resultado de decisión). La cobertura se mide como el número de ramas ejecutadas por los casos de prueba dividido por el número total de ramas, y se expresa como porcentaje. Así: a) No es correcta. El resultado de una decisión es una rama condicional. Para pruebas de ramas, X cuenta no sólo ramas condicionales, sino también incondicionales b) No es correcto. la cobertura de ramas cuenta no sólo las ramas condicionales, sino también las incondicionales c) Es correcta. la cobertura de ramas se mide como el número de ramas ejecutadas por los casos de prueba dividido por el número total de ramas, y se expresa como porcentaje d) No es correcto. Tanto X como Y cuentan solo las ramas condicionales y no toman en cuenta las ramas incondicionales"
         }
       }
     },
@@ -7468,7 +7500,7 @@
       "reference": "FL-4.2.2",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "A developer was asked to implement the following business rule. You design the test cases using 2-value boundary value analysis. Which of the following sets of test inputs achieves the greatest coverage?",
+      "prompt": "A developer was asked to implement the following business rule; you design the test cases using 2-value boundary value analysis. Which of the following sets of test inputs achieves the greatest coverage?",
       "options": [
         {
           "key": "a",
@@ -7504,7 +7536,7 @@
       },
       "translations": {
         "es": {
-          "prompt": "Se pidió a un desarrollador que implementara la siguiente regla de negocio. Usted diseña los casos de prueba mediante un análisis de valores límite de 2 valores. ¿Cuál de los siguientes conjuntos de entradas de prueba logra la mayor cobertura?",
+          "prompt": "Se pidió a un desarrollador que implementara la siguiente regla de negocio; usted diseña los casos de prueba mediante un análisis de valores límite de 2 valores. ¿Cuál de los siguientes conjuntos de entradas de prueba logra la mayor cobertura?",
           "options": [
             {
               "key": "a",

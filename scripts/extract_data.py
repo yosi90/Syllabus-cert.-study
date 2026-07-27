@@ -164,6 +164,58 @@ CHAPTER_DISTRIBUTION = {
 
 MULTI_ANSWER_IDS = ["A-06", "A-31", "B-26", "C-04", "D-20", "D-30", "D-35"]
 
+B25_PROMPT_PARTS = {
+    "en": [
+        {"type": "text", "text": "Let the branch coverage metric be defined as"},
+        {
+            "type": "math",
+            "latex": r"\mathrm{BCov}=\frac{X}{Y}\times 100\%",
+            "spoken": "B Cov equals X divided by Y, times one hundred percent.",
+        },
+        {"type": "text", "text": "What do X and Y represent in this formula?"},
+    ],
+    "es": [
+        {"type": "text", "text": "Definamos la métrica de cobertura de ramas como"},
+        {
+            "type": "math",
+            "latex": r"\mathrm{BCov}=\frac{X}{Y}\times 100\%",
+            "spoken": "B Cov es igual a X dividido entre Y, por cien por ciento.",
+        },
+        {"type": "text", "text": "¿Qué representan X e Y en esta fórmula?"},
+    ],
+}
+
+A34_PROMPT_EN = (
+    "Consider the following test categories (1-4): "
+    "1. Usability testing 2. Component testing 3. Functional testing 4. Reliability testing "
+    "And the following agile testing quadrants (A-D): "
+    "A. Agile testing quadrant Q1: technology facing, supporting the development team "
+    "B. Agile testing quadrant Q2: business facing, supporting the development team "
+    "C. Agile testing quadrant Q3: business facing, critique the product "
+    "D. Agile testing quadrant Q4: technology facing, critique the product "
+    "How do the following test categories map onto the agile testing quadrants?"
+)
+A34_PROMPT_ES = (
+    "Considere las siguientes categorías de pruebas (1-4): "
+    "1. Pruebas de usabilidad 2. Pruebas de componentes 3. Pruebas funcionales 4. Pruebas de confiabilidad "
+    "Y los siguientes cuadrantes de pruebas ágiles (A-D): "
+    "A. Cuadrante de pruebas ágiles Q1: orientado a la tecnología, apoyando al equipo de desarrollo "
+    "B. Cuadrante de pruebas ágiles Q2: orientado al negocio, apoyando al equipo de desarrollo "
+    "C. Cuadrante de pruebas ágiles Q3: orientado al negocio, critica el producto "
+    "D. Cuadrante de pruebas ágiles Q4: orientado a la tecnología, critica el producto "
+    "¿Cómo se asignan las siguientes categorías de pruebas a los cuadrantes de pruebas ágiles?"
+)
+
+C21_PROMPT_EN = (
+    "A developer was asked to implement the following business rule; you design the test cases using 2-value "
+    "boundary value analysis. Which of the following sets of test inputs achieves the greatest coverage?"
+)
+C21_PROMPT_ES = (
+    "Se pidió a un desarrollador que implementara la siguiente regla de negocio; usted diseña los casos de prueba "
+    "mediante un análisis de valores límite de 2 valores. ¿Cuál de los siguientes conjuntos de entradas de prueba "
+    "logra la mayor cobertura?"
+)
+
 QUESTION_VISUALS = {
     "A-14": ("Test execution results table for TC1, TC2 and TC3.", "Tabla de resultados de ejecución de TC1, TC2 y TC3."),
     "A-21": ("Final result and final grade table for the course-grade system.", "Tabla de resultado final y calificación final del sistema de notas."),
@@ -669,6 +721,14 @@ def build_bank() -> dict[str, Any]:
                 }
             if question_id in existing_translations:
                 item["translations"] = existing_translations[question_id]
+            if question_id == "A-34":
+                item["prompt"] = A34_PROMPT_EN
+                item.setdefault("translations", {}).setdefault("es", {})["prompt"] = A34_PROMPT_ES
+            if question_id == "B-25":
+                item["promptParts"] = B25_PROMPT_PARTS
+            if question_id == "C-21":
+                item["prompt"] = C21_PROMPT_EN
+                item.setdefault("translations", {}).setdefault("es", {})["prompt"] = C21_PROMPT_ES
             if question_id == "C-31":
                 item["prompt"] = C31_PROMPT_EN
                 item["promptParts"] = C31_PROMPT_PARTS
