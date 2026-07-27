@@ -198,6 +198,29 @@ describe("progress storage", () => {
     expect(importProgress(exportProgress(restored)).activeExam).toEqual(progress.activeExam);
   });
 
+  it("persists panel disclosure preferences and defaults older saves to open", () => {
+    const storage = memoryStorage();
+    const progress = createEmptyProgress();
+    progress.preferences.filtersPanelOpen = false;
+    progress.preferences.progressPanelOpen = true;
+
+    saveProgress(progress, storage);
+    expect(loadProgress(storage).preferences).toMatchObject({
+      filtersPanelOpen: false,
+      progressPanelOpen: true,
+    });
+
+    const olderSave = createEmptyProgress() as unknown as {
+      preferences: Record<string, unknown>;
+    };
+    delete olderSave.preferences.filtersPanelOpen;
+    delete olderSave.preferences.progressPanelOpen;
+    expect(importProgress(JSON.stringify(olderSave)).preferences).toMatchObject({
+      filtersPanelOpen: true,
+      progressPanelOpen: true,
+    });
+  });
+
   it("migrates the former single status select to the checkbox collection", () => {
     const legacyV2 = createEmptyProgress() as unknown as Record<string, unknown>;
     const study = legacyV2.study as Record<string, unknown>;

@@ -40,6 +40,43 @@ test("language, theme, filters and current practice question survive a reload", 
   await expect(page.getByText("2/40", { exact: true })).toBeVisible();
 });
 
+test("each sidebar panel preserves its open state independently", async ({ page }, testInfo) => {
+  await prepareApp(page);
+  await page.goto("/");
+  const isMobile = testInfo.project.name === "mobile-chromium";
+  if (isMobile) await page.getByRole("button", { name: "Open menu" }).click();
+
+  const filtersPanel = page.locator("#main-menu .filters");
+  const progressPanel = page.locator("#main-menu .progress-panel");
+  await filtersPanel.getByText("Filters", { exact: true }).click();
+  await expect(filtersPanel).not.toHaveAttribute("open", "");
+  await expect(progressPanel).toHaveAttribute("open", "");
+  await expect.poll(() => page.evaluate(() =>
+    JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null")
+      ?.preferences.filtersPanelOpen,
+  )).toBe(false);
+
+  await page.reload();
+  await expect(filtersPanel).not.toHaveAttribute("open", "");
+  await expect(progressPanel).toHaveAttribute("open", "");
+  if (isMobile) await page.getByRole("button", { name: "Open menu" }).click();
+
+  await filtersPanel.getByText("Filters", { exact: true }).click();
+  await progressPanel.getByText("Local progress", { exact: true }).click();
+  await expect(filtersPanel).toHaveAttribute("open", "");
+  await expect(progressPanel).not.toHaveAttribute("open", "");
+  await expect.poll(() => page.evaluate(() => {
+    const preferences = JSON.parse(
+      window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null",
+    )?.preferences;
+    return [preferences?.filtersPanelOpen, preferences?.progressPanelOpen];
+  })).toEqual([true, false]);
+
+  await page.reload();
+  await expect(filtersPanel).toHaveAttribute("open", "");
+  await expect(progressPanel).not.toHaveAttribute("open", "");
+});
+
 test("an active exam restores its answers, position and timer after reload", async ({ page }) => {
   await prepareApp(page);
   await page.goto("/#/exam");

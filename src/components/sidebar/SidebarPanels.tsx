@@ -1,14 +1,10 @@
-import { useRef, type ChangeEvent, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import {
   Check,
-  CircleHelp,
-  Download,
-  FileUp,
+  ChevronDown,
   Filter,
   RotateCcw,
   Search,
-  Trash2,
-  XCircle,
 } from "lucide-react";
 import { chapters } from "../../data/bank";
 import { emptyFilters, type QuestionFilters, type QuestionStatus } from "../../domain/filters";
@@ -16,7 +12,6 @@ import {
   kLevels,
   models,
   type Copy,
-  type FileOperationStatus,
   type Language,
 } from "../../app/content";
 import {
@@ -30,11 +25,8 @@ export function FiltersPanel({
   setFilters,
   references,
   tutorialTarget,
-  onExport,
-  onImport,
-  onReset,
-  onTutorialReset,
-  fileStatus,
+  open,
+  onOpenChange,
   language,
   copy,
 }: {
@@ -42,25 +34,13 @@ export function FiltersPanel({
   setFilters: (filters: QuestionFilters) => void;
   references: string[];
   tutorialTarget: string | undefined;
-  onExport: () => void;
-  onImport: (file: File) => Promise<void>;
-  onReset: () => void;
-  onTutorialReset: () => void;
-  fileStatus: FileOperationStatus;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   language: Language;
   copy: Copy;
 }) {
-  const fileInput = useRef<HTMLInputElement | null>(null);
-
   function toggleValue<T extends string>(values: T[], value: T) {
     return values.includes(value) ? values.filter((item) => item !== value) : [...values, value];
-  }
-
-  function readImport(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    void onImport(file);
-    event.target.value = "";
   }
 
   const filtersActive = hasActiveFilters(filters);
@@ -72,138 +52,118 @@ export function FiltersPanel({
   ];
 
   return (
-    <section className={classNames("panel filters", tutorialTarget === "layout" && "tutorial-highlight")}>
-      <h2>
-        <Filter aria-hidden="true" />
-        {copy.filters}
-      </h2>
+    <details
+      className={classNames("panel filters panel-disclosure", tutorialTarget === "layout" && "tutorial-highlight")}
+      open={open}
+      onToggle={(event) => onOpenChange(event.currentTarget.open)}
+    >
+      <summary>
+        <h2>
+          <Filter aria-hidden="true" />
+          {copy.filters}
+        </h2>
+        <ChevronDown className="disclosure-chevron" aria-hidden="true" />
+      </summary>
 
-      <div className="search-row">
-        <label className="search-box">
-          <Search aria-hidden="true" />
-          <input
-            aria-label={copy.searchPlaceholder}
-            value={filters.query}
-            onChange={(event) => setFilters({ ...filters, query: event.target.value })}
-            placeholder={copy.searchPlaceholder}
-          />
-        </label>
-        {filtersActive && (
-          <button
-            className="icon-button compact"
-            type="button"
-            onClick={() => setFilters(emptyFilters)}
-            title={copy.clearFilters}
-            aria-label={copy.clearFilters}
-            data-tooltip={copy.clearFilters}
-          >
-            <RotateCcw aria-hidden="true" />
-          </button>
-        )}
-      </div>
-
-      <FilterGroup title={copy.model} highlighted={tutorialTarget === "modes"}>
-        {models.map((model) => (
-          <label className="check-pill" key={model}>
+      <div className="panel-disclosure-content">
+        <div className="search-row">
+          <label className="search-box">
+            <Search aria-hidden="true" />
             <input
-              type="checkbox"
-              checked={filters.models.includes(model)}
-              onChange={() => setFilters({ ...filters, models: toggleValue(filters.models, model) })}
+              aria-label={copy.searchPlaceholder}
+              value={filters.query}
+              onChange={(event) => setFilters({ ...filters, query: event.target.value })}
+              placeholder={copy.searchPlaceholder}
             />
-            <span className="check-indicator" aria-hidden="true"><Check /></span>
-            {model}
           </label>
-        ))}
-      </FilterGroup>
+          {filtersActive && (
+            <button
+              className="icon-button compact"
+              type="button"
+              onClick={() => setFilters(emptyFilters)}
+              title={copy.clearFilters}
+              aria-label={copy.clearFilters}
+              data-tooltip={copy.clearFilters}
+            >
+              <RotateCcw aria-hidden="true" />
+            </button>
+          )}
+        </div>
 
-      <FilterGroup title={copy.chapter} highlighted={tutorialTarget === "chapters"}>
-        {chapters.map((chapter) => (
-          <label className="check-pill wide" key={chapter.id} title={localizedChapterName(chapter.id, language)}>
-            <input
-              type="checkbox"
-              checked={filters.chapters.includes(chapter.id)}
-              onChange={() => setFilters({ ...filters, chapters: toggleValue(filters.chapters, chapter.id) })}
-            />
-            <span className="check-indicator" aria-hidden="true"><Check /></span>
-            {chapter.id}
-          </label>
-        ))}
-      </FilterGroup>
-
-      <FilterGroup title="K-Level" highlighted={tutorialTarget === "k-level"}>
-        {kLevels.map((level) => (
-          <label className="check-pill" key={level}>
-            <input
-              type="checkbox"
-              checked={filters.kLevels.includes(level)}
-              onChange={() => setFilters({ ...filters, kLevels: toggleValue(filters.kLevels, level) })}
-            />
-            <span className="check-indicator" aria-hidden="true"><Check /></span>
-            {level}
-          </label>
-        ))}
-      </FilterGroup>
-
-      <label className={classNames("field-label", tutorialTarget === "reference-status" && "tutorial-highlight")}>
-        {copy.reference}
-        <select
-          value={filters.references[0] ?? ""}
-          onChange={(event) =>
-            setFilters({ ...filters, references: event.target.value ? [event.target.value] : [] })
-          }
-        >
-          <option value="">{copy.all}</option>
-          {references.map((reference) => (
-            <option value={reference} key={reference}>
-              {reference}
-            </option>
+        <FilterGroup title={copy.model} highlighted={tutorialTarget === "modes"}>
+          {models.map((model) => (
+            <label className="check-pill" key={model}>
+              <input
+                type="checkbox"
+                checked={filters.models.includes(model)}
+                onChange={() => setFilters({ ...filters, models: toggleValue(filters.models, model) })}
+              />
+              <span className="check-indicator" aria-hidden="true"><Check /></span>
+              {model}
+            </label>
           ))}
-        </select>
-      </label>
+        </FilterGroup>
 
-      <FilterGroup title={copy.status} highlighted={tutorialTarget === "reference-status"}>
-        {statusOptions.map((status) => (
-          <label className="check-pill wide" key={status.value}>
-            <input
-              type="checkbox"
-              checked={filters.status.includes(status.value)}
-              onChange={() => setFilters({ ...filters, status: toggleValue(filters.status, status.value) })}
-            />
-            <span className="check-indicator" aria-hidden="true"><Check /></span>
-            {status.label}
-          </label>
-        ))}
-      </FilterGroup>
+        <FilterGroup title={copy.chapter} highlighted={tutorialTarget === "chapters"}>
+          {chapters.map((chapter) => (
+            <label className="check-pill wide" key={chapter.id} title={localizedChapterName(chapter.id, language)}>
+              <input
+                type="checkbox"
+                checked={filters.chapters.includes(chapter.id)}
+                onChange={() => setFilters({ ...filters, chapters: toggleValue(filters.chapters, chapter.id) })}
+              />
+              <span className="check-indicator" aria-hidden="true"><Check /></span>
+              {chapter.id}
+            </label>
+          ))}
+        </FilterGroup>
 
-      <div className={classNames("filter-actions", tutorialTarget === "progress-actions" && "tutorial-highlight")}>
-        <button className="secondary" type="button" onClick={onExport} disabled={fileStatus?.kind === "loading"}>
-          <Download aria-hidden="true" />
-          {copy.export}
-        </button>
-        <button className="secondary" type="button" onClick={() => fileInput.current?.click()} disabled={fileStatus?.kind === "loading"}>
-          <FileUp aria-hidden="true" />
-          {copy.import}
-        </button>
-        <button className="secondary" type="button" onClick={onTutorialReset}>
-          <CircleHelp aria-hidden="true" />
-          {copy.tutorial}
-        </button>
-        <button className="danger" type="button" onClick={onReset}>
-          <Trash2 aria-hidden="true" />
-          {copy.delete}
-        </button>
+        <FilterGroup title="K-Level" highlighted={tutorialTarget === "k-level"}>
+          {kLevels.map((level) => (
+            <label className="check-pill" key={level}>
+              <input
+                type="checkbox"
+                checked={filters.kLevels.includes(level)}
+                onChange={() => setFilters({ ...filters, kLevels: toggleValue(filters.kLevels, level) })}
+              />
+              <span className="check-indicator" aria-hidden="true"><Check /></span>
+              {level}
+            </label>
+          ))}
+        </FilterGroup>
+
+        <label className={classNames("field-label", tutorialTarget === "reference-status" && "tutorial-highlight")}>
+          {copy.reference}
+          <select
+            value={filters.references[0] ?? ""}
+            onChange={(event) =>
+              setFilters({ ...filters, references: event.target.value ? [event.target.value] : [] })
+            }
+          >
+            <option value="">{copy.all}</option>
+            {references.map((reference) => (
+              <option value={reference} key={reference}>
+                {reference}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <FilterGroup title={copy.status} highlighted={tutorialTarget === "reference-status"}>
+          {statusOptions.map((status) => (
+            <label className="check-pill wide" key={status.value}>
+              <input
+                type="checkbox"
+                checked={filters.status.includes(status.value)}
+                onChange={() => setFilters({ ...filters, status: toggleValue(filters.status, status.value) })}
+              />
+              <span className="check-indicator" aria-hidden="true"><Check /></span>
+              {status.label}
+            </label>
+          ))}
+        </FilterGroup>
       </div>
-      {fileStatus && (
-        <p
-          className={classNames("file-status", fileStatus.kind)}
-          role={fileStatus.kind === "error" ? "alert" : "status"}
-          aria-live={fileStatus.kind === "error" ? "assertive" : "polite"}
-        >
-          {fileStatus.message}
-        </p>
-      )}
-      <input ref={fileInput} className="visually-hidden" type="file" accept="application/json" onChange={readImport} />
-    </section>
+    </details>
   );
 }
 

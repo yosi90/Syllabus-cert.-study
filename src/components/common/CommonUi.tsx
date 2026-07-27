@@ -1,7 +1,18 @@
-import { useRef } from "react";
-import { CheckCircle2, ChevronLeft, ChevronRight, Moon, Sun } from "lucide-react";
+import { useRef, type ChangeEvent } from "react";
+import {
+  CheckCircle2,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  CircleHelp,
+  Download,
+  FileUp,
+  Moon,
+  Sun,
+  Trash2,
+} from "lucide-react";
 import { summarizeProgress } from "../../domain/filters";
-import type { Copy, Language, Theme, TutorialContent } from "../../app/content";
+import type { Copy, FileOperationStatus, Language, Theme, TutorialContent } from "../../app/content";
 import { classNames } from "../../app/presentation";
 import { useModalAccessibility } from "../../hooks/useModalAccessibility";
 
@@ -75,22 +86,82 @@ export function TranslationNotice({ copy, onClose }: { copy: Copy; onClose: () =
 export function StatsPanel({
   progressSummary,
   highlighted,
+  open,
+  onOpenChange,
+  onExport,
+  onImport,
+  onReset,
+  onTutorialReset,
+  fileStatus,
   copy,
 }: {
   progressSummary: ReturnType<typeof summarizeProgress>;
   highlighted: boolean;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onExport: () => void;
+  onImport: (file: File) => Promise<void>;
+  onReset: () => void;
+  onTutorialReset: () => void;
+  fileStatus: FileOperationStatus;
   copy: Copy;
 }) {
+  const fileInput = useRef<HTMLInputElement | null>(null);
+
+  function readImport(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    void onImport(file);
+    event.target.value = "";
+  }
+
   return (
-    <section className={classNames("panel compact progress-panel", highlighted && "tutorial-highlight")}>
-      <h2>{copy.localProgress}</h2>
-      <div className="stat-grid">
-        <Metric label={copy.viewed} value={progressSummary.attempted} />
-        <Metric label={copy.correct} value={progressSummary.correct} />
-        <Metric label={copy.wrong} value={progressSummary.incorrect} />
-        <Metric label={copy.flagged} value={progressSummary.flagged} />
+    <details
+      className={classNames("panel compact progress-panel panel-disclosure", highlighted && "tutorial-highlight")}
+      open={open}
+      onToggle={(event) => onOpenChange(event.currentTarget.open)}
+    >
+      <summary>
+        <h2>{copy.localProgress}</h2>
+        <ChevronDown className="disclosure-chevron" aria-hidden="true" />
+      </summary>
+      <div className="panel-disclosure-content">
+        <div className="stat-grid">
+          <Metric label={copy.viewed} value={progressSummary.attempted} />
+          <Metric label={copy.correct} value={progressSummary.correct} />
+          <Metric label={copy.wrong} value={progressSummary.incorrect} />
+          <Metric label={copy.flagged} value={progressSummary.flagged} />
+        </div>
+        <div className="progress-actions">
+          <button className="secondary" type="button" onClick={onExport} disabled={fileStatus?.kind === "loading"}>
+            <Download aria-hidden="true" />
+            {copy.export}
+          </button>
+          <button className="secondary" type="button" onClick={() => fileInput.current?.click()} disabled={fileStatus?.kind === "loading"}>
+            <FileUp aria-hidden="true" />
+            {copy.import}
+          </button>
+          <button className="secondary" type="button" onClick={onTutorialReset}>
+            <CircleHelp aria-hidden="true" />
+            {copy.tutorial}
+          </button>
+          <button className="danger" type="button" onClick={onReset}>
+            <Trash2 aria-hidden="true" />
+            {copy.delete}
+          </button>
+        </div>
+        {fileStatus && (
+          <p
+            className={classNames("file-status", fileStatus.kind)}
+            role={fileStatus.kind === "error" ? "alert" : "status"}
+            aria-live={fileStatus.kind === "error" ? "assertive" : "polite"}
+          >
+            {fileStatus.message}
+          </p>
+        )}
+        <input ref={fileInput} className="visually-hidden" type="file" accept="application/json" onChange={readImport} />
       </div>
-    </section>
+    </details>
   );
 }
 

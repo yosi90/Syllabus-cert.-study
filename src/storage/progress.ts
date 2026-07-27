@@ -87,6 +87,8 @@ export type ProgressState = {
     language: "en" | "es" | null;
     theme: "light" | "dark" | null;
     lastRoute: "/" | "/practice" | "/exam" | "/review";
+    filtersPanelOpen: boolean;
+    progressPanelOpen: boolean;
   };
   study: {
     filters: StoredFilters;
@@ -138,6 +140,8 @@ export function createEmptyProgress(): ProgressState {
       language: null,
       theme: null,
       lastRoute: "/",
+      filtersPanelOpen: true,
+      progressPanelOpen: true,
     },
     study: {
       filters: { ...emptyFilters },
@@ -241,6 +245,8 @@ function normalizeProgress(value: ProgressState): ProgressState {
       language: preferences.language === "en" || preferences.language === "es" ? preferences.language : null,
       theme: preferences.theme === "light" || preferences.theme === "dark" ? preferences.theme : null,
       lastRoute: ["/", "/practice", "/exam", "/review"].includes(preferences.lastRoute) ? preferences.lastRoute : "/",
+      filtersPanelOpen: preferences.filtersPanelOpen !== false,
+      progressPanelOpen: preferences.progressPanelOpen !== false,
     },
     study: {
       filters: normalizeFilters(study.filters),

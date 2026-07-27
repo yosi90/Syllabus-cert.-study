@@ -229,6 +229,39 @@ button:disabled {
   height: 16px;
 }
 
+.panel-disclosure > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #f8fafc;
+  cursor: pointer;
+  list-style: none;
+}
+
+.panel-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.panel-disclosure > summary h2 {
+  margin-bottom: 0;
+}
+
+.panel-disclosure .disclosure-chevron {
+  flex: 0 0 auto;
+  width: 17px;
+  height: 17px;
+  transition: transform 0.18s ease;
+}
+
+.panel-disclosure[open] > summary .disclosure-chevron {
+  transform: rotate(180deg);
+}
+
+.panel-disclosure-content {
+  margin-top: 10px;
+}
+
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -436,22 +469,22 @@ button:disabled {
   background: #0d1523;
 }
 
-.filter-actions {
+.progress-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 7px;
   margin-top: 10px;
 }
 
-.filter-actions .secondary,
-.filter-actions .danger {
+.progress-actions .secondary,
+.progress-actions .danger {
   min-height: 34px;
   padding: 7px 8px;
   font-size: 12px;
 }
 
-.filter-actions .secondary svg,
-.filter-actions .danger svg {
+.progress-actions .secondary svg,
+.progress-actions .danger svg {
   width: 15px;
   height: 15px;
 }
@@ -2262,10 +2295,6 @@ button:disabled {
     display: none;
   }
 
-  .sidebar .progress-panel {
-    display: none;
-  }
-
   .quick-study-card .quick-study-eyebrow,
   .quick-study-card .quick-study-description {
     display: none;
@@ -2312,13 +2341,13 @@ button:disabled {
     font-size: 10px;
   }
 
-  .sidebar .filter-actions {
+  .sidebar .progress-actions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 6px;
   }
 
-  .sidebar .filter-actions .secondary,
-  .sidebar .filter-actions .danger {
+  .sidebar .progress-actions .secondary,
+  .sidebar .progress-actions .danger {
     min-width: 0;
     padding: 6px;
     font-size: 11px;
@@ -2557,7 +2586,7 @@ button:disabled {
 
   .exam-start-grid,
   .stat-grid,
-  .filter-actions {
+  .progress-actions {
     grid-template-columns: 1fr;
   }
 

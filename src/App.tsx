@@ -169,6 +169,19 @@ function AppShell() {
     setProgress(next);
   }
 
+  function setPanelOpen(
+    panel: "filtersPanelOpen" | "progressPanelOpen",
+    open: boolean,
+  ) {
+    setProgress((current) => current.preferences[panel] === open ? current : {
+      ...current,
+      preferences: {
+        ...current.preferences,
+        [panel]: open,
+      },
+    });
+  }
+
   function handleStudyToggle(question: Question, optionKey: string) {
     const revealed = currentStudySession
       ? currentStudySession.revealed || currentStudySession.checkedQuestionIds.includes(question.id)
@@ -579,15 +592,23 @@ function AppShell() {
           setFilters={setFilters}
           references={references}
           tutorialTarget={tutorialTarget}
+          open={progress.preferences.filtersPanelOpen}
+          onOpenChange={(open) => setPanelOpen("filtersPanelOpen", open)}
+          language={language}
+          copy={copy}
+        />
+        <StatsPanel
+          progressSummary={progressSummary}
+          highlighted={tutorialTarget === "progress-actions"}
+          open={progress.preferences.progressPanelOpen}
+          onOpenChange={(open) => setPanelOpen("progressPanelOpen", open)}
           onExport={handleExport}
           onImport={handleImport}
           onReset={handleReset}
           onTutorialReset={handleTutorialReset}
           fileStatus={fileStatus}
-          language={language}
           copy={copy}
         />
-        <StatsPanel progressSummary={progressSummary} highlighted={tutorialTarget === "progress-actions"} copy={copy} />
       </aside>
 
       <Routes>
