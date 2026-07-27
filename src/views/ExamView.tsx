@@ -5,7 +5,7 @@ import type { Question, SourceModel } from "../data/types";
 import { findQuestionsByIds } from "../domain/exams";
 import { models, type Copy, type ExamState, type Language, type TimerMode } from "../app/content";
 import { formatRemainingTime } from "../app/presentation";
-import { ConfirmDialog, Metric } from "../components/common/CommonUi";
+import { ConfirmDialog, KeyboardShortcutHint, Metric } from "../components/common/CommonUi";
 import { ExamRail, QuestionCard } from "../components/questions/QuestionUi";
 import { useQuestionKeyboard } from "../hooks/useQuestionKeyboard";
 
@@ -65,6 +65,22 @@ export function ExamView({
   }
 
   useQuestionKeyboard({
+    questionId: activeQuestionId,
+    selectionMode: activeExam
+      ? questions.find((item) => item.id === activeQuestionId)?.selectionMode
+      : undefined,
+    selectedAnswers: activeQuestionId ? activeExam?.answers[activeQuestionId] ?? [] : [],
+    canNavigateAnswers: Boolean(activeExam),
+    onToggleAnswer: activeExam
+      ? (optionKey) => {
+        const question = questions.find((item) => item.id === activeQuestionId);
+        if (question) onToggle(question, optionKey);
+      }
+      : undefined,
+    canUsePrimaryAction: Boolean(
+      activeExam && activeExam.currentIndex < activeExam.blueprint.questionIds.length - 1,
+    ),
+    onPrimaryAction: () => handleKeyboardMove(1),
     canMovePrevious: Boolean(activeExam && activeExam.currentIndex > 0),
     canMoveNext: Boolean(activeExam && activeExam.currentIndex < activeExam.blueprint.questionIds.length - 1),
     onMove: handleKeyboardMove,
@@ -198,9 +214,16 @@ export function ExamView({
       />
 
       <div className="action-bar">
-        <button className="secondary" type="button" onClick={() => onMove(-1)} disabled={activeExam.currentIndex === 0}>
+        <button
+          className="secondary has-keyboard-shortcut"
+          type="button"
+          onClick={() => onMove(-1)}
+          disabled={activeExam.currentIndex === 0}
+          aria-keyshortcuts="ArrowLeft"
+        >
           <ChevronLeft aria-hidden="true" />
           {copy.previous}
+          <KeyboardShortcutHint keys={["←"]} language={language} />
         </button>
         <button className="primary" type="button" onClick={onFinish}>
           <CheckCircle2 aria-hidden="true" />
@@ -211,13 +234,15 @@ export function ExamView({
           {copy.cancel}
         </button>
         <button
-          className="secondary"
+          className="secondary has-keyboard-shortcut"
           type="button"
           onClick={handleNext}
           disabled={activeExam.currentIndex >= activeExam.blueprint.questionIds.length - 1}
+          aria-keyshortcuts="ArrowRight Enter"
         >
           {copy.next}
           <ChevronRight aria-hidden="true" />
+          <KeyboardShortcutHint keys={["→", "Enter"]} language={language} />
         </button>
       </div>
 

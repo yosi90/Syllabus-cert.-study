@@ -86,7 +86,7 @@ test("exam warns before leaving an incomplete multiple selection", async ({ page
   await questionList.getByRole("button", { name: "6", exact: true }).click();
 
   await page.locator('.option-row input[type="checkbox"]').first().check();
-  await page.getByRole("button", { name: "Next" }).click();
+  await page.keyboard.press("Enter");
 
   const dialog = page.getByRole("alertdialog", { name: "Incomplete multiple selection" });
   await expect(dialog).toBeVisible();

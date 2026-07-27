@@ -5,7 +5,7 @@ import { isCorrectAnswer } from "../domain/scoring";
 import type { PersistedStudySession, ProgressState } from "../storage/progress";
 import type { Copy, Language } from "../app/content";
 import { classNames, progressLabel } from "../app/presentation";
-import { EmptyState, FlagLanguageToggle, Metric } from "../components/common/CommonUi";
+import { EmptyState, FlagLanguageToggle, KeyboardShortcutHint, Metric } from "../components/common/CommonUi";
 import { ExplanationPanel, QuestionCard, QuestionRail } from "../components/questions/QuestionUi";
 import { useQuestionKeyboard } from "../hooks/useQuestionKeyboard";
 
@@ -85,8 +85,15 @@ export function StudyView({
   }
 
   useQuestionKeyboard({
-    canCheck: Boolean(currentQuestion && selected.length > 0 && !revealed),
-    onCheck: handleCheck,
+    questionId: currentQuestion?.id,
+    selectionMode: currentQuestion?.selectionMode,
+    selectedAnswers: selected,
+    canNavigateAnswers: Boolean(currentQuestion && !revealed),
+    onToggleAnswer: currentQuestion
+      ? (optionKey) => onToggle(currentQuestion, optionKey)
+      : undefined,
+    canUsePrimaryAction: Boolean(currentQuestion && selected.length > 0 && !revealed),
+    onPrimaryAction: handleCheck,
     canMovePrevious: Boolean(currentQuestion && currentIndex > 0),
     canMoveNext: Boolean(currentQuestion && currentIndex < filteredQuestions.length - 1),
     onMove,
@@ -170,18 +177,27 @@ export function StudyView({
       )}
 
       <div className="action-bar study-actions">
-        <button className="secondary" type="button" onClick={() => onMove(-1)} disabled={currentIndex === 0}>
+        <button
+          className="secondary has-keyboard-shortcut"
+          type="button"
+          onClick={() => onMove(-1)}
+          disabled={currentIndex === 0}
+          aria-keyshortcuts="ArrowLeft"
+        >
           <ChevronLeft aria-hidden="true" />
           {copy.previous}
+          <KeyboardShortcutHint keys={["←"]} language={language} />
         </button>
         <button
-          className="primary"
+          className="primary has-keyboard-shortcut"
           type="button"
           onClick={handleCheck}
           disabled={selected.length === 0 || revealed}
+          aria-keyshortcuts="Enter"
         >
           <CheckCircle2 aria-hidden="true" />
           {copy.check}
+          <KeyboardShortcutHint keys={["Enter"]} language={language} />
         </button>
         {adaptiveSession ? (
           <button className="secondary" type="button" onClick={onLeaveSession}>
@@ -201,13 +217,15 @@ export function StudyView({
           </button>
         ) : (
           <button
-            className="secondary"
+            className="secondary has-keyboard-shortcut"
             type="button"
             onClick={() => onMove(1)}
             disabled={currentIndex >= filteredQuestions.length - 1}
+            aria-keyshortcuts="ArrowRight"
           >
             {copy.next}
             <ChevronRight aria-hidden="true" />
+            <KeyboardShortcutHint keys={["→"]} language={language} />
           </button>
         )}
       </div>

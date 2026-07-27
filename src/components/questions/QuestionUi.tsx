@@ -125,20 +125,7 @@ export function QuestionCard({
 
       <QuestionVisual question={question} language={language} copy={copy} />
 
-      <div
-        className="options-list"
-        onKeyDown={(event) => {
-          if (locked || event.key !== "Tab" || !(event.target instanceof HTMLInputElement)) return;
-          const inputs = Array.from(
-            event.currentTarget.querySelectorAll<HTMLInputElement>('input[type="radio"], input[type="checkbox"]'),
-          ).filter((input) => !input.disabled);
-          const currentIndex = inputs.indexOf(event.target);
-          const nextIndex = currentIndex + (event.shiftKey ? -1 : 1);
-          if (currentIndex < 0 || nextIndex < 0 || nextIndex >= inputs.length) return;
-          event.preventDefault();
-          inputs[nextIndex].focus();
-        }}
-      >
+      <div className="options-list">
         {displayOptions.map((option) => {
           const isSelected = selected.includes(option.key);
           const isCorrect = question.correctAnswers.includes(option.key);
@@ -155,6 +142,7 @@ export function QuestionCard({
               <input
                 type={question.selectionMode === "multiple" ? "checkbox" : "radio"}
                 name={question.id}
+                value={option.key}
                 checked={isSelected}
                 disabled={locked}
                 onChange={() => onToggle(option.key)}

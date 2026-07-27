@@ -103,6 +103,23 @@ export function Metric({ label, value }: { label: string; value: number | string
   );
 }
 
+export function KeyboardShortcutHint({
+  keys,
+  language,
+}: {
+  keys: string[];
+  language: Language;
+}) {
+  return (
+    <span className="keyboard-shortcut-tooltip" aria-hidden="true">
+      <span>{language === "es" ? "Atajo de teclado" : "Keyboard shortcut"}</span>
+      <span className="keyboard-shortcut-keys">
+        {keys.map((key) => <kbd key={key}>{key}</kbd>)}
+      </span>
+    </span>
+  );
+}
+
 
 export function FlagLanguageToggle({ language, onChange, label = "Language" }: { language: Language; onChange: (language: Language) => void; label?: string }) {
   return (

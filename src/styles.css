@@ -970,6 +970,18 @@ button:disabled {
   accent-color: #2f887a;
 }
 
+@media (min-width: 641px) {
+  .option-row {
+    grid-template-columns: 22px 30px minmax(0, 1fr);
+  }
+
+  .option-row input {
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+  }
+}
+
 .option-row.is-selected {
   border-color: #5aa7ba;
   background: #eef8fa;
@@ -1280,6 +1292,78 @@ button:disabled {
   justify-content: center;
   gap: 10px;
   margin: 16px 0;
+}
+
+.keyboard-shortcut-tooltip {
+  display: none;
+}
+
+@media (min-width: 641px) and (hover: hover) and (pointer: fine) {
+  .has-keyboard-shortcut {
+    position: relative;
+  }
+
+  .keyboard-shortcut-tooltip {
+    position: absolute;
+    z-index: 30;
+    bottom: calc(100% + 9px);
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: max-content;
+    max-width: min(260px, 80vw);
+    padding: 7px 9px;
+    border: 1px solid rgb(255 255 255 / 14%);
+    border-radius: 7px;
+    color: #ffffff;
+    background: #172033;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 20%);
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.2;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease,
+      visibility 0s linear 120ms;
+    white-space: nowrap;
+  }
+
+  .keyboard-shortcut-keys {
+    display: inline-flex;
+    gap: 4px;
+  }
+
+  .keyboard-shortcut-tooltip kbd {
+    min-width: 25px;
+    padding: 3px 6px;
+    border: 1px solid #7f8ca0;
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    color: #172033;
+    background: #f7f9fc;
+    box-shadow: 0 1px 0 rgb(0 0 0 / 24%);
+    font: 800 12px/1 system-ui, sans-serif;
+    text-align: center;
+  }
+
+  .has-keyboard-shortcut:not(:disabled):hover .keyboard-shortcut-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+    transition-delay: 500ms;
+  }
+
+  .has-keyboard-shortcut:not(:disabled):focus-visible .keyboard-shortcut-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+    transition-delay: 0ms;
+  }
 }
 
 .primary,
