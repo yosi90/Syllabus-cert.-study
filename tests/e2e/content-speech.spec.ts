@@ -203,6 +203,27 @@ test("D-22 keeps its four test cases in one intact list card", async ({ page }, 
   await expect(page.locator(".question-prompt-list-item").last()).toContainText("category D.");
 });
 
+test("B-20 displays the car wash rules as one four-item list", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "Prompt rendering only needs one browser pass.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (progress) {
+      progress.study.currentQuestionId = "B-20";
+      progress.preferences.language = "es";
+      window.localStorage.setItem(key, JSON.stringify(progress));
+      window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
+    }
+  });
+  await page.goto("/#/practice");
+
+  await expect(page.locator(".question-prompt-list")).toHaveCount(1);
+  await expect(page.locator(".question-prompt-list-item")).toHaveCount(4);
+  await expect(page.locator(".question-prompt-list-item").first()).toContainText("El valor inicial es 0.");
+  await expect(page.locator(".question-prompt-list-item").last()).toContainText("descuento adicional del 40 %");
+  await expect(page.locator(".question-prompt-text").last()).toContainText("¿Cuál de los siguientes conjuntos");
+});
+
 test("B-22 displays its five input test cases as one list", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Prompt rendering only needs one browser pass.");
   await page.addInitScript(() => {

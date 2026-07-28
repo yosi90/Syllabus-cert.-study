@@ -4914,7 +4914,7 @@
       "reference": "FL-4.2.1",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "Customers of the TestWash car wash chain have cards with a record of the number of washes they have bought so far. The initial value is 0. After entering the car wash, the system increases the number on the card by one. This value represents the number of the current wash. Based on this number the system decides what discount the customer is entitled to. For every tenth wash the system gives a 10% discount, and for every twentieth wash, the system gives a further 40% discount (i.e., a 50% discount in total). Which of the following sets of input data (understood as the numbers of the current wash) achieves the highest equivalence partition coverage?",
+      "prompt": "Customers of the TestWash car wash chain have cards with a record of the number of washes they have bought so far: • The initial value is 0. • After entering the car wash, the system increases the number on the card by one. This value represents the number of the current wash, and the system uses it to decide what discount the customer is entitled to. • For every tenth wash, the system gives a 10% discount. • For every twentieth wash, the system gives a further 40% discount (i.e., a 50% discount in total). Which of the following sets of input data (understood as the numbers of the current wash) achieves the highest equivalence partition coverage?",
       "options": [
         {
           "key": "a",
@@ -4943,7 +4943,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Los clientes de la cadena de lavado de coches TestWash disponen de tarjetas con el registro del número de lavados realizados hasta el momento. El valor inicial es 0. Después de ingresar al túnel de lavado, el sistema aumenta en uno el número de la tarjeta. Este valor representa el número del lavado actual. En base a este número, el sistema decide a qué descuento tiene derecho el cliente. Por cada décimo lavado, el sistema ofrece un descuento del 10 % y por cada vigésimo lavado, el sistema ofrece un descuento adicional del 40 % (es decir, un descuento del 50 % en total). ¿Cuál de los siguientes conjuntos de datos de entrada (entendidos como los números del lavado actual) logra la mayor cobertura de división de equivalencia?",
+          "prompt": "Los clientes de la cadena de lavado de coches TestWash disponen de tarjetas con el registro del número de lavados realizados hasta el momento: • El valor inicial es 0. • Después de ingresar al túnel de lavado, el sistema aumenta en uno el número de la tarjeta. Este valor representa el número del lavado actual y se utiliza para decidir a qué descuento tiene derecho el cliente. • Por cada décimo lavado, el sistema ofrece un descuento del 10 %. • Por cada vigésimo lavado, el sistema ofrece un descuento adicional del 40 % (es decir, un descuento del 50 % en total). ¿Cuál de los siguientes conjuntos de datos de entrada (entendidos como los números del lavado actual) logra la mayor cobertura de división de equivalencia?",
           "options": [
             {
               "key": "a",
