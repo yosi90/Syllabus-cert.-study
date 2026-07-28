@@ -263,6 +263,32 @@ describe("progress storage", () => {
     expect(importProgress(exportProgress(progress)).activeStudySession?.seed).toBe("seed");
   });
 
+  it("repairs a checked study question that inherited no session answer", () => {
+    const progress = createEmptyProgress();
+    progress.study.answers = { "B-34": ["c"] };
+    progress.activeStudySession = {
+      id: "adaptive-b34-regression",
+      title: "Reinforcement · 10",
+      size: 10,
+      seed: "b34-regression",
+      optionMode: "shuffled",
+      optionSeed: "b34-regression",
+      questionIds: ["B-34"],
+      currentIndex: 0,
+      answers: {},
+      revealed: true,
+      checkedQuestionIds: ["B-34"],
+      startedAt: "2026-07-28T00:00:00.000Z",
+      studyMode: "reinforcement",
+    };
+
+    const restored = importProgress(JSON.stringify(progress));
+    expect(restored.study.answers["B-34"]).toEqual(["c"]);
+    expect(restored.activeStudySession?.answers["B-34"]).toBeUndefined();
+    expect(restored.activeStudySession?.checkedQuestionIds).toEqual([]);
+    expect(restored.activeStudySession?.revealed).toBe(false);
+  });
+
   it("adds compatible option modes to older version 2 sessions", () => {
     const imported = importProgress(JSON.stringify({
       ...createEmptyProgress(),

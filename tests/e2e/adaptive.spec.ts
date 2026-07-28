@@ -137,6 +137,38 @@ test("a ten-question adaptive session survives leaving and reloading", async ({ 
   await expect(page.getByText("2/10", { exact: true })).toBeVisible();
 });
 
+test("a reinforcement session never inherits a pending free-practice answer", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop-chromium", "One Chromium pass covers shared study state.");
+  await page.addInitScript(() => {
+    const key = "istqb-ctfl-v4-trainer:v2";
+    const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
+    if (!progress) return;
+    progress.study.currentQuestionId = "B-34";
+    progress.study.answers = { "B-34": ["c"] };
+    progress.activeStudySession = {
+      id: "adaptive-b34-regression",
+      title: "Reinforcement · 10",
+      size: 10,
+      seed: "b34-regression",
+      optionMode: "shuffled",
+      optionSeed: "b34-regression",
+      questionIds: ["B-34"],
+      currentIndex: 0,
+      answers: {},
+      revealed: false,
+      checkedQuestionIds: [],
+      startedAt: "2026-07-28T00:00:00.000Z",
+      studyMode: "reinforcement",
+    };
+    window.localStorage.setItem(key, JSON.stringify(progress));
+  });
+  await page.goto("/#/practice");
+
+  await expect(page.locator(".question-meta").getByText("B-34", { exact: true })).toBeVisible();
+  await expect(page.locator('.option-row input[type="radio"]:checked')).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Check" })).toBeDisabled();
+});
+
 test("a recovered twenty-question session finishes and enters history", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Full · 20" }).click();

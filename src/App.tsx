@@ -133,6 +133,11 @@ function AppShell() {
   const currentStudyRevealed = currentStudySession
     ? currentStudySession.revealed || currentStudySession.checkedQuestionIds.includes(currentStudyQuestion?.id ?? "")
     : studyRevealed;
+  const currentStudySelection = currentStudyQuestion
+    ? currentStudySession
+      ? currentStudySession.answers[currentStudyQuestion.id] ?? []
+      : studyAnswers[currentStudyQuestion.id] ?? []
+    : [];
   const { elapsedMs: activeQuestionTimeMs, finishAttempt: finishQuestionTimer } = useActiveQuestionTimer(
     currentStudySession ? `study:${currentStudySession.id}` : "practice",
     currentStudyQuestion?.id ?? null,
@@ -202,7 +207,10 @@ function AppShell() {
 
   function handleStudyCheck(question: Question) {
     if (currentStudySession?.checkedQuestionIds.includes(question.id)) return;
-    const selected = currentStudySession?.answers[question.id] ?? studyAnswers[question.id] ?? [];
+    const selected = currentStudySession
+      ? currentStudySession.answers[question.id] ?? []
+      : studyAnswers[question.id] ?? [];
+    if (selected.length === 0) return;
     if (question.selectionMode === "multiple" && selected.length < question.correctAnswers.length) return;
     const correct = isCorrectAnswer(question, selected);
     const activeMs = finishQuestionTimer(question.id);
@@ -636,7 +644,7 @@ function AppShell() {
               filteredQuestions={studyQuestions}
               currentQuestion={currentStudyQuestion}
               currentIndex={studyIndex}
-              selected={currentStudyQuestion ? currentStudySession?.answers[currentStudyQuestion.id] ?? studyAnswers[currentStudyQuestion.id] ?? [] : []}
+              selected={currentStudySelection}
               revealed={currentStudyRevealed}
               progress={progress}
               onToggle={handleStudyToggle}

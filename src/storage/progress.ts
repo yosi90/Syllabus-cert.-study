@@ -200,6 +200,36 @@ function normalizeFilters(value: Partial<StoredFilters> | undefined): StoredFilt
   };
 }
 
+function normalizeActiveStudySession(value: Record<string, unknown>): PersistedStudySession {
+  const session = value as unknown as PersistedStudySession;
+  const answers = isObject(value.answers) ? value.answers as AnswerMap : {};
+  const questionIds = Array.isArray(value.questionIds)
+    ? value.questionIds.filter((id): id is string => typeof id === "string")
+    : [];
+  const currentQuestionId = questionIds[session.currentIndex];
+  const hasOwnAnswer = (questionId: string) =>
+    Array.isArray(answers[questionId]) && answers[questionId].length > 0;
+  const checkedQuestionIds = Array.isArray(value.checkedQuestionIds)
+    ? value.checkedQuestionIds.filter((id): id is string =>
+        typeof id === "string" && hasOwnAnswer(id))
+    : currentQuestionId && Boolean(value.revealed) && hasOwnAnswer(currentQuestionId)
+      ? [currentQuestionId]
+      : [];
+
+  return {
+    ...session,
+    questionIds,
+    answers,
+    optionMode: "shuffled",
+    optionSeed: typeof value.optionSeed === "string"
+      ? value.optionSeed
+      : String(value.seed ?? value.id ?? "adaptive-session"),
+    checkedQuestionIds,
+    revealed: Boolean(currentQuestionId && checkedQuestionIds.includes(currentQuestionId)),
+    paused: Boolean(value.paused),
+  };
+}
+
 function normalizeProgress(value: ProgressState): ProgressState {
   const defaults = createEmptyProgress();
   const preferences = value.preferences ?? defaults.preferences;
@@ -267,17 +297,7 @@ function normalizeProgress(value: ProgressState): ProgressState {
         }
       : null,
     activeStudySession: isObject(value.activeStudySession)
-      ? {
-          ...(value.activeStudySession as PersistedStudySession),
-          optionMode: "shuffled",
-          optionSeed: typeof value.activeStudySession.optionSeed === "string"
-            ? value.activeStudySession.optionSeed
-            : String(value.activeStudySession.seed ?? value.activeStudySession.id ?? "adaptive-session"),
-          checkedQuestionIds: Array.isArray(value.activeStudySession.checkedQuestionIds)
-            ? value.activeStudySession.checkedQuestionIds.filter((id): id is string => typeof id === "string")
-            : [],
-          paused: Boolean(value.activeStudySession.paused),
-        }
+      ? normalizeActiveStudySession(value.activeStudySession)
       : null,
     review: {
       sessionId: typeof value.review?.sessionId === "string" ? value.review.sessionId : null,
