@@ -122,6 +122,8 @@ test("desktop action buttons reveal delayed keyboard shortcut tooltips", async (
   await expect(nextButton).toHaveAttribute("aria-keyshortcuts", "ArrowRight");
   await expect(page.getByRole("button", { name: "Check" })).toHaveAttribute("aria-keyshortcuts", "Enter");
   await expect(tooltip.locator("kbd")).toHaveText(["→"]);
+  await expect(tooltip.locator("kbd")).toHaveClass("keyboard-shortcut-arrow");
+  await expect(tooltip.locator("kbd")).toHaveCSS("font-size", "17px");
   await expect(tooltip).toHaveCSS("opacity", "0");
 
   await nextButton.hover();

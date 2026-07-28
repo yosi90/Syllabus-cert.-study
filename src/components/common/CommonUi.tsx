@@ -185,7 +185,14 @@ export function KeyboardShortcutHint({
     <span className="keyboard-shortcut-tooltip" aria-hidden="true">
       <span>{language === "es" ? "Atajo de teclado" : "Keyboard shortcut"}</span>
       <span className="keyboard-shortcut-keys">
-        {keys.map((key) => <kbd key={key}>{key}</kbd>)}
+        {keys.map((key) => (
+          <kbd
+            key={key}
+            className={key === "←" || key === "→" ? "keyboard-shortcut-arrow" : undefined}
+          >
+            {key}
+          </kbd>
+        ))}
       </span>
     </span>
   );

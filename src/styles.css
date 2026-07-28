@@ -1372,7 +1372,11 @@ button:disabled {
   }
 
   .keyboard-shortcut-tooltip kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-width: 25px;
+    min-height: 21px;
     padding: 3px 6px;
     border: 1px solid #7f8ca0;
     border-bottom-width: 2px;
@@ -1380,8 +1384,14 @@ button:disabled {
     color: #172033;
     background: #f7f9fc;
     box-shadow: 0 1px 0 rgb(0 0 0 / 24%);
-    font: 800 12px/1 system-ui, sans-serif;
+    font: 800 12px/1.2 system-ui, sans-serif;
     text-align: center;
+  }
+
+  .keyboard-shortcut-tooltip kbd.keyboard-shortcut-arrow {
+    padding-block: 1px 4px;
+    font-size: 17px;
+    line-height: 1;
   }
 
   .has-keyboard-shortcut:not(:disabled):hover .keyboard-shortcut-tooltip {
