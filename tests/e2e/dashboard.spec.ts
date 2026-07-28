@@ -157,7 +157,7 @@ test("an active exam can be continued from home", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Modelo A" })).toBeVisible();
 });
 
-test("practice progress can be continued from home", async ({ page }) => {
+test("completed loose practice does not offer a session to continue", async ({ page }) => {
   await page.goto("/#/practice");
   await page.getByRole("radio").first().check();
   await page.getByRole("button", { name: "Check" }).click();
@@ -167,10 +167,7 @@ test("practice progress can be continued from home", async ({ page }) => {
   } else {
     await page.locator(".mode-tabs").getByRole("link", { name: "Home" }).click();
   }
-  await page.getByRole("button", { name: "Continue practice" }).click();
-
-  await expect(page).toHaveURL(/#\/practice$/);
-  await expect(page.getByRole("heading", { name: "Single questions" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Continue practice" })).toBeHidden();
 });
 
 test("the marked counter opens practice with the marked filter active", async ({ page }, testInfo) => {

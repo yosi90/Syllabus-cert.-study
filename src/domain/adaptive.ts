@@ -11,6 +11,17 @@ export type AdaptiveCandidate = {
 };
 
 const kLevels = ["K1", "K2", "K3"] as const;
+const STUDY_PRIORITY_WEIGHTS = {
+  neverCorrect: 1_000,
+  lastAnswerIncorrect: 400,
+  flagged: 200,
+  lowAccuracy: 150,
+  maxSlowAnswer: 300,
+  absencePerDay: 2,
+  maxAbsenceDays: 365,
+  selectionDeviation: 35,
+  maxSelectionBalance: 140,
+} as const;
 
 function apportion(weights: Record<string, number>, target: number) {
   const totalWeight = Object.values(weights).reduce((sum, weight) => sum + weight, 0);
@@ -161,6 +172,68 @@ function hashSeed(value: string) {
   return hash >>> 0;
 }
 
+function daysSinceLastSelection(
+  questionId: string,
+  progress: ProgressState,
+  fallbackUpdatedAt: string,
+  now: number,
+) {
+  const sessionTimes = progress.sessions
+    .filter((session) => session.questionIds.includes(questionId))
+    .map((session) => new Date(session.completedAt).getTime())
+    .filter(Number.isFinite);
+  const lastSelectionTime = sessionTimes.length
+    ? Math.max(...sessionTimes)
+    : new Date(fallbackUpdatedAt).getTime();
+  return Number.isFinite(lastSelectionTime)
+    ? Math.max(0, (now - lastSelectionTime) / 86_400_000)
+    : 0;
+}
+
+function selectionBalance(
+  questionId: string,
+  progress: ProgressState,
+) {
+  const eligibleIds = Object.entries(progress.questionProgress)
+    .filter(([, item]) => item.attempts > 0)
+    .map(([id]) => id);
+  if (!eligibleIds.length || !progress.sessions.length) return 0;
+
+  const eligible = new Set(eligibleIds);
+  const appearances = new Map<string, number>();
+  let totalAppearances = 0;
+  for (const session of progress.sessions) {
+    for (const id of new Set(session.questionIds)) {
+      if (!eligible.has(id)) continue;
+      appearances.set(id, (appearances.get(id) ?? 0) + 1);
+      totalAppearances += 1;
+    }
+  }
+  if (!totalAppearances) return 0;
+
+  const averageAppearances = totalAppearances / eligibleIds.length;
+  const deviation = averageAppearances - (appearances.get(questionId) ?? 0);
+  return Math.max(
+    -STUDY_PRIORITY_WEIGHTS.maxSelectionBalance,
+    Math.min(
+      STUDY_PRIORITY_WEIGHTS.maxSelectionBalance,
+      deviation * STUDY_PRIORITY_WEIGHTS.selectionDeviation,
+    ),
+  );
+}
+
+function studyRotationPriority(
+  questionId: string,
+  progress: ProgressState,
+  fallbackUpdatedAt: string,
+  now: number,
+) {
+  const ageDays = daysSinceLastSelection(questionId, progress, fallbackUpdatedAt, now);
+  const spacingPriority = Math.min(ageDays, STUDY_PRIORITY_WEIGHTS.maxAbsenceDays)
+    * STUDY_PRIORITY_WEIGHTS.absencePerDay;
+  return spacingPriority + selectionBalance(questionId, progress);
+}
+
 export function adaptivePriority(
   question: Question,
   progress: ProgressState,
@@ -174,12 +247,12 @@ export function adaptivePriority(
   const recentError = item.lastCorrect ? 0 : 100 + Math.max(0, 30 - ageDays);
   const flagged = item.flagged ? 55 : 0;
   const lowAccuracy = (1 - accuracy) * 50;
-  const age = Math.min(ageDays, 90) * 0.4;
   const averageSeconds = item.timedAttempts
     ? (item.totalActiveMs ?? 0) / item.timedAttempts / 1_000
     : 0;
   const slowAnswer = Math.min(averageSeconds, 180) * 0.08;
-  return recentError + flagged + lowAccuracy + age + slowAnswer;
+  const rotationPriority = studyRotationPriority(question.id, progress, item.updatedAt, now);
+  return recentError + flagged + lowAccuracy + slowAnswer + rotationPriority;
 }
 
 export function reinforcementPriority(
@@ -191,17 +264,18 @@ export function reinforcementPriority(
   if (!item?.attempts) return 0;
 
   const accuracy = item.correct / item.attempts;
-  const ageDays = Math.max(0, (now - new Date(item.updatedAt).getTime()) / 86_400_000);
   const averageSeconds = item.timedAttempts
     ? (item.totalActiveMs ?? 0) / item.timedAttempts / 1_000
     : 0;
 
-  return (item.correct === 0 ? 1_000 : 0)
-    + (item.lastCorrect ? 0 : 400)
-    + (item.flagged ? 200 : 0)
-    + (1 - accuracy) * 150
-    + Math.min(averageSeconds, 300)
-    + Math.min(ageDays, 90) * 0.4;
+  const masteryPriority = (item.correct === 0 ? STUDY_PRIORITY_WEIGHTS.neverCorrect : 0)
+    + (item.lastCorrect ? 0 : STUDY_PRIORITY_WEIGHTS.lastAnswerIncorrect)
+    + (item.flagged ? STUDY_PRIORITY_WEIGHTS.flagged : 0)
+    + (1 - accuracy) * STUDY_PRIORITY_WEIGHTS.lowAccuracy;
+  const difficultyPriority = Math.min(averageSeconds, STUDY_PRIORITY_WEIGHTS.maxSlowAnswer);
+  const rotationPriority = studyRotationPriority(question.id, progress, item.updatedAt, now);
+
+  return masteryPriority + difficultyPriority + rotationPriority;
 }
 
 export function rankAdaptiveQuestions(

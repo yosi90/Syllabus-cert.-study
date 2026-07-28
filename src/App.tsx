@@ -619,7 +619,7 @@ function AppShell() {
               dashboard={dashboard}
               language={language}
               copy={copy}
-              canContinuePractice={Boolean(activeStudySession) || progressSummary.attempted > 0 || Object.keys(studyAnswers).length > 0}
+              canContinuePractice={Boolean(activeStudySession)}
               hasActiveExam={Boolean(activeExam)}
               onStartStudy={startStudyBatch}
               onContinuePractice={handleContinuePractice}

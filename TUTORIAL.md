@@ -28,7 +28,7 @@ La primera vez que abras la web aparece un tutorial breve de tres pasos. Puedes 
 - Cobertura y precision por capitulo y nivel K.
 - Hasta dos capitulos a reforzar cuando ya existen intentos suficientes para compararlos.
 
-El panel no predice si aprobaras el examen. Los bloques de 10 y 20 crean sesiones adaptativas reproducibles: priorizan errores recientes, preguntas marcadas, baja precision, intentos antiguos y preguntas no vistas, sin repetir preguntas. Inicialmente limitan cada capitulo al 40 % de la sesion cuando el banco disponible lo permite.
+El panel no predice si aprobaras el examen. Los bloques de 10 y 20 crean sesiones adaptativas reproducibles: priorizan errores recientes, preguntas marcadas, baja precision, intentos antiguos y preguntas no vistas, sin repetir preguntas. Todos los bloques aumentan progresivamente la prioridad de una pregunta cuanto más tiempo lleva sin aparecer en una sesión; una ausencia prolongada puede pesar más que haber tardado en responderla. También comparan sus apariciones en las últimas 20 sesiones con la media de las preguntas practicadas: estar por debajo suma prioridad y estar por encima la resta, dentro de un límite que evita ocultar errores importantes. Los bloques adaptativos favorecen además la cobertura de preguntas no vistas, mientras que los refuerzos se concentran en preguntas ya intentadas. Inicialmente limitan cada capitulo al 40 % de la sesion cuando el banco disponible lo permite.
 
 Las sesiones adaptativas guardan su semilla, preguntas, posicion, respuestas y estado de correccion. Puedes salir desde `Practica`, recargar o cerrar la pestana y continuar desde `Inicio`. Al terminarlas se guardan en el historial con un resumen y el capitulo recomendado para reforzar.
 

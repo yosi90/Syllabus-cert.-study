@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { Question } from "../data/types";
 import { questions as bankQuestions } from "../data/bank";
-import { createEmptyProgress } from "../storage/progress";
+import { createEmptyProgress, type StoredSession } from "../storage/progress";
 import { adaptivePriority, createAdaptiveQuestionIds, createReinforcementQuestionIds, recommendAdaptiveChapter, reinforcementPriority, studyDistributionTargets } from "./adaptive";
 
 function question(id: string, chapter = "FL-1"): Question {
@@ -24,8 +24,31 @@ function question(id: string, chapter = "FL-1"): Question {
   };
 }
 
+function session(id: string, questionIds: string[], completedAt = "2026-07-19T00:00:00.000Z"): StoredSession {
+  return {
+    id,
+    title: "Reinforcement",
+    mode: "study",
+    sessionType: "adaptive",
+    questionIds,
+    answers: {},
+    score: {
+      total: questionIds.length,
+      answered: 0,
+      blank: questionIds.length,
+      correct: 0,
+      incorrect: 0,
+      score: 0,
+      percent: 0,
+      passed: false,
+      passingScore: questionIds.length + 1,
+    },
+    completedAt,
+  };
+}
+
 describe("adaptive queue", () => {
-  it("prioritizes recent errors, flags, low accuracy, age and unseen questions", () => {
+  it("combines unseen questions, learning needs and rotation in adaptive blocks", () => {
     const progress = createEmptyProgress();
     const now = Date.parse("2026-07-15T00:00:00.000Z");
     progress.questionProgress = {
@@ -36,11 +59,14 @@ describe("adaptive queue", () => {
       accurate: { attempts: 4, correct: 4, lastCorrect: true, flagged: false, lastAnswers: ["a"], updatedAt: "2026-07-15T00:00:00.000Z" },
     };
 
-    expect(adaptivePriority(question("unseen"), progress, now)).toBeGreaterThan(adaptivePriority(question("error"), progress, now));
-    expect(adaptivePriority(question("error"), progress, now)).toBeGreaterThan(adaptivePriority(question("flagged"), progress, now));
-    expect(adaptivePriority(question("flagged"), progress, now)).toBeGreaterThan(adaptivePriority(question("low"), progress, now));
-    expect(adaptivePriority(question("low"), progress, now)).toBeGreaterThan(adaptivePriority(question("old"), progress, now));
-    expect(adaptivePriority(question("old"), progress, now)).toBeGreaterThan(adaptivePriority(question("accurate"), progress, now));
+    const unseenPriority = adaptivePriority(question("unseen"), progress, now);
+    const accuratePriority = adaptivePriority(question("accurate"), progress, now);
+    for (const id of ["error", "flagged", "low", "old"]) {
+      expect(unseenPriority).toBeGreaterThan(adaptivePriority(question(id), progress, now));
+      expect(adaptivePriority(question(id), progress, now)).toBeGreaterThan(accuratePriority);
+    }
+    expect(adaptivePriority(question("old"), progress, now))
+      .toBeGreaterThan(adaptivePriority(question("low"), progress, now));
   });
 
   it("exhausts unseen questions before reusing previous errors", () => {
@@ -125,6 +151,53 @@ describe("adaptive queue", () => {
       now,
     );
     expect(ids.slice(0, 3)).toEqual(["missed", "slow", "fast"]);
+  });
+
+  it("lets a long absence outweigh a slow answer and resets that age after a session", () => {
+    const progress = createEmptyProgress();
+    progress.questionProgress = {
+      overdue: { attempts: 2, correct: 2, lastCorrect: true, flagged: false, lastAnswers: ["a"], updatedAt: "2026-01-01", totalActiveMs: 20_000, lastActiveMs: 10_000, timedAttempts: 2 },
+      slow: { attempts: 2, correct: 2, lastCorrect: true, flagged: false, lastAnswers: ["a"], updatedAt: "2026-07-15", totalActiveMs: 600_000, lastActiveMs: 300_000, timedAttempts: 2 },
+    };
+    const now = Date.parse("2026-07-20T00:00:00.000Z");
+
+    expect(reinforcementPriority(question("overdue"), progress, now))
+      .toBeGreaterThan(reinforcementPriority(question("slow"), progress, now));
+
+    progress.sessions = [session("recent-reinforcement", ["overdue"])];
+
+    expect(reinforcementPriority(question("overdue"), progress, now))
+      .toBeLessThan(reinforcementPriority(question("slow"), progress, now));
+  });
+
+  it("balances recent appearances around their average without overriding a serious miss", () => {
+    const progress = createEmptyProgress();
+    const mastered = {
+      attempts: 2,
+      correct: 2,
+      lastCorrect: true,
+      flagged: false,
+      lastAnswers: ["a"],
+      updatedAt: "2026-07-19T00:00:00.000Z",
+      totalActiveMs: 20_000,
+      lastActiveMs: 10_000,
+      timedAttempts: 2,
+    };
+    progress.questionProgress = {
+      repeated: { ...mastered },
+      underrepresented: { ...mastered },
+      repeatedMiss: { ...mastered, correct: 0, lastCorrect: false, lastAnswers: ["b"] },
+    };
+    progress.sessions = Array.from({ length: 4 }, (_, index) =>
+      session(`recent-${index}`, ["repeated", "repeatedMiss"]));
+    const now = Date.parse("2026-07-20T00:00:00.000Z");
+
+    expect(reinforcementPriority(question("underrepresented"), progress, now))
+      .toBeGreaterThan(reinforcementPriority(question("repeated"), progress, now));
+    expect(reinforcementPriority(question("repeatedMiss"), progress, now))
+      .toBeGreaterThan(reinforcementPriority(question("underrepresented"), progress, now));
+    expect(adaptivePriority(question("underrepresented"), progress, now))
+      .toBeGreaterThan(adaptivePriority(question("repeated"), progress, now));
   });
 
   it("recommends the chapter with the most missed answers", () => {
