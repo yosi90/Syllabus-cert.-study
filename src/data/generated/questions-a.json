@@ -642,7 +642,7 @@
           }
         ],
         "selector": "Selecciona UNA opción.",
-        "explanation": "a) No es correcto. Se utiliza con mayor frecuencia en el desarrollo impulsado por el comportamiento (BDD) b) No es correcto. Es la descripción de desarrollo guiado por pruebas (TDD) c) Es correcta. En el desarrollo basado en pruebas de aceptación (ATDD), las pruebas se escriben a partir de criterios de aceptación como parte del proceso de diseño d) No es correcto. Se utiliza en BDD."
+        "explanation": "a) No es correcto. Se utiliza con mayor frecuencia en el desarrollo impulsado por el comportamiento (BDD) b) No es correcto. Es la descripción del desarrollo guiado por pruebas (TDD) c) Es correcta. En el desarrollo basado en pruebas de aceptación (ATDD), las pruebas se escriben a partir de criterios de aceptación como parte del proceso de diseño d) No es correcto. Se utiliza en el desarrollo impulsado por el comportamiento (BDD)."
       }
     },
     "questionTypes": [

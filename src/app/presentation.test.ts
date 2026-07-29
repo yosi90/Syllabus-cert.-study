@@ -81,6 +81,23 @@ describe("localized explanation and formula presentation", () => {
 });
 
 describe("question prompt formatting", () => {
+  it("keeps B-21's three partitions separate from the following coverage explanation", () => {
+    const question = questions.find((item) => item.id === "B-21")!;
+
+    for (const language of ["en", "es"] as const) {
+      const localized = localizedQuestion(question, language);
+      const parsed = parseExplanation(localized.explanation, question.options.map((option) => option.key));
+      const blocks = promptBlocks(parsed.intro);
+
+      expect(blocks.slice(0, 3).map((block) => block.type), `B-21 (${language})`).toEqual(["text", "list", "text"]);
+      expect(blocks[1]).toMatchObject({ type: "list", items: [{ marker: "•" }, { marker: "•" }, { marker: "•" }] });
+      expect(blocks[2]).toMatchObject({
+        type: "text",
+        text: expect.stringMatching(language === "es" ? /^Para lograr una cobertura completa/ : /^To achieve full coverage/),
+      });
+    }
+  });
+
   it.each(["B-34", "B-39", "C-15", "C-17", "C-20", "C-26", "D-20"])(
     "places every list item in %s on its own line",
     (id) => {

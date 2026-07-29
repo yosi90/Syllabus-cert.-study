@@ -47,4 +47,37 @@ describe("technical term localization", () => {
       ["commits", "confirmación de cambios"],
     ]);
   });
+
+  it("treats ATDD, BDD and TDD consistently as technical language", () => {
+    const segments = technicalTextSegments(
+      "En el desarrollo basado en pruebas de aceptación (ATDD), el desarrollo impulsado por el comportamiento (BDD) y el desarrollo guiado por pruebas (TDD) se usan enfoques distintos. Después se comparan ATDD, BDD y TDD.",
+    );
+    const terms = segments.filter((segment) => segment.type === "term");
+
+    expect(terms.map((segment) => [segment.text, segment.translation])).toEqual([
+      ["acceptance test-driven development", "desarrollo guiado por pruebas de aceptación"],
+      ["ATDD", "desarrollo guiado por pruebas de aceptación"],
+      ["behavior-driven development", "desarrollo impulsado por el comportamiento"],
+      ["BDD", "desarrollo impulsado por el comportamiento"],
+      ["test-driven development", "desarrollo guiado por pruebas"],
+      ["TDD", "desarrollo guiado por pruebas"],
+      ["ATDD", "desarrollo guiado por pruebas de aceptación"],
+      ["BDD", "desarrollo impulsado por el comportamiento"],
+      ["TDD", "desarrollo guiado por pruebas"],
+    ]);
+  });
+
+  it("treats configuration management and CM as the same technical term", () => {
+    const segments = technicalTextSegments(
+      "La gestión de la configuración (CM) y la gestión de configuración utilizan herramientas CM.",
+    );
+    const terms = segments.filter((segment) => segment.type === "term");
+
+    expect(terms.map((segment) => [segment.text, segment.translation])).toEqual([
+      ["configuration management", "gestión de la configuración"],
+      ["CM", "gestión de la configuración"],
+      ["configuration management", "gestión de la configuración"],
+      ["CM", "gestión de la configuración"],
+    ]);
+  });
 });

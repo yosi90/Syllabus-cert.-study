@@ -1897,7 +1897,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "a) No es correcto. Se utiliza con mayor frecuencia en el desarrollo impulsado por el comportamiento (BDD) b) No es correcto. Es la descripción de desarrollo guiado por pruebas (TDD) c) Es correcta. En el desarrollo basado en pruebas de aceptación (ATDD), las pruebas se escriben a partir de criterios de aceptación como parte del proceso de diseño d) No es correcto. Se utiliza en BDD."
+          "explanation": "a) No es correcto. Se utiliza con mayor frecuencia en el desarrollo impulsado por el comportamiento (BDD) b) No es correcto. Es la descripción del desarrollo guiado por pruebas (TDD) c) Es correcta. En el desarrollo basado en pruebas de aceptación (ATDD), las pruebas se escriben a partir de criterios de aceptación como parte del proceso de diseño d) No es correcto. Se utiliza en el desarrollo impulsado por el comportamiento (BDD)."
         }
       },
       "questionTypes": [
@@ -5197,7 +5197,7 @@
       ],
       "selectionMode": "single",
       "selector": "Select ONE option.",
-      "explanation": "The domain for the password length has three equivalence partitions: • passwords too short {0, 1, …, 4, 5} • passwords OK {6, 7, …, 11, 12} • passwords too long {13, 14, …} To achieve full coverage for 3-value BVA we need to test the following values: 0, 1, 4, 5, 6, 7, 11, 12, 13, 14. Since 2-value BVA is already covered, this means that we have already tested the passwords of length: 0, 5, 6, 12 and 13. This means that the additional lengths that need to be covered to move from 2-value to 3-value are: 1, 4, 7, 11 and 14. Thus: a) Is not correct b) Is not correct c) Is not correct d) Is correct",
+      "explanation": "The domain for the password length has three equivalence partitions: • passwords too short {0, 1, …, 4, 5} • passwords OK {6, 7, …, 11, 12} • passwords too long {13, 14, …}\n\nTo achieve full coverage for 3-value BVA we need to test the following values: 0, 1, 4, 5, 6, 7, 11, 12, 13, 14. Since 2-value BVA is already covered, this means that we have already tested the passwords of length: 0, 5, 6, 12 and 13. This means that the additional lengths that need to be covered to move from 2-value to 3-value are: 1, 4, 7, 11 and 14. Thus: a) Is not correct b) Is not correct c) Is not correct d) Is correct",
       "notes": [],
       "points": 1,
       "translations": {
@@ -5222,7 +5222,7 @@
             }
           ],
           "selector": "Selecciona UNA opción.",
-          "explanation": "El dominio para la longitud de la contraseña tiene tres particiones de equivalencia: • contraseñas demasiado cortas {0, 1,…, 4, 5} • contraseñas correctas {6, 7,…, 11, 12} • contraseñas demasiado largas {13, 14,…} Para lograr una cobertura completa para BVA de 3 valores, necesitamos probar los siguientes valores: 0, 1, 4, 5, 6, 7, 11, 12, 13, 14. Dado que BVA de 2 valores ya está cubierto, esto significa que ya hemos probado las contraseñas de longitud: 0, 5, 6, 12 y 13. Esto significa que las longitudes adicionales que deben cubrirse para pasar de 2 valores a 3 valores son: 1, 4, 7, 11 y 14. Por lo tanto: a) No es correcto b) No es correcto c) No es correcto d) Es correcto"
+          "explanation": "El dominio para la longitud de la contraseña tiene tres particiones de equivalencia: • contraseñas demasiado cortas {0, 1,…, 4, 5} • contraseñas correctas {6, 7,…, 11, 12} • contraseñas demasiado largas {13, 14,…}\n\nPara lograr una cobertura completa para BVA de 3 valores, necesitamos probar los siguientes valores: 0, 1, 4, 5, 6, 7, 11, 12, 13, 14. Dado que BVA de 2 valores ya está cubierto, esto significa que ya hemos probado las contraseñas de longitud: 0, 5, 6, 12 y 13. Esto significa que las longitudes adicionales que deben cubrirse para pasar de 2 valores a 3 valores son: 1, 4, 7, 11 y 14. Por lo tanto: a) No es correcto b) No es correcto c) No es correcto d) Es correcto"
         }
       },
       "questionTypes": [

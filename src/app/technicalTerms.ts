@@ -11,6 +11,8 @@ export type TechnicalTerm = {
 
 export const technicalTerms: TechnicalTerm[] = [
   { term: "acceptance test-driven development", translation: "desarrollo guiado por pruebas de aceptación", forms: [{ source: "desarrollo guiado por pruebas de aceptación" }, { source: "desarrollo basado en pruebas de aceptación" }, { source: "ATDD", display: "ATDD" }] },
+  { term: "behavior-driven development", translation: "desarrollo impulsado por el comportamiento", forms: [{ source: "desarrollo impulsado por el comportamiento" }, { source: "desarrollo guiado por el comportamiento" }, { source: "BDD", display: "BDD" }] },
+  { term: "test-driven development", translation: "desarrollo guiado por pruebas", forms: [{ source: "desarrollo guiado por pruebas" }, { source: "desarrollo basado en pruebas" }, { source: "TDD", display: "TDD" }] },
   { term: "boundary value analysis", translation: "análisis de valores límite", forms: [{ source: "análisis de valores límite" }, { source: "BVA", display: "BVA" }] },
   { term: "equivalence partitioning", translation: "partición de equivalencia", forms: [{ source: "particiones de equivalencia", display: "equivalence partitions" }, { source: "partición de equivalencia" }, { source: "división de equivalencia" }, { source: "EP", display: "EP" }] },
   { term: "decision table testing", translation: "pruebas de tabla de decisiones", forms: [{ source: "pruebas de tabla de decisiones" }, { source: "prueba de tabla de decisiones" }, { source: "pruebas de tablas de decisión" }, { source: "prueba de tabla de decisión" }] },
@@ -27,6 +29,7 @@ export const technicalTerms: TechnicalTerm[] = [
   { term: "test completion", translation: "finalización de pruebas", forms: [{ source: "finalización de pruebas" }, { source: "cierre de pruebas" }] },
   { term: "test monitoring", translation: "monitorización de pruebas", forms: [{ source: "monitorización de pruebas" }, { source: "seguimiento de pruebas" }] },
   { term: "test control", translation: "control de pruebas", forms: [{ source: "control de pruebas" }] },
+  { term: "configuration management", translation: "gestión de la configuración", forms: [{ source: "gestión de la configuración" }, { source: "gestión de configuración" }, { source: "CM", display: "CM" }] },
   { term: "commit", translation: "confirmación de cambios", forms: [{ source: "commits", display: "commits" }, { source: "commit" }] },
   { term: "testware", translation: "productos de trabajo de prueba", forms: [{ source: "productos de trabajo de prueba" }, { source: "testware" }] },
   { term: "quality assurance", translation: "aseguramiento de la calidad", forms: [{ source: "aseguramiento de la calidad" }, { source: "QA", display: "QA" }] },
