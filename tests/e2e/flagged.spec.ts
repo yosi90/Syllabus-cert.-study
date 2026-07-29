@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
 
 function installFlaggedQuestion(page: import("@playwright/test").Page, currentQuestionId = "A-01") {
   return page.addInitScript((questionId) => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (!progress) return;
     progress.study.currentQuestionId = questionId;

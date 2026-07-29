@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 test("reinforcement actions prioritize weak questions and persist active answer time", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "One Chromium pass covers shared timing behavior.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (!progress) return;
     progress.questionProgress = {
@@ -41,7 +41,7 @@ test("reinforcement actions prioritize weak questions and persist active answer 
   await page.waitForTimeout(1_100);
   await expect(timer).toHaveAttribute("aria-label", stoppedTime!);
   await expect.poll(async () => page.evaluate(() => {
-    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null");
+    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "null");
     return progress?.questionProgress?.["A-01"]?.totalActiveMs ?? 0;
   })).toBeGreaterThan(900);
 });
@@ -66,7 +66,7 @@ test("exam questions also stop and persist their individual timer on first answe
 
   await page.getByRole("button", { name: "Finish" }).click();
   await expect.poll(async () => page.evaluate(() => {
-    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null");
+    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "null");
     return progress?.questionProgress?.["A-01"]?.timedAttempts ?? 0;
   })).toBe(1);
 });
@@ -118,7 +118,7 @@ test("a ten-question adaptive session survives leaving and reloading", async ({ 
   const optionOrderBeforeReload = await page.locator(".option-row").allTextContents();
 
   const beforeReload = await page.evaluate(() => {
-    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null");
+    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "null");
     return { seed: progress.activeStudySession.seed, questionIds: progress.activeStudySession.questionIds };
   });
   await page.reload();
@@ -126,7 +126,7 @@ test("a ten-question adaptive session survives leaving and reloading", async ({ 
   await expect(page.getByText("2/10", { exact: true })).toBeVisible();
   await expect(page.locator(".option-row")).toHaveText(optionOrderBeforeReload);
   const afterReload = await page.evaluate(() => {
-    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null");
+    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "null");
     return { seed: progress.activeStudySession.seed, questionIds: progress.activeStudySession.questionIds };
   });
   expect(afterReload).toEqual(beforeReload);
@@ -140,7 +140,7 @@ test("a ten-question adaptive session survives leaving and reloading", async ({ 
 test("a reinforcement session never inherits a pending free-practice answer", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "One Chromium pass covers shared study state.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (!progress) return;
     progress.study.currentQuestionId = "B-34";
@@ -178,7 +178,7 @@ test("a recovered twenty-question session finishes and enters history", async ({
   await railButtons.nth(19).click();
   await expect(page.getByText("20/20", { exact: true })).toBeVisible();
   await expect.poll(async () => page.evaluate(() => {
-    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null");
+    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "null");
     return progress?.activeStudySession?.currentIndex;
   })).toBe(19);
   await page.reload();

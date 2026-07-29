@@ -58,7 +58,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Es imposible demostrar que ya no hay defectos en el sistema bajo prueba. Ver principio de prueba 1 b) No es correcto. Ver principio de prueba 7 c) Es correcto. Las pruebas encuentran defectos y fallas, lo que reduce el nivel de riesgo y al mismo tiempo da más confianza en el nivel de calidad del objeto de prueba d) No es correcto. Es imposible probar todas las combinaciones de entradas (ver principio de prueba 2)"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-02",
@@ -119,7 +122,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. Es importante que los testers estén involucrados desde el inicio del ciclo de vida de desarrollo de software (SDLC). Aumentará la comprensión de las decisiones de diseño y detectará defectos tempranamente. b) No es correcto. Tanto los desarrolladores como los testers comprenderán mejor los productos de trabajo de cada uno y cómo probar el código c) No es correcto. Los usuarios finales no ayudarán a los testers a aumentar la calidad de los informes de defectos; Además, los usuarios normalmente no participan en pruebas de bajo nivel como las pruebas de integración. d) No es correcto. Estar certificado no significa automáticamente que el tester será mejor en diseño de prueba"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-03",
@@ -180,7 +186,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. Este principio significa que si las mismas pruebas se repiten una y otra vez, eventualmente estas pruebas ya no encuentran ningún defecto nuevo. Probablemente esta sea la razón por la que todas Las pruebas también pasaron en esta versión b) No son correcto. Este principio habla de la creencia errónea de que simplemente encontrar y corregir una gran cantidad de defectos garantizará el éxito de un sistema c) No es correcta. Este principio dice que un pequeño número de componentes suele contener la mayoría de los defectos d) No es correcto. Este principio establece que probar todas las combinaciones de insumos y condiciones previas no es factible."
       }
-    }
+    },
+    "questionTypes": [
+      "scenario"
+    ]
   },
   {
     "id": "A-04",
@@ -241,7 +250,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Estimar el esfuerzo de la prueba es parte de la planificación de la prueba b) Es correcto. Este es un ejemplo de definición de condiciones de prueba que es parte del análisis de prueba c) No es correcto. Usar técnicas de prueba para derivar elementos de cobertura es parte del diseño de prueba d) No es correcto. Informar defectos encontrados durante Las pruebas dinámicas son parte de la ejecución de prueba"
       }
-    }
+    },
+    "questionTypes": [
+      "scenario"
+    ]
   },
   {
     "id": "A-05",
@@ -302,7 +314,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "i. Es verdad. El SDLC influye en el enfoque de prueba ii. Es falso. El número de defectos detectados en proyectos anteriores puede tener alguna influencia, pero no es tan significativo como i, iii y iv iii. Es verdad. Los riesgos de producto identificados son uno de los factores más importantes que influyen en el enfoque de prueba iv. Es verdad. Los requisitos regulatorios son factores importantes que influyen en el enfoque de prueba v. Es falso. El entorno de prueba no tiene influencia significativa en el enfoque de prueba Así: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "list"
+    ]
   },
   {
     "id": "A-06",
@@ -372,7 +387,10 @@
         "selector": "Selecciona DOS opciones.",
         "explanation": "a) Es correcto. Esto lo hacen los testers b) No es correcto. El backlog del producto es creado y mantenido por el propietario del producto c) No es correcto. Esto lo hace el equipo de desarrollo d) No es correcto. Este es un rol gerencial e) Es correcto. Esto lo realizan los testers ya que su tarea técnica la realiza como parte de un análisis de prueba."
       }
-    }
+    },
+    "questionTypes": [
+      "multiple-response"
+    ]
   },
   {
     "id": "A-07",
@@ -433,7 +451,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "i. Es verdad. Tener conocimiento del dominio es una habilidad importante del tester ii. Es falso. Esta es una tarea del analista de negocios junto con el representante comercial iii. Es verdad. Ser un buen jugador de equipo es una habilidad importante iv. Es falso. Planificar y organizar el trabajo del equipo es tarea del Test Manager o, sobre todo en un proyecto de desarrollo de software Agile, de todo el equipo y no sólo del tester v. Es cierto. El pensamiento crítico es una de las habilidades más importantes de los testers Así: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "list",
+      "scenario"
+    ]
   },
   {
     "id": "A-08",
@@ -494,7 +516,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. El enfoque de automatización de pruebas lo definen testers con la ayuda de desarrolladores y representantes comerciales b) No es correcto. La estrategia de prueba se decide en colaboración con los desarrolladores c) No es correcta. Los testers, desarrolladores y representantes comerciales son parte del enfoque de equipo completo d) Es correcto. Los testers trabajarán estrechamente con representantes comerciales para garantizar que se alcancen los niveles de calidad deseados. Esto incluye apoyarlos y colaborar con ellos para ayudarlos a crear pruebas de aceptación adecuadas."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-09",
@@ -555,7 +580,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto b) No es correcto c) No es correcto d) Es correcto. Esta regla es válida para todos los modelos SDLC"
       }
-    }
+    },
+    "questionTypes": [
+      "scenario"
+    ]
   },
   {
     "id": "A-10",
@@ -616,7 +644,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Se utiliza con mayor frecuencia en el desarrollo impulsado por el comportamiento (BDD) b) No es correcto. Es la descripción de desarrollo guiado por pruebas (TDD) c) Es correcta. En el desarrollo basado en pruebas de aceptación (ATDD), las pruebas se escriben a partir de criterios de aceptación como parte del proceso de diseño d) No es correcto. Se utiliza en BDD."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-11",
@@ -677,7 +708,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. La revisión temprana es un ejemplo del enfoque de desplazamiento a la izquierda b) No es correcto. TDD es un ejemplo del enfoque de desplazamiento a la izquierda c) No es correcto. Las primeras pruebas no funcionales son un ejemplo del enfoque de desplazamiento a la izquierda d) Es correcto. Los scripts de prueba deben estar sujetos a gestión de la configuración, por lo que no tiene sentido crear los scripts de prueba antes de que se configure este proceso."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-12",
@@ -738,7 +772,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Las retrospectivas son más útiles para identificar oportunidades de mejora y tienen poca importancia para los clientes b) No es correcto. Las retrospectivas no tienen como objetivo recopilar comentarios sobre el producto, sino sobre el proceso. Además, las retrospectivas son una actividad interna del equipo y no deben incluir representantes de los usuarios finales c) Es correcto. Las retrospectivas realizadas periódicamente, cuando se realizan actividades de seguimiento adecuadas, son fundamentales para la mejora continua del desarrollo y Las pruebas d) No son correcto. El coraje y el respeto son valores de la Programación Extrema y no están estrechamente relacionados con las retrospectivas"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-13",
@@ -799,7 +836,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Considerando: • La base de prueba para las pruebas de aceptación son las necesidades de negocio del usuario (1D) • La comunicación entre componentes se prueba durante las pruebas de integración de componentes (2B) • Las fallas en la lógica se pueden encontrar durante las pruebas de componentes (3A) • Las reglas de negocio son la base de prueba para Las pruebas de sistema (4C) Así: a) son correcta b) No es correcta c) No es correcta d) No es correcta"
       }
-    }
+    },
+    "questionTypes": [
+      "list",
+      "matching"
+    ]
   },
   {
     "id": "A-14",
@@ -867,7 +908,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Debido a que TC1 y TC3 fallaron en la Ejecución 1 (es decir, prueba (1) y prueba (3)), la prueba (4) y la prueba (6) son pruebas de confirmación. Debido a que TC2 y TC3 fallaron en la Ejecución 2 (es decir, las pruebas (5) y (6)), la prueba (8) y la prueba (9) también son pruebas de confirmación. TC2 pasó en la Ejecución 1 (es decir, prueba (2)), por lo que la prueba (5) es una prueba de regresión. TC1 pasó en la Ejecución 2 (es decir, prueba (4)), por lo que la prueba (7) también es una prueba de regresión. Por lo tanto: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "visual",
+      "scenario"
+    ]
   },
   {
     "id": "A-15",
@@ -928,7 +973,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. La gestión de defectos no es menos costosa. Encontrar y reparar defectos más adelante en el SDLC es más costoso b) No es correcto. Este es un beneficio de Las pruebas estáticas c) No son correcto. Este es un beneficio de Las pruebas estáticas d) No son correcto. Este es un beneficio de las pruebas estáticas."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-16",
@@ -989,7 +1037,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. La retroalimentación puede mejorar el proceso de prueba, pero si uno sólo quiere mejorar proyectos futuros, la retroalimentación no necesita llegar temprana o frecuentemente b) No es correcta. La retroalimentación no se utiliza para priorizar los requisitos c) No es correcto. No existe una forma única y recomendada de medir la calidad de los cambios. Además, este no es uno de los beneficios de la retroalimentación temprana que se mencionan en la sección 3.2.1 d) Es correcto. La retroalimentación temprana y frecuente puede evitar malentendidos sobre los requisitos"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-17",
@@ -1050,7 +1101,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Considerando los atributos: • Especificados para recorridos, revisiones técnicas e inspecciones; por lo tanto, las revisiones que se realizan no pueden ser revisiones informales. • El propósito de evaluar la calidad es uno de los objetivos más importantes de un recorrido. • Esto no está permitido para las inspecciones y generalmente no se hace en las revisiones técnicas. Se necesita un moderador en los recorridos y está permitido para revisiones informales • Todos los tipos de revisiones pueden incluir preparación individual (incluso revisiones informales) • Todos los tipos de revisiones pueden producir un informe de revisión, aunque las revisiones informales no requieren documentación Por lo tanto: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "list",
+      "scenario"
+    ]
   },
   {
     "id": "A-18",
@@ -1111,7 +1166,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. El tiempo adecuado para las personas es un factor de éxito b) No es correcto. Dividir los productos de trabajo en pequeñas partes adecuadas es un factor de éxito c) No es correcto. Evitar comportamientos que puedan indicar aburrimiento, exasperación, etc. es un factor de éxito d) Es correcto. Durante las revisiones se pueden encontrar defectos, no fallas"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-19",
@@ -1172,7 +1230,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Ésta es una característica común de las técnicas de prueba de caja blanca. Las condiciones de prueba, los casos de prueba y los datos de prueba se derivan de una base de prueba que puede incluir código, arquitectura de software, diseño detallado o cualquier otra fuente de información sobre la estructura del software. b) No es correcto. Ésta es una característica común de las técnicas de prueba de caja blanca. La cobertura se mide con base en los ítems probados dentro de una estructura seleccionada y la técnica de prueba aplicada a la base de prueba c) Es correcta. Esta es una característica común de las técnicas de prueba basadas en la experiencia. Este conocimiento y experiencia incluyen el uso esperado del software, su entorno, posibles defectos y la distribución de esos defectos se utiliza para definir Las pruebas d) No son correcto. Ésta es una característica común de las técnicas de prueba de caja negra. Los casos de prueba pueden usarse para detectar brechas dentro de los requisitos y la implementación de los mismos, así como desviaciones de los requisitos."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-20",
@@ -1233,7 +1294,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "La situación presentada en la pregunta se describe en el programa de estudios como cobertura de “cada opción”. “Jardín pequeño” y “jardín grande” solo pueden ir con “planta baja”, por lo que necesitamos dos casos de prueba con “planta baja” que cubran estas dos particiones “tipo jardín”. Necesitamos dos casos de prueba más para cubrir las otras dos particiones del “piso”. La partición restante \"tipo jardín\" o \"sin jardín\" está cubierta por estas pruebas. Necesitamos un total de cuatro casos de prueba: TC1 (planta baja, jardín pequeño) TC2 (planta baja, jardín grande) TC3 (primer piso, sin jardín) TC4 (segundo piso o piso superior, sin jardín) Así: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "list",
+      "scenario"
+    ]
   },
   {
     "id": "A-21",
@@ -1301,7 +1366,13 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Hay 12 valores límite para los valores del resultado final: 0, 50, 51, 60, 61, 70, 71, 80, 81, 90, 91 y 100. Los casos de prueba cubren seis de ellos (TC1 – 91, TC2 – 50, TC3 – 81, TC4 – 60, TC5 – 70 y TC7 – 51). Por tanto, los casos de prueba cubren 6/12 = 50%. Así: a) Es correcto b) No es correcto c) No es correcto d) No es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "visual",
+      "list",
+      "scenario",
+      "calculation"
+    ]
   },
   {
     "id": "A-22",
@@ -1369,7 +1440,12 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Un miembro que no haya incumplido el plazo puede obtener un descuento y una camiseta de regalo después de 15 alquileres de bicicletas. b) No es correcto. Un socio que no haya incumplido el plazo puede obtener un descuento pero no una camiseta de regalo hasta que haya alquilado una bicicleta 15 veces c) No es correcto. Los no miembros no pueden obtener un descuento, incluso si aún no han incumplido un plazo d) Es correcto. No habrá descuento como no socio que además haya incumplido un plazo, pero sólo los socios podrán recibir una camiseta de regalo. Por lo tanto, la acción no es correcta"
       }
-    }
+    },
+    "questionTypes": [
+      "visual",
+      "list",
+      "calculation"
+    ]
   },
   {
     "id": "A-23",
@@ -1437,7 +1513,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Las transiciones de “prueba” y “error” no pueden ocurrir en un caso de prueba. Tampoco pueden ambas transiciones “terminadas”. Esto significa que necesitamos al menos tres casos de prueba para lograr la cobertura de transición. Por ejemplo: TC1: prueba, hecho TC2: ejecutar, error, hecho TC3: ejecutar, pausar, reanudar, pausar, hecho Así: a) No es correcto b) No es correcto c) No es correcto d) Es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "visual"
+    ]
   },
   {
     "id": "A-24",
@@ -1498,7 +1577,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. Para lograr el 100% de cobertura de sentencias, cada sentencia, incluidas las que tienen defectos, debe haber sido ejecutada y evaluada al menos una vez b) No es correcta. La cobertura depende de lo que se prueba, no del número de casos de prueba. Por ejemplo, para el código “if (x==0) y=1”, un caso de prueba (x=0) logra el 100% de cobertura de sentencias, pero dos casos de prueba (x=1) y (x=2) juntos logran solo el 50% de cobertura de sentencias c) No es correcto. Si hay un bucle en el código puede haber un número infinito de rutas posibles, por lo que no es posible ejecutar todas las rutas posibles en el código d) No es correcto. No es posible realizar pruebas exhaustivas (consulte la sección de los siete principios de las pruebas en el programa de estudios). Por ejemplo, para el código \"entrada x; imprime x\", cualquier prueba única con x arbitraria logra una cobertura de sentencias del 100%, pero cubre un valor de entrada"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-25",
@@ -1559,7 +1641,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. La ventaja fundamental de las técnicas de prueba de caja blanca es que durante las pruebas se tiene en cuenta toda la implementación del software. b) No es correcta. Las medidas de cobertura de caja blanca proporcionan una medida objetiva de la cobertura y proporcionan la información necesaria para permitir que se generen pruebas adicionales para aumentar esta cobertura c) No es correcto. Se pueden utilizar técnicas de prueba de caja blanca para realizar revisiones (pruebas estáticas) d) Es correcta. Ésta es la debilidad de las técnicas de prueba de caja blanca. No pueden identificar la implementación faltante porque se basan únicamente en la estructura del objeto de prueba, no en la especificación de requisitos."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-26",
@@ -1620,7 +1705,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. El concepto básico detrás de la predicción de errores es que el tester intenta adivinar qué errores pudo haber cometido el desarrollador y qué defectos puede haber en el objeto de prueba basándose en experiencias pasadas (y, a veces, checklists). b) No es correcto. Aunque un tester que fue desarrollador puede utilizar su experiencia personal para ayudarle a la hora de realizar predicción de errores, la técnica de prueba no se basa en conocimientos previos de desarrollo c) No es correcta. La predicción de errores no es una técnica de usabilidad para adivinar cómo los usuarios pueden fallar al interactuar con el objeto de prueba. d) No es correcta. Duplicar la tarea de desarrollo tiene varios defectos que la hacen poco práctica, como que el tester tiene habilidades equivalentes a las del desarrollador y el tiempo necesario para realizar el desarrollo. No es predicción de errores"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-27",
@@ -1681,7 +1769,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Este es un producto nuevo. Probablemente aún no tenga un checklist y es posible que no se conozcan las condiciones de prueba debido a que faltan requisitos b) No es correcto. Este es un producto nuevo. Probablemente no tenga suficiente información para hacer conjeturas de error correctas c) Es correcto. Las pruebas exploratorias son más útil cuando hay pocas especificaciones conocidas y/o hay un cronograma apremiante para Las pruebas d) No son correcto. Las pruebas de ramas llevan mucho tiempo y su gerencia está preguntando sobre algunos resultados de las pruebas ahora. Además, pruebas de ramas no implica conocimiento del dominio."
       }
-    }
+    },
+    "questionTypes": [
+      "scenario"
+    ]
   },
   {
     "id": "A-28",
@@ -1742,7 +1833,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Las retrospectivas se utilizan para capturar lecciones aprendidas y mejorar el proceso de desarrollo y prueba, no para documentar los criterios de aceptación b) Es correcto. Esta es la forma estándar de documentar los criterios de aceptación. c) No es correcto. La comunicación verbal no permite documentar físicamente los criterios de aceptación como parte de una historia de usuario (aspecto “tarjeta” en el modelo 3C) d) No es correcto. Los criterios de aceptación están relacionados con una historia de usuario, no con un plan de prueba. Además, los criterios de aceptación son las condiciones que deben cumplirse para decidir si la historia del usuario está completa. Los riesgos no son tales condiciones."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-29",
@@ -1803,7 +1897,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. Esta prueba cubre dos criterios de aceptación: uno sobre editar el documento y otro sobre guardar cambios b) No es correcto. Los criterios de aceptación cubren las actividades del editor, no las actividades del propietario del contenido. c) No es correcto. Programar el contenido editado para su publicación puede ser una buena característica, pero no está cubierta por los criterios de aceptación d) No es correcto. Los criterios de aceptación establecen la reasignación de un editor al propietario del contenido, no a otro editor."
       }
-    }
+    },
+    "questionTypes": [
+      "list",
+      "scenario"
+    ]
   },
   {
     "id": "A-30",
@@ -1864,7 +1962,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Las prioridades para las historias de usuarios las determina el representante comercial junto con el equipo de desarrollo b) No es correcto. Los testers se centran tanto en los aspectos funcionales como en los no funcionales del sistema a probar. c) Es correcto. Según el plan de estudios, esta es una de las formas en que los testers agregan valor a la iteración y la planificación de lanzamientos d) No es correcto. El diseño de prueba temprano no forma parte de la planificación del lanzamiento. El diseño temprano de prueba no garantiza automáticamente el lanzamiento de software de calidad"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-31",
@@ -1934,7 +2035,10 @@
         "selector": "Selecciona DOS opciones.",
         "explanation": "a) No es correcto. la preparación del entorno de prueba es un criterio de disponibilidad de recursos; por tanto pertenece a los criterios de entrada b) No es correcto. Este es un criterio de disponibilidad de recursos; por tanto pertenece a los criterios de entrada c) Es correcto. La densidad estimada de defectos es una medida de diligencia; por tanto pertenece a los criterios de salida. d) No es correcto. Los requisitos traducidos a un formato determinado dan como resultado requisitos comprobables; por tanto pertenece a los criterios de entrada e) Es correcto. La automatización de Las pruebas de regresión son un criterio de finalización; por lo tanto pertenece a los criterios de salida"
       }
-    }
+    },
+    "questionTypes": [
+      "multiple-response"
+    ]
   },
   {
     "id": "A-32",
@@ -1995,7 +2099,12 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "En la técnica de estimación de tres puntos: E = (optimista + 4*más probable + pesimista)/6 E = (2+(4*11)+14)/6 = 10 Así: a) No es correcto b) No es correcto c) No es correcto d) Es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "list",
+      "scenario",
+      "calculation"
+    ]
   },
   {
     "id": "A-33",
@@ -2063,7 +2172,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "La prueba TC 001 debe ser primero, seguida por la TC 002, para satisfacer las dependencias. Luego, TC 003 para satisfacer prioridad y luego TC 004, seguido por TC 005. Así: a) Es correcto b) No es correcto c) No es correcto d) No es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "visual",
+      "scenario"
+    ]
   },
   {
     "id": "A-34",
@@ -2124,7 +2237,12 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Considerando: • Las pruebas de usabilidad están en Q3 (1 – C) • las pruebas de componentes están en Q1 (2 – A) • las pruebas funcionales están en Q2 (3 – B) • Las pruebas de confiabilidad están en Q4 (4 – D) Así: a) son correcto b) No es correcto c) No es correcto d) No es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "list",
+      "matching",
+      "scenario"
+    ]
   },
   {
     "id": "A-35",
@@ -2185,7 +2303,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. No aceptamos el riesgo; se proponen acciones concretas b) No es correcto. No se proponen planes de contingencia c) Es correcto. Las acciones propuestas están relacionadas con pruebas, que es una forma de mitigación de riesgos d) No es correcta. El riesgo no se transfiere sino que se mitiga"
       }
-    }
+    },
+    "questionTypes": [
+      "list"
+    ]
   },
   {
     "id": "A-36",
@@ -2246,7 +2367,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Los criterios de aceptación son las condiciones utilizadas para decidir si la historia de usuario está lista. No pueden mostrar avances en el trabajo b) No es correcto. informes de defectos informar sobre los defectos. No muestran avances de trabajo c) No es correcto. El informe de finalización de la prueba se puede crear después de finalizar la iteración, por lo que no mostrará el progreso continuamente dentro de una iteración d) Es correcto. Los gráficos de evolución son una representación gráfica del trabajo que queda por hacer en comparación con el tiempo restante. Se actualizan diariamente, para que puedan mostrar continuamente el avance del trabajo."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-37",
@@ -2307,7 +2431,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. La trazabilidad es la relación entre dos o más productos de trabajo, no entre diferentes versiones de un mismo producto de trabajo b) No es correcta. Las pruebas de mantenimiento consisten en probar cambios; no está estrechamente relacionado con el control de versiones c) Es correcto. Para soportar las pruebas, la gestión de la configuración puede implicar el control de versiones de todos los elementos de la prueba d) No es correcta. La ingeniería de requisitos es la obtención, documentación y gestión de requisitos; no está estrechamente relacionado con el control de versiones del script de prueba"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-38",
@@ -2368,7 +2495,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. El resultado esperado es \"la aplicación debería aceptar la entrada proporcionada y crear el usuario\". El resultado real es \"La aplicación se cuelga después de ingresar\" Entrada de prueba. $ä””. b) No es correcto. Se hace referencia al caso de prueba y al requisito correspondiente y se dice que se rechaza el defecto. Además, el estado del defecto no sería de mucha ayuda para los desarrolladores c) Es correcto. No sabemos en qué entorno de prueba se detectó la anomalía, y tampoco sabemos qué aplicación (y su versión) está afectada d) No es correcta. El informe de defectos establece que la anomalía es urgente, que es un problema global (es decir, muchas, si no todas, las cuentas de administración de pruebas se ven afectadas) y afirma que el impacto es alto para las partes interesadas del negocio."
       }
-    }
+    },
+    "questionTypes": [
+      "list"
+    ]
   },
   {
     "id": "A-39",
@@ -2429,7 +2559,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. El seguimiento de la prueba implica la verificación continua de todas las actividades y la comparación del progreso real con el plan de prueba. El control de la prueba implica tomar las acciones necesarias para cumplir con los objetivos de prueba del plan de prueba. No se preparan datos de prueba durante estas actividades. b) No es correcto. El análisis de prueba incluye el análisis de la base de prueba para identificar las condiciones de prueba y priorizarlas. Durante esta actividad no se preparan datos de prueba. c) Es correcto. El diseño de prueba y la implementación pueden incluir la identificación, creación o adquisición del software de prueba necesario para la ejecución de la prueba (por ejemplo, datos de prueba). d) No es correcto. Las actividades de finalización de la prueba ocurren en los hitos del proyecto (por ejemplo, lanzamiento, fin de iteración, finalización del nivel de prueba), por lo que es demasiado tarde para preparar los datos de prueba."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "A-40",
@@ -2490,6 +2623,9 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. automatización de pruebas no introduce regresiones desconocidas en producción b) Es correcta. La asignación incorrecta de esfuerzos para mantener el software de prueba es un riesgo c) No es correcta. Las herramientas de prueba deben seleccionarse de manera que se pueda confiar en ellas y en su software de prueba d) No es correcto. El objetivo principal de la automatización de pruebas es reducir las pruebas manuales. Entonces, esto es un beneficio, no un riesgo."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   }
 ]

@@ -83,16 +83,16 @@ test("primary navigation is visible and operable from the keyboard", async ({ pa
   await page.goto("/");
   const navigation = page.getByRole("navigation", { name: "Modes" });
   const homeLink = navigation.getByRole("link", { name: "Home" });
-  const practiceLink = navigation.getByRole("link", { name: "Practice" });
+  const metricsLink = navigation.getByRole("link", { name: "Metrics" });
 
   await page.keyboard.press("Tab");
   await expect(homeLink).toBeFocused();
   const outlineWidth = await homeLink.evaluate((element) => Number.parseFloat(getComputedStyle(element).outlineWidth));
   expect(outlineWidth).toBeGreaterThanOrEqual(2);
   await page.keyboard.press("Tab");
-  await expect(practiceLink).toBeFocused();
+  await expect(metricsLink).toBeFocused();
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/#\/practice$/);
+  await expect(page).toHaveURL(/#\/metrics$/);
 });
 
 test("reduced motion disables interface transitions", async ({ page }) => {
@@ -111,7 +111,7 @@ test("import and export report success and error without native alerts", async (
   await fileInput.setInputFiles({ name: "invalid.json", mimeType: "application/json", buffer: Buffer.from("{}") });
   await expect(page.getByRole("alert")).toContainText("CTFL v4");
 
-  const validProgress = await page.evaluate(() => window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "");
+  const validProgress = await page.evaluate(() => window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "");
   await fileInput.setInputFiles({ name: "progress.json", mimeType: "application/json", buffer: Buffer.from(validProgress) });
   await expect(page.getByRole("status")).toHaveText("Progress imported successfully.");
 
@@ -151,8 +151,8 @@ for (const theme of ["light", "dark"] as const) {
       }
     }
     expect(await contrastRatio(page, ".workspace-header h2", ":root")).toBeGreaterThanOrEqual(4.5);
-    expect(await contrastRatio(page, ".dashboard-section .eyebrow", ".dashboard-section")).toBeGreaterThanOrEqual(4.5);
-    expect(await contrastRatio(page, ".dashboard-note", ".dashboard-section")).toBeGreaterThanOrEqual(4.5);
+    expect(await contrastRatio(page, ".dashboard-section .dashboard-section-title", ".dashboard-section")).toBeGreaterThanOrEqual(4.5);
+    expect(await contrastRatio(page, ".dashboard-breakdown-copy span", ".dashboard-section")).toBeGreaterThanOrEqual(4.5);
     expect(await contrastRatio(page, ".primary", ".primary")).toBeGreaterThanOrEqual(4.5);
   });
 }

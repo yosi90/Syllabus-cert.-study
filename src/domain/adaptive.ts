@@ -325,6 +325,25 @@ export function createReinforcementQuestionIds(
   return selected.map((candidate) => candidate.question.id);
 }
 
+export function createScopedReinforcementQuestionIds(
+  questions: Question[],
+  progress: ProgressState,
+  requestedSize: number,
+  seed: string,
+  now = Date.now(),
+) {
+  const ranked = questions
+    .map((question) => ({
+      question,
+      priority: reinforcementPriority(question, progress, now),
+      tieBreaker: hashSeed(`${seed}:${question.id}`),
+    }))
+    .sort((left, right) => right.priority - left.priority || left.tieBreaker - right.tieBreaker);
+  const target = Math.min(requestedSize, ranked.length);
+  return selectWithChapterFallback(ranked, target, 0.5)
+    .map((candidate) => candidate.question.id);
+}
+
 export function recommendAdaptiveChapter(questions: Question[], answers: AnswerMap) {
   const misses = new Map<string, number>();
   for (const question of questions) {

@@ -57,11 +57,11 @@ test("practice, graphics and progress remain usable offline", async ({ page, con
   await page.getByRole("button", { name: "Check" }).click();
   await expect(page.locator(".feedback")).toBeVisible();
   await expect.poll(() => page.evaluate(() => {
-    const raw = window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "";
+    const raw = window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "";
     const parsed = raw ? JSON.parse(raw) : null;
     return parsed?.questionProgress?.["A-01"]?.attempts ?? 0;
   })).toBe(1);
-  const exportedProgress = await page.evaluate(() => window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "");
+  const exportedProgress = await page.evaluate(() => window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "");
 
   await context.setOffline(true);
   await expect(page.getByText("Offline", { exact: true })).toBeVisible();

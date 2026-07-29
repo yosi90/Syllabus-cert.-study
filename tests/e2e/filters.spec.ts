@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 test("status uses square multi-select checkboxes with OR semantics", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "The shared filter behavior only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (!progress) return;
     progress.questionProgress = {

@@ -16,6 +16,7 @@ function question(id: string): Question {
     options: [{ key: "a", text: "A" }],
     correctAnswers: ["a"],
     selectionMode: "single",
+    questionTypes: ["simple"],
     selector: "Select ONE option.",
     explanation: "",
     notes: [],

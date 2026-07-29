@@ -19,6 +19,7 @@ const baseQuestion: Question = {
   ],
   correctAnswers: ["b"],
   selectionMode: "single",
+  questionTypes: ["simple"],
   selector: "Seleccionar UNA opcion.",
   explanation: "Explicacion",
   notes: [],

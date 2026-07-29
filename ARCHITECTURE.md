@@ -5,14 +5,14 @@ La aplicación se organiza por responsabilidad. `App.tsx` compone rutas, conecta
 ## Estructura
 
 - `src/app/`: contratos de interfaz, textos bilingües y utilidades puras de presentación.
-- `src/views/`: una vista por ruta (`StudyView`, `ExamView` y `ReviewView`). Reciben datos y callbacks tipados; no acceden directamente a `localStorage`.
+- `src/views/`: una vista por ruta (`HomeView`, `MetricsView`, `StudyView`, `ExamView` y `ReviewView`). Reciben datos y callbacks tipados; no acceden directamente a `localStorage`.
 - `src/components/common/`: piezas reutilizables, tutorial, métricas y diálogos.
 - `src/components/navigation/`: navegación lateral y móvil.
 - `src/components/sidebar/`: filtros y acciones secundarias.
 - `src/components/questions/`: tarjeta, gráficos, explicación, teoría y raíles de preguntas.
 - `src/hooks/`: integración React con persistencia, tema y restauración de ruta.
 - `src/hooks/useSpeechSynthesis.ts`: mejora progresiva de lectura; concentra detección, voz activa y cancelación sin persistir estado.
-- `src/domain/`: reglas puras de filtrado, puntuación, opciones y generación de simulacros.
+- `src/domain/`: reglas puras de filtrado, puntuación, opciones, métricas de aprendizaje, recomendaciones y generación de simulacros.
 - `src/storage/`: esquema, migración, importación y exportación del progreso.
 - `src/data/`: banco maestro, tipos y fragmentos derivados por modelo. `question-bank.json` es la única fuente editable; `npm run prepare:data` regenera `generated/` automáticamente.
 - `public/icons/` y `vite.config.ts`: identidad instalable, manifest y precaché PWA; `PwaStatus` concentra los avisos de conexión y actualización.
@@ -32,9 +32,11 @@ La aplicación se organiza por responsabilidad. `App.tsx` compone rutas, conecta
 11. Los archivos de `src/data/generated/` no se editan a mano. Cualquier corrección se hace en `question-bank.json` y se propaga con `npm run prepare:data`; desarrollo, unitarias y compilación ejecutan este paso previamente.
 12. Las fórmulas se modelan mediante `promptParts` localizados, con LaTeX y una descripción hablada obligatoria; la pregunta conserva `prompt` como fallback y texto de búsqueda.
 13. Los controles de voz solo se muestran si el navegador ofrece Speech Synthesis, y deben cancelar cualquier locución al cambiar de pregunta, idioma o ruta.
+14. Cada pregunta declara uno o varios `questionTypes`; `simple` es exclusivo y el resto de tipos puede solaparse. El script `classify-question-types.ts` ayuda a mantener la clasificación y `validate:data` verifica su consistencia.
+15. Las métricas se calculan en `src/domain/metrics.ts` a partir de intentos inmutables. La vista puede filtrar estudio y simulacro, pero no modifica el historial ni duplica reglas estadísticas.
 
 ## Flujo de estado
 
-`AppShell` mantiene el estado de la sesión activa y entrega props a las vistas. `useTrainerProgress` carga y guarda el documento v2; `useWorkspacePersistence` sincroniza preferencias, práctica, simulacro y revisión; `usePersistentTheme` y `useLastRouteRestoration` aíslan sus respectivos efectos de navegador.
+`AppShell` mantiene el estado de la sesión activa y entrega props a las vistas. `useTrainerProgress` carga y guarda el documento v3, migra v1/v2 y conserva hasta 5000 eventos en `attemptHistory`; `useWorkspacePersistence` sincroniza preferencias, práctica, simulacro, métricas y revisión; `usePersistentTheme` y `useLastRouteRestoration` aíslan sus respectivos efectos de navegador.
 
 Antes de cerrar un cambio estructural se ejecuta `npm run validate`. Los selectores y nombres accesibles existentes se consideran contratos de las pruebas E2E.

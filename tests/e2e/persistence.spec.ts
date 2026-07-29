@@ -52,7 +52,7 @@ test("each sidebar panel preserves its open state independently", async ({ page 
   await expect(filtersPanel).not.toHaveAttribute("open", "");
   await expect(progressPanel).toHaveAttribute("open", "");
   await expect.poll(() => page.evaluate(() =>
-    JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null")
+    JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "null")
       ?.preferences.filtersPanelOpen,
   )).toBe(false);
 
@@ -67,7 +67,7 @@ test("each sidebar panel preserves its open state independently", async ({ page 
   await expect(progressPanel).not.toHaveAttribute("open", "");
   await expect.poll(() => page.evaluate(() => {
     const preferences = JSON.parse(
-      window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null",
+      window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "null",
     )?.preferences;
     return [preferences?.filtersPanelOpen, preferences?.progressPanelOpen];
   })).toEqual([true, false]);
@@ -99,7 +99,7 @@ test("an exam whose timer expired while closed is restored as time up", async ({
   await page.goto("/#/exam");
   await page.getByRole("button", { name: /Model A/ }).click();
   await page.evaluate(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     progress.activeExam.endsAt = Date.now() - 1_000;
     progress.activeExam.timerMode = "standard";
@@ -119,7 +119,7 @@ test("the last route is restored when reopening the application root", async ({ 
   await page.goto("/#/review");
   await expect(page.getByRole("heading", { name: "Recent history" })).toBeVisible();
   await expect.poll(async () => {
-    return page.evaluate(() => JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null")?.preferences.lastRoute);
+    return page.evaluate(() => JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "null")?.preferences.lastRoute);
   }).toBe("/review");
 
   await page.goto("/");

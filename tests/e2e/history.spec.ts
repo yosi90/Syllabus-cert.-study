@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
   await prepareApp(page);
   await page.addInitScript(({ ids }) => {
     if (window.localStorage.getItem("ctfl-history-fixture") === "ready") return;
-    const raw = window.localStorage.getItem("istqb-ctfl-v4-trainer:v2");
+    const raw = window.localStorage.getItem("istqb-ctfl-v4-trainer:v3");
     if (!raw) return;
     const progress = JSON.parse(raw);
     progress.sessions = [
@@ -33,7 +33,7 @@ test.beforeEach(async ({ page }) => {
       },
     ];
     progress.review = { sessionId: null };
-    window.localStorage.setItem("istqb-ctfl-v4-trainer:v2", JSON.stringify(progress));
+    window.localStorage.setItem("istqb-ctfl-v4-trainer:v3", JSON.stringify(progress));
     window.localStorage.setItem("ctfl-history-fixture", "ready");
   }, { ids: questionIds });
 });

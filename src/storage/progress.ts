@@ -2,9 +2,37 @@ import type { KLevel, SourceModel } from "../data/types";
 import type { AnswerMap, SessionScore } from "../domain/scoring";
 import type { OptionMode } from "../domain/options";
 
-export const STORAGE_KEY = "istqb-ctfl-v4-trainer:v2";
+export const STORAGE_KEY = "istqb-ctfl-v4-trainer:v3";
+export const PREVIOUS_STORAGE_KEY = "istqb-ctfl-v4-trainer:v2";
 export const LEGACY_STORAGE_KEY = "istqb-ctfl-v4-trainer:v1";
 export const UNKNOWN_ACTIVE_TIME_MS = ((999 * 60) + 59) * 1_000;
+export const MAX_ATTEMPT_HISTORY = 5_000;
+
+export type AttemptContext =
+  | "question-bank"
+  | "adaptive-study"
+  | "reinforcement-study"
+  | "official-exam"
+  | "random-exam";
+
+export type AttemptEvent = {
+  id: string;
+  questionId: string;
+  answeredAt: string;
+  attemptNumber: number;
+  selectedAnswers: string[];
+  isCorrect: boolean;
+  activeMs: number | null;
+  context: AttemptContext;
+  sessionId: string | null;
+  bankVersion: string;
+};
+
+export type AttemptMetadata = {
+  context: AttemptContext;
+  sessionId?: string | null;
+  bankVersion?: string;
+};
 
 export type QuestionProgress = {
   attempts: number;
@@ -54,13 +82,14 @@ export type PersistedExam = {
   endsAt: number | null;
   optionMode: "original";
   questionActiveMs?: Record<string, number>;
+  questionAnsweredAt?: Record<string, string>;
   timerSessionId?: string;
 };
 
 export type PersistedStudySession = {
   id: string;
   title: string;
-  size: 10 | 20;
+  size: number;
   seed: string;
   optionMode: "shuffled";
   optionSeed: string;
@@ -75,9 +104,11 @@ export type PersistedStudySession = {
 };
 
 export type ProgressState = {
-  version: 2;
+  version: 3;
   certification: "ctfl-v4";
   timingBackfillCompleted: boolean;
+  trackingStartedAt: string;
+  attemptHistory: AttemptEvent[];
   questionProgress: Record<string, QuestionProgress>;
   sessions: StoredSession[];
   preferences: {
@@ -86,7 +117,7 @@ export type ProgressState = {
     tutorialCompletedAt: string | null;
     language: "en" | "es" | null;
     theme: "light" | "dark" | null;
-    lastRoute: "/" | "/practice" | "/exam" | "/review";
+    lastRoute: "/" | "/metrics" | "/practice" | "/exam" | "/review";
     filtersPanelOpen: boolean;
     progressPanelOpen: boolean;
   };
@@ -115,6 +146,10 @@ type LegacyProgressState = {
   };
 };
 
+type PreviousProgressState = Omit<ProgressState, "version" | "trackingStartedAt" | "attemptHistory"> & {
+  version: 2;
+};
+
 export type StorageLike = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 
 const emptyFilters: StoredFilters = {
@@ -126,11 +161,13 @@ const emptyFilters: StoredFilters = {
   status: [],
 };
 
-export function createEmptyProgress(): ProgressState {
+export function createEmptyProgress(now = new Date().toISOString()): ProgressState {
   return {
-    version: 2,
+    version: 3,
     certification: "ctfl-v4",
     timingBackfillCompleted: true,
+    trackingStartedAt: now,
+    attemptHistory: [],
     questionProgress: {},
     sessions: [],
     preferences: {
@@ -172,6 +209,17 @@ function isLegacyProgressState(value: unknown): value is LegacyProgressState {
 }
 
 function isProgressState(value: unknown): value is ProgressState {
+  if (!isObject(value)) return false;
+  return (
+    value.version === 3 &&
+    value.certification === "ctfl-v4" &&
+    isObject(value.questionProgress) &&
+    Array.isArray(value.attemptHistory) &&
+    Array.isArray(value.sessions)
+  );
+}
+
+function isPreviousProgressState(value: unknown): value is PreviousProgressState {
   if (!isObject(value)) return false;
   return (
     value.version === 2 &&
@@ -230,15 +278,59 @@ function normalizeActiveStudySession(value: Record<string, unknown>): PersistedS
   };
 }
 
+const attemptContexts: AttemptContext[] = [
+  "question-bank",
+  "adaptive-study",
+  "reinforcement-study",
+  "official-exam",
+  "random-exam",
+];
+
+function normalizeAttemptEvent(value: unknown): AttemptEvent | null {
+  if (!isObject(value)) return null;
+  if (
+    typeof value.id !== "string"
+    || typeof value.questionId !== "string"
+    || typeof value.answeredAt !== "string"
+    || typeof value.isCorrect !== "boolean"
+    || !Array.isArray(value.selectedAnswers)
+    || !attemptContexts.includes(value.context as AttemptContext)
+  ) return null;
+  const activeMs = typeof value.activeMs === "number" && Number.isFinite(value.activeMs)
+    ? Math.max(0, Math.round(value.activeMs))
+    : null;
+  return {
+    id: value.id,
+    questionId: value.questionId,
+    answeredAt: value.answeredAt,
+    attemptNumber: typeof value.attemptNumber === "number" && Number.isFinite(value.attemptNumber)
+      ? Math.max(1, Math.round(value.attemptNumber))
+      : 1,
+    selectedAnswers: value.selectedAnswers.filter((answer): answer is string => typeof answer === "string"),
+    isCorrect: value.isCorrect,
+    activeMs,
+    context: value.context as AttemptContext,
+    sessionId: typeof value.sessionId === "string" ? value.sessionId : null,
+    bankVersion: typeof value.bankVersion === "string" ? value.bankVersion : "ctfl-v4",
+  };
+}
+
 function normalizeProgress(value: ProgressState): ProgressState {
   const defaults = createEmptyProgress();
   const preferences = value.preferences ?? defaults.preferences;
   const study = value.study ?? defaults.study;
   const shouldBackfillTiming = value.timingBackfillCompleted !== true;
   return {
-    version: 2,
+    version: 3,
     certification: "ctfl-v4",
     timingBackfillCompleted: true,
+    trackingStartedAt: typeof value.trackingStartedAt === "string"
+      ? value.trackingStartedAt
+      : defaults.trackingStartedAt,
+    attemptHistory: (Array.isArray(value.attemptHistory) ? value.attemptHistory : [])
+      .map(normalizeAttemptEvent)
+      .filter((event): event is AttemptEvent => event !== null)
+      .slice(-MAX_ATTEMPT_HISTORY),
     questionProgress: Object.fromEntries(
       Object.entries(value.questionProgress ?? {}).map(([questionId, item]) => {
         const totalActiveMs = Number.isFinite(item.totalActiveMs) ? Math.max(0, item.totalActiveMs ?? 0) : 0;
@@ -274,7 +366,7 @@ function normalizeProgress(value: ProgressState): ProgressState {
       tutorialCompletedAt: preferences.tutorialCompletedAt ?? null,
       language: preferences.language === "en" || preferences.language === "es" ? preferences.language : null,
       theme: preferences.theme === "light" || preferences.theme === "dark" ? preferences.theme : null,
-      lastRoute: ["/", "/practice", "/exam", "/review"].includes(preferences.lastRoute) ? preferences.lastRoute : "/",
+      lastRoute: ["/", "/metrics", "/practice", "/exam", "/review"].includes(preferences.lastRoute) ? preferences.lastRoute : "/",
       filtersPanelOpen: preferences.filtersPanelOpen !== false,
       progressPanelOpen: preferences.progressPanelOpen !== false,
     },
@@ -294,6 +386,9 @@ function normalizeProgress(value: ProgressState): ProgressState {
           ...(isObject(value.activeExam.questionActiveMs)
             ? { questionActiveMs: Object.fromEntries(Object.entries(value.activeExam.questionActiveMs).filter((entry): entry is [string, number] => typeof entry[1] === "number" && Number.isFinite(entry[1]))) }
             : {}),
+          ...(isObject(value.activeExam.questionAnsweredAt)
+            ? { questionAnsweredAt: Object.fromEntries(Object.entries(value.activeExam.questionAnsweredAt).filter((entry): entry is [string, string] => typeof entry[1] === "string")) }
+            : {}),
         }
       : null,
     activeStudySession: isObject(value.activeStudySession)
@@ -303,6 +398,16 @@ function normalizeProgress(value: ProgressState): ProgressState {
       sessionId: typeof value.review?.sessionId === "string" ? value.review.sessionId : null,
     },
   };
+}
+
+function migratePreviousProgress(value: PreviousProgressState): ProgressState {
+  const migrated = createEmptyProgress();
+  return normalizeProgress({
+    ...value,
+    version: 3,
+    trackingStartedAt: migrated.trackingStartedAt,
+    attemptHistory: [],
+  });
 }
 
 function migrateLegacyProgress(value: LegacyProgressState): ProgressState {
@@ -324,6 +429,7 @@ function migrateLegacyProgress(value: LegacyProgressState): ProgressState {
 function parseProgress(raw: string): ProgressState | null {
   const parsed: unknown = JSON.parse(raw);
   if (isProgressState(parsed)) return normalizeProgress(parsed);
+  if (isPreviousProgressState(parsed)) return migratePreviousProgress(parsed);
   if (isLegacyProgressState(parsed)) return migrateLegacyProgress(parsed);
   return null;
 }
@@ -332,6 +438,14 @@ export function loadProgress(storage: StorageLike = window.localStorage): Progre
   try {
     const currentRaw = storage.getItem(STORAGE_KEY);
     if (currentRaw) return parseProgress(currentRaw) ?? createEmptyProgress();
+
+    const previousRaw = storage.getItem(PREVIOUS_STORAGE_KEY);
+    if (previousRaw) {
+      const migrated = parseProgress(previousRaw);
+      if (!migrated) return createEmptyProgress();
+      storage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+      return migrated;
+    }
 
     const legacyRaw = storage.getItem(LEGACY_STORAGE_KEY);
     if (!legacyRaw) return createEmptyProgress();
@@ -350,6 +464,7 @@ export function saveProgress(progress: ProgressState, storage: StorageLike = win
 
 export function clearProgress(storage: StorageLike = window.localStorage): ProgressState {
   storage.removeItem(STORAGE_KEY);
+  storage.removeItem(PREVIOUS_STORAGE_KEY);
   storage.removeItem(LEGACY_STORAGE_KEY);
   return createEmptyProgress();
 }
@@ -361,7 +476,9 @@ export function recordQuestionAttempt(
   isCorrect: boolean,
   now = new Date().toISOString(),
   activeMs?: number,
+  metadata: AttemptMetadata = { context: "question-bank" },
 ): ProgressState {
+  if (selectedAnswers.length === 0) return progress;
   const previous = progress.questionProgress[questionId];
   const measuredActiveMs = typeof activeMs === "number" && Number.isFinite(activeMs)
     ? Math.max(0, Math.round(activeMs))
@@ -370,12 +487,26 @@ export function recordQuestionAttempt(
     && previous.lastActiveMs === UNKNOWN_ACTIVE_TIME_MS
     && previous.timedAttempts === 1;
   const replacesUnknownActiveTime = hasUnknownActiveTime && measuredActiveMs !== null;
+  const attemptNumber = (previous?.attempts ?? 0) + 1;
+  const attemptEvent: AttemptEvent = {
+    id: `${now}:${questionId}:${attemptNumber}`,
+    questionId,
+    answeredAt: now,
+    attemptNumber,
+    selectedAnswers: Array.from(new Set(selectedAnswers)).sort(),
+    isCorrect,
+    activeMs: measuredActiveMs,
+    context: metadata.context,
+    sessionId: metadata.sessionId ?? null,
+    bankVersion: metadata.bankVersion ?? "ctfl-v4",
+  };
   return {
     ...progress,
+    attemptHistory: [...progress.attemptHistory, attemptEvent].slice(-MAX_ATTEMPT_HISTORY),
     questionProgress: {
       ...progress.questionProgress,
       [questionId]: {
-        attempts: (previous?.attempts ?? 0) + 1,
+        attempts: attemptNumber,
         correct: (previous?.correct ?? 0) + (isCorrect ? 1 : 0),
         lastCorrect: isCorrect,
         flagged: previous?.flagged ?? false,

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { Menu, Moon, X } from "lucide-react";
 import { HashRouter, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { chapters, examRules, questionBank, questions } from "./data/bank";
@@ -6,7 +6,8 @@ import type { Question, SourceModel } from "./data/types";
 import { createModelExam, createRandomExam, findQuestionsByIds, type ExamBlueprint } from "./domain/exams";
 import { emptyFilters, filterQuestions, summarizeProgress, type QuestionFilters } from "./domain/filters";
 import { summarizeStudyDashboard } from "./domain/dashboard";
-import { createAdaptiveQuestionIds, createReinforcementQuestionIds } from "./domain/adaptive";
+import { createAdaptiveQuestionIds, createReinforcementQuestionIds, createScopedReinforcementQuestionIds } from "./domain/adaptive";
+import { summarizeLearningMetrics, type MetricsOrigin } from "./domain/metrics";
 import { isCorrectAnswer, scoreQuestions, toggleAnswer, type AnswerMap } from "./domain/scoring";
 import {
   addSession,
@@ -54,6 +55,7 @@ import { ExamView } from "./views/ExamView";
 import { ReviewView } from "./views/ReviewView";
 import { StudyView } from "./views/StudyView";
 import { HomeView } from "./views/HomeView";
+import type { ReviewScope } from "./views/MetricsView";
 import {
   useLastRouteRestoration,
   usePersistentTheme,
@@ -62,6 +64,9 @@ import {
 } from "./hooks/useTrainerPersistence";
 import { useModalAccessibility } from "./hooks/useModalAccessibility";
 import { useActiveQuestionTimer } from "./hooks/useActiveQuestionTimer";
+
+const MetricsView = lazy(() =>
+  import("./views/MetricsView").then((module) => ({ default: module.MetricsView })));
 
 function AppShell() {
   const navigate = useNavigate();
@@ -92,6 +97,7 @@ function AppShell() {
   const [pendingConfirmation, setPendingConfirmation] = useState<"cancel-exam" | "reset-progress" | null>(null);
   const [flagResolutionQuestionId, setFlagResolutionQuestionId] = useState<string | null>(null);
   const [tutorialStep, setTutorialStep] = useState(0);
+  const [metricsOrigin, setMetricsOrigin] = useState<MetricsOrigin>("all");
   const menuRef = useModalAccessibility<HTMLElement>(isMenuOpen, () => setIsMenuOpen(false));
   useLastRouteRestoration(location.pathname, progress.preferences.lastRoute, navigate);
 
@@ -123,6 +129,10 @@ function AppShell() {
   );
   const progressSummary = useMemo(() => summarizeProgress(questions, progress), [progress]);
   const dashboard = useMemo(() => summarizeStudyDashboard(questions, chapters, progress), [progress]);
+  const learningMetrics = useMemo(
+    () => summarizeLearningMetrics(questions, chapters, progress, metricsOrigin, now, language),
+    [language, metricsOrigin, now, progress],
+  );
   const references = useMemo(() => Array.from(new Set(questions.map((question) => question.reference))).sort(), []);
   const tutorialTarget = progress.preferences.tutorialCompleted ? undefined : tutorialSteps[tutorialStep]?.target;
   const storedStudyIndex = studyQuestions.findIndex((question) => question.id === studyQuestionId);
@@ -216,7 +226,23 @@ function AppShell() {
     const activeMs = finishQuestionTimer(question.id);
     const previous = progress.questionProgress[question.id];
     const shouldOfferFlagResolution = correct && Boolean(previous?.flagged) && !previous?.flaggedCorrectPrompted;
-    let nextProgress = recordQuestionAttempt(progress, question.id, selected, correct, new Date().toISOString(), activeMs);
+    let nextProgress = recordQuestionAttempt(
+      progress,
+      question.id,
+      selected,
+      correct,
+      new Date().toISOString(),
+      activeMs,
+      {
+        context: currentStudySession?.studyMode === "reinforcement"
+          ? "reinforcement-study"
+          : currentStudySession
+            ? "adaptive-study"
+            : "question-bank",
+        sessionId: currentStudySession?.id ?? null,
+        bankVersion: questionBank.metadata.version,
+      },
+    );
     if (shouldOfferFlagResolution) {
       nextProgress = markFlaggedCorrectPrompted(nextProgress, question.id);
       setFlagResolutionQuestionId(question.id);
@@ -305,6 +331,7 @@ function AppShell() {
       endsAt: duration ? Date.now() + duration * 60 * 1000 : null,
       optionMode: "original",
       questionActiveMs: {},
+      questionAnsweredAt: {},
       timerSessionId: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
     });
     setReview(null);
@@ -324,6 +351,9 @@ function AppShell() {
     setActiveExam({
       ...activeExam,
       answers: { ...activeExam.answers, [question.id]: nextAnswers },
+      questionAnsweredAt: nextAnswers.length > 0
+        ? { ...activeExam.questionAnsweredAt, [question.id]: new Date().toISOString() }
+        : Object.fromEntries(Object.entries(activeExam.questionAnsweredAt ?? {}).filter(([id]) => id !== question.id)),
       questionActiveMs: activeMs === undefined
         ? activeExam.questionActiveMs ?? {}
         : { ...activeExam.questionActiveMs, [question.id]: activeMs },
@@ -345,6 +375,8 @@ function AppShell() {
     const examQuestions = findQuestionsByIds(questions, activeExam.blueprint.questionIds);
     const score = scoreQuestions(examQuestions, activeExam.answers, examRules);
     let nextProgress = progress;
+    const completedAt = new Date().toISOString();
+    const sessionId = `${activeExam.blueprint.id}-${Date.now()}`;
 
     for (const result of score.results) {
       nextProgress = recordQuestionAttempt(
@@ -352,14 +384,19 @@ function AppShell() {
         result.questionId,
         result.selectedAnswers,
         result.isCorrect,
-        new Date().toISOString(),
+        activeExam.questionAnsweredAt?.[result.questionId] ?? completedAt,
         activeExam.questionActiveMs?.[result.questionId],
+        {
+          context: activeExam.blueprint.id.startsWith("model-") ? "official-exam" : "random-exam",
+          sessionId,
+          bankVersion: questionBank.metadata.version,
+        },
       );
     }
 
     const { results: _results, ...scoreSummary } = score;
     const session: StoredSession = {
-      id: `${activeExam.blueprint.id}-${Date.now()}`,
+      id: sessionId,
       title: activeExam.blueprint.title,
       mode: "exam",
       sessionType: activeExam.blueprint.id.startsWith("model-") ? "official" : "random",
@@ -371,7 +408,7 @@ function AppShell() {
       questionIds: activeExam.blueprint.questionIds,
       answers: activeExam.answers,
       score: scoreSummary,
-      completedAt: new Date().toISOString(),
+      completedAt,
     };
 
     updateProgress(addSession(nextProgress, session));
@@ -483,6 +520,49 @@ function AppShell() {
       startedAt: new Date().toISOString(),
       studyMode: mode,
     });
+    navigate("/practice");
+  }
+
+  function startScopedReview(scope: ReviewScope, requestedSize: number) {
+    const scopedQuestions = questions.filter((question) =>
+      scope.dimension === "chapter"
+        ? question.chapter === scope.id
+        : scope.dimension === "kLevel"
+          ? question.kLevel === scope.id
+          : question.questionTypes.includes(scope.id as Question["questionTypes"][number]));
+    const seed = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const questionIds = createScopedReinforcementQuestionIds(
+      scopedQuestions,
+      progress,
+      requestedSize,
+      seed,
+    );
+    if (!questionIds.length) return;
+    setActiveStudySession({
+      id: `reinforcement-${scope.dimension}-${scope.id}-${seed}`,
+      title: language === "es"
+        ? `Repaso · ${scope.id} · ${questionIds.length}`
+        : `Review · ${scope.id} · ${questionIds.length}`,
+      size: questionIds.length,
+      seed,
+      optionMode: "shuffled",
+      optionSeed: seed,
+      questionIds,
+      currentIndex: 0,
+      answers: {},
+      revealed: false,
+      checkedQuestionIds: [],
+      startedAt: new Date().toISOString(),
+      studyMode: "reinforcement",
+    });
+    navigate("/practice");
+  }
+
+  function exploreQuestionBank() {
+    setActiveStudySession((current) => current ? { ...current, paused: true } : current);
+    setFilters(emptyFilters);
+    setStudyQuestionId(questions[0]?.id ?? null);
+    setStudyRevealed(false);
     navigate("/practice");
   }
 
@@ -633,8 +713,24 @@ function AppShell() {
               onContinuePractice={handleContinuePractice}
               onContinueExam={() => navigate("/exam")}
               onOpenFlagged={handleOpenFlaggedQuestions}
+              onExploreQuestionBank={exploreQuestionBank}
               onLanguageChange={handleLanguageChange}
             />
+          }
+        />
+        <Route
+          path="/metrics"
+          element={
+            <Suspense fallback={<main className="workspace"><p role="status">{copy.metricsTitle}…</p></main>}>
+              <MetricsView
+                metrics={learningMetrics}
+                origin={metricsOrigin}
+                language={language}
+                copy={copy}
+                onOriginChange={setMetricsOrigin}
+                onStartReview={startScopedReview}
+              />
+            </Suspense>
           }
         />
         <Route

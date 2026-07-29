@@ -1,4 +1,4 @@
-import { BookOpen, House, RotateCcw, Timer } from "lucide-react";
+import { ChartNoAxesCombined, House, RotateCcw, Timer } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import type { Copy } from "../../app/content";
 import { classNames } from "../../app/presentation";
@@ -15,7 +15,7 @@ export function ModeNavigation({
   return (
     <nav className={classNames("mode-tabs", highlighted && "tutorial-highlight")} aria-label={copy.modesLabel}>
       <NavLink to="/" end onClick={onNavigate} data-initial-focus>{copy.home}</NavLink>
-      <NavLink to="/practice" onClick={onNavigate}>{copy.practice}</NavLink>
+      <NavLink to="/metrics" onClick={onNavigate}>{copy.metrics}</NavLink>
       <NavLink to="/exam" onClick={onNavigate}>{copy.exam}</NavLink>
       <NavLink to="/review" onClick={onNavigate}>{copy.review}</NavLink>
     </nav>
@@ -29,9 +29,9 @@ export function MobilePrimaryNavigation({ copy, onNavigate }: { copy: Copy; onNa
         <House aria-hidden="true" />
         <span>{copy.home}</span>
       </NavLink>
-      <NavLink to="/practice" onClick={onNavigate}>
-        <BookOpen aria-hidden="true" />
-        <span>{copy.practice}</span>
+      <NavLink to="/metrics" onClick={onNavigate}>
+        <ChartNoAxesCombined aria-hidden="true" />
+        <span>{copy.metrics}</span>
       </NavLink>
       <NavLink to="/exam" onClick={onNavigate}>
         <Timer aria-hidden="true" />

@@ -58,7 +58,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. A menudo es posible utilizar pruebas dinámicas para provocar que un objeto de prueba falle de maneras que los usuarios nunca podrían lograr, como mediante el uso de inyección de fallas. Sin embargo, si la falla nunca puede ocurrir con usuarios finales reales, entonces identificarla no es especialmente valiosa ya que las pruebas tienen como objetivo en última instancia mejorar el producto de trabajo para los usuarios finales. Dedicar tiempo a probar fallas que no pueden ocurrir con usuarios reales no es un uso eficiente del tiempo de un tester b) No es correcto. Los desarrolladores utilizan pruebas estáticas en forma de análisis estático para identificar defectos en su código antes de lo que se puede lograr mediante pruebas dinámicas. Tenga en cuenta, sin embargo, que las pruebas estáticas (y el análisis estático) se utilizan para detectar defectos, no fallas, que se encuentran mediante pruebas dinámicas. Por lo tanto, es el uso del término “fracasos” lo que hace que ésta sea una opción incorrecta. c) No es correcta. El análisis estático detecta directamente defectos en el código y normalmente esta es información para el desarrollador, no para el cliente. d) Es correcto. Las revisiones son una forma de pruebas estáticas que se pueden aplicar desde el comienzo del ciclo de vida de desarrollo de software y se utilizan para encontrar defectos que pueden eliminarse antes de que las actividades de desarrollo posteriores desperdicien esfuerzos en requisitos defectuosos. Si los defectos no se detectan y eliminan a tiempo, cuando el defecto se encuentre en productos derivados del trabajo, como el diseño y el código, será necesario cambiar los requisitos."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-02",
@@ -119,7 +122,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. El aseguramiento de la calidad se concentra en la mejora e implementación de procesos y utiliza un enfoque preventivo para evitar errores y defectos, mientras que las pruebas son una forma de control de calidad utilizada para detectar defectos. b) Es correcto. El control de calidad tiene como objetivo lograr niveles apropiados de calidad centrándose en identificar y corregir los defectos del producto. Las pruebas son una parte importante del control de calidad y ayudan a descubrir estos defectos. c) No es correcto. Aunque las pruebas son una parte importante del control de calidad y ayudan a descubrir defectos, otras técnicas (que no son pruebas) utilizadas en el control de calidad incluyen métodos formales como la verificación de modelos y la demostración de corrección, así como la simulación y la creación de prototipos. d) No es correcto. El aseguramiento de la calidad se concentra en la mejora e implementación de procesos y utiliza un enfoque preventivo para evitar errores y defectos, mientras que las pruebas son una forma de control de calidad utilizada para detectar defectos."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-03",
@@ -180,7 +186,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "El principio de “Las pruebas exhaustivas son imposibles” se refiere al hecho de que no son factible probar todas las variaciones posibles de los insumos en todas las circunstancias diferentes, excepto en casos triviales. En cambio, las pruebas utilizan técnicas de prueba, priorización de casos de prueba y pruebas basadas en riesgos para tomar muestras del conjunto de posibilidades y enfocar los esfuerzos de prueba. a) No es correcto. El principio establece que no es factible probarlo todo excepto en casos triviales. Probar todo requeriría probar cada variación posible de los insumos en todas las circunstancias diferentes, lo que generalmente es inviable ya que habrá un número prácticamente infinito de posibilidades. Probar todos los posibles resultados esperados no solucionará este problema ya que la relación entre las entradas y los resultados esperados puede ser diferente para cada objeto de prueba. A veces puede haber un número prácticamente infinito de posibles resultados esperados (por ejemplo, cuando hay varias variables que representan números reales), mientras que en otras ocasiones puede haber solo dos resultados esperados, como con una sola variable que puede ser verdadera o falsa b) No es correcto. El principio establece que no es factible probar todas las variaciones posibles de los insumos en todas las circunstancias diferentes. Esto se debe a que para los sistemas no triviales existe un número prácticamente infinito. Por lo tanto, en la práctica, documentar todas las posibles variaciones de entrada no sería práctico ya que llevaría un tiempo infinito. c) No es correcto. Comenzar las pruebas lo antes posible con revisiones y otros enfoques de pruebas estáticas no solucionará el problema de que haya demasiados casos de prueba posibles. El principio de “las pruebas tempranas ahorran tiempo y dinero” se ocupa de corregir los defectos tempranamente para evitar la aparición de defectos posteriores en los productos derivados de trabajo, reduciendo así los costos y la probabilidad de fallas. d) Es correcto. El uso de partición de equivalencia y análisis de límite valores para generar casos de prueba es una forma de abordar el principio, ya que estas técnicas de prueba proporcionan una forma sistemática de derivar un subconjunto finito de todos los casos de prueba posibles"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-04",
@@ -241,7 +250,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. El diseño de prueba implica el uso de condiciones de prueba para crear casos de prueba y otro software de prueba necesario, como requisitos de datos de prueba y cartas de prueba para pruebas exploratorias. También se especifican los requisitos del entorno de prueba, incluyendo la infraestructura y herramientas necesarias b) No es correcto. La ejecución de prueba implica la ejecución de casos de prueba (como parte de los procedimientos de prueba), sin embargo, no cubre directamente el otro software de prueba mencionado en la pregunta, como los requisitos de datos de prueba, los requisitos de entorno de prueba y las condiciones de prueba. c) No es correcto. El análisis de prueba se utiliza para identificar las características que requieren prueba. La base de prueba se analiza y define como condiciones de prueba, que luego se priorizan junto con los riesgos relacionados. Si bien esta actividad implica trabajar con condiciones de prueba, no cubre el otro software de prueba mencionado en la pregunta, como los requisitos de datos de prueba, los requisitos de entorno de prueba y los casos de prueba d) No es correcto. La implementación de prueba incluye la generación de procedimientos de prueba, como scripts de prueba manuales y automatizados, que se crean a partir de casos de prueba y pueden ensamblarse en conjuntos de pruebas. Los procedimientos de prueba están priorizados y organizados en un cronograma de ejecución de prueba. Se crean los datos de prueba, se construye el entorno de prueba y se verifica su configuración. Si bien esta actividad implica trabajar explícitamente con casos de prueba, y puede usar requisitos de datos de prueba y requisitos de entorno de prueba para crear datos de prueba y el entorno de prueba, no cubre condiciones de prueba"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-05",
@@ -302,7 +314,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Es poco probable que el equipo de marketing de la organización realice muchas pruebas (aunque en algunas organizaciones pueden estar involucrados con pruebas de aceptación), por lo que su nivel promedio de experiencia (la mayor parte de la cual sería en marketing) probablemente no afecte la forma en que se realizan Las pruebas para un objeto de prueba determinado b) No son correcto. Es poco probable que el nivel de conocimiento de los usuarios de que se está construyendo un nuevo sistema para ellos afecte la forma en que se realizan las pruebas. Es más probable que cualquier participación del usuario que pueda afectar cómo se realizan las pruebas sea resultado de decisiones tomadas por los testers, el cliente y el Project Manager. c) Es correcta. La cantidad de años de experiencia de los miembros del equipo de pruebas de eficiencia del desempeño ayudará a determinar las capacidades y el conocimiento (por ejemplo, de diferentes herramientas y tipos de defectos) que los miembros del equipo aplicarán cuando realicen pruebas. d) No es correcto. La estructura organizativa de los diferentes usuarios finales (que pueden ser variadas) cambiará entre usuarios. Por lo tanto, es posible que ni siquiera se sepa cuándo se está probando la aplicación y, por lo tanto, la estructura organizativa del usuario final puede tener poco efecto en cómo se realizan las pruebas"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-06",
@@ -363,7 +378,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. La trazabilidad entre los riesgos mitigados y los casos de prueba que pasaron proporciona poca información, porque para ser mitigados (mediante pruebas) los riesgos necesitarían tener un caso de prueba correspondiente que pasó. Para poder evaluar el riesgo residual, es necesario disponer de trazabilidad entre todos los riesgos y los resultados de las pruebas, de modo que los riesgos que no hayan superado la prueba correspondiente puedan identificarse como riesgos residuales b) Es correcto. La trazabilidad entre los requisitos del usuario y los resultados de las pruebas proporciona una indicación de qué requisitos del usuario se han probado y, por lo tanto, proporciona un medio para medir el progreso del proyecto (en el contexto de las pruebas) frente a los objetivos comerciales. c) No es correcto. No está claro que los casos de prueba que fallaron proporcionen una indicación de las habilidades del tester más que los casos de prueba que pasaron. Dependería en parte del objetivo de la prueba (por ejemplo, generar confianza o provocar fallas). Además, dicha medición de testers basada en casos de prueba que pasaron y fallaron puede ser contraproducente ya que podría hacer que los testers optimicen sus pruebas basándose en esa métrica en lugar del objetivo de prueba d) No es correcto. La trazabilidad entre los riesgos identificados y las condiciones de prueba escritas proporciona un medio para determinar qué condiciones de prueba adicionales deben escribirse. Determinar qué riesgos vale la pena probar es parte de la gestión de riesgos y, en particular, de la mitigación de riesgos."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-07",
@@ -424,7 +442,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Fuertes habilidades de comunicación, escucha activa y habilidades de trabajo en equipo permiten que un tester interactúe efectivamente con todas las partes interesadas; sin embargo, un conocimiento profundo de una variedad de juegos de computadora que le permitió llevarse bien con un desarrollador no es un ejemplo de una habilidad genérica útil para los testers. b) Es correcto. El conocimiento del dominio que se puede utilizar para comprender y comunicarse con los usuarios finales y los representantes comerciales es una de las habilidades genéricas requeridas por los testers. Un tester con experiencia como piloto le permitiría apreciar mejor los criterios de aceptación del sistema de control del helicóptero. c) No es correcto. Aunque las habilidades de programación podrían considerarse conocimientos técnicos que pueden aumentar la eficiencia al utilizar algunas herramientas de prueba, es poco probable que estas habilidades mejoren su comunicación con los analistas de negocios. d) No es correcto. Aunque la minuciosidad, la atención al detalle, la curiosidad y un enfoque metódico para identificar defectos difíciles de encontrar son habilidades genéricas útiles para los testers, es dudoso que generen casos de prueba antes de comenzar las pruebas exploratorias. Esto se debe a que uno de los principios principales de Las pruebas exploratorias son que los casos de prueba se generan durante la prueba, no se programan de antemano."
       }
-    }
+    },
+    "questionTypes": [
+      "scenario"
+    ]
   },
   {
     "id": "B-08",
@@ -485,7 +506,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. El enfoque de equipo completo permite que cualquier miembro del equipo con las habilidades y conocimientos necesarios realice cualquier tarea, sin embargo, eso no significa que los miembros del equipo puedan asumir cualquier rol en cualquier momento. Por lo general, solo asumen roles en los que son competentes y no hay ninguna sugerencia de que cada miembro del equipo pueda desempeñar todos los roles b) No es correcto. El enfoque de todo el equipo se aplica a cómo funciona un solo equipo (normalmente en el desarrollo de software ágil); no cubre cómo se supone que deben trabajar varios equipos en proyectos más grandes, y no sugiere que solo se necesita un equipo \"completo\" para un proyecto completo c) No es correcto. El enfoque de equipo completo no espera que todos los miembros del equipo participen en todas las decisiones importantes. Por ejemplo, no es necesario que el representante comercial (es decir, el propietario del producto) participe en cada decisión técnica que no afecte el resultado comercial y la implementación de dicho enfoque ralentizaría innecesariamente el progreso del equipo. d) Es correcto. Al aprovechar los diversos conjuntos de habilidades de cada miembro del equipo de manera más efectiva, el enfoque de todo el equipo fomenta una dinámica de equipo superior, promueve una comunicación y colaboración sólidas y genera una sinergia de equipo que beneficia a todo el proyecto"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-09",
@@ -546,7 +570,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. En el desarrollo ágil de software, los entregables se producen en cada iteración, y la entrega frecuente de incrementos requiere pruebas de regresión extensas. Aunque algunas (o todas) estas pruebas de regresión pueden ser automatizadas, las pruebas de regresión (automatizadas o no) no pueden ser reemplazadas por la automatización de Las pruebas del sistema b) son correcta. Si se utiliza un modelo de desarrollo secuencial, al principio del ciclo de vida de desarrollo de software no hay código disponible para su ejecución, por lo que durante este tiempo se realizan pruebas estáticas (por ejemplo, revisiones). Más adelante en el ciclo de vida, cuando el código esté disponible para su ejecución, es posible realizar pruebas dinámicas. Tenga en cuenta, sin embargo, que la preparación para las pruebas dinámicas a menudo ocurrirá temprano en cualquier ciclo de vida de desarrollo de software c) No es correcto. Si se utiliza un modelo de desarrollo iterativo, como el desarrollo ágil de software, entonces las pruebas de componentes bien pueden usarse para pruebas de regresión para cada iteración. En cuyo caso, existe un argumento sólido para automatizar estas pruebas de componentes, que deberán ejecutarse con frecuencia, y es poco probable que haya un argumento sólido para que los desarrolladores realicen estas pruebas de componentes manualmente. d) No es correcto. En la mayoría de los modelos de desarrollo incremental, los entregables se producen en cada incremento, lo que requiere pruebas estáticas y pruebas dinámicas en todos los niveles de prueba para cada incremento entregado"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-10",
@@ -607,7 +634,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Los testers deben revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte de un enfoque de desplazamiento a la izquierda. Si esperaran hasta la siguiente fase de desarrollo, entonces se podrían iniciar trabajos de desarrollo (y pruebas) innecesarios en productos de trabajo defectuosos y no revisados. b) Es correcto. Los testers deberían revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte de un enfoque de desplazamiento hacia la izquierda. c) No es correcto. Los testers típicamente revisan los productos de trabajo que forman la base de prueba como parte del análisis de prueba, no antes del análisis de prueba y el diseño de prueba. d) No es correcto. Los testers deben revisar los productos de trabajo tan pronto como los borradores estén disponibles para permitir pruebas tempranas como parte del enfoque de desplazamiento a la izquierda. Esperar hasta que se publiquen significa que cualquier defecto que pueda encontrarse mediante la revisión del tester estará en el documento publicado."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-11",
@@ -668,7 +698,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. El desarrollo basado en pruebas (TDD) es un ejemplo bien conocido de un enfoque de desarrollo basado en pruebas b) No es correcto. El desarrollo impulsado por la cobertura no es un ejemplo correcto de un enfoque de desarrollo basado en Las pruebas c) No son correcto. El desarrollo impulsado por la calidad no es un ejemplo correcto de un enfoque de desarrollo basado en Las pruebas d) No son correcto. El desarrollo impulsado por funciones no es un ejemplo de un enfoque de desarrollo basado en pruebas, sino que es, en cambio, una metodología de desarrollo de software ágil basada en la entrega de funciones (a diferencia de historias de usuarios en Scrum)"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-12",
@@ -729,7 +762,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. Esto se proporciona en gran medida a través de la integración continua, donde los desarrolladores envían pruebas de componentes (unitarias) con su nuevo código, que deben aprobarse para que el código sea admitido en la compilación. Por lo tanto, los desarrolladores sí necesitan completar pruebas de componentes b) Es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. c) No es correcto. DevOps mejora las pruebas de varias maneras, como proporcionando retroalimentación rápida sobre la calidad del código, pruebas de regresión automatizadas que minimizan el riesgo de regresión y promoviendo un enfoque de desplazamiento a la izquierda con envío de código y pruebas de componentes de alta calidad. Los testers no intentan tratar a los desarrolladores y a las operaciones por igual dedicando más tiempo a las pruebas de lanzamiento, aunque bien se puede utilizar un enfoque de desplazamiento a la derecha para las pruebas (pruebas en producción). d) No es correcto. Los procesos automatizados como la integración continua/entrega continua (CI/CD) en DevOps facilitan entornos de prueba estables y reducen la necesidad de pruebas manuales; sin embargo, existe el riesgo de pasar por alto la importancia de las pruebas manuales, especialmente desde la perspectiva del usuario"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-13",
@@ -790,7 +826,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. Las pruebas de sistema examinan el comportamiento y las capacidades del sistema completo y cubren pruebas no funcionales de características de calidad, que incluyen pruebas de seguridad. Este tipo de prueba suele realizarla un equipo de pruebas independiente basándose en las especificaciones del sistema. b) No es correcto. Las pruebas de integración de sistemas examinan las interfaces con otros sistemas y servicios externos c) No es correcto. Las pruebas beta son un tipo de pruebas de aceptación realizadas en un sitio externo por roles ajenos a la organización de desarrollo d) No es correcto. Las pruebas de integración de componentes implica probar las (interfaces e) interacciones entre los componentes de un sistema, como la interfaz de usuario y la base de datos."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-14",
@@ -851,7 +890,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Las pruebas de regresión aumentan en número a medida que avanza el proyecto, ya que normalmente se requieren nuevas pruebas de regresión a medida que se realizan cambios en el sistema. De manera similar, el número de pruebas de confirmación también suele aumentar a medida que avanza el proyecto, ya que se necesitan nuevas pruebas de confirmación para cada corrección realizada en un sistema. b) No es correcto. Es al revés. Las pruebas de confirmación se crean y ejecutan cuando se repara el objeto de prueba, y las pruebas de regresión se ejecutan (idealmente) siempre que se mejora (cambia) el objeto de prueba c) No es correcto. pruebas de confirmación verifica que un defecto se haya solucionado correctamente y, por lo tanto, se ocupa de probar los cambios en el objeto de prueba. Sin embargo, las pruebas de regresión aseguran que los cambios (incluidos los cambios en el entorno operativo) no tengan efectos negativos en el software no modificado y, por lo tanto, no verifican que el entorno operativo permanezca sin cambios d) Es correcto. Las pruebas de regresión garantizan que los cambios no tengan efectos negativos en el software no modificado. pruebas de confirmación verifica que un defecto ha sido corregido – y por lo tanto se refiere al código modificado"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-15",
@@ -912,7 +954,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. La falta de usabilidad proporcionada a través de la interfaz de usuario se puede detectar mediante una revisión utilizando un checklist adecuado, pero la falta de usabilidad también se puede identificar haciendo que varios usuarios típicos prueben dinámicamente la interfaz de usuario y proporcionen comentarios sobre su usabilidad b) Es correcta. Una revisión de código puede detectar código al que no se puede acceder por ninguna ruta; sin embargo, las pruebas dinámicas solo pueden ejercitar código accesible y no pueden determinar que no se puede alcanzar el código sin ejecutar todas las combinaciones posibles de entradas y estados de entrada, lo cual no es práctico para código real. c) No es correcto. Los tiempos de respuesta deficientes para la mayoría de los usuarios esperados son difíciles de determinar sin ejecutar el código (es decir, mediante pruebas estáticas), por lo que en esta situación pruebas dinámicas podrían encontrar un defecto, pero es poco probable que pruebas estáticas lo encuentren d) No es correcto. Una revisión del código por parte de alguien que conozca las características requeridas podría detectar que las características requeridas no se habían implementado en el código, y también se podrían usar pruebas dinámicas para determinar que estas características requeridas no se habían implementado"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-16",
@@ -973,7 +1018,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. La retroalimentación proviene de las partes interesadas (por ejemplo, representantes comerciales y usuarios finales), no de los desarrolladores, por lo que no es probable que esta retroalimentación informe a los Managers qué desarrolladores son más o menos productivos. b) No es correcto. Los Project Managers no utilizan la retroalimentación temprana y frecuente de las partes interesadas para priorizar cómo interactúan con las diferentes partes interesadas c) Es correcto. Obtener retroalimentación de las partes interesadas tempranamente y con frecuencia en el proceso de desarrollo de software puede ser muy beneficioso ya que facilita la comunicación temprana de posibles problemas de calidad, puede evitar malentendidos sobre los requisitos y garantiza que cualquier cambio en los requisitos de las partes interesadas se comprenda e implemente antes. d) No es correcto. La retroalimentación temprana y frecuente puede impedir el desarrollo de un producto que no satisfaga las necesidades de las partes interesadas y resulte en retrabajos costosos y plazos incumplidos, por lo que, idealmente, no debería haber demoras. Además, la retroalimentación proviene de las partes interesadas (no de ellos), lo que incluye a los usuarios finales, por lo que el hecho de que los usuarios finales brinden retroalimentación no ayudará a que los usuarios finales comprendan"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-17",
@@ -1034,7 +1082,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Considerando cada una de las descripciones de tareas enumeradas: 1. Se seleccionan las características de calidad a evaluar y los criterios de salida - (Planificación (C): definir el alcance de la revisión, propósito, producto de trabajo a revisar, características de calidad a evaluar, áreas de enfoque, criterios de salida, información complementaria como estándares, esfuerzo y plazos). 2. Todos tienen acceso al producto de trabajo - (Inicio de revisión (B): garantizar que todos los participantes tengan acceso al producto de trabajo y a los recursos necesarios, y aclarar sus roles y responsabilidades). 3. Se identifican anomalías en el producto de trabajo - (Revisión individual (A): evaluación de la calidad del producto de trabajo, identificación y registro de anomalías, recomendaciones y preguntas utilizando técnicas de revisión como revisión basada en checklists y revisión basada en escenarios). 4. Se analizan y discuten anomalías - (Comunicación y análisis (D): análisis y discusión de cada anomalía, determinando su estado, propiedad y acciones requeridas, y tomando decisiones de revisión, normalmente en (Esto podría incluir determinar la necesidad de una revisión de seguimiento). Por lo tanto: a) No es correcto b) No es correcto c) No es correcto d) Es correcto. La coincidencia correcta es: 1C, 2B, 3A, 4D"
       }
-    }
+    },
+    "questionTypes": [
+      "list"
+    ]
   },
   {
     "id": "B-18",
@@ -1095,7 +1146,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Teniendo en cuenta cada una de las funciones enumeradas: 1. Escribano (o registrador): responsable de recopilar comentarios de los revisores y documentar la información de la revisión, como las decisiones tomadas y cualquier nueva anomalía identificada durante la reunión de revisión. (Registra información de revisión, como decisiones y nuevas anomalías encontradas durante la reunión de revisión - B) 2. Líder de revisión: responsable de supervisar el proceso de revisión, como seleccionar a los miembros del equipo de revisión, programar reuniones de revisión y garantizar que la revisión se complete con éxito. (Asume la responsabilidad general de la revisión, como organizar cuándo y dónde se llevará a cabo la revisión - D) 3. Facilitador (o Moderador): responsable de garantizar que las reuniones de revisión se desarrollen de manera efectiva, incluida la gestión del tiempo, la mediación en las discusiones y la creación de un entorno seguro donde todos puedan expresar sus opiniones libremente. (Garantiza el funcionamiento eficaz de las reuniones de revisión y el establecimiento de un entorno de revisión seguro - A) 4. Manager: responsable de decidir qué se debe revisar y asignar recursos, como personal y tiempo, para la revisión. (Decide qué se va a revisar y proporciona recursos, como personal y tiempo para la revisión - C) Por lo tanto: a) No es correcto b) No es correcto c) Es correcto. La coincidencia correcta es: 1B, 2D, 3A, 4C d) No es correcta"
       }
-    }
+    },
+    "questionTypes": [
+      "list",
+      "matching"
+    ]
   },
   {
     "id": "B-19",
@@ -1156,7 +1211,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Las pruebas de tabla de decisiones son una técnica de prueba de caja negra, no una técnica de prueba de caja blanca – los casos de prueba no se basan en las decisiones en el código fuente. En pruebas de ramas, los casos de prueba se derivan del conocimiento del flujo de control del objeto de prueba b) No es correcto. La anticipación de defectos potenciales se utiliza en predicción de errores (una técnica de prueba basada en la experiencia), no en pruebas de ramas (una técnica de prueba de caja blanca). En pruebas de tabla de decisiones, los casos de prueba se derivan de la especificación que describe la lógica de negocio c) No es correcta. Si un caso de prueba se basa en el conocimiento del flujo de control del objeto de prueba, es una técnica de prueba de caja blanca. Las pruebas de tabla de decisiones generalmente se basan en un análisis de la lógica de negocios, por lo que es una técnica de prueba de caja negra. En pruebas de ramas, los casos de prueba no se derivan de la especificación; esto la convertiría en una técnica de prueba de caja negra. Las pruebas de ramas son una técnica de prueba de caja blanca, donde los casos de prueba se derivan con base en la estructura del código fuente d) Es correcto. Las pruebas de tabla de decisiones son una técnica de prueba de caja negra, por lo que se basa en un análisis del comportamiento especificado del objeto de prueba sin referencia a su estructura interna. Por tanto, los casos de prueba son independientes de cómo esté implementado el software. Las pruebas de ramas son una técnica de prueba de caja blanca, por lo que los casos de prueba se basan en un análisis de la estructura interna y el procesamiento del objeto de prueba. Como los casos de prueba dependen de cómo está diseñado y codificado el software, solo se pueden crear después del diseño o implementación del objeto de prueba"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-20",
@@ -1217,7 +1275,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. 19 cubre la partición “sin descuento”, 20 cubre la partición “50% de descuento” y 30 cubre la partición “10% de descuento”. Estos tres valores cubren las tres particiones de equivalencia válidas b) No es correcto. 11 y 12 cubren la partición “sin descuento”, mientras que 20 cubre la partición “50% de descuento”, por lo que cubren dos de las tres particiones de equivalencia válidas c) No es correcto. 1 cubre la partición “sin descuento”, mientras que 10 y 50 cubren la partición “10% de descuento”. La partición “50% de descuento” no está cubierta, por lo que en total están cubiertas dos de las tres particiones de equivalencia válidas d) No es correcto. 29 y 31 cubren la partición “sin descuento”, mientras que 10 y 30 cubren la partición “10% de descuento”. La partición “50% de descuento” no está cubierta, por lo que en general dos de las tres particiones de equivalencia válidas están cubiertas"
       }
-    }
+    },
+    "questionTypes": [
+      "list",
+      "calculation"
+    ]
   },
   {
     "id": "B-21",
@@ -1278,7 +1340,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "El dominio para la longitud de la contraseña tiene tres particiones de equivalencia: • contraseñas demasiado cortas {0, 1,…, 4, 5} • contraseñas correctas {6, 7,…, 11, 12} • contraseñas demasiado largas {13, 14,…} Para lograr una cobertura completa para BVA de 3 valores, necesitamos probar los siguientes valores: 0, 1, 4, 5, 6, 7, 11, 12, 13, 14. Dado que BVA de 2 valores ya está cubierto, esto significa que ya hemos probado las contraseñas de longitud: 0, 5, 6, 12 y 13. Esto significa que las longitudes adicionales que deben cubrirse para pasar de 2 valores a 3 valores son: 1, 4, 7, 11 y 14. Por lo tanto: a) No es correcto b) No es correcto c) No es correcto d) Es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "scenario",
+      "calculation"
+    ]
   },
   {
     "id": "B-22",
@@ -1346,7 +1412,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Hay cinco columnas en la tabla de decisiones. Cada caso de prueba cubre uno de ellos. TC1 y TC2 cubren ambos la Regla 4 TC3 y TC4 cubren la Regla 2 TC5 cubren la Regla 5 Entonces, estos cinco casos de prueba cubren tres de cinco columnas, logrando una cobertura de (3/5)*100% = 60%. Por tanto, la opción b) es la opción CORRECTA. Así: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "visual",
+      "calculation"
+    ]
   },
   {
     "id": "B-23",
@@ -1414,7 +1484,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Nos referimos a las transiciones con E1,…, E5 como en la imagen. La variable N denota el número de elementos almacenados actualmente. Cada evento \"Agregar\" lo aumenta en 1 y cada evento \"Eliminar\" lo disminuye en 1. Tenga en cuenta que cuando el evento \"Agregar\" ocurre mientras se encuentra en el estado NO COMPLETO, el estado cambia a COMPLETO solo si N=2. Si N<2, el sistema permanece en el estado NO LLENO. Si N=0, no es posible realizar ninguna acción de “Eliminar”. De manera similar, si N=3, no es posible realizar ninguna acción \"Agregar\". La prueba a) se puede escribir como E1, E3, E3, E2, E4 (por lo que cubre 4 de 5 transiciones válidas, logrando una cobertura de transiciones válidas del 80%). La prueba b) no es factible, porque después de las primeras tres acciones de \"Agregar\" el sistema está en el estado COMPLETO y no hay una transición válida desde COMPLETO provocada por el evento \"Agregar\". Después de las tres primeras transiciones, sólo se logra el 60% de la cobertura de las transiciones válidas. La prueba c) se puede escribir como E1, E2, E4, E5, E3 (por lo que cubre 5 de 5 transiciones válidas, logrando una cobertura de transiciones válidas del 100%). La prueba d) se puede escribir como E1, E2, E4, E5, E4 (por lo que cubre 4 de 5 transiciones válidas, logrando una cobertura de transiciones válidas del 80%). Por lo tanto: a) No es correcto b) No es correcto c) Es correcto d) No es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "visual"
+    ]
   },
   {
     "id": "B-24",
@@ -1475,7 +1548,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. La cobertura siempre se define como el porcentaje de los elementos cubiertos. Por tanto, no puede superar el 100% b) Es correcta. Si las sentencias ejecutadas por T1 y T2 fueran disjuntas, la cobertura del conjunto de pruebas {T1, T2} sería del 105%, lo cual es imposible (ver respuesta a). Por lo tanto, al menos el 5% de las sentencias ejecutables deben haber sido ejecutadas tanto por T1 como por T2 c) No es correcto. cobertura de sentencias no nos dice nada sobre el número de no sentencias ejecutables en el código d) No es correcto. Incluso si un conjunto de pruebas logra una cobertura completa de sentencias, esto no implica lograr una cobertura completa de ramas"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-25",
@@ -1568,7 +1644,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Las pruebas de ramas son una técnica de prueba de caja blanca en la que los elementos de cobertura son ramas. Una rama es una transferencia de control entre dos nodos en el gráfico de flujo de control, que muestra las posibles secuencias en las que se ejecutan las sentencias del código fuente en el objeto de prueba. Cada transferencia de control puede ser incondicional (es decir, un código lineal) o condicional (es decir, un resultado de decisión). La cobertura se mide como el número de ramas ejecutadas por los casos de prueba dividido por el número total de ramas, y se expresa como porcentaje. Así: a) No es correcta. El resultado de una decisión es una rama condicional. Para pruebas de ramas, X cuenta no sólo ramas condicionales, sino también incondicionales b) No es correcto. la cobertura de ramas cuenta no sólo las ramas condicionales, sino también las incondicionales c) Es correcta. la cobertura de ramas se mide como el número de ramas ejecutadas por los casos de prueba dividido por el número total de ramas, y se expresa como porcentaje d) No es correcto. Tanto X como Y cuentan solo las ramas condicionales y no toman en cuenta las ramas incondicionales"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-26",
@@ -1638,7 +1717,10 @@
         "selector": "Selecciona DOS opciones.",
         "explanation": "Las pruebas exploratorias son útiles cuando hay pocas o inadecuadas especificaciones o hay una presión de tiempo significativa para las pruebas. Las pruebas exploratorias también son útiles para complementar otras técnicas de prueba más formales. Las pruebas exploratorias serán más efectivas si el tester tiene experiencia, conocimiento del dominio y un alto grado de habilidades esenciales, como habilidades analíticas, curiosidad y creatividad. Así: a) Es correcta. Las pruebas exploratorias son útiles cuando hay pocas o inadecuadas especificaciones o hay una importante presión de tiempo en Las pruebas b) No son correcto. Las pruebas exploratorias no son una técnica de prueba de caja negra c) No es correcto. Las pruebas exploratorias son útiles cuando las especificaciones están mal redactadas d) No es correcta. Las habilidades de programación no tienen nada que ver con Las pruebas exploratorias en principio e) son correcta. Las pruebas exploratorias serán más efectivas si el tester tiene experiencia, tiene conocimiento del dominio y tiene un alto grado de habilidades esenciales, como habilidades analíticas, curiosidad y creatividad"
       }
-    }
+    },
+    "questionTypes": [
+      "multiple-response"
+    ]
   },
   {
     "id": "B-27",
@@ -1699,7 +1781,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Los checklists deben contener condiciones de prueba que verificar. Este es un ejemplo de error, no una condición de prueba; incluso si el tester pudo deducir algunas condiciones potenciales de prueba a partir de los ejemplos de errores, esta descripción del error es demasiado general b) No es correcta. Los checklists no deben contener elementos que sean más adecuados como criterios de salida. Este es un ejemplo de criterio de salida c) No es correcto. Los checklists no deben contener elementos demasiado generales. Este es un ítem muy general, que prácticamente describe un objetivo de prueba d) Es correcto. Este es un ejemplo de una condición de prueba que puede ser verificada por un humano."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-28",
@@ -1760,7 +1845,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. El formato orientado a reglas incluye formatos como checklists con viñetas o formas tabuladas de asignaciones de entrada y salida, que muestran explícitamente las reglas a seguir. Dado/Cuándo/Entonces es un formato orientado a escenarios porque describe un escenario a verificar b) Es correcto. Este es un formato Dado/Cuándo/Entonces, que está orientado a escenarios. c) No es correcto. No existe un formato de criterios de aceptación \"orientado al producto\" d) No es correcto. No existe un formato de criterios de aceptación \"orientado al proceso\""
       }
-    }
+    },
+    "questionTypes": [
+      "scenario"
+    ]
   },
   {
     "id": "B-29",
@@ -1821,7 +1909,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. El caso de prueba está relacionado con la visualización de pedidos anteriores en el historial de pedidos b) No es correcto. El caso de prueba está relacionado con la visualización de pedidos anteriores c) No es correcto. El caso de prueba está relacionado con la visualización de pedidos anteriores en el historial de pedidos d) Es correcto. El caso de prueba está relacionado con el proceso de registro, que no se comenta en la historia del usuario. La historia del usuario trata sobre la visualización de pedidos anteriores"
       }
-    }
+    },
+    "questionTypes": [
+      "scenario"
+    ]
   },
   {
     "id": "B-30",
@@ -1882,7 +1973,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. Esto es algo que puede (y debe) comprobarse antes de enviar el código al control de versiones. b) No es correcto. Esto es algo que se puede comprobar después de realizar el paso (2), porque el informe de conflictos de fusión se puede realizar después de enviar y fusionar el código. c) No es correcto. Esto encaja mejor ya que el criterio de entrada para el paso (3) d) no es correcto. Esto encaja mejor como criterio de salida para el paso (3)"
       }
-    }
+    },
+    "questionTypes": [
+      "scenario"
+    ]
   },
   {
     "id": "B-31",
@@ -1950,7 +2044,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "El esfuerzo de desarrollo promedio es de $900 000 y el esfuerzo de prueba promedio es de $90 000 (calculado a partir de los cuatro proyectos). La relación promedio entre el esfuerzo de prueba y desarrollo es de 1:10 ($90 000: $900 000), lo que significa que históricamente, en promedio, el esfuerzo de prueba es el 10 % del esfuerzo de desarrollo. Entonces, si el esfuerzo de desarrollo se estima en $800 000, el esfuerzo de prueba estimado se estima como: 10 % * $800 000 = 0,1 * $800 000 = $80 000. Por lo tanto: a) No es correcto b) Es correcto c) No es correcto d) No es correcto"
       }
-    }
+    },
+    "questionTypes": [
+      "visual",
+      "calculation"
+    ]
   },
   {
     "id": "B-32",
@@ -2018,7 +2116,12 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Las dependencias lógicas significan que para cada producto debe ejecutar BUSCAR → VER → AGREGAR antes de ejecutar PEDIR. Puede agregar más productos (usando el mismo flujo) antes de ejecutar el PEDIDO. En base a esto, primero se debe ejecutar TC1 o TC2, de lo contrario no se podrá avanzar. La primera prioridad se debe dar a VER y AGREGAR el producto B, ya que sus casos de prueba (TC6, TC4) tienen mayor prioridad. Entonces, las primeras 3 pruebas a ejecutar son TC2 -> TC4 -> TC6. Ahora debemos considerar si ejecutar TC7 y luego todo el flujo para el producto A o ejecutar primero los TC para el producto A. Si TC7 tiene menor prioridad que las otras pruebas, se deben probar primero. Por tanto, todo el flujo debería ser: TC2 -> TC4 -> TC6 -> TC1 -> TC3 -> TC5 -> TC7 a) No es correcto. TC1 debe ejecutarse antes que TC3 b) Es correcto c) No es correcto. Como se muestra arriba, TC7 es el último en ejecutarse. d) No es correcto. El producto B debe ejecutarse antes que el producto A."
       }
-    }
+    },
+    "questionTypes": [
+      "visual",
+      "list",
+      "scenario"
+    ]
   },
   {
     "id": "B-33",
@@ -2079,7 +2182,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Las pruebas de usabilidad son pruebas comerciales que critican el producto (P3) b) No son correctas. Las pruebas funcionales son pruebas de cara al negocio (Q2) c) No son correcto. Las pruebas de aceptación de usuario son pruebas de cara al negocio que critican el producto (P3) d) Es correcta. Las pruebas de integración de componentes son pruebas orientadas a la tecnología que apoyan al equipo (guía el desarrollo) (Q1)"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-34",
@@ -2140,7 +2246,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Considerando cada uno de los riesgos enumerados y sus mitigaciones: 1. Las respuestas largas del sistema (1) se pueden probar en pruebas de rendimiento (B) 2. Los cambios en las preferencias de los consumidores (2) generalmente están fuera de nuestro control, por lo que generalmente aceptamos este riesgo (A) 3. La inundación de la sala de servidores (3) puede causar pérdidas significativas, por lo que debemos transferir el riesgo, por ejemplo, comprando una póliza de seguro (D) 4. Que los pacientes mayores de cierta edad reciban informes inexactos (4) sugiere un posible problema de límites, que puede detectarse eficazmente con técnicas de prueba como BVA (C). Por lo tanto: a) No es correcto b) No es correcto c) Es correcto. Las combinaciones correctas de riesgo y mitigación son: 1B, 2A, 3D y 4C d) No es correcta"
       }
-    }
+    },
+    "questionTypes": [
+      "list",
+      "matching"
+    ]
   },
   {
     "id": "B-35",
@@ -2201,7 +2311,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. Las métricas de calidad del producto miden las características de calidad. El tiempo medio hasta la falla mide la madurez, por lo que es una métrica de calidad del producto b) No es correcto. Este es un ejemplo de métrica de defecto, no de métrica de calidad del producto. c) No es correcto. Este es un ejemplo de métrica de cobertura, no de métrica de calidad del producto. d) No es correcto. Este es un ejemplo de métrica de defectos, no de métrica de calidad del producto"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-36",
@@ -2262,7 +2375,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. El cliente se encuentra en una ubicación y zona horaria diferente, por lo que puede resultar difícil comunicarse cara a cara b) No es correcto. Los paneles suelen estar disponibles para cualquier usuario en cualquier momento, por lo que la diferencia de zonas horarias no será un obstáculo tan grande para la comunicación como la comunicación verbal cara a cara c) No es correcto. Aunque la diferencia horaria entre Europa y América es de varias horas, y esto puede causar algunos inconvenientes, ciertamente no es tan grande como en la comunicación cara a cara d) No es correcto. Las herramientas de videoconferencia son un medio de comunicación conveniente. Aunque la comunicación entre Europa y América durante el horario laboral generalmente requiere que una de las partes se conecte muy temprano o muy tarde, esto no es un inconveniente tan grande como la comunicación verbal cara a cara."
       }
-    }
+    },
+    "questionTypes": [
+      "scenario"
+    ]
   },
   {
     "id": "B-37",
@@ -2323,7 +2439,10 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. Para un elemento de configuración complejo (p. ej., un entorno de prueba), la gestión de la configuración (CM) registra los elementos que lo componen, sus relaciones y versiones b) No es correcta. Las herramientas CM no ejecutan casos de prueba y no calculan cobertura c) No es correcto. Una herramienta CM no es una herramienta de gestión con licencia d) No es correcto. Las herramientas CM no generan datos de prueba"
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   },
   {
     "id": "B-38",
@@ -2391,7 +2510,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) No es correcto. Si bien la oración es cierta, no aporta mucho valor para el desarrollador b) Es correcta. Según los resultados de la prueba, parece que el sistema ignora los duplicados y ordena la lista sin tener en cuenta las repeticiones. Probablemente esta sea la causa de las averías en TC3, TC4, TC5. Dicha información puede ayudar al desarrollador a encontrar el defecto y solucionarlo de manera más eficiente. c) No es correcta. El sistema no falla al ordenar números negativos. El problema más bien está en no tener en cuenta los duplicados d) No es correcto. Los casos de prueba TC3, TC4 y TC5 fallan, pero no nos consta que los casos de prueba tengan algún defecto."
       }
-    }
+    },
+    "questionTypes": [
+      "visual",
+      "scenario"
+    ]
   },
   {
     "id": "B-39",
@@ -2452,7 +2575,11 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "Teniendo en cuenta cada una de las categorías de herramientas enumeradas y sus descripciones: A. Herramientas de pruebas estáticas: dan soporte al tester en la realización de revisiones y análisis estáticos (4) B. Herramientas que ofrecen soporte para la escalabilidad y la estandarización de la implementación: por ejemplo, máquinas virtuales, herramientas de contenedorización (3) C. Herramientas DevOps: dan soporte al proceso de entrega de DevOps, el seguimiento del flujo de trabajo, los procesos de construcción automatizados y la integración/entrega continua (CI/CD) (1) D. Herramientas de colaboración: facilitan la comunicación (2) Por lo tanto: a) No es correcto b) No es correcto c) Es correcto. La coincidencia correcta es: 1C, 2D, 3B, 4A d) No es correcta"
       }
-    }
+    },
+    "questionTypes": [
+      "list",
+      "matching"
+    ]
   },
   {
     "id": "B-40",
@@ -2513,6 +2640,9 @@
         "selector": "Selecciona UNA opción.",
         "explanation": "a) Es correcto. La automatización de pruebas puede proporcionar medidas que son demasiado complicadas para que las obtengan los humanos, como medidas de cobertura de pruebas de caja blanca para todos los códigos excepto el más trivial. b) No es correcto. Al utilizar herramientas de prueba, la responsabilidad de las pruebas NO se comparte con el proveedor de la herramienta, ya que el proveedor no participa en Las pruebas y son responsabilidad del tester. La única responsabilidad posible que podría asignarse al proveedor de la herramienta es si la herramienta no funciona como se esperaba y proporciona resultados de prueba incorrectos c) No es correcto. Los testers aún necesitan aplicar el pensamiento crítico al analizar anomalías en los resultados de las pruebas para determinar su causa probable. d) No es correcto. Ni los testers ni las herramientas pueden generar casos de prueba simplemente a partir de un análisis del código del programa, ya que el código es la implementación y no proporciona información sobre los resultados esperados, que deberán provenir de otra parte de la base de prueba, como la especificación de diseño."
       }
-    }
+    },
+    "questionTypes": [
+      "simple"
+    ]
   }
 ]

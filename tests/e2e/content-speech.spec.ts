@@ -78,7 +78,7 @@ test("speech controls are hidden when the browser API is unavailable", async ({ 
 test("C-31 renders a real fraction with an accessible localized description", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Formula rendering only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "C-31";
@@ -103,7 +103,7 @@ test("C-31 renders a real fraction with an accessible localized description", as
 test("B-25 renders its branch-coverage formula with the shared math style", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Formula rendering only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "B-25";
@@ -121,7 +121,7 @@ test("B-25 renders its branch-coverage formula with the shared math style", asyn
 test("A-34 places a heading above each of its two lists", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Prompt layout only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "A-34";
@@ -147,7 +147,7 @@ test("A-34 places a heading above each of its two lists", async ({ page }, testI
 test("C-21 keeps its introductory sentences in one continuous text block", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Prompt layout only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "C-21";
@@ -168,7 +168,7 @@ test("C-21 keeps its introductory sentences in one continuous text block", async
 test("D-26 renders both compound-interest expressions with mathematical exponents", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Formula rendering only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "D-26";
@@ -188,7 +188,7 @@ test("D-26 renders both compound-interest expressions with mathematical exponent
 test("D-22 keeps its four test cases in one intact list card", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Prompt rendering only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "D-22";
@@ -206,7 +206,7 @@ test("D-22 keeps its four test cases in one intact list card", async ({ page }, 
 test("B-20 displays the car wash rules as one four-item list", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Prompt rendering only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "B-20";
@@ -227,7 +227,7 @@ test("B-20 displays the car wash rules as one four-item list", async ({ page }, 
 test("B-22 displays its five input test cases as one list", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Prompt rendering only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "B-22";
@@ -246,7 +246,7 @@ test("B-22 displays its five input test cases as one list", async ({ page }, tes
 test("A-38 displays the defect report as a structured card", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Prompt rendering only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "A-38";
@@ -274,7 +274,7 @@ test("A-38 displays the defect report as a structured card", async ({ page }, te
 test("D-17 expands both lists in its explanation", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Explanation rendering only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "D-17";
@@ -297,7 +297,7 @@ test("D-17 expands both lists in its explanation", async ({ page }, testInfo) =>
 test("B-23 renders each detailed option explanation once", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Explanation rendering only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "B-23";
@@ -318,7 +318,7 @@ test("B-23 renders each detailed option explanation once", async ({ page }, test
 test("A-32 renders both three-point estimates as inline mathematical formulas in the explanation", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Formula rendering only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "A-32";
@@ -341,7 +341,7 @@ test("A-32 renders both three-point estimates as inline mathematical formulas in
 test("D-34 renders its risk formulas and monetary calculation with KaTeX fractions", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop-chromium", "Formula rendering only needs one browser pass.");
   await page.addInitScript(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "D-34";
@@ -364,7 +364,7 @@ test("Spanish technical terms expose translations without selecting an answer", 
   test.skip(testInfo.project.name !== "desktop-chromium", "One browser pass covers shared term interactions.");
   await page.addInitScript(() => {
     window.localStorage.setItem("istqb-ctfl-v4-spanish-translation-notice-seen", "true");
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     if (progress) {
       progress.study.currentQuestionId = "C-26";

@@ -17,6 +17,7 @@ function question(id: string, chapter = "FL-1"): Question {
     options: [{ key: "a", text: "A" }, { key: "b", text: "B" }],
     correctAnswers: ["a"],
     selectionMode: "single",
+    questionTypes: ["simple"],
     selector: "one",
     explanation: "",
     notes: [],

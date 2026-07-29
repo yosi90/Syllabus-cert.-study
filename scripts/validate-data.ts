@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import katex from "katex";
+import { hasValidQuestionTypes } from "../src/domain/questionTypes";
+import type { QuestionType } from "../src/data/types";
 
 type Option = {
   key: string;
@@ -22,6 +24,7 @@ type Question = {
   options: Option[];
   correctAnswers: string[];
   selectionMode: "single" | "multiple";
+  questionTypes: QuestionType[];
   explanation: string;
   notes: string[];
   points: number;
@@ -113,6 +116,18 @@ for (const question of bank.questions) {
   assert(/^FL-[1-6]$/.test(question.chapter), `${question.id}: invalid chapter ${question.chapter}`);
   assert([4, 5].includes(question.options.length), `${question.id}: expected 4 or 5 options`);
   assert(question.points === 1, `${question.id}: expected 1 point, found ${question.points}`);
+  assert(
+    Array.isArray(question.questionTypes) && hasValidQuestionTypes(question.questionTypes),
+    `${question.id}: invalid question types`,
+  );
+  assert(
+    !question.visual || question.questionTypes.includes("visual"),
+    `${question.id}: visual questions must include the visual type`,
+  );
+  assert(
+    question.selectionMode !== "multiple" || question.questionTypes.includes("multiple-response"),
+    `${question.id}: multiple answers must include the multiple-response type`,
+  );
 
   if (question.promptParts) {
     for (const language of ["en", "es"] as const) {

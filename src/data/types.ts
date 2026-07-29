@@ -1,6 +1,14 @@
 export type SourceModel = "A" | "B" | "C" | "D";
 export type KLevel = "K1" | "K2" | "K3";
 export type SelectionMode = "single" | "multiple";
+export type QuestionType =
+  | "simple"
+  | "visual"
+  | "list"
+  | "multiple-response"
+  | "matching"
+  | "scenario"
+  | "calculation";
 
 export type QuestionOption = {
   key: string;
@@ -52,6 +60,7 @@ export type Question = {
   options: QuestionOption[];
   correctAnswers: string[];
   selectionMode: SelectionMode;
+  questionTypes: QuestionType[];
   selector: string;
   explanation: string;
   notes: string[];

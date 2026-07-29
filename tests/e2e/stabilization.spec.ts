@@ -47,7 +47,7 @@ test("a random exam contains forty unique questions and opens its review", async
   await page.getByRole("button", { name: "Random" }).click();
 
   const activeExam = await page.evaluate(() => {
-    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v2") ?? "null");
+    const progress = JSON.parse(window.localStorage.getItem("istqb-ctfl-v4-trainer:v3") ?? "null");
     return progress?.activeExam;
   });
   expect(activeExam.blueprint.questionIds).toHaveLength(40);
@@ -74,7 +74,7 @@ test("an exported practice state can be imported and restored", async ({ page },
   expect(exportPath).toBeTruthy();
 
   await page.evaluate(() => {
-    const key = "istqb-ctfl-v4-trainer:v2";
+    const key = "istqb-ctfl-v4-trainer:v3";
     const progress = JSON.parse(window.localStorage.getItem(key) ?? "null");
     progress.questionProgress = {};
     progress.study.answers = {};

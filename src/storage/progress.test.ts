@@ -5,6 +5,8 @@ import {
   exportProgress,
   importProgress,
   LEGACY_STORAGE_KEY,
+  MAX_ATTEMPT_HISTORY,
+  PREVIOUS_STORAGE_KEY,
   loadProgress,
   markFlaggedCorrectPrompted,
   recordQuestionAttempt,
@@ -61,6 +63,30 @@ describe("progress storage", () => {
       totalActiveMs: 12_500,
       lastActiveMs: 12_500,
       timedAttempts: 1,
+    });
+  });
+
+  it("records individual attempts, skips blank exam answers and caps history", () => {
+    let progress = createEmptyProgress("2026-01-01T00:00:00.000Z");
+    progress = recordQuestionAttempt(progress, "A-01", [], false, "2026-01-01T00:00:00.000Z", 3_000, {
+      context: "official-exam",
+    });
+    expect(progress.attemptHistory).toEqual([]);
+    expect(progress.questionProgress["A-01"]).toBeUndefined();
+
+    for (let index = 0; index < MAX_ATTEMPT_HISTORY + 2; index += 1) {
+      progress = recordQuestionAttempt(progress, "A-01", ["a"], true, `2026-01-01T00:00:${String(index % 60).padStart(2, "0")}.000Z`, 2_000, {
+        context: "adaptive-study",
+        sessionId: "study-1",
+        bankVersion: "test",
+      });
+    }
+    expect(progress.attemptHistory).toHaveLength(MAX_ATTEMPT_HISTORY);
+    expect(progress.attemptHistory.at(-1)).toMatchObject({
+      attemptNumber: MAX_ATTEMPT_HISTORY + 2,
+      context: "adaptive-study",
+      sessionId: "study-1",
+      bankVersion: "test",
     });
   });
 
@@ -156,10 +182,32 @@ describe("progress storage", () => {
     );
 
     const migrated = loadProgress(storage);
-    expect(migrated.version).toBe(2);
+    expect(migrated.version).toBe(3);
+    expect(migrated.attemptHistory).toEqual([]);
     expect(migrated.questionProgress["A-01"].attempts).toBe(2);
     expect(migrated.questionProgress["A-01"].flagged).toBe(true);
     expect(migrated.preferences.tutorialCompleted).toBe(true);
+    expect(storage.getItem(STORAGE_KEY)).not.toBeNull();
+  });
+
+  it("migrates a version 2 save without fabricating individual attempts", () => {
+    const storage = memoryStorage();
+    const previous = createEmptyProgress("2026-01-01T00:00:00.000Z");
+    storage.setItem(PREVIOUS_STORAGE_KEY, JSON.stringify({
+      ...previous,
+      version: 2,
+      trackingStartedAt: undefined,
+      attemptHistory: undefined,
+      questionProgress: {
+        "A-01": { attempts: 4, correct: 3, lastCorrect: true, flagged: false, lastAnswers: ["a"], updatedAt: "2026-01-01" },
+      },
+    }));
+
+    const migrated = loadProgress(storage);
+
+    expect(migrated.version).toBe(3);
+    expect(migrated.questionProgress["A-01"].attempts).toBe(4);
+    expect(migrated.attemptHistory).toEqual([]);
     expect(storage.getItem(STORAGE_KEY)).not.toBeNull();
   });
 
