@@ -1299,7 +1299,7 @@
     "reference": "FL-4.2.2",
     "kLevel": "K3",
     "rawKLevel": "K3",
-    "prompt": "You are testing a temperature control system for a horticultural cold storage facility. The system receives the temperature (in full degrees Celsius) as the input. If the temperature is between 0 and 2 degrees inclusive, the system displays the message “temperature OK”. For lower temperatures, the system displays the message \"temperature too low\" and for higher temperatures it displays the message “temperature too high”. Using two-value boundary value analysis, which of the following sets of test inputs provides the highest level of boundary value coverage?",
+    "prompt": "You are testing a temperature control system for a horticultural cold storage facility: • The system receives the temperature (in full degrees Celsius) as the input. • If the temperature is between 0 and 2 degrees inclusive, the system displays the message “temperature OK”. • For lower temperatures, the system displays the message \"temperature too low\". • For higher temperatures, the system displays the message “temperature too high”.\n\nUsing two-value boundary value analysis, which of the following sets of test inputs provides the highest level of boundary value coverage?",
     "options": [
       {
         "key": "a",
@@ -1328,7 +1328,7 @@
     "points": 1,
     "translations": {
       "es": {
-        "prompt": "Está probando un sistema de control de temperatura para una instalación de almacenamiento en frío para horticultura. El sistema recibe la temperatura (en grados Celsius completos) como entrada. Si la temperatura está entre 0 y 2 grados inclusive, el sistema muestra el mensaje “temperatura OK”. Para temperaturas más bajas, el sistema muestra el mensaje \"temperatura demasiado baja\" y para temperaturas más altas muestra el mensaje \"temperatura demasiado alta\". Utilizando el análisis de valores límite de dos valores, ¿cuál de los siguientes conjuntos de entradas de prueba proporciona el nivel más alto de cobertura de valores límite?",
+        "prompt": "Está probando un sistema de control de temperatura para una instalación de almacenamiento en frío para horticultura: • El sistema recibe la temperatura (en grados Celsius completos) como entrada. • Si la temperatura está entre 0 y 2 grados inclusive, el sistema muestra el mensaje “temperatura OK”. • Para temperaturas más bajas, el sistema muestra el mensaje \"temperatura demasiado baja\". • Para temperaturas más altas, el sistema muestra el mensaje \"temperatura demasiado alta\".\n\nUtilizando el análisis de valores límite de dos valores, ¿cuál de los siguientes conjuntos de entradas de prueba proporciona el nivel más alto de cobertura de valores límite?",
         "options": [
           {
             "key": "a",

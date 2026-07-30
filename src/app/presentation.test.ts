@@ -121,6 +121,29 @@ describe("question prompt formatting", () => {
     }));
   });
 
+  it("shows D-21's temperature rules as a four-item list", () => {
+    const question = questions.find((item) => item.id === "D-21")!;
+
+    for (const language of ["en", "es"] as const) {
+      const blocks = promptBlocks(localizedQuestion(question, language).prompt);
+
+      expect(blocks.map((block) => block.type), `D-21 (${language})`).toEqual(["text", "list", "text"]);
+      expect(blocks[1]).toMatchObject({
+        type: "list",
+        items: [
+          { marker: "•" },
+          { marker: "•" },
+          { marker: "•" },
+          { marker: "•" },
+        ],
+      });
+      expect(blocks[2]).toMatchObject({
+        type: "text",
+        text: expect.stringMatching(language === "es" ? /^Utilizando el análisis/ : /^Using two-value/),
+      });
+    }
+  });
+
   it("keeps the four D-22 test cases together without treating result categories as list markers", () => {
     const question = questions.find((item) => item.id === "D-22")!;
     for (const language of ["en", "es"] as const) {
