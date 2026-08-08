@@ -5173,7 +5173,7 @@
       "reference": "FL-4.2.2",
       "kLevel": "K3",
       "rawKLevel": "K3",
-      "prompt": "You are testing a form that verifies the correctness of the length of the password given as input. The form accepts a password with the correct length and rejects a password that is too short or too long. The password length is correct if it has between 6 and 12 characters inclusive. Otherwise, it is considered incorrect. At first, the form is empty (password length = 0). You apply boundary value analysis to the “password length” variable. Your set of test cases achieves 100% 2-value boundary value coverage. The team decided that due to the high risk of this component, test cases should be added to ensure 100% 3-value boundary value coverage. Which additional password lengths should be tested to achieve this?",
+      "prompt": "You are testing a form that verifies the correctness of the length of the password given as input: • The form accepts a password with the correct length and rejects a password that is too short or too long. • The password length is correct if it has between 6 and 12 characters inclusive; otherwise, it is considered incorrect. • At first, the form is empty (password length = 0). • You apply boundary value analysis to the “password length” variable. • Your set of test cases achieves 100% 2-value boundary value coverage. • Due to the high risk of this component, the team decided that test cases should be added to ensure 100% 3-value boundary value coverage. Which additional password lengths should be tested to achieve this?",
       "options": [
         {
           "key": "a",
@@ -5202,7 +5202,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Está probando un formulario que verifica la exactitud de la longitud de la contraseña proporcionada como entrada. El formulario acepta una contraseña con la longitud correcta y rechaza una contraseña que sea demasiado corta o demasiado larga. La longitud de la contraseña es correcta si tiene entre 6 y 12 caracteres inclusive. En caso contrario, se considera incorrecto. Al principio, el formulario está vacío (longitud de la contraseña = 0). Se aplica análisis de valores límite a la variable “longitud de contraseña”. Su conjunto de casos de prueba logra una cobertura del 100% del valor límite de 2 valores. El equipo decidió que, debido al alto riesgo de este componente, se deberían agregar casos de prueba para garantizar una cobertura del 100 % del valor límite de 3 valores. ¿Qué longitudes de contraseña adicionales deberían probarse para lograrlo?",
+          "prompt": "Está probando un formulario que verifica la exactitud de la longitud de la contraseña proporcionada como entrada: • El formulario acepta una contraseña con la longitud correcta y rechaza una contraseña que sea demasiado corta o demasiado larga. • La longitud de la contraseña es correcta si tiene entre 6 y 12 caracteres inclusive; en caso contrario, se considera incorrecta. • Al principio, el formulario está vacío (longitud de la contraseña = 0). • Se aplica análisis de valores límite a la variable “longitud de contraseña”. • Su conjunto de casos de prueba logra una cobertura del 100% del valor límite de 2 valores. • Debido al alto riesgo de este componente, el equipo decidió que se deberían agregar casos de prueba para garantizar una cobertura del 100 % del valor límite de 3 valores. ¿Qué longitudes de contraseña adicionales deberían probarse para lograrlo?",
           "options": [
             {
               "key": "a",
@@ -5806,7 +5806,7 @@
       "reference": "FL-5.1.3",
       "kLevel": "K2",
       "rawKLevel": "K2",
-      "prompt": "Your team follows the process that uses the DevOps delivery pipeline. The first three steps of this process are: (1) Code development (2) Submit code into a version control system and merge it into the “test” branch (3) Perform component testing for the submitted code Which of the following is BEST suited to be the entry criterion for step (2) of this pipeline?",
+      "prompt": "Your team follows the process that uses the DevOps delivery pipeline. The first three steps of this process are: 1. Code development 2. Submit code into a version control system and merge it into the “test” branch 3. Perform component testing for the submitted code Which of the following is BEST suited to be the entry criterion for step (2) of this pipeline?",
       "options": [
         {
           "key": "a",
@@ -5835,7 +5835,7 @@
       "points": 1,
       "translations": {
         "es": {
-          "prompt": "Su equipo sigue el proceso que utiliza el proceso de entrega de DevOps. Los primeros tres pasos de este proceso son: (1) Desarrollo de código (2) Enviar código a un sistema de control de versiones y fusionarlo en la rama de “prueba” (3) Realizar pruebas de componentes para el código enviado ¿Cuál de los siguientes es MEJOR para ser el criterio de entrada para el paso (2) de este proceso?",
+          "prompt": "Su equipo sigue el proceso que utiliza el proceso de entrega de DevOps. Los primeros tres pasos de este proceso son: 1. Desarrollo de código 2. Enviar código a un sistema de control de versiones y fusionarlo en la rama de “prueba” 3. Realizar pruebas de componentes para el código enviado ¿Cuál de los siguientes es MEJOR para ser el criterio de entrada para el paso (2) de este proceso?",
           "options": [
             {
               "key": "a",

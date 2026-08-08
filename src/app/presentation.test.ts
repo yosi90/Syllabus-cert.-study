@@ -144,6 +144,26 @@ describe("question prompt formatting", () => {
     }
   });
 
+  it.each([
+    ["B-21", 6, /^(?:Which additional|¿Qué longitudes)/],
+    ["B-30", 3, /^(?:Which of the following|¿Cuál de los siguientes)/],
+  ] as const)("shows %s's problem description as a list", (id, itemCount, questionPattern) => {
+    const question = questions.find((item) => item.id === id)!;
+
+    for (const language of ["en", "es"] as const) {
+      const blocks = promptBlocks(localizedQuestion(question, language).prompt);
+      const lists = blocks.filter((block) => block.type === "list");
+
+      expect(blocks.map((block) => block.type), `${id} (${language})`).toEqual(["text", "list", "text"]);
+      expect(lists).toHaveLength(1);
+      expect(lists[0].items).toHaveLength(itemCount);
+      expect(blocks.at(-1)).toMatchObject({
+        type: "text",
+        text: expect.stringMatching(questionPattern),
+      });
+    }
+  });
+
   it("keeps the four D-22 test cases together without treating result categories as list markers", () => {
     const question = questions.find((item) => item.id === "D-22")!;
     for (const language of ["en", "es"] as const) {
